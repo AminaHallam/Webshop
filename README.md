@@ -1,20 +1,33 @@
 # Webshop
+
+BAR QUEENS
+Medlemmar: 
+- Lisa Karnerfors
+- Wictoria Drefelt
+- Angelica Moberg Skoglund
+- Amina Hallam
+- Fredrik Olsson 
+
+Beskrivning:
 Vi skall bygga en objekt-orienterad back-end webbshop applikation i PHP som är kopplad till en MySQL databas. Backend skall innehålla ett API som skall användas för kommunikationen med databasen. Till hjälp har vi en uppgiftsbeskrivning samt en kravspecifikation.
+
+Affärsidé:
+ZM Art erbjuder exklusiv och unik konst. Zeon Milo är en svensk konstnär som har nått framgång i Europa med sin unika konst. 
 
 Kravspecifikation på projektet:
 1. Alla sidor skall vara responsiva. (G) ✅ ❌
 
 2. Arbetet ska implementeras med objektorienterade principer. (G) ✅ ❌
 
-3. Skapa ett konceptuellt ER diagram, detta ska lämnas in vid idégodkännandet G) ✅ ❌
+3. Skapa ett konceptuellt ER diagram, detta ska lämnas in vid idégodkännandet G) ✅ 
 
-4. Beskriv er företagsidé i en kort muntlig presentation vid idégodkännandet (G) ✅ ❌
+4. Beskriv er företagsidé i en kort muntlig presentation vid idégodkännandet (G) ✅ 
 
-5. Det skall finnas en kortare text som beskriver erat projekt i er readme.md (G) ✅ ❌
+5. Det skall finnas en kortare text som beskriver erat projekt i er readme.md (G) ✅ 
 
-6. All data som programmet utnyttjar ska vara sparat i en MYSQL databas (produkter,   beställningar, konton mm. Ej kundvagn) (G) ✅ ❌
+6. All data som programmet utnyttjar ska vara sparat i en MYSQL databas (produkter, beställningar, konton mm. Ej kundvagn) (G) ✅ ❌
 
-7. Det ska finnas ett normaliserat diagram över databasen i ert Github-Repo (G) ✅ ❌
+7. Det ska finnas ett normaliserat diagram över databasen i ert Github-Repo (G) ✅ ❌ - Fysiskt-Diagram
 
 8. Man ska kunna logga in som administratör i systemet (G) ✅ ❌
 
@@ -64,12 +77,5 @@ Kravspecifikation på projektet:
 
 31. Administratörer ska kunna markera beställningar som skickade och se vilka ordrar som blivit mottagna (VG) ✅ ❌
 
-Gruppens Namn: 
-Gruppens medlemmar: 
-- Lisa Karnerfors
-- Wictoria Drefelt
-- Angelica Moberg Skoglund
-- Amina Hallam
-- Fredrik Olsson 
 
 Länk till GitHub Repo: https://github.com/AminaHallam/Webshop
