@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px; 
+
+}
+
+
+
+:root {
+    --color1: #EDEDE9;
+    --color2: #D6CCC2;
+    --color3: #F5EBE0;
+    --color4: #E3D5CA;
+    --color5: #D5BDAF;
+}
+
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+
