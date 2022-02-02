@@ -1,5 +1,5 @@
 
-* {
+*{
     box-sizing: border-box;
     margin: 0px;
     padding: 0px; 
@@ -117,8 +117,6 @@ li, a {
 }
 
 
-
-
 #accountIcon {
     height: 30px;
     width: 30px; 
@@ -146,7 +144,7 @@ footer {
     left: 0px;
     right: 0px;
     height: 150px;
-    border: 1px solid black; 
+     
 }
 
 .footerDiv {
