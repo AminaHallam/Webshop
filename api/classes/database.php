@@ -16,8 +16,9 @@ class Database {
 
         $this->selectedTable = $table;
         $this->selectedClass = $class;
+
     }
-}
+}   
 
 
 ?>
