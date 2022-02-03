@@ -14,13 +14,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     
 
-    <title>Document</title>
+    <title>Zeon Milo</title>
 </head>
 <body>
     
     
     <?php 
-        include './includes/header.html'
+        include './includes/header.html';
 
 
     ?> 
@@ -31,7 +31,10 @@
 
     
 <?php 
-        include './includes/footer.html'
+
+        include_once './includes/startPage.html'; 
+
+        include './includes/footer.html';
 
 
     ?> 
