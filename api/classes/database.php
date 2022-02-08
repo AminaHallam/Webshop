@@ -7,7 +7,7 @@ class Database {
     public $selectedClass;
 
     function __construct($table, $class) {
-        $dns = "mysql:host=localhost;dbname=webshop";  // TODO CHANGE DBNAME? 
+        $dns = "mysql:host=localhost;dbname=webshop"; 
         $user = "root";
         $password = "root";
 
@@ -26,6 +26,32 @@ class Database {
 
         return $result;
     }
+
+    public function fetchById($id, $createInstanceFunction) {
+
+        $query = $this->db->prepare("SELECT * FROM " . $this->selectedTable . " WHERE Id= " . $id . ";");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction);
+
+        if(empty($result)){
+            throw new Exception($this->selectedClass . " with ID " . $id . " not found...", 500);
+            exit;
+        }
+
+        return $result[0];
+    }
+
+
+    public function freeQuery($sqlQuery, $createInstanceFunction) {
+        $query = $this->db->prepare($sqlQuery);
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction);
+
+
+        return $result;
+    }
+
+
 }   
 
 
