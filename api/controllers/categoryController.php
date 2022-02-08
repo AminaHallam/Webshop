@@ -1,6 +1,6 @@
 <?php 
 
-include_once("./../classes/createInstanceFunction.php");
+include_once("./../classes/createInstanceFunctions.php");
 include_once("./../controllers/mainController.php");
 include_once("./../controllers/productController.php");
 
@@ -20,18 +20,12 @@ class CategoryController extends MainController {
 
 
     public function getById($id) {
-
-        $category = $this->database->fetchById($id, $this->createCategory);
-        
+        $category = $this->database->fetchById($id, $this->createCategory);    
         $productController = new ProductController();
-        
         $products = $productController->getProductsFromCategory($id); 
-
-        $category->products = $products;
+        $category->products = $products;  
 
         return $category;
-
-
     }
 
 }
