@@ -1,10 +1,10 @@
 <?php 
 
+include_once("./../classes/createInstanceFunction.php");
 include_once("./../controllers/mainController.php");
 include_once("./../controllers/productController.php");
-include_once("./../classes/createInstanceFunction.php");
 
-/*  */
+
 class CategoryController extends MainController {
 
     public $createCategory = "createCategory";
@@ -16,6 +16,8 @@ class CategoryController extends MainController {
     function getAll() {
         return $this->database->fetchAll($this->createCategory);
     }
+
+
 
     public function getById($id) {
 

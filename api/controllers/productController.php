@@ -6,7 +6,7 @@ include_once('./../classes/createInstanceFunction.php');
 
 class ProductController extends MainController {
 
-    private $createProduct = "createProduct";
+    public $createProduct = "createProduct";
 
     function __construct() {
         parent::__construct("Product", "Product");
@@ -21,6 +21,8 @@ class ProductController extends MainController {
     }
     
     public function getProductsFromCategory($id){
+
+        error_log(serialize($id));
 
         $query = "SELECT p.productId, p.Name, p.Description, p.UnitPrice, p.UnitsInStock, p.Image
         FROM product p 
