@@ -5,7 +5,6 @@ try {
     include_once("./../controllers/categoryController.php");
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
-        echo json_encode('hej');
         
         if($_GET["action"] == "getAll") {
           
