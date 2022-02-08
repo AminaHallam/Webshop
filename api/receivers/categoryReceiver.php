@@ -5,7 +5,7 @@ try {
     include_once("./../controllers/categoryController.php");
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
-        
+
         if($_GET["action"] == "getAll") {
           
             $controller = new categoryController(); 
@@ -28,7 +28,6 @@ try {
             
         }
     }    
-
 
 } catch(Exception $e) {
     echo json_encode(array("Message" => $e->getMessage(), "Status" => $e->getCode()));

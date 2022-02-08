@@ -1,9 +1,10 @@
 
 
 function onLoad() {
-    //getAllProducts()
-    //getProductFromId(1)
-    getAllCategory();
+    getAllProducts()
+    getProductFromId(1)
+    getAllCategories()
+    getCategoryFromId(3)
 }
 
 document.getElementById("menu").addEventListener("click", openMenu);
@@ -23,7 +24,8 @@ async function makeRequest(url, method, body) {
             body
         })
         let result = await response.json();
-        console.log(result)
+
+        return result
     } catch(err) {
         console.error(err)
     }
@@ -49,14 +51,23 @@ async function getProductFromId(id) {
 
 
 
-//functions for category 
 
-async function getAllCategory() {
+
+/* Category */
+
+/* Hämtar alla kategorier */
+async function getAllCategories() {
     const action = "getAll";
-    
     let allCategories = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}`, "GET")
+    console.log(allCategories); 
+}
 
-    console.log(allCategories);
+
+/* Hämtar alla produkter som tillhör en specifik kategori */
+async function getCategoryFromId(idToGet) {
+    const action = "getById";
+    let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET")
+    console.log(specificCategory) 
 }
 
 

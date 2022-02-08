@@ -1,21 +1,16 @@
 <?php 
-/* Skall spegla det som är i databasen. */
+
 class Category {
-    public $Id;
+    public $categoryId;
     public $categoryName;
     public $categoryDescription;
 
-
-
     public $products;
 
-    function __construct($Id, $categoryName, $categoryDescription) {
-        $this->Id = $Id;
+    function __construct($categoryId, $categoryName, $categoryDescription) {
+        $this->categoryId = $categoryId;
         $this->categoryName = $categoryName;
         $this->categoryDescription = $categoryDescription;
-        
-
-
 
     }
 }
