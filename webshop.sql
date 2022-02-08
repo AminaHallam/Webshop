@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 03, 2022 at 09:29 AM
+-- Generation Time: Feb 07, 2022 at 06:25 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `webshopupdate`
+-- Database: `webshop`
 --
 
 -- --------------------------------------------------------
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `category` (
-  `CategoryID` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `CategoryName` varchar(50) NOT NULL,
   `Description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -37,7 +37,7 @@ CREATE TABLE `category` (
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`CategoryID`, `CategoryName`, `Description`) VALUES
+INSERT INTO `category` (`Id`, `CategoryName`, `Description`) VALUES
 (1, 'Wildlife', ''),
 (2, 'Strong Women', ''),
 (3, 'Figurative', ''),
@@ -50,7 +50,7 @@ INSERT INTO `category` (`CategoryID`, `CategoryName`, `Description`) VALUES
 --
 
 CREATE TABLE `courrier` (
-  `CourrierID` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `CourrierName` varchar(50) NOT NULL,
   `Address` varchar(100) NOT NULL,
   `Email` varchar(100) NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE `courrier` (
 -- Dumping data for table `courrier`
 --
 
-INSERT INTO `courrier` (`CourrierID`, `CourrierName`, `Address`, `Email`, `CountryCode`, `StandardPhone`, `MobileNumber`, `Contact`) VALUES
+INSERT INTO `courrier` (`Id`, `CourrierName`, `Address`, `Email`, `CountryCode`, `StandardPhone`, `MobileNumber`, `Contact`) VALUES
 (1, 'Postnord', 'postnordgatan 2 , 51124 Göteborg, Sverige', 'info@postnord.se', 46, 31837465, 767123654, 'Stefan Larsson'),
 (2, 'DHL', 'dhlgatan 65, 45623 Borås, Sverige', 'info@dhl.se', 46, NULL, 731123645, 'Louise Andersson');
 
@@ -75,7 +75,7 @@ INSERT INTO `courrier` (`CourrierID`, `CourrierName`, `Address`, `Email`, `Count
 --
 
 CREATE TABLE `newsletter` (
-  `NewsID` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `Title` varchar(100) NOT NULL,
   `Text` text NOT NULL,
   `Date` date NOT NULL
@@ -85,7 +85,7 @@ CREATE TABLE `newsletter` (
 -- Dumping data for table `newsletter`
 --
 
-INSERT INTO `newsletter` (`NewsID`, `Title`, `Text`, `Date`) VALUES
+INSERT INTO `newsletter` (`Id`, `Title`, `Text`, `Date`) VALUES
 (1, 'January 2022', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:\r\n\r\n“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.”\r\nThe purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn\'t distract from the layout. A practice not without controversy, laying out pages with meaningless filler text can be very useful when the focus is meant to be on design, not content.\r\n', '2022-01-01'),
 (2, 'Min titel', 'brödtext2', '2022-02-02');
 
@@ -96,7 +96,7 @@ INSERT INTO `newsletter` (`NewsID`, `Title`, `Text`, `Date`) VALUES
 --
 
 CREATE TABLE `order` (
-  `OrderID` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `StatusID` varchar(20) NOT NULL,
   `UserID` int(11) NOT NULL,
   `CourrierID` int(11) NOT NULL,
@@ -109,7 +109,7 @@ CREATE TABLE `order` (
 -- Dumping data for table `order`
 --
 
-INSERT INTO `order` (`OrderID`, `StatusID`, `UserID`, `CourrierID`, `RegisterDate`, `ShippingDate`, `CustRecDate`) VALUES
+INSERT INTO `order` (`Id`, `StatusID`, `UserID`, `CourrierID`, `RegisterDate`, `ShippingDate`, `CustRecDate`) VALUES
 (1, 'CREC', 1, 1, '2022-01-28 00:00:00', '2022-01-29 00:00:00', '2022-01-31 00:00:00'),
 (2, 'CREC', 2, 2, '2022-02-02 15:39:35', '2022-02-02 15:39:35', '2022-02-02 15:39:35'),
 (3, 'REG', 2, 1, '2022-01-24 00:00:00', NULL, NULL),
@@ -148,7 +148,7 @@ INSERT INTO `orderdetails` (`ProductID`, `OrderID`, `Quantity`) VALUES
 --
 
 CREATE TABLE `orderstatus` (
-  `StatusID` varchar(8) NOT NULL,
+  `Id` varchar(8) NOT NULL,
   `Status` varchar(50) NOT NULL,
   `Description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -157,7 +157,7 @@ CREATE TABLE `orderstatus` (
 -- Dumping data for table `orderstatus`
 --
 
-INSERT INTO `orderstatus` (`StatusID`, `Status`, `Description`) VALUES
+INSERT INTO `orderstatus` (`Id`, `Status`, `Description`) VALUES
 ('CREC', 'CustReceived', 'The order is delivered to customer'),
 ('REG', 'Registered', 'The order is registered and will soon be handled'),
 ('SHIP', 'Shipped', 'The order has left our warehouse');
@@ -169,7 +169,7 @@ INSERT INTO `orderstatus` (`StatusID`, `Status`, `Description`) VALUES
 --
 
 CREATE TABLE `product` (
-  `ProductID` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `Description` text NOT NULL,
   `UnitPrice` float NOT NULL,
@@ -181,7 +181,7 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`ProductID`, `Name`, `Description`, `UnitPrice`, `UnitsInStock`, `Image`) VALUES
+INSERT INTO `product` (`Id`, `Name`, `Description`, `UnitPrice`, `UnitsInStock`, `Image`) VALUES
 (1, 'Stop hiding', '100x150\r\nAcrylic and charcoal\r\nGallery canvas\r\nReady to hang!', 1490, 1, 'abStopHiding.png'),
 (2, 'Spirit of a wolf', '100 x 120\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame not necessary)\r\nReady to hang!', 1190, 1, 'wildSpiritOfAWolf.png'),
 (3, 'Everyone knows the price of evereything and the value of nothing', '100x150\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 1490, 1, 'womanEveryoneKnowsThePrice.JPG'),
@@ -265,7 +265,7 @@ INSERT INTO `productincategory` (`ProductID`, `CategoryID`, `LastUpdated`) VALUE
 --
 
 CREATE TABLE `subscriptionnews` (
-  `SubscriptionID` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `UserID` int(11) DEFAULT NULL,
   `FirstName` varchar(50) NOT NULL,
   `LastName` varchar(50) NOT NULL,
@@ -276,7 +276,7 @@ CREATE TABLE `subscriptionnews` (
 -- Dumping data for table `subscriptionnews`
 --
 
-INSERT INTO `subscriptionnews` (`SubscriptionID`, `UserID`, `FirstName`, `LastName`, `Email`) VALUES
+INSERT INTO `subscriptionnews` (`Id`, `UserID`, `FirstName`, `LastName`, `Email`) VALUES
 (3, NULL, 'Angelica', 'Moberg Skoglund', 'a.m.s@live.se'),
 (4, 3, 'Sigge', 'Eklund', 'telia@telia.se'),
 (5, NULL, 'Sebastian', 'Larsson', 'sebastianlarsson@live.se'),
@@ -290,7 +290,7 @@ INSERT INTO `subscriptionnews` (`SubscriptionID`, `UserID`, `FirstName`, `LastNa
 --
 
 CREATE TABLE `user` (
-  `UserID` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `Email` varchar(100) NOT NULL,
   `Password` varchar(100) NOT NULL,
   `FirstName` varchar(50) NOT NULL,
@@ -311,7 +311,7 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`UserID`, `Email`, `Password`, `FirstName`, `LastName`, `Street`, `CO`, `ZipCode`, `City`, `Country`, `CountryCode`, `StandardPhone`, `MobileNumber`, `Admin`, `TermsOfPurchase`) VALUES
+INSERT INTO `user` (`Id`, `Email`, `Password`, `FirstName`, `LastName`, `Street`, `CO`, `ZipCode`, `City`, `Country`, `CountryCode`, `StandardPhone`, `MobileNumber`, `Admin`, `TermsOfPurchase`) VALUES
 (1, 'tjena@hej.se', 'hejsvej2014', 'Agda', 'Larsson', 'Tjolahoppsvägen', NULL, 51123, 'Borås', 'Sweden', 46, 31, 274843, 0, 0),
 (2, 'hejhejhej@tjose', 'tbnhjrejvn25', 'Örjan', 'Svedin', 'Andravägen 78', NULL, 12345, 'Bollebygd', 'Sweden', 46, NULL, 736761236, 0, 0),
 (3, 'telia@telia.se', 'rfgerger98!', 'Sigge', 'Eklund', 'sistavägen 45', NULL, 25412, 'Göteborg', 'Sweden', 46, NULL, 765453658, 0, 1),
@@ -326,26 +326,26 @@ INSERT INTO `user` (`UserID`, `Email`, `Password`, `FirstName`, `LastName`, `Str
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
-  ADD PRIMARY KEY (`CategoryID`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `courrier`
 --
 ALTER TABLE `courrier`
-  ADD PRIMARY KEY (`CourrierID`),
+  ADD PRIMARY KEY (`Id`),
   ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- Indexes for table `newsletter`
 --
 ALTER TABLE `newsletter`
-  ADD PRIMARY KEY (`NewsID`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `order`
 --
 ALTER TABLE `order`
-  ADD PRIMARY KEY (`OrderID`),
+  ADD PRIMARY KEY (`Id`),
   ADD KEY `CourrierId` (`CourrierID`),
   ADD KEY `UserID` (`UserID`),
   ADD KEY `OrderStatusID` (`StatusID`);
@@ -362,13 +362,13 @@ ALTER TABLE `orderdetails`
 -- Indexes for table `orderstatus`
 --
 ALTER TABLE `orderstatus`
-  ADD PRIMARY KEY (`StatusID`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`ProductID`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `productincategory`
@@ -382,13 +382,13 @@ ALTER TABLE `productincategory`
 -- Indexes for table `subscriptionnews`
 --
 ALTER TABLE `subscriptionnews`
-  ADD PRIMARY KEY (`SubscriptionID`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`UserID`),
+  ADD PRIMARY KEY (`Id`),
   ADD UNIQUE KEY `Email` (`Email`);
 
 --
@@ -399,43 +399,43 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `CategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `courrier`
 --
 ALTER TABLE `courrier`
-  MODIFY `CourrierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `newsletter`
 --
 ALTER TABLE `newsletter`
-  MODIFY `NewsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `subscriptionnews`
 --
 ALTER TABLE `subscriptionnews`
-  MODIFY `SubscriptionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -445,23 +445,23 @@ ALTER TABLE `user`
 -- Constraints for table `order`
 --
 ALTER TABLE `order`
-  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`CourrierID`) REFERENCES `courrier` (`CourrierID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `order_ibfk_3` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `order_ibfk_4` FOREIGN KEY (`StatusID`) REFERENCES `orderstatus` (`StatusID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`CourrierID`) REFERENCES `courrier` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `order_ibfk_3` FOREIGN KEY (`UserID`) REFERENCES `user` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `order_ibfk_4` FOREIGN KEY (`StatusID`) REFERENCES `orderstatus` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orderdetails`
 --
 ALTER TABLE `orderdetails`
-  ADD CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `order` (`OrderID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orderdetails_ibfk_2` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `order` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orderdetails_ibfk_2` FOREIGN KEY (`ProductID`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `productincategory`
 --
 ALTER TABLE `productincategory`
-  ADD CONSTRAINT `productincategory_ibfk_1` FOREIGN KEY (`CategoryID`) REFERENCES `category` (`CategoryID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `productincategory_ibfk_2` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `productincategory_ibfk_1` FOREIGN KEY (`CategoryID`) REFERENCES `category` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `productincategory_ibfk_2` FOREIGN KEY (`ProductID`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
