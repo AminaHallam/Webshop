@@ -17,6 +17,14 @@ try {
                 echo(json_encode($controller->loginUser($_GET["user"], $_GET["password"])));
                 exit;
             }
+        } else if($_GET["action"] == "getUser") {
+
+
+           /*  echo json_encode("Vi kom in! :D"); */
+
+            echo json_encode($_SESSION["inloggedUser"]);
+
+
         }
     }
 

@@ -37,7 +37,10 @@ async function makeRequest(url, method, body) {
     }
 }
 
-/* Sign In - View */
+
+
+
+/* Logga in */
 document.querySelector(".button").addEventListener("click", loginUser)
 
 async function loginUser(e) {
@@ -51,8 +54,32 @@ async function loginUser(e) {
     
     let verify = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${loginUser}&password=${loginPassword}`, "GET")
     
-    console.log(verify)
-} 
+   /*  console.log(verify) */
+
+    if(!verify) {
+        alert("Något gick fel")
+        return
+    }
+
+    alert("Du är nu inloggad!")
+
+    window.location.href = "./../index.html";
+
+
+}
+
+
+
+
+
+
+// Hämta användarinfo från SESSION vid inloggad användare.
+async function getUser() {
+    const action = 'getUser'; 
+    let getUser = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
+    
+    /* console.log(getUser) */
+}
 
 
 

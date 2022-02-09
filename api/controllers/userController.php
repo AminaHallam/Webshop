@@ -24,8 +24,6 @@ class UserController extends MainController {
 
         $checkAccount = $this->database->freeQuery($query, $this->createUser);
 
-        /* error_log(serialize($checkAccount)); */
-
         if(!$checkAccount == "{}") {
 
             return false;
@@ -33,28 +31,28 @@ class UserController extends MainController {
 
         $_SESSION["inloggedUser"] = serialize($checkAccount);
 
-        /* return true; */
-
-         $this->verifyAdmin(); 
-
+        return true;
     }
+
 
 
     public function verifyAdmin() {
 
         if($_SESSION["inloggedUser"]) {
 
-
             $loggedInUser = unserialize($_SESSION["inloggedUser"]);
 
-          /*   $adminValue = $loggedInUser->Admin; */
+            $checkAdmin = $loggedInUser[0]->Admin;
 
-            error_log(serialize($loggedInUser));
+            if($checkAdmin == 1) {
 
-            /* error_log(serialize($loggedInUser->Admin)); */
+                return true;
 
-            /* $loggedInUser->admin; */
-            
+            } else {
+
+                return false;
+            }
+
         }
 
     }
