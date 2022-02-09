@@ -16,7 +16,7 @@ class UserController extends MainController {
 
 
 
-
+    // Kollar om username och password matchar databasen
     public function loginUser($user, $password) { 
         $query = "SELECT * 
         FROM user
@@ -25,39 +25,43 @@ class UserController extends MainController {
         $checkAccount = $this->database->freeQuery($query, $this->createUser);
 
         if(!$checkAccount == "{}") {
-
             return false;
         }
 
         $_SESSION["inloggedUser"] = serialize($checkAccount);
-
         return true;
     }
 
 
-
+    // Kollar om den inloggade användaren är admin eller inte
     public function verifyAdmin() {
 
         if($_SESSION["inloggedUser"]) {
-
             $loggedInUser = unserialize($_SESSION["inloggedUser"]);
-
             $checkAdmin = $loggedInUser[0]->Admin;
 
             if($checkAdmin == 1) {
-
                 return true;
 
             } else {
-
                 return false;
             }
-
         }
-
     }
 
 
+
+    
+
+    /* Hämtar kunden som är kopplad till en specifik order */
+    public function getUserFromOrder($orderId) { 
+        $query = "SELECT u.id, u.Email, u.Password, u.FirstName, u.LastName, u.Street, u.CO, u.ZipCode, u.City, u.Country, u.CountryCode, u.StandardPhone, u.MobileNumber, u.Admin, u.TermsOfPurchase FROM user u
+        JOIN `order` o
+            ON o.userid = u.Id
+            WHERE o.id = ".$orderId.";";
+
+        return $this->database->freeQuery($query, $this->createUser); 
+    }
 
 
 
