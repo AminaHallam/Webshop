@@ -7,7 +7,8 @@
 }
 
 main {
-    margin-top: 0px;
+    margin-top: 140px;
+    height: unset;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,10 +36,10 @@ main {
 .accountContainer {
     display: flex;
     justify-content: center;
-    align-items: center;
-    text-align: center;
     height: 100vh;
-    margin-top: 40px;
+    align-items: flex-start;
+    text-align: center;
+    margin-top: 60px;
 }
 
 .h1 {
@@ -46,8 +47,7 @@ main {
 }
 
 .form {
-    width: 400px;
-    height: 420px;
+    width: 100%;
     border-radius: 7px;
     background-color: white;
     margin: 10px;
@@ -55,6 +55,19 @@ main {
     padding-left: 50px;
     padding-right: 50px;
     text-align: center;
+}
+
+.containerForms {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 70px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.registerBlock{
+    margin: 40px;
 }
 
 .inputGroup input {
