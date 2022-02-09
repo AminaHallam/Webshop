@@ -53,34 +53,39 @@
 <main>
     <div class="accountContainer">
         <form class="form" id="login"> 
-            <h1 class="h1">Logga in</h1>
+            <h1 class="h1">Sign in</h1>
             <div class="inputGroup">
-                <input id="inputUserName" type="text" placeholder="Användarnamn" name="Användarnamn" autofocus required>
+                <input id="inputUserName" type="email" placeholder="example@example.se" name="Användarnamn" autofocus required>
             </div>
             <div class="inputGroup">
-                <input id="inputPassword" type="password" placeholder="Lösenord" name="Lösenord" required>
+                <input id="inputPassword" type="password" placeholder="password" name="Lösenord" required>
             </div>
-            <button class="button" type="submit">Logga in</button>
-            <p class="formText">
-                <a class="noAccountLink" id="linkCreateAccount" href="#" >Inget konto? Skapa ett här</a>
-            </p>
             
+<!--             <div class="adminContainer">
+                <p>Admin?</p>
+                <input type="checkbox" id="admin" name="Admin" value="1">
+            </div> -->
+
+            <button class="button" type="submit">Sign in</button>
+            <p class="formText">
+                <a class="noAccountLink" id="linkCreateAccount" href="#" >New customer? <strong>Create your account</strong> here.</a>
+            </p>
         </form>
         
         <form class="form hidden" id="createAccount">
-            <h1 class="h1">Skapa konto</h1>
+            <h1 class="h1">Create account</h1>
             <div class="inputGroup">
-                <input id="user" type="text" placeholder="Användarnamn" name="Användarnamn" autofocus required>
+                <input id="user" type="email" placeholder="example@example.se" name="Användarnamn" autofocus required>
             </div>
             <div class="inputGroup">
-                <input id="pw" type="password" placeholder="Lösenord" name="Lösenord" required>
+                <input id="pw" type="password" placeholder="password" name="Lösenord" required>
             </div>
             <div class="inputGroup">
-                <input id="confirmPw" type="password" placeholder="Bekräfta lösenord" name="Lösenord" required>
+                <input id="confirmPw" type="password" placeholder="confirm password" name="Lösenord" required>
             </div>
-            <button class="buttonCA" type="submit">Skapa konto</button>
+            <button class="buttonCA" type="submit">Create account</button>
             <p class="formText">
-                <a class="noAccountLink" id="linkLogIn" href="#" >Har du redan ett konto? Klicka här</a>
+                <a class="noAccountLink" id="linkLogIn" href="#" >Already have an account? <strong>Sign in</strong> here</a>
             </p>
         </form>
     </div>  
@@ -89,7 +94,7 @@
     
     
     <!-- Se till att newsletter hamnar under main -->
-    <div class="newsLetter">
+<!--     <div class="newsLetter">
         <form action="/action_page.php">
             <div class="container">
                 <h2>I Send Colourful Mail To Some Really Lovely People.</h2>
@@ -104,8 +109,7 @@
                 <input type="submit" value="Sign me up!">
             </div>
         </form>
-
-    </div>
+    </div> -->
 
 
 <footer>
