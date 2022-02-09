@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// Skall importeras sen
 async function makeRequest(url, method, body) {
     try {
         let response = await fetch(url, {
@@ -36,51 +37,40 @@ async function makeRequest(url, method, body) {
     }
 }
 
-async function verifyAccount(user, password, admin) {
-    const action = 'verifyAccount'; 
-    
-    let verify = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${user}&password=${password}&admin=${admin}`, "GET")
-    console.log(verify)
-}
-
-
 /* Sign In - View */
-document.querySelector(".button").addEventListener("click", () => {
-    
+document.querySelector(".button").addEventListener("click", loginUser)
+
+async function loginUser(e) {
+
+    e.preventDefault();
+
+    const action = 'loginUser'; 
+
     let loginUser = document.querySelector("#inputUserName").value
     let loginPassword = document.querySelector("#inputPassword").value
-    let admin = document.querySelector("#admin").value
     
-    verifyAccount(loginUser, loginPassword, admin);
-
-    /* 
-    console.log(admin)
-    console.log(loginUser)
-    console.log(loginPassword)
- */
-    /* Skicka in värdena i en Request till PHP med GET. Du skall få tillbaka true eller false. 
-    Glöm inte att vi behöver göra en hashning på lösenordet. Men få det andra att funka först
+    let verify = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${loginUser}&password=${loginPassword}`, "GET")
     
-    I PHP skall vi jämföra email, lösenord och admin på alla users med värdena vi skickat in.
-    så något typ: 
-    SELECT * 
-    FROM user
-    WHERE Email = "admin@admin.se" AND Password = "admin" AND Admin = 1
-    
-    Skicka tillbaka true om vi får en match och false om vi inte får en match. 
-    Vi skall även få med att användaren är admin eller inte. kanske en checkbox i inloggningsmenyn där man får klicka i om man är admin. 
-    Om den i icheckad skickar vi "1", om inte en "0" som vi kan jämföra med på attributet admin.
-    Lägg in användaren i session */ 
+    console.log(verify)
+} 
 
-    /* if(result) {
-        alert("Du är inloggad")
 
-        // Skicka användaren till sin rätta vy 
-    } else {
-        alert("Något gick fel")
-    }
-*/     
-})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
