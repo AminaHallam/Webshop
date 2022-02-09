@@ -22,6 +22,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+async function makeRequest(url, method, body) {
+    try {
+        let response = await fetch(url, {
+            method,
+            body
+        })
+        let result = await response.json();
+
+        return result
+    } catch(err) {
+        console.error(err)
+    }
+}
+
+async function verifyAccount(user, password, admin) {
+    const action = 'verifyAccount'; 
+    
+    let verify = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${user}&password=${password}&admin=${admin}`, "GET")
+    console.log(verify)
+}
 
 
 /* Sign In - View */
@@ -29,10 +49,15 @@ document.querySelector(".button").addEventListener("click", () => {
     
     let loginUser = document.querySelector("#inputUserName").value
     let loginPassword = document.querySelector("#inputPassword").value
+    let admin = document.querySelector("#admin").value
     
+    verifyAccount(loginUser, loginPassword, admin);
+
+    /* 
+    console.log(admin)
     console.log(loginUser)
     console.log(loginPassword)
-
+ */
     /* Skicka in värdena i en Request till PHP med GET. Du skall få tillbaka true eller false. 
     Glöm inte att vi behöver göra en hashning på lösenordet. Men få det andra att funka först
     
@@ -47,17 +72,15 @@ document.querySelector(".button").addEventListener("click", () => {
     Om den i icheckad skickar vi "1", om inte en "0" som vi kan jämföra med på attributet admin.
     Lägg in användaren i session */ 
 
-    if(result) {
+    /* if(result) {
         alert("Du är inloggad")
 
-        /* Skicka användaren till sin rätta vy */
+        // Skicka användaren till sin rätta vy 
     } else {
         alert("Något gick fel")
     }
-    
+*/     
 })
-
-
 
 
 
