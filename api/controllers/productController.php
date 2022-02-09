@@ -7,6 +7,7 @@ include_once("./../controllers/mainController.php");
 class ProductController extends MainController {
 
     private $createFunction = "createProduct";
+    private $productDetails = "productDetails";
 
     function __construct() {
         parent::__construct("Product", "Product");
@@ -47,6 +48,22 @@ class ProductController extends MainController {
     }  
 
 
+
+
+    /* Hämtar alla produkter som är kopplade till en specifik order - Har lite proble med attributet quantity */
+    ////////* påbörjad funktion 2022-02-07. Vill få med quantity som ligger i productDetails till instansen */ //////////////////////////////////////////////////
+    public function getProductsFromOrder($orderId) { 
+        $query = "SELECT p.id, p.Name, p.Description, p.UnitPrice, p.UnitsInStock, p.Image, od.Quantity FROM `order` o
+        JOIN orderdetails od
+            ON od.OrderID = o.id
+        JOIN Product p
+            ON p.id = od.ProductID
+            WHERE o.id = ".$orderId.";";
+
+        return $this->database->freeQuery($query, $this->productDetails); 
+    }  
+
+////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
