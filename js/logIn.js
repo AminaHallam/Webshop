@@ -1,6 +1,5 @@
 import { makeRequest } from "../helperFunctions/fetchHelper.js"
 
-
 const logOut = document.querySelector(".logout")
 const myPage = document.querySelector(".myPage")
 const buttonCA = document.querySelector(".buttonCA")
@@ -10,6 +9,7 @@ const createAccountForm = document.querySelector("#createAccount")
 
 async function onLoad() {
     /* await verifyAdmin() */
+    await showCorrectLayout();
     await getUser()
 }
 
@@ -36,8 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
 makeRequest();
 
 
-
-
 /* Logga in */
 document.querySelector(".button").addEventListener("click", loginUser)
 
@@ -49,51 +47,38 @@ async function loginUser(e) {
 
     let loginUser = document.querySelector("#inputUserName").value
     let loginPassword = document.querySelector("#inputPassword").value
-    
-    let verify = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${loginUser}&password=${loginPassword}`, "GET")
-    
 
+    let verify = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${loginUser}&password=${loginPassword}`, "GET")
 
     if(!verify) {
         alert("Wrong credentials")
         return
     }
-
-
-
     alert("You are in!")
-
-
     
-    let checkAdmin = await verifyAdmin();
+  /*   let checkAdmin = await verifyAdmin();
 
     console.log(checkAdmin);
 
      if(checkAdmin) {
-        console.log("Du är admin")
+        myAdmin();
     } else {
-
-        console.log("Du är INTE admin")
-    } 
+        myPages();
+    }  */
 
     // If session är true skicka adminsida, if false skicka till kundsida
-
-    
 
     /* window.location.href = "./../index.html"; */
 
 }
 
 
-
 async function verifyAdmin() {
     const action = 'verifyAdmin'; 
     let verifyA = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
     console.log(verifyA)
-    return verifyA
-    
+    return verifyA    
 }
-
 
 
 // Hämta användarinfo från SESSION vid inloggad användare.
@@ -105,17 +90,30 @@ async function getUser() {
 }
 
 
+async function myAdmin() {
+    console.log("Kom in admin");
 
+    document.querySelector(".adminSetting").classList.remove("none");
+    /* window.location.href = "./../index.html"; */
+}
 
+async function myPages() {
+    console.log("Kom in page");
+    window.location.href = "./../index.html"; 
+} 
 
+// 10/2 Få det att stanna kvar på sidan 
 
+async function showCorrectLayout() {
+    let checkAdmin = await verifyAdmin();
+    console.log(checkAdmin);
 
-
-
-
-
-
-
+     if(checkAdmin) {
+        console.log("shoo");/* myAdmin(); */
+    } else {
+        console.log("hejdå");/* myPages(); */
+    } 
+}
 
 /* Register account - View */
 document.querySelector(".buttonCA").addEventListener("click", () => {
@@ -125,13 +123,11 @@ document.querySelector(".buttonCA").addEventListener("click", () => {
     let registerPassword = document.querySelector("#pw").value
     let confirmPassword = document.querySelector("#confirmPw").value
   
-
     // Call functions to check if the credentials are good enough before we send them to PHP
     const isValid = validateInputs(registerUser, registerPassword) 
     const validPw = validatePasswords(registerPassword, confirmPassword)
     const inputPwUser = sameInputs(registerUser, registerPassword)
-
-    
+  
     
     /* If all these are true, the credentials  will be sent to PHP */
     
@@ -162,11 +158,8 @@ document.querySelector(".buttonCA").addEventListener("click", () => {
 
     * Vi behöver göra en hashning på lösenorden. Men få det andra att funka först*/
 
-    
 
 })
-
-
 
 
 
