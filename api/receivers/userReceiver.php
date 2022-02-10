@@ -10,7 +10,6 @@ try {
 
           if($_GET["user"] && $_GET["password"]) {
 
-                /* echo json_encode($_SESSION["inloggedUser"]); */
  
                 $controller = new UserController();
 

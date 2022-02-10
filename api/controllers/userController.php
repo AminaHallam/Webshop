@@ -29,6 +29,7 @@ class UserController extends MainController {
         }
 
         $_SESSION["inloggedUser"] = serialize($checkAccount);
+        
         return true;
     }
 

@@ -1,8 +1,12 @@
+import { makeRequest } from "./helperFunctions/fetchHelper.js"
+
+
 const logOut = document.querySelector(".logout")
 const myPage = document.querySelector(".myPage")
 const buttonCA = document.querySelector(".buttonCA")
 const loginForm = document.querySelector("#login")
 const createAccountForm = document.querySelector("#createAccount")
+
 
 // Switching between Login-form and create account-form
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,20 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Skall importeras sen
-async function makeRequest(url, method, body) {
-    try {
-        let response = await fetch(url, {
-            method,
-            body
-        })
-        let result = await response.json();
 
-        return result
-    } catch(err) {
-        console.error(err)
-    }
-}
+makeRequest();
 
 
 
@@ -54,12 +46,16 @@ async function loginUser(e) {
     
     let verify = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${loginUser}&password=${loginPassword}`, "GET")
     
-   /*  console.log(verify) */
+    // Gör en request på verifyAdmin
+
+
 
     if(!verify) {
         alert("Något gick fel")
         return
     }
+
+    // If session är true skicka adminsida, if false skicka till kundsida
 
     alert("Du är nu inloggad!")
 
