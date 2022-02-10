@@ -4,7 +4,13 @@ import {makeRequest} from '.././helperFunctions/fetchHelper.js'
 
 function onLoad() {
     openMenu();
-    renderProductsFromCategory(2)
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const url = urlParams.get('id')
+    
+    getCategoryFromId(url)
+    
+    renderProductsFromCategory(url)
 
 
 }
@@ -14,8 +20,7 @@ makeRequest();
 
 
 
-
-async function getCategoryFromId(idToGet) {
+ async function getCategoryFromId(idToGet) {
 
     const action = "getById";
     let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET")
@@ -23,7 +28,7 @@ async function getCategoryFromId(idToGet) {
 
     for (let i = 0; i < specificCategory.length; i++) {
         const category = specificCategory[i]; 
-        console.log(category)
+        
     }
     const main = document.getElementsByTagName("main")[0]; 
 
@@ -47,8 +52,8 @@ async function renderProductsFromCategory(idToGet) {
 
     const action = "getById";
     let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET")
-    console.log(specificCategory) 
-
+    
+    
     
     for (let i = 0; i < specificCategory.products.length; i++) {
         const product = specificCategory.products[i];
