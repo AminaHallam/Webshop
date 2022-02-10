@@ -8,6 +8,12 @@ const loginForm = document.querySelector("#login")
 const createAccountForm = document.querySelector("#createAccount")
 
 
+async function onLoad() {
+    /* await verifyAdmin() */
+    await getUser()
+}
+
+
 // Switching between Login-form and create account-form
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -35,8 +41,8 @@ makeRequest();
 /* Logga in */
 document.querySelector(".button").addEventListener("click", loginUser)
 
-async function loginUser(e) {
 
+async function loginUser(e) {
     e.preventDefault();
 
     const action = 'loginUser'; 
@@ -46,26 +52,47 @@ async function loginUser(e) {
     
     let verify = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${loginUser}&password=${loginPassword}`, "GET")
     
-    // Gör en request på verifyAdmin
-
 
 
     if(!verify) {
-        alert("Något gick fel")
+        alert("Wrong credentials")
         return
     }
 
+
+
+    alert("You are in!")
+
+
+    
+    let checkAdmin = await verifyAdmin();
+
+    console.log(checkAdmin);
+
+     if(checkAdmin) {
+        console.log("Du är admin")
+    } else {
+
+        console.log("Du är INTE admin")
+    } 
+
     // If session är true skicka adminsida, if false skicka till kundsida
 
-    alert("Du är nu inloggad!")
+    
 
-    window.location.href = "./../index.html";
-
+    /* window.location.href = "./../index.html"; */
 
 }
 
 
 
+async function verifyAdmin() {
+    const action = 'verifyAdmin'; 
+    let verifyA = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
+    console.log(verifyA)
+    return verifyA
+    
+}
 
 
 
@@ -74,15 +101,8 @@ async function getUser() {
     const action = 'getUser'; 
     let getUser = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
     
-    /* console.log(getUser) */
+     console.log(getUser) 
 }
-
-
-
-
-
-
-
 
 
 
@@ -178,3 +198,6 @@ function sameInputs(username, password){
     }
         return true
 }
+
+
+window.addEventListener("load", onLoad);
