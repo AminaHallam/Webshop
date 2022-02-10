@@ -4,6 +4,7 @@ import {makeRequest} from './fetchHelper.js'
 export function openMenu() {   
     document.getElementById("dropdown").classList.toggle("active");
 } 
+document.getElementById("menu").addEventListener("click", openMenu);
 
 makeRequest();
 /* Category */
