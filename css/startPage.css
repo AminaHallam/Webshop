@@ -15,6 +15,7 @@ p {
 }
 
 form {
+  position: relative;
   font-family: Arial;
   padding: 20px;
   background-color: #f5ebe0;

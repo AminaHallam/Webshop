@@ -1,0 +1,40 @@
+.categoryContainer {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin: 50px;
+
+    font-size: 40px;
+
+}
+
+
+
+.productContainer {
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin: 20px;
+
+    justify-content: center;
+
+    align-items: center;
+
+    cursor: pointer;
+
+
+}
+
+
+
+p {
+
+    margin:0px;
+
+}
