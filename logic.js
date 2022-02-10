@@ -75,6 +75,9 @@ async function getCategoryFromId(idToGet) {
     const action = "getById";
     let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET")
     console.log(specificCategory) 
+
+
+    
 }
 
 
