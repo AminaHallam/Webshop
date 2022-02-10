@@ -82,6 +82,10 @@ header {
     margin-top: 70px;
     margin-right: 80px;
 }
+
+.none {
+    display: none;
+}
  
 .fas {
     position: absolute;
