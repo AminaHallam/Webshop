@@ -28,13 +28,10 @@ class Database {
         $query->execute(); 
         $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction); 
         
-        error_log(serialize($result));
+        /* error_log(serialize($result)); */
         return $result;  
     }
 
-
-
-    
 
     public function fetchById($id, $createInstanceFunction) {
 
@@ -50,20 +47,19 @@ class Database {
     }
 
 
-
-
-
-
     public function freeQuery($sqlQuery, $createInstanceFunction) {
-       
+        
+      /*   error_log(serialize($sqlQuery));
+        error_log(serialize($createInstanceFunction)); */
+
         $query = $this->db->prepare($sqlQuery);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction);
-
+        
+       /*  error_log(serialize($result)); */
+        
         return $result;
     }
-
-
 
 }
     ?>

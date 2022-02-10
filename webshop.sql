@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 07, 2022 at 06:25 PM
+-- Generation Time: Feb 09, 2022 at 09:00 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -303,7 +303,7 @@ CREATE TABLE `user` (
   `CountryCode` int(11) NOT NULL,
   `StandardPhone` int(20) DEFAULT NULL,
   `MobileNumber` int(20) NOT NULL,
-  `Admin` tinyint(1) NOT NULL,
+  `Admin` tinyint(1) DEFAULT '0',
   `TermsOfPurchase` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -312,11 +312,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`Id`, `Email`, `Password`, `FirstName`, `LastName`, `Street`, `CO`, `ZipCode`, `City`, `Country`, `CountryCode`, `StandardPhone`, `MobileNumber`, `Admin`, `TermsOfPurchase`) VALUES
-(1, 'tjena@hej.se', 'hejsvej2014', 'Agda', 'Larsson', 'Tjolahoppsvägen', NULL, 51123, 'Borås', 'Sweden', 46, 31, 274843, 0, 0),
-(2, 'hejhejhej@tjose', 'tbnhjrejvn25', 'Örjan', 'Svedin', 'Andravägen 78', NULL, 12345, 'Bollebygd', 'Sweden', 46, NULL, 736761236, 0, 0),
-(3, 'telia@telia.se', 'rfgerger98!', 'Sigge', 'Eklund', 'sistavägen 45', NULL, 25412, 'Göteborg', 'Sweden', 46, NULL, 765453658, 0, 1),
-(4, 'grey@grey.se', 'ffefwfäfer', 'Per', 'Andersson', 'skitvägen', NULL, 12345, 'Malmö', 'Sweden', 46, NULL, 76123456, 0, 0),
-(5, 'admin@admin.se', 'admin', 'admin', 'admin', 'skitvägen', NULL, 12345, 'Malmö', 'Sweden', 46, NULL, 76123456, 1, 0);
+(1, 'tjena@hej.se', 'hejsvej2014', 'Agda', 'Larsson', 'Tjolahoppsvägen', NULL, 51123, 'Borås', 'Sweden', 46, 31274843, 736544441, NULL, 1),
+(2, 'hejhejhej@tjose', 'tbnhjrejvn25', 'Örjan', 'Svedin', 'Andravägen 78', NULL, 12345, 'Bollebygd', 'Sweden', 46, NULL, 736761236, NULL, 1),
+(3, 'telia@telia.se', 'rfgerger98!', 'Sigge', 'Eklund', 'sistavägen 45', NULL, 25412, 'Göteborg', 'Sweden', 46, NULL, 765453658, NULL, 1),
+(4, 'grey@grey.se', 'ffefwfäfer', 'Per', 'Andersson', 'skitvägen', NULL, 12345, 'Malmö', 'Sweden', 46, NULL, 76123456, NULL, 1),
+(5, 'admin@admin.se', 'admin', 'admin', 'admin', 'skitvägen', NULL, 12345, 'Malmö', 'Sweden', 46, NULL, 76123456, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -382,7 +382,8 @@ ALTER TABLE `productincategory`
 -- Indexes for table `subscriptionnews`
 --
 ALTER TABLE `subscriptionnews`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- Indexes for table `user`
