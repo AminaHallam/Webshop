@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="/collectionPage.js"></script>
     <script src="./logic.js" defer></script>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/startPage.css">
     <link rel="stylesheet" href="css/allProductsPage.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <script src="https://morgan3d.github.io/include.js/include.min.js"></script> --> 
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
 
     <title>Zeon Milo</title>
@@ -29,10 +29,9 @@
             <li id="menu">COLLECTION
             <i class="fas fa-angle-down"></i>
             
-            
             <ul id="dropdown">
 
-                <li><a href="allProductsPage.html">ALL PRODUCTS</a></li>
+                <li><a href="allProductsPage.html" id="all">ALL PRODUCTS</a></li>
                 
             </ul>
         </li>
@@ -40,7 +39,7 @@
             <li><a href="#socialMedia">CONTACT</a></li>
         </div>
         <div class="icons">
-            <li><a href="./client/login.html"><img src="/assets/icons/account.png" alt="account" id='accountIcon' href="#"></a></li>
+            <li><a href="#"><img src="/assets/icons/account.png" alt="account" id='accountIcon' href="#"></a></li>
             <li><a href="#"><img src="/assets/icons/shop-bag.png" alt="cartIcon" id='cartIcon' href="#"></a></li>
         </div>
         </nav>
@@ -48,34 +47,32 @@
         </div>
 
         <main> 
-<!-- Se till att newsletter hamnar under main -->
+
 
         </main>
 
 
-
 <!-- 
+        <div class="newsLetter">
+            <form action="/action_page.php">
+                <div class="container">
+                  <h2>I Send Colourful Mail To Some Really Lovely People.</h2>
+                  <br>
+                  <p>Want early previews of original paintings? Drop your email in the little box below.</p>
+                </div>
+                
+                <div class="newsLetterContainer">
+                  <input type="text" placeholder="Name" name="name" required>
+                  <input type="text" placeholder="Email address" name="mail" required>
+                  
+                  <input type="submit" value="Sign me up!">
+                </div>
+              </form>
+        
+            </div>
+
 
             <footer>
-                <div class="newsLetter">
-                    <form action="/action_page.php">
-                        <div class="container">
-                          <h2>I Send Colourful Mail To Some Really Lovely People.</h2>
-                          <br>
-                          <p>Want early previews of original paintings? Drop your email in the little box below.</p>
-                        </div>
-                        
-                        <div class="newsLetterContainer">
-                          <input type="text" placeholder="Name" name="name" required>
-                          <input type="text" placeholder="Email address" name="mail" required>
-                          
-                          <input type="submit" value="Sign me up!">
-                        </div>
-                      </form>
-                
-                    </div>
-
-
                 <div class="footerDiv">
                     <div class="contactInfo" id='contact'>
                         <h4>Contact</h4>
@@ -98,9 +95,9 @@
         
         
         
-            </footer>
- 
+            </footer> -->
 
+<!-- 
     <include src="../includes/header.html"></include>
 
 <main>
