@@ -1,58 +1,51 @@
 
 function onLoad() {
-
+    getAllCategories()
     getAllProducts()
     getProductFromId(1)
-    getAllCategories()
     getCategoryFromId(3)
-
     getAllOrders()
     getOrderById(2)
     getOrdersByOtherId(`"REG"`, "Status")
     getOrdersByOtherId(2, "User")
-
 }
+
 
 document.getElementById("menu").addEventListener("click", openMenu);
 
  
-function openMenu() {
-    
-    getAllCategories() 
-    
-    
-}
+/* function openMenu() {
+    getAllCategories()  
+} */
 
-document.getElementById("menu").addEventListener("click", openMenu);
+
+
+/* document.getElementById("menu").addEventListener("click", openMenu); {
 
 // document.querySelector("#all").addEventListener("click", getAllProducts); 
+   
+} */
 
-
+function openMenu() {   
+    document.getElementById("dropdown").classList.toggle("active");
+} 
     
-    function openMenu() {
+async function makeRequest(url, method, body) {
+    try {
+        let response = await fetch(url, {
+            method,
+            body
+        })
+        let result = await response.json();
         
-        document.getElementById("dropdown").classList.toggle("active");
-        
+        return result
+    } catch(err) {
+        console.error(err)
     }
-    
-    
-    
-    async function makeRequest(url, method, body) {
-        try {
-            let response = await fetch(url, {
-                method,
-                body
-            })
-            let result = await response.json();
-            
-            return result
-        } catch(err) {
-            console.error(err)
-        }
-    }
+}
 
    
-}
+
 
 
 /* Product */
@@ -65,24 +58,22 @@ async function getAllProducts() {
     console.log(allProducts)
 }
 
+
+
 /* Hämtar en produkt baserat på ett produktid */
 async function getProductFromId(id) {
-    const action = 'getById'; 
+const action = 'getById'; 
 
-    
-    
-    
-    
-  /*   async function getProductFromId(id) {
-        const action = 'getById'; 
-        
-        let specificProduct = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}&id=${id}`, "GET")
-        // console.log(specificProduct)
-        console.log(specificProduct)
+let specificProduct = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}&id=${id}`, "GET")
 
-       
-    }
-     */
+console.log(specificProduct)
+
+}
+     
+
+
+
+
 
 
 
@@ -152,7 +143,7 @@ async function getAllOrders() {
     console.log(allOrders); 
 }
 
-} */
+
     
 
 
