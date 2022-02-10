@@ -3,8 +3,12 @@ import {makeRequest} from './fetchHelper.js'
 
 export function openMenu() {   
     document.getElementById("dropdown").classList.toggle("active");
+    document.getElementById("menu").addEventListener("click", openMenu);
 } 
-document.getElementById("menu").addEventListener("click", openMenu);
+//document.getElementById("menu").addEventListener("click", openMenu);
+
+
+//const categories = getAllCategoriesAsList(); 
 
 makeRequest();
 /* Category */
@@ -26,9 +30,50 @@ export async function getAllCategories() {
         title.innerHTML = element.categoryName; 
         ul.append(productContainer)
         productContainer.append(title)
+
         
         
     }  
     
     
+}
+
+
+export async function getAllCategoriesAsList() {
+    const action = "getAll";
+    let allCategories = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}`, "GET")
+    
+    
+    for (let i = 0; i < allCategories.length; i++) {
+        const element = allCategories[i];
+        let categories = element.categoryId; 
+        return categories; 
+    }
+
+}
+
+async function getCategoryFromId(idToGet) {
+
+    const action = "getById";
+    let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET")
+    console.log(specificCategory) 
+
+    for (let i = 0; i < specificCategory.length; i++) {
+        const category = specificCategory[i]; 
+        console.log(category)
+    }
+    const main = document.getElementsByTagName("main")[0]; 
+
+    if(specificCategory.categoryName) {
+
+        let categoryContainer = document.createElement("div")
+        categoryContainer.classList.add("categoryContainer")
+        let category = document.createElement("h2")
+        category.innerHTML = specificCategory.categoryName;
+        
+        main.appendChild(categoryContainer)
+        categoryContainer.appendChild(category)
+    
+    }
+
 }

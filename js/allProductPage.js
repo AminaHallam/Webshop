@@ -12,6 +12,8 @@ function onLoad() {
     
 }
 
+
+
 getAllCategories();
 
 makeRequest();
