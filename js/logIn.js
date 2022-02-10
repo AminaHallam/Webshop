@@ -1,4 +1,4 @@
-import { makeRequest } from "./helperFunctions/fetchHelper.js"
+import { makeRequest } from "../helperFunctions/fetchHelper.js"
 
 
 const logOut = document.querySelector(".logout")

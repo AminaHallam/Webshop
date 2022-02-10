@@ -1,12 +1,20 @@
+import {openMenu, getAllCategories} from '.././helperFunctions/renderHelper.js'
+import {makeRequest} from '.././helperFunctions/fetchHelper.js'
+
+
+
 
 function onLoad() {
 
     getAllProducts() 
+    openMenu();
    
     
 }
 
+getAllCategories();
 
+makeRequest();
 
 async function getAllProducts() {
     const action = "getAll";
