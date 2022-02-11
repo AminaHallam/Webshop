@@ -33,6 +33,7 @@ export async function showCorrectLayout() {
     let checkIfInlogged = await getUser();
 
     if(!checkIfInlogged) {
+        document.querySelector(".adminIcons").classList.add("none");
         console.log("Ingen är inloggad")
         return
     }
@@ -42,12 +43,15 @@ export async function showCorrectLayout() {
      if(checkAdmin) {
         console.log("Du är admin");
 
-        document.querySelector(".adminSetting").classList.remove("none");
+        document.querySelector(".adminIcons").classList.remove("none");
+        document.querySelector(".loginIcon").classList.add("none")
 
     } else {
         console.log("Du är en vanlig kund");
-
+        
+        document.querySelector(".adminIcons").classList.remove("none");
         document.querySelector(".adminSetting").classList.add("none");
+        document.querySelector(".loginIcon").classList.add("none")
     } 
 }
 
@@ -57,6 +61,14 @@ export async function getUser() {
     let getUser = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
      /* console.log(getUser)  */
      return getUser
+}
+
+
+export async function logOut(){
+
+    const action = "destroySession"
+    let logoutUser = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
+    alert("You are out!")    
 }
 
 

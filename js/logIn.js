@@ -1,7 +1,6 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut} from './../helperFunctions/fetchHelper.js'
 
-const logOut = document.querySelector(".logout")
 const myPage = document.querySelector(".myPage")
 const buttonCA = document.querySelector(".buttonCA")
 const loginForm = document.querySelector("#login")
@@ -18,6 +17,7 @@ getAllCategories();
 getUser();
 
 document.getElementById("menu").addEventListener("click", openMenu);
+document.querySelector(".logOut").addEventListener("click", logOut)
 
 
 // Switching between Login-form and create account-form
