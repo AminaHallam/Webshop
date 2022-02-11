@@ -1,4 +1,5 @@
-import { makeRequest, verifyAdmin, getUser, showCorrectLayout } from "../helperFunctions/fetchHelper.js"
+import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout} from './../helperFunctions/fetchHelper.js'
 
 const logOut = document.querySelector(".logout")
 const myPage = document.querySelector(".myPage")
@@ -9,12 +10,14 @@ const createAccountForm = document.querySelector("#createAccount")
 
 async function onLoad() {
     await showCorrectLayout();
-   
 }
 
 makeRequest();
 verifyAdmin();
+getAllCategories();
 getUser();
+
+document.getElementById("menu").addEventListener("click", openMenu);
 
 
 // Switching between Login-form and create account-form
@@ -61,13 +64,6 @@ async function loginUser(e) {
     location.href = "./../index.html";
 
 }
-
-
-
-
-
-
-
 
 
 

@@ -3,7 +3,6 @@ import {makeRequest, verifyAdmin, getUser, showCorrectLayout} from './../helperF
 
 
 async function onLoad() {
-    /* await getUser(); */
     await showCorrectLayout();
 }
 
@@ -13,13 +12,6 @@ verifyAdmin();
 getUser();
 
 document.getElementById("menu").addEventListener("click", openMenu);
-
-
-
-
-
-
-
 
 
 

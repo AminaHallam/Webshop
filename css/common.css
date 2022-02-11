@@ -132,6 +132,11 @@ li, a {
     width: 26px; 
 }
 
+#adminIcon {
+    height: 26px;
+    width: 26px; 
+}
+
 
 main {
     display: flex;

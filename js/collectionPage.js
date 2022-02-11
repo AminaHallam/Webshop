@@ -1,9 +1,9 @@
-import {openMenu} from '.././helperFunctions/renderHelper.js'
-import {makeRequest} from '.././helperFunctions/fetchHelper.js'
+import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout} from './../helperFunctions/fetchHelper.js'
 
 
-function onLoad() {
-    openMenu();
+async function onLoad() {
+    await showCorrectLayout();
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const url = urlParams.get('id')
@@ -11,12 +11,14 @@ function onLoad() {
     getCategoryFromId(url)
     
     renderProductsFromCategory(url)
-
-
 }
 
 makeRequest();
+verifyAdmin();
+getAllCategories();
+getUser();
 
+document.getElementById("menu").addEventListener("click", openMenu);
 
 
 

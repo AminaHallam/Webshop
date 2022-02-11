@@ -1,31 +1,27 @@
-import {openMenu, getAllCategories} from '.././helperFunctions/renderHelper.js'
-import {makeRequest} from '.././helperFunctions/fetchHelper.js'
+import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout} from './../helperFunctions/fetchHelper.js'
 
 
+async function onLoad() {
+    await showCorrectLayout();
+    getAllProducts();
 
-
-function onLoad() {
-
-    getAllProducts() 
-    openMenu();
-   
-    
 }
 
-
-
-getAllCategories();
-
 makeRequest();
+verifyAdmin();
+getAllCategories();
+getUser();
+
+document.getElementById("menu").addEventListener("click", openMenu);
+
 
 async function getAllProducts() {
     const action = "getAll";
 
     let allProducts = await makeRequest(`./api/receivers/productReceiver.php?action=${action}`, "GET")
-    
 
     renderProducts(allProducts)
-
     
 }
 
