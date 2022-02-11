@@ -1,7 +1,6 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
 import {makeRequest, verifyAdmin, getUser, showCorrectLayout} from './../helperFunctions/fetchHelper.js'
 
-
 async function onLoad() {
     await showCorrectLayout();
     getAllProducts();
@@ -66,6 +65,14 @@ async function renderProducts(list){
 
 }
 
+
+export function productPage(product) {
+
+    let productId = product.productId
+
+    window.location.href = "productPage.html?id=" + productId; 
+
+}
 
 
 window.addEventListener('load', onLoad)
