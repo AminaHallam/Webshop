@@ -13,7 +13,7 @@ abstract class MainController {
     abstract function getAll();
     abstract function getById($id);
     /*
-    abstract function add($product);
+    abstract function add($newsletter);
     abstract function delete($id);
     */
 }
