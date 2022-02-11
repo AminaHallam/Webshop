@@ -1,4 +1,4 @@
-import { makeRequest } from "../helperFunctions/fetchHelper.js"
+import { makeRequest, verifyAdmin, getUser, showCorrectLayout } from "../helperFunctions/fetchHelper.js"
 
 const logOut = document.querySelector(".logout")
 const myPage = document.querySelector(".myPage")
@@ -8,10 +8,13 @@ const createAccountForm = document.querySelector("#createAccount")
 
 
 async function onLoad() {
-    /* await verifyAdmin() */
     await showCorrectLayout();
-    await getUser()
+   
 }
+
+makeRequest();
+verifyAdmin();
+getUser();
 
 
 // Switching between Login-form and create account-form
@@ -33,12 +36,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-makeRequest();
+
 
 
 /* Logga in */
 document.querySelector(".button").addEventListener("click", loginUser)
-
 
 async function loginUser(e) {
     e.preventDefault();
@@ -55,65 +57,20 @@ async function loginUser(e) {
         return
     }
     alert("You are in!")
-    
-  /*   let checkAdmin = await verifyAdmin();
 
-    console.log(checkAdmin);
-
-     if(checkAdmin) {
-        myAdmin();
-    } else {
-        myPages();
-    }  */
-
-    // If session är true skicka adminsida, if false skicka till kundsida
-
-    /* window.location.href = "./../index.html"; */
+    location.href = "./../index.html";
 
 }
 
 
-async function verifyAdmin() {
-    const action = 'verifyAdmin'; 
-    let verifyA = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
-    console.log(verifyA)
-    return verifyA    
-}
 
 
-// Hämta användarinfo från SESSION vid inloggad användare.
-async function getUser() {
-    const action = 'getUser'; 
-    let getUser = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
-    
-     console.log(getUser) 
-}
 
 
-async function myAdmin() {
-    console.log("Kom in admin");
 
-    document.querySelector(".adminSetting").classList.remove("none");
-    /* window.location.href = "./../index.html"; */
-}
 
-async function myPages() {
-    console.log("Kom in page");
-    window.location.href = "./../index.html"; 
-} 
 
-// 10/2 Få det att stanna kvar på sidan 
 
-async function showCorrectLayout() {
-    let checkAdmin = await verifyAdmin();
-    console.log(checkAdmin);
-
-     if(checkAdmin) {
-        console.log("shoo");/* myAdmin(); */
-    } else {
-        console.log("hejdå");/* myPages(); */
-    } 
-}
 
 /* Register account - View */
 document.querySelector(".buttonCA").addEventListener("click", () => {

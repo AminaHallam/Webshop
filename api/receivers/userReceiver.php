@@ -1,6 +1,8 @@
 <?php
 
-try {   
+try {
+    
+    session_start();
 
    include_once("./../controllers/userController.php");
 
@@ -17,6 +19,9 @@ try {
             }
             
         } else if($_GET["action"] == "getUser") {
+
+            /* session_destroy(); */
+            
             echo json_encode($_SESSION["inloggedUser"]); 
 
         } else if($_GET["action"] == "verifyAdmin") {
