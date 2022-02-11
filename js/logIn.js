@@ -118,9 +118,9 @@ e.preventDefault();
         return
     }
     
-    const hej = 'addUser'; 
+    const action = 'addUser'; 
 
-    let emailCheck = await makeRequest(`./../api/receivers/userReceiver.php?action=${hej}&user=${registerEmail}`, "GET")
+    let emailCheck = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${registerEmail}`, "GET")
     console.log(emailCheck)
 
 

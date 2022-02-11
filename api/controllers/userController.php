@@ -22,7 +22,7 @@ class UserController extends MainController {
         $checkEmail = $this->database->freeQuery($query, $this->createUser);
         error_log(serialize($checkEmail));
 
-        if($checkEmail == "{}") {
+        if(!$checkEmail == "{}") {
             return true;
         }
         return false;
