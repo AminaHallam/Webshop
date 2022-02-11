@@ -25,6 +25,10 @@ function createOrder($Id, $StatusId, $UserId, $CourrierId, $RegisterDate, $Shipp
     return new Order((int)$Id, $StatusId, (int)$UserId, (int)$CourrierId, $RegisterDate, $ShippingDate, $CustRecDate);
 } 
 
+/* function createNewsLetter($Id, $Title, $Text, $Date) {
+    return new NewsLetter((int)$Id, $Title, $Text, $Date);
+}  */
+
 /* Påbörjad. Vill få med quantity. Blev inge bra */
 function productDetails($Id, $name, $description, $unitPrice, $unitsInStock, $image/* , $quantity */) { 
 return new Product((int)$Id, $name, $description, $unitPrice, $unitsInStock, $image/* , $quantity */); 
