@@ -1,5 +1,5 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut} from './../helperFunctions/fetchHelper.js'
 
 
 async function onLoad() {
@@ -23,6 +23,7 @@ getUser();
 
 
 document.getElementById("menu").addEventListener("click", openMenu);
+document.querySelector(".logOut").addEventListener("click", logOut)
 
 
 async function productPage(product) {
