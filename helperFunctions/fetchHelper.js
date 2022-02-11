@@ -16,10 +16,6 @@ export async function makeRequest(url, method, body) {
 
 
 
-
-
-
-
 /* User */
 
 
@@ -62,14 +58,6 @@ export async function getUser() {
      /* console.log(getUser)  */
      return getUser
 }
-
-
-
-
-
-
-
-
 
 
 

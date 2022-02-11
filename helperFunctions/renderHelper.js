@@ -1,12 +1,10 @@
-
 import {makeRequest} from './fetchHelper.js'
 
+// Dropmeny
 export function openMenu() {   
     document.getElementById("dropdown").classList.toggle("active");
-    document.getElementById("menu").addEventListener("click", openMenu);
+    
 } 
-//document.getElementById("menu").addEventListener("click", openMenu);
-
 
 //const categories = getAllCategoriesAsList(); 
 
