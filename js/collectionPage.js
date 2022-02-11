@@ -1,5 +1,5 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout} from './../helperFunctions/fetchHelper.js'
 
 
 async function onLoad() {
@@ -22,12 +22,10 @@ document.getElementById("menu").addEventListener("click", openMenu);
 
 
 
-
  async function getCategoryFromId(idToGet) {
 
     const action = "getById";
-    let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET")
-    console.log(specificCategory) 
+    let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET") 
 
     for (let i = 0; i < specificCategory.length; i++) {
         const category = specificCategory[i]; 
@@ -52,15 +50,11 @@ document.getElementById("menu").addEventListener("click", openMenu);
 
 async function renderProductsFromCategory(idToGet) {
 
-
     const action = "getById";
     let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET")
     
-    
-    
     for (let i = 0; i < specificCategory.products.length; i++) {
         const product = specificCategory.products[i];
-
         
         const main = document.getElementsByTagName("main")[0]; 
        
@@ -74,19 +68,23 @@ async function renderProductsFromCategory(idToGet) {
         unitPrice.innerHTML = product.unitPrice + " €";
         let image = document.createElement("img")
         image.src = "./assets/" + product.image
-
+        image.addEventListener("click", () => {productPage(product)})
     
         main.append(productContainer)
         productContainer.append(title, description, unitPrice, image)
 
-        
-
     }
-
 
 
 }
 
-document.querySelector(".logOut").addEventListener("click", logOut)
+function productPage(product) {
+
+    let productId = product.productId
+
+    window.location.href = "productPage.html?id=" + productId; 
+
+} 
+
 
 window.addEventListener("load", onLoad)

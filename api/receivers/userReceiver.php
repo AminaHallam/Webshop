@@ -30,8 +30,20 @@ try {
             echo(json_encode($controller->verifyAdmin()));
                 
             exit;
+            
+        } else if($_GET["action"] == "addUser") {
+            
+            if($_GET["user"]) {
+                $controller = new UserController();
+                echo(json_encode($controller->checkEmail($_GET["user"])));
+                exit;
+              }
         }
+    } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if($_POST["endpoint"] == "addUser") {
+            echo (json_encode("addUser"));
     }
+}
 
 }catch(Exception $err) {
     echo json_encode(array('Message' => $err->getMessage(), "Status" => $err->getCode()));
