@@ -47,90 +47,90 @@
     </header>
 
 
-<main>
-    <div class="accountContainer">
-        <form class="form" id="login"> 
-            <h1 class="h1">Sign in</h1>
-            <div class="inputGroup">
-                <input id="inputUserName" type="email" placeholder="example@example.se" name="Användarnamn" autofocus required>
-            </div>
-            <div class="inputGroup">
-                <input id="inputPassword" type="password" placeholder="password" name="Lösenord" required>
-            </div>
+    <main>
+        <div class="accountContainer">
+            <form class="form" id="login"> 
+                <h1 class="h1">Sign in</h1>
+                <div class="inputGroup">
+                    <input id="inputUserName" type="email" placeholder="example@example.se" name="Användarnamn" autofocus required>
+                </div>
+                <div class="inputGroup">
+                    <input id="inputPassword" type="password" placeholder="password" name="Lösenord" required>
+                </div>
 
-            <button class="button" type="submit">Sign in</button>
-            <p class="formText">
-                <a class="noAccountLink" id="linkCreateAccount" href="#" >New customer? <strong>Create your account</strong> here.</a>
-            </p>
-        </form>
-        
-        <form class="form hidden" id="createAccount">
-            <h1 class="h1">Create account</h1>
-            <div class="containerForms">
-                <div class="registerBlock">
-                    <h2>Address</h2>
-                    <div class="inputGroup">
-                        <input id="firstName" type="text" placeholder="firstname" name="firstName" autofocus required>
+                <button class="button" type="submit">Sign in</button>
+                <p class="formText">
+                    <a class="noAccountLink" id="linkCreateAccount" href="#" >New customer? <strong>Create your account</strong> here.</a>
+                </p>
+            </form>
+            
+            <form class="form hidden" id="createAccount">
+                <h1 class="h1">Create account</h1>
+                <div class="containerForms">
+                    <div class="registerBlock">
+                        <h2>Address</h2>
+                        <div class="inputGroup">
+                            <input id="firstName" type="text" placeholder="firstname" name="firstName" autofocus required>
+                        </div>
+                        <div class="inputGroup">
+                            <input id="lastName" type="text" placeholder="lastname" name="lastName" required>
+                        </div>
+                        <div class="inputGroup">
+                            <input id="street" type="text" placeholder="street" name="street" required>
+                        </div>
+                        <div class="inputGroup">
+                            <input id="CO" type="text" placeholder="CO (Not requried)" name="CO" >
+                        </div>
+                        <div class="inputGroup">
+                            <input id="zipcode" type="number" placeholder="zipcode" name="zipcode" required>
+                        </div>
+                        <div class="inputGroup">
+                            <input id="city" type="text" placeholder="city" name="city" required>
+                        </div>
+                        <div class="inputGroup">
+                            <input id="country" type="text" placeholder="country" name="country" required>
+                        </div>
                     </div>
-                    <div class="inputGroup">
-                        <input id="lastName" type="text" placeholder="lastname" name="lastName" autofocus required>
+
+                    <div class="registerBlock">
+                        <h2>Contact</h2>
+                        <div class="inputGroup">
+                            <input id="user" type="email" placeholder="example@example.se" name="email" required>
+                        </div>
+                        <div class="inputGroup">
+                            <input id="countryCode" type="number" placeholder="country code e.g '46' " name="countrycode" required>
+                        </div>
+                        <div class="inputGroup">
+                            <input id="mobileNumber" type="number" placeholder="mobile phone" name="mobileNumber" required>
+                        </div>
+                        <div class="inputGroup">
+                            <input id="standardphone" type="number" placeholder="standard phone (Not required)" name="standardphone" >
+                        </div>
                     </div>
-                    <div class="inputGroup">
-                        <input id="street" type="text" placeholder="street" name="street" autofocus required>
-                    </div>
-                    <div class="inputGroup">
-                        <input id="CO" type="text" placeholder="CO (Not requried)" name="CO" autofocus>
-                    </div>
-                    <div class="inputGroup">
-                        <input id="zipcode" type="number" placeholder="zipcode" name="zipcode" autofocus required>
-                    </div>
-                    <div class="inputGroup">
-                        <input id="city" type="text" placeholder="city" name="city" autofocus required>
-                    </div>
-                    <div class="inputGroup">
-                        <input id="country" type="text" placeholder="country" name="country" autofocus required>
+                    
+                    <div class="registerBlock">
+                        <h2>Password</h2>
+                        <div class="inputGroup">
+                            <input id="pw" type="password" placeholder="password" name="password" required>
+                        </div>
+                        <div class="inputGroup">
+                            <input id="confirmPw" type="password" placeholder="confirm password" name="password" required>
+                        </div>
                     </div>
                 </div>
 
-                <div class="registerBlock">
-                    <h2>Contact</h2>
-                    <div class="inputGroup">
-                        <input id="user" type="email" placeholder="example@example.se" name="Användarnamn" autofocus required>
-                    </div>
-                    <div class="inputGroup">
-                        <input id="countryCode" type="number" placeholder="country code e.g '46' " name="countrycode" autofocus required>
-                    </div>
-                    <div class="inputGroup">
-                        <input id="mobileNumber" type="number" placeholder="mobile number" name="mobileNumber" autofocus required>
-                    </div>
-                    <div class="inputGroup">
-                        <input id="standardphone" type="number" placeholder="standard phone (Not required)" name="standardphone" autofocus>
-                    </div>
-                </div>
-                
-                <div class="registerBlock">
-                    <h2>Password</h2>
-                    <div class="inputGroup">
-                        <input id="pw" type="password" placeholder="password" name="Lösenord" required>
-                    </div>
-                    <div class="inputGroup">
-                        <input id="confirmPw" type="password" placeholder="confirm password" name="Lösenord" required>
-                    </div>
-                </div>
-            </div>
 
-
-            <button class="buttonCA" type="submit">Create account</button>
-            <p class="formText">
-                <a class="noAccountLink" id="linkLogIn" href="#" >Already have an account? <strong>Sign in</strong> here</a>
-            </p><br><br>
-            <p class="formText">
-                By continuing, you agree to Zeon Milo's <a href="#"><strong>Conditions of Use</strong></a>and<a href="#"><strong>Terms of Purchase</strong></a>
-            </p>
-        
-        </form>
-    </div>  
-</main>
+                <button class="buttonCA" type="submit">Create account</button>
+                <p class="formText">
+                    <a class="noAccountLink" id="linkLogIn" href="#" >Already have an account? <strong>Sign in</strong> here</a>
+                </p><br><br>
+                <p class="formText">
+                    By continuing, you agree to Zeon Milo's <a href="#"><strong>Conditions of Use</strong></a>and<a href="#"><strong>Terms of Purchase</strong></a>
+                </p>
+            
+            </form>
+        </div>  
+    </main>
     
     
     

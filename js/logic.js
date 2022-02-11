@@ -1,23 +1,21 @@
 import {openMenu, getAllCategories, getAllCategoriesAsList} from '.././helperFunctions/renderHelper.js'
-import {makeRequest} from '.././helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout} from '.././helperFunctions/fetchHelper.js'
 
 
-
-
-
-function onLoad() {
-   
+async function onLoad() {
+    await getUser();
+    await showCorrectLayout();
 }
 
+makeRequest();
+getAllCategories();
+verifyAdmin();
+getUser();
 
 document.getElementById("menu").addEventListener("click", openMenu);
 
 
 
-
-
-makeRequest();
-getAllCategories();
 
 
 
