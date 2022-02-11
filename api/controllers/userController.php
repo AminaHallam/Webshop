@@ -14,6 +14,20 @@ class UserController extends MainController {
     }
 
 
+    public function checkEmail($user) {
+        $query = "SELECT *
+        FROM user
+        WHERE Email = "."'".$user."'";
+
+        $checkEmail = $this->database->freeQuery($query, $this->createUser);
+        error_log(serialize($checkEmail));
+
+        if($checkEmail == "{}") {
+            return true;
+        }
+        return false;
+        
+    }
 
 
     // Kollar om username och password matchar databasen
