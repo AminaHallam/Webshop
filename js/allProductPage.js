@@ -1,11 +1,11 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout, getProductFromId} from './../helperFunctions/fetchHelper.js'
 
 
 async function onLoad() {
     await showCorrectLayout();
     getAllProducts();
-
+    getAllProductsId();
 }
 
 makeRequest();
@@ -65,6 +65,33 @@ async function renderProducts(list){
 
 
 }
+
+
+
+export async function getAllProductsId() {
+    const action = "getAll";
+    let allProductsId = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}`, "GET")
+    
+    
+    for (let i = 0; i < allProductsId.length; i++) {
+        const element = allProductsId[i]
+        console.log(element.productId)
+      /*   const ul = document.getElementById("dropdown");
+        let productContainer = document.createElement("div")
+        productContainer.classList.add("productContainer")
+        let title = document.createElement("a")
+        title.href = 'collectionPage.html?id=' + element.categoryId
+        title.innerHTML = element.categoryName; 
+        ul.append(productContainer)
+        productContainer.append(title) */
+
+        
+        
+    }  
+    
+    
+}
+
 
 
 
