@@ -28,11 +28,11 @@ export async function verifyAdmin() {
 
 // Visar den rätta layouten beroende på om det är en kund eller admin som är inloggad. Om ingen är inloggad behålls den befintliga layouten.
 export async function showCorrectLayout() {
+    const loggedInUser = document.querySelector(".loggedInUser")
 
     /* Checkar om någon användare finns i session(dvs inloggad) */
     let checkIfInlogged = await getUser();
     if(!checkIfInlogged) {
-        const loggedInUser = document.querySelector(".loggedInUser")
         document.querySelector(".adminIcons").classList.add("none");
         loggedInUser.classList.add("none")
         return
@@ -40,7 +40,7 @@ export async function showCorrectLayout() {
 
 
     /* Visar vem som är inloggad */
-    const loggedInUser = document.querySelector(".loggedInUser")
+    
     loggedInUser.classList.remove("none")
     let activeUser = document.createElement("p")
     activeUser.innerText = "Logged in user: " + checkIfInlogged.FirstName
