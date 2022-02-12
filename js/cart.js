@@ -3,9 +3,10 @@ import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut} from './..
 
 
 async function onLoad() {
+    accountCheck();
     await getUser();
     await showCorrectLayout();
-    accountCheck();
+    
 }
 
 makeRequest();
@@ -22,6 +23,8 @@ document.querySelector(".logOut").addEventListener("click", logOut)
 
 // Om du inte är inloggad så skickas du till loginsidan. 
 async function accountCheck() {
+
+    console.log("kommer in i accountcheck")
 
     let allowed = await getUser();
 

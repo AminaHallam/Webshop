@@ -2,8 +2,6 @@
 
 try {
     
-    session_start();
-
    include_once("./../controllers/userController.php");
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -19,7 +17,24 @@ try {
             }
             
         } else if($_GET["action"] == "getUser") {
-            echo json_encode($_SESSION["inloggedUser"]); 
+
+            $user = unserialize($_SESSION["inloggedUser"]);
+
+            error_log(serialize($user));
+
+            $basicUserInfo = array(
+                "id" => $user[0]->Id,
+                "FirstName" => $user[0]->FirstName,
+                "LastName" => $user[0]->LastName
+            );
+
+            if($user == 0) {
+
+                echo json_encode(false);
+                exit;
+            }
+
+            echo json_encode($basicUserInfo); 
 
 
         } else if($_GET["action"] == "verifyAdmin") {

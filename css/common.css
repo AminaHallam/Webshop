@@ -96,8 +96,18 @@ header {
     display: none;
     position: absolute;
     width: 100%;
-    
- 
+}
+
+.loggedInUser {
+    display: flex;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+}
+
+.loggedInUser p {
+    padding-top: 2px;
+    padding-right: 5px;
 }
  
 #dropdown.active {
