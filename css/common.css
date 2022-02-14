@@ -160,6 +160,28 @@ li, a {
 }
 
 
+.qty {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    right:115px;
+    top:92px;
+    font-size: 10px;
+    border-radius: 50%;
+    background-color: #E3D5CA;
+}
+
+.qtyAdmin {
+    right: 247px;
+}
+
+.qtyCustomer {
+    right: 212px;
+}
+
+
 main {
     display: flex;
     flex-direction: column;

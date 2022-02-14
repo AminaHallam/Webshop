@@ -26,21 +26,32 @@ export async function verifyAdmin() {
     return verifyA    
 }
 
+
+
+
+
+
+
+
+
+
 // Visar den rätta layouten beroende på om det är en kund eller admin som är inloggad. Om ingen är inloggad behålls den befintliga layouten.
 export async function showCorrectLayout() {
     const loggedInUser = document.querySelector(".loggedInUser")
-
+    
     /* Checkar om någon användare finns i session(dvs inloggad) */
     let checkIfInlogged = await getUser();
     if(!checkIfInlogged) {
+        
         document.querySelector(".adminIcons").classList.add("none");
+        document.querySelector(".qty").classList.remove("qtyCustomer")
+        document.querySelector(".qty").classList.remove("qtyAdmin")
         loggedInUser.classList.add("none")
         return
     }
 
 
     /* Visar vem som är inloggad */
-    
     loggedInUser.classList.remove("none")
     let activeUser = document.createElement("p")
     activeUser.innerText = "Logged in user: " + checkIfInlogged.FirstName
@@ -54,14 +65,23 @@ export async function showCorrectLayout() {
         console.log("Du är admin");
         document.querySelector(".adminIcons").classList.remove("none");
         document.querySelector(".loginIcon").classList.add("none")
+        document.querySelector(".qty").classList.add("qtyAdmin")
 
     } else {
         console.log("Du är en vanlig kund");
         document.querySelector(".adminIcons").classList.remove("none");
         document.querySelector(".adminSetting").classList.add("none");
         document.querySelector(".loginIcon").classList.add("none")
+        document.querySelector(".qty").classList.add("qtyCustomer")
     } 
 }
+
+
+
+
+
+
+
 
 
 // Hämtar Id, förnamn och efternamn från SESSION vid inloggad användare. Vid ej inloggad användare så returnerar getUser false.
@@ -139,3 +159,28 @@ console.log(specificProduct)
 
 }
      
+
+
+/* Cart */
+
+
+// Printar ut det totala antalet på produkter vi lagt till i kundvagen uppe i headern. 
+export async function printNrOfElements() {
+
+    let numberCart = document.querySelector(".qty")
+
+    const action = "getCart"
+
+    let cart = await makeRequest(`./../api/receivers/cartReceiver.php?action=${action}`, "GET")
+
+    if(cart) {
+        cart = JSON.parse(cart)
+    } else { 
+        cart = []
+    }
+
+    let totalSum = cart.reduce((sum,item) => sum + item.quantity, 0)
+    
+    numberCart.innerText = totalSum
+
+}
