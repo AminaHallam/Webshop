@@ -6,10 +6,15 @@ try {
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
 
-        if($_GET["action"] == "getCart") {
+        if(isset($_GET["action"]) == "getCart") {
+
+            if(isset($_SESSION["myCart"])) {
 
             echo json_encode($_SESSION["myCart"]);
-            exit; 
+            exit;
+
+            }
+
         } 
 
     }
@@ -18,7 +23,7 @@ try {
 
         if($_POST["action"] == "updateCart") {
 
-            if($_POST["cart"]) {
+            if(isset($_POST["cart"])) {
 
                 $cart = $_POST["cart"];
                 
