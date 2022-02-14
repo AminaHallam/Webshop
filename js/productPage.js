@@ -2,11 +2,12 @@ productPage.js
 
 
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
 
 
 async function onLoad() {
     await showCorrectLayout();
+    await printNrOfElements(); 
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -41,12 +42,12 @@ async function productPage(product) {
 
 
 
-export async function renderProduct(idToGet) {
+async function renderProduct(idToGet) {
 
     const action = "getById";
     let product = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}&id=${idToGet}`, "GET")
 
-    const main = document.getElementsByTagName("mainCont")[0]; 
+    let main = document.getElementsByTagName("main")[0]; 
        
     let productContainer = document.createElement("div")
     productContainer.classList.add("productContainer")
@@ -62,13 +63,13 @@ export async function renderProduct(idToGet) {
     image.classList.add('productImage')
     image.src = "./assets/" + product.image
     image.addEventListener("click", () => {productPage(product)})
-    let addToCart = document.createElement('button'); 
-    addToCart.classList.add('addToCart')
-    addToCart.innerText = 'Add'
-    addToCart.addEventListener('click', () => {
-        console.log('click')
-        //TODO ADD FUNCTION HERE 
-    })
+
+    let addToCartButton = document.createElement('button'); 
+    addToCartButton.classList.add('addToCart')
+    addToCartButton.innerText = "Add"
+    addToCartButton.addEventListener("click", () => {addToCart(product)})
+
+
     let cartElement = document.createElement('div');
     cartElement.classList.add('cartElement')
     let cartButton = document.createElement('button')
@@ -76,12 +77,76 @@ export async function renderProduct(idToGet) {
     cartButton.innerText = 'Continue to checkout'
     main.append(productContainer, productInfo, cartElement)
     cartElement.append(cartButton)
-    productInfo.append(title, description, unitPrice, addToCart)
+    productInfo.append(title, description, unitPrice, addToCartButton)
     productContainer.append(image)
 
 
 }
 
+
+
+
+
+// Lägger till produkten i kundvagnen (SESSION)
+async function addToCart(product) {
+
+    /* Hämtar den sparade carten i SESSION */
+    const action = "getCart"
+
+    let cart = await makeRequest(`./../api/receivers/cartReceiver.php?action=${action}`, "GET")
+
+    if(cart) {
+        cart = JSON.parse(cart) 
+    } else {
+        cart = []
+    }
+
+    /* Kollar upp om produkten har lagts till tidigare, samt jämför antalet vi lagt till på produkten i carten och unitsinstock på produkten i databasen. */
+    let index = cart.findIndex((cartItem) => { 
+
+        if(cartItem.product.productId == product.productId) {
+            
+            if(cartItem.quantity >= product.unitsInStock) {
+                alert("Sorry, we do not have more of this product available for reservation")
+                return index = false
+            }
+
+            return true
+        }
+
+    })
+
+    /* Om produkten inte finns i carten sedan tidigare, lägg till produkten samt quantity 1. Else, dvs om den redan finns, addera bara med 1 */
+    if(index < 0) {
+        cart.push({
+            product: product, 
+            quantity: 1
+        })
+
+
+        alert(product.name + " is added to cart")
+
+    } else {
+        cart[index].quantity++
+
+        alert(product.name + " is added to cart")
+    }
+
+
+    /* Skickar en uppdaterad version av carten till SESSION */
+    const push = "updateCart"
+
+    var body = new FormData()
+    body.append("action", push)
+    body.append("cart", JSON.stringify(cart))
+
+
+    await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
+
+
+    printNrOfElements();
+
+}
 
 
 
