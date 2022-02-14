@@ -26,6 +26,8 @@
 <body>
 
     <header>
+        <div class="loggedInUser none">
+        </div>
         <nav class="containerHeader">
             <li class="logoHeader"><a href="./index.html"><img src="/assets/icons/logoCropped.png" alt="zmLogo"></a></li>
             <div class="contactDiv">
@@ -39,22 +41,29 @@
                 <li><a href="#socialMedia">CONTACT</a></li>
             </div>
             <div class="icons">
-                <li><a href="./login.html"><img src="/assets/icons/account.png" alt="account" id='accountIcon'></a></li>
+                <li><a class="loginIcon" href="./login.html"><img src="/assets/icons/account.png" alt="account" id='accountIcon'></a></li>
                 <li><a href="./cartPage.html"><img src="/assets/icons/shop-bag.png" alt="cartIcon" id='cartIcon'></a></li>
-                <li><a class="adminSetting none" href="./myProfile.html"><img src="/assets/icons/admin.png" title="Admin settings" alt="adminIcon" id='adminIcon'></a></li>
+                <div class="adminIcons none">
+                    <li><a class="adminSetting" href="./myProfile.html"><img src="/assets/icons/admin.png" title="Admin settings" alt="adminIcon" id='adminIcon'></a></li>
+                    <li><a class="myOrders" href="./myProfile.html"><img src="/assets/icons/orders.png" title="My orders" alt="orderIcon" id='orderIcon'></a></li>
+                    <li><a class="logOut" href="./index.html"><img src="/assets/icons/logout.png" title="Log out" alt="logOutIcon" id='logOutIcon'></a></li>
+                </div>
             </div>
         </nav>
+
     </header>
         
 
         <main> 
+
+
 <!-- Se till att newsletter hamnar under main -->
 
         </main>
 
 
 
-<!-- 
+ 
 
             <footer>
                 <div class="newsLetter">
@@ -99,19 +108,7 @@
         
         
             </footer>
- 
 
-    <include src="../includes/header.html"></include>
-
-<main>
-       
-
-</main>
-
-    <include src="../includes/startPage.html"></include>
-
-    <include src="../includes/footer.html"></include>
--->
 
 
 </body>

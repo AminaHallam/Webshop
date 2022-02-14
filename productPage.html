@@ -16,12 +16,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     
 
     <title>Zeon Milo</title>
 </head>
 <body>
     <header>
+        <div class="loggedInUser none"></div>
         <nav class="containerHeader">
             <li class="logoHeader"><a href="./index.html"><img src="/assets/icons/logoCropped.png" alt="zmLogo"></a></li>
             <div class="contactDiv">
@@ -35,9 +37,13 @@
                 <li><a href="#socialMedia">CONTACT</a></li>
             </div>
             <div class="icons">
-                <li><a href="./login.html"><img src="/assets/icons/account.png" alt="account" id='accountIcon'></a></li>
+                <li><a class="loginIcon" href="./login.html"><img src="/assets/icons/account.png" alt="account" id='accountIcon'></a></li>
                 <li><a href="./cartPage.html"><img src="/assets/icons/shop-bag.png" alt="cartIcon" id='cartIcon'></a></li>
-                <li><a class="adminSetting none" href="./myProfile.html"><img src="/assets/icons/admin.png" title="Admin settings" alt="adminIcon" id='adminIcon'></a></li>
+                <div class="adminIcons none">
+                    <li><a class="adminSetting" href="./myProfile.html"><img src="/assets/icons/admin.png" title="Admin settings" alt="adminIcon" id='adminIcon'></a></li>
+                    <li><a class="myOrders" href="./myProfile.html"><img src="/assets/icons/orders.png" title="My orders" alt="orderIcon" id='orderIcon'></a></li>
+                    <li><a class="logOut" href="./index.html"><img src="/assets/icons/logout.png" title="Log out" alt="logOutIcon" id='logOutIcon'></a></li>
+                </div>
             </div>
         </nav>
     </header>

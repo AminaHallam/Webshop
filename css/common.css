@@ -83,9 +83,7 @@ header {
     margin-right: 80px;
 }
 
-.none {
-    display: none;
-}
+
  
 .fas {
     position: absolute;
@@ -98,8 +96,18 @@ header {
     display: none;
     position: absolute;
     width: 100%;
-    
- 
+}
+
+.loggedInUser {
+    display: flex;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+}
+
+.loggedInUser p {
+    padding-top: 2px;
+    padding-right: 5px;
 }
  
 #dropdown.active {
@@ -121,6 +129,10 @@ li, a {
    
 }
 
+.adminIcons {
+    display: flex;
+}
+
 
 #accountIcon {
     height: 30px;
@@ -133,6 +145,16 @@ li, a {
 }
 
 #adminIcon {
+    height: 26px;
+    width: 26px; 
+}
+
+#orderIcon {
+    height: 26px;
+    width: 26px; 
+}
+
+#logOutIcon {
     height: 26px;
     width: 26px; 
 }
@@ -167,7 +189,9 @@ footer {
     
 }
 
-
+.none {
+    display: none;
+}
 
 /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ 
 @media screen and (max-width:320px) 

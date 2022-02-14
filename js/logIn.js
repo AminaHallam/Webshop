@@ -1,7 +1,6 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut} from './../helperFunctions/fetchHelper.js'
 
-const logOut = document.querySelector(".logout")
 const myPage = document.querySelector(".myPage")
 const buttonCA = document.querySelector(".buttonCA")
 const loginForm = document.querySelector("#login")
@@ -18,6 +17,7 @@ getAllCategories();
 getUser();
 
 document.getElementById("menu").addEventListener("click", openMenu);
+document.querySelector(".logOut").addEventListener("click", logOut)
 
 
 // Switching between Login-form and create account-form
@@ -69,18 +69,34 @@ async function loginUser(e) {
 
 
 /* Register account - View */
-document.querySelector(".buttonCA").addEventListener("click", () => {
+document.querySelector(".buttonCA").addEventListener("click", registerAccount)
+
+
+async function registerAccount(e) {
+e.preventDefault();
+
     
     // Fetch values from register account-forms
-    let registerUser = document.querySelector("#user").value
+    let registerFirstname = document.querySelector("#firstname").value
+    let registerLastname = document.querySelector("#lastname").value
+    let registerStreet = document.querySelector("#street").value
+    let registerCO = document.querySelector("#co").value
+    let registerZipcode = document.querySelector("#zipcode").value
+    let registerCity = document.querySelector("#city").value
+    let registerCountry = document.querySelector("#country").value
+    let registerCountrycode = document.querySelector("#countrycode").value
+    let registerMobilenumber = document.querySelector("#mobilenumber").value
+    let registerStandardphone = document.querySelector("#standardphone").value
+    let registerEmail = document.querySelector("#user").value
     let registerPassword = document.querySelector("#pw").value
-    let confirmPassword = document.querySelector("#confirmPw").value
-  
+    let confirmPassword = document.querySelector("#confirmpw").value
+    
+    
     // Call functions to check if the credentials are good enough before we send them to PHP
-    const isValid = validateInputs(registerUser, registerPassword) 
+    const isValid = validateInputs(registerPassword) 
     const validPw = validatePasswords(registerPassword, confirmPassword)
-    const inputPwUser = sameInputs(registerUser, registerPassword)
-  
+    const inputPwUser = sameInputs(registerEmail, registerPassword)
+    
     
     /* If all these are true, the credentials  will be sent to PHP */
     
@@ -95,15 +111,45 @@ document.querySelector(".buttonCA").addEventListener("click", () => {
         alert("Username and password can't be the same. You can do better :) ")
         return
     }
-
+    
     // If the password inputs doesnt match:
     if(!validPw){
-    alert("Passwords doesn't match. Try again")
-    return
+        alert("Passwords doesn't match. Try again")
+        return
     }
+    
+    const action = 'addUser'; 
+
+    let emailCheck = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${registerEmail}`, "GET")
+    console.log(emailCheck)
 
 
-  
+
+
+
+    //POST till userReciever
+    var myData = new FormData();
+    myData.append("endpoint", "addUser");
+    myData.append("FirstName", registerFirstname);
+    myData.append("LastName", registerLastname);
+    myData.append("Street", registerStreet);
+    myData.append("CO", registerCO);
+    myData.append("ZipCode", registerZipcode);
+    myData.append("City", registerCity);
+    myData.append("Country", registerCountry);
+    myData.append("Email", registerEmail);
+    myData.append("CountryCode", registerCountrycode);
+    myData.append("MobileNumber", registerMobilenumber);
+    myData.append("StandardPhone", registerStandardphone);
+    myData.append("Password", registerPassword);
+    
+    console.log(myData)
+
+    let addUser = await makeRequest("./../api/receivers/userReceiver.php", "POST", myData)
+    console.log(addUser)
+}
+
+
     /* 
     * Gör funktioner som checkar våra krav på initialerna innan vi skickar dem till PHP. CHECK!
 
@@ -112,17 +158,12 @@ document.querySelector(".buttonCA").addEventListener("click", () => {
     * Vi behöver göra en hashning på lösenorden. Men få det andra att funka först*/
 
 
-})
-
-
-
-
 /* Functions to register account */
 
 
 // Check if the inputs have 6 or more characters     
-function validateInputs(username, password) {
-    if(username.length >= 6 && password.length >= 6){
+function validateInputs(password) {
+    if(password.length >= 6){
         return true
     }
         return false
@@ -130,7 +171,6 @@ function validateInputs(username, password) {
 
 // Check if the input of both passwords are matching
 function validatePasswords(password, confPassword){
-
     if(password == confPassword) {
         return true
     }
@@ -147,3 +187,5 @@ function sameInputs(username, password){
 
 
 window.addEventListener("load", onLoad);
+
+

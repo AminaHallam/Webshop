@@ -23,6 +23,7 @@
 
 <body>
     <header>
+        <div class="loggedInUser none"></div>
         <nav class="containerHeader">
             <li class="logoHeader"><a href="./../index.html"><img src="/assets/icons/logoCropped.png" alt="zmLogo"></a></li>
             <div class="contactDiv">
@@ -36,9 +37,13 @@
                 <li><a href="#socialMedia">CONTACT</a></li>
             </div>
             <div class="icons">
-                <li><a href="./login.html"><img src="/assets/icons/account.png" alt="account" id='accountIcon' href="#"></a></li>
-                <li><a href="./cartPage.html"><img src="/assets/icons/shop-bag.png" alt="cartIcon" id='cartIcon' href="#"></a></li>
-                <li><a class="adminSetting none" href="./myProfile.html"><img src="/assets/icons/admin.png" alt="ad,omIcon" id='adminIcon' href="#"></a></li>
+                <li><a class="loginIcon" href="./login.html"><img src="/assets/icons/account.png" alt="account" id='accountIcon'></a></li>
+                <li><a href="./cartPage.html"><img src="/assets/icons/shop-bag.png" alt="cartIcon" id='cartIcon'></a></li>
+                <div class="adminIcons none">
+                    <li><a class="adminSetting" href="./myProfile.html"><img src="/assets/icons/admin.png" title="Admin settings" alt="adminIcon" id='adminIcon'></a></li>
+                    <li><a class="myOrders" href="./myProfile.html"><img src="/assets/icons/orders.png" title="My orders" alt="orderIcon" id='orderIcon'></a></li>
+                    <li><a class="logOut" href="./index.html"><img src="/assets/icons/logout.png" title="Log out" alt="logOutIcon" id='logOutIcon'></a></li>
+                </div>
             </div>
             
         </nav>
@@ -68,16 +73,16 @@
                     <div class="registerBlock">
                         <h2>Address</h2>
                         <div class="inputGroup">
-                            <input id="firstName" type="text" placeholder="firstname" name="firstName" autofocus required>
+                            <input id="firstname" type="text" placeholder="firstname" name="firstName" autofocus required>
                         </div>
                         <div class="inputGroup">
-                            <input id="lastName" type="text" placeholder="lastname" name="lastName" required>
+                            <input id="lastname" type="text" placeholder="lastname" name="lastName" required>
                         </div>
                         <div class="inputGroup">
                             <input id="street" type="text" placeholder="street" name="street" required>
                         </div>
                         <div class="inputGroup">
-                            <input id="CO" type="text" placeholder="CO (Not requried)" name="CO" >
+                            <input id="co" type="text" placeholder="CO (Not requried)" name="CO" >
                         </div>
                         <div class="inputGroup">
                             <input id="zipcode" type="number" placeholder="zipcode" name="zipcode" required>
@@ -96,10 +101,10 @@
                             <input id="user" type="email" placeholder="example@example.se" name="email" required>
                         </div>
                         <div class="inputGroup">
-                            <input id="countryCode" type="number" placeholder="country code e.g '46' " name="countrycode" required>
+                            <input id="countrycode" type="number" placeholder="country code e.g '46' " name="countrycode" required>
                         </div>
                         <div class="inputGroup">
-                            <input id="mobileNumber" type="number" placeholder="mobile phone" name="mobileNumber" required>
+                            <input id="mobilenumber" type="number" placeholder="mobile phone" name="mobileNumber" required>
                         </div>
                         <div class="inputGroup">
                             <input id="standardphone" type="number" placeholder="standard phone (Not required)" name="standardphone" >
@@ -112,7 +117,7 @@
                             <input id="pw" type="password" placeholder="password" name="password" required>
                         </div>
                         <div class="inputGroup">
-                            <input id="confirmPw" type="password" placeholder="confirm password" name="password" required>
+                            <input id="confirmpw" type="password" placeholder="confirm password" name="password" required>
                         </div>
                     </div>
                 </div>
