@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 09, 2022 at 09:00 AM
--- Server version: 5.7.24
--- PHP Version: 7.4.16
+-- Hôte : localhost:8889
+-- Généré le : lun. 14 fév. 2022 à 12:42
+-- Version du serveur : 5.7.34
+-- Version de PHP : 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `webshop`
+-- Base de données : `webshop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Structure de la table `category`
 --
 
 CREATE TABLE `category` (
@@ -34,7 +34,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `category`
+-- Déchargement des données de la table `category`
 --
 
 INSERT INTO `category` (`Id`, `CategoryName`, `Description`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `category` (`Id`, `CategoryName`, `Description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `courrier`
+-- Structure de la table `courrier`
 --
 
 CREATE TABLE `courrier` (
@@ -61,7 +61,7 @@ CREATE TABLE `courrier` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `courrier`
+-- Déchargement des données de la table `courrier`
 --
 
 INSERT INTO `courrier` (`Id`, `CourrierName`, `Address`, `Email`, `CountryCode`, `StandardPhone`, `MobileNumber`, `Contact`) VALUES
@@ -71,7 +71,7 @@ INSERT INTO `courrier` (`Id`, `CourrierName`, `Address`, `Email`, `CountryCode`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `newsletter`
+-- Structure de la table `newsletter`
 --
 
 CREATE TABLE `newsletter` (
@@ -82,7 +82,7 @@ CREATE TABLE `newsletter` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `newsletter`
+-- Déchargement des données de la table `newsletter`
 --
 
 INSERT INTO `newsletter` (`Id`, `Title`, `Text`, `Date`) VALUES
@@ -92,7 +92,7 @@ INSERT INTO `newsletter` (`Id`, `Title`, `Text`, `Date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order`
+-- Structure de la table `order`
 --
 
 CREATE TABLE `order` (
@@ -106,7 +106,7 @@ CREATE TABLE `order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `order`
+-- Déchargement des données de la table `order`
 --
 
 INSERT INTO `order` (`Id`, `StatusID`, `UserID`, `CourrierID`, `RegisterDate`, `ShippingDate`, `CustRecDate`) VALUES
@@ -121,7 +121,7 @@ INSERT INTO `order` (`Id`, `StatusID`, `UserID`, `CourrierID`, `RegisterDate`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orderdetails`
+-- Structure de la table `orderdetails`
 --
 
 CREATE TABLE `orderdetails` (
@@ -131,7 +131,7 @@ CREATE TABLE `orderdetails` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `orderdetails`
+-- Déchargement des données de la table `orderdetails`
 --
 
 INSERT INTO `orderdetails` (`ProductID`, `OrderID`, `Quantity`) VALUES
@@ -144,7 +144,7 @@ INSERT INTO `orderdetails` (`ProductID`, `OrderID`, `Quantity`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orderstatus`
+-- Structure de la table `orderstatus`
 --
 
 CREATE TABLE `orderstatus` (
@@ -154,7 +154,7 @@ CREATE TABLE `orderstatus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `orderstatus`
+-- Déchargement des données de la table `orderstatus`
 --
 
 INSERT INTO `orderstatus` (`Id`, `Status`, `Description`) VALUES
@@ -165,7 +165,7 @@ INSERT INTO `orderstatus` (`Id`, `Status`, `Description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Structure de la table `product`
 --
 
 CREATE TABLE `product` (
@@ -178,7 +178,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `product`
+-- Déchargement des données de la table `product`
 --
 
 INSERT INTO `product` (`Id`, `Name`, `Description`, `UnitPrice`, `UnitsInStock`, `Image`) VALUES
@@ -214,7 +214,7 @@ INSERT INTO `product` (`Id`, `Name`, `Description`, `UnitPrice`, `UnitsInStock`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productincategory`
+-- Structure de la table `productincategory`
 --
 
 CREATE TABLE `productincategory` (
@@ -224,7 +224,7 @@ CREATE TABLE `productincategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `productincategory`
+-- Déchargement des données de la table `productincategory`
 --
 
 INSERT INTO `productincategory` (`ProductID`, `CategoryID`, `LastUpdated`) VALUES
@@ -261,32 +261,31 @@ INSERT INTO `productincategory` (`ProductID`, `CategoryID`, `LastUpdated`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subscriptionnews`
+-- Structure de la table `subscriptionnews`
 --
 
 CREATE TABLE `subscriptionnews` (
   `Id` int(11) NOT NULL,
   `UserID` int(11) DEFAULT NULL,
   `FirstName` varchar(50) NOT NULL,
-  `LastName` varchar(50) NOT NULL,
   `Email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `subscriptionnews`
+-- Déchargement des données de la table `subscriptionnews`
 --
 
-INSERT INTO `subscriptionnews` (`Id`, `UserID`, `FirstName`, `LastName`, `Email`) VALUES
-(3, NULL, 'Angelica', 'Moberg Skoglund', 'a.m.s@live.se'),
-(4, 3, 'Sigge', 'Eklund', 'telia@telia.se'),
-(5, NULL, 'Sebastian', 'Larsson', 'sebastianlarsson@live.se'),
-(6, NULL, 'Amina', 'Hallam', 'aminahallam@live.se'),
-(7, 1, 'Agda', 'Larsson', 'tjena@hej.se');
+INSERT INTO `subscriptionnews` (`Id`, `UserID`, `FirstName`, `Email`) VALUES
+(3, NULL, 'Angelica', 'a.m.s@live.se'),
+(4, 3, 'Sigge', 'telia@telia.se'),
+(5, NULL, 'Sebastian', 'sebastianlarsson@live.se'),
+(6, NULL, 'Amina', 'aminahallam@live.se'),
+(7, 1, 'Agda', 'tjena@hej.se');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE `user` (
@@ -308,7 +307,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`Id`, `Email`, `Password`, `FirstName`, `LastName`, `Street`, `CO`, `ZipCode`, `City`, `Country`, `CountryCode`, `StandardPhone`, `MobileNumber`, `Admin`, `TermsOfPurchase`) VALUES
@@ -319,30 +318,30 @@ INSERT INTO `user` (`Id`, `Email`, `Password`, `FirstName`, `LastName`, `Street`
 (5, 'admin@admin.se', 'admin', 'admin', 'admin', 'skitvägen', NULL, 12345, 'Malmö', 'Sweden', 46, NULL, 76123456, 1, 1);
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `category`
+-- Index pour la table `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `courrier`
+-- Index pour la table `courrier`
 --
 ALTER TABLE `courrier`
   ADD PRIMARY KEY (`Id`),
   ADD UNIQUE KEY `Email` (`Email`);
 
 --
--- Indexes for table `newsletter`
+-- Index pour la table `newsletter`
 --
 ALTER TABLE `newsletter`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `order`
+-- Index pour la table `order`
 --
 ALTER TABLE `order`
   ADD PRIMARY KEY (`Id`),
@@ -351,7 +350,7 @@ ALTER TABLE `order`
   ADD KEY `OrderStatusID` (`StatusID`);
 
 --
--- Indexes for table `orderdetails`
+-- Index pour la table `orderdetails`
 --
 ALTER TABLE `orderdetails`
   ADD PRIMARY KEY (`ProductID`,`OrderID`),
@@ -359,19 +358,19 @@ ALTER TABLE `orderdetails`
   ADD KEY `ProductID` (`ProductID`);
 
 --
--- Indexes for table `orderstatus`
+-- Index pour la table `orderstatus`
 --
 ALTER TABLE `orderstatus`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `product`
+-- Index pour la table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `productincategory`
+-- Index pour la table `productincategory`
 --
 ALTER TABLE `productincategory`
   ADD PRIMARY KEY (`ProductID`,`CategoryID`),
@@ -379,71 +378,71 @@ ALTER TABLE `productincategory`
   ADD KEY `ProductID` (`ProductID`);
 
 --
--- Indexes for table `subscriptionnews`
+-- Index pour la table `subscriptionnews`
 --
 ALTER TABLE `subscriptionnews`
   ADD PRIMARY KEY (`Id`),
   ADD UNIQUE KEY `Email` (`Email`);
 
 --
--- Indexes for table `user`
+-- Index pour la table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`Id`),
   ADD UNIQUE KEY `Email` (`Email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT pour la table `category`
 --
 ALTER TABLE `category`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `courrier`
+-- AUTO_INCREMENT pour la table `courrier`
 --
 ALTER TABLE `courrier`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `newsletter`
+-- AUTO_INCREMENT pour la table `newsletter`
 --
 ALTER TABLE `newsletter`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `order`
+-- AUTO_INCREMENT pour la table `order`
 --
 ALTER TABLE `order`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT for table `subscriptionnews`
+-- AUTO_INCREMENT pour la table `subscriptionnews`
 --
 ALTER TABLE `subscriptionnews`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `order`
+-- Contraintes pour la table `order`
 --
 ALTER TABLE `order`
   ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`CourrierID`) REFERENCES `courrier` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -451,14 +450,14 @@ ALTER TABLE `order`
   ADD CONSTRAINT `order_ibfk_4` FOREIGN KEY (`StatusID`) REFERENCES `orderstatus` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `orderdetails`
+-- Contraintes pour la table `orderdetails`
 --
 ALTER TABLE `orderdetails`
   ADD CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `order` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `orderdetails_ibfk_2` FOREIGN KEY (`ProductID`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `productincategory`
+-- Contraintes pour la table `productincategory`
 --
 ALTER TABLE `productincategory`
   ADD CONSTRAINT `productincategory_ibfk_1` FOREIGN KEY (`CategoryID`) REFERENCES `category` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
