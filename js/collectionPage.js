@@ -62,16 +62,19 @@ async function renderProductsFromCategory(idToGet) {
         productContainer.classList.add("productContainer")
         let title = document.createElement("h2")
         title.innerHTML = product.name;
+        let productInfo = document.createElement('div');
         let description = document.createElement("p")
         description.innerHTML = product.description;
         let unitPrice = document.createElement("p")
         unitPrice.innerHTML = product.unitPrice + " €";
         let image = document.createElement("img")
+        image.classList.add('productImage')
         image.src = "./assets/" + product.image
         image.addEventListener("click", () => {productPage(product)})
     
-        main.append(productContainer)
-        productContainer.append(title, description, unitPrice, image)
+        main.append(productContainer, productContainer)
+        productInfo.append(title, description, unitPrice)
+        productContainer.append(image)
 
     }
 
