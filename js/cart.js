@@ -8,7 +8,8 @@ async function onLoad() {
     await printNrOfElements(); 
     await renderCart() 
     await getUser();
-    
+    await getCourrier()
+
 }
 
 makeRequest();
@@ -146,20 +147,53 @@ async function renderCart() {
 
     }
 
+
     let totalSum = cart.reduce((sum,item) => sum + item.product.unitPrice * item.quantity, 0);
 
     let summaryContainer = document.createElement("div")
     summaryContainer.classList.add("summaryContainer")
+
     
+    let courriers = await getCourrier();
+    let courrierForm = document.createElement("form")
+    
+    for (let i = 0; i < courriers.length; i++) {
+        const courrierCompany = courriers[i];
+
+        let radioButton = document.createElement("input")
+        radioButton.classList.add("radioButton")
+        radioButton.setAttribute("type", "radio")
+        radioButton.setAttribute("value", courrierCompany.Id)
+        radioButton.setAttribute("name", "selectCourrier")
+
+
+        let courrierName = document.createElement("label")
+        courrierName.innerText = courrierCompany.courrierName
+
+        courrierForm.append(radioButton, courrierName)
+        
+    }
+
+
     let orderSummary = document.createElement("p")
     orderSummary.classList.add("orderSummary")
     orderSummary.innerHTML = "Order summary: " +  totalSum + " €"
 
     main.append(summaryContainer)
-    summaryContainer.append(orderSummary)
+    summaryContainer.append(courrierForm, orderSummary)
 
 }
 
+
+
+async function getCourrier() {
+
+    const action = "getAll"
+
+    let courrier = await makeRequest(`./../api/receivers/courrierReceiver.php?action=${action}`, "GET")
+
+    return courrier
+}
 
 
 

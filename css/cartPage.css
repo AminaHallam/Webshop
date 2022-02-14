@@ -37,10 +37,16 @@ main {
 .summaryContainer {
     height: 300px;
     width: 100%;
+    gap: 30px;
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
-    padding-right: 20px;
+    padding-right: 30px;
+}
+
+.radioButton {
+    margin: 10px;
 }
 
 .orderSummary {
@@ -88,3 +94,4 @@ main {
     border: none;
     
 }
+
