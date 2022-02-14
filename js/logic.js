@@ -1,11 +1,12 @@
 import {openMenu, getAllCategories} from '.././helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut} from '.././helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from '.././helperFunctions/fetchHelper.js'
 
 document.querySelector(".logOut").addEventListener("click", logOut)
 
 async function onLoad() {
     await getUser();
     await showCorrectLayout();
+    await printNrOfElements();
 }
 
 makeRequest();

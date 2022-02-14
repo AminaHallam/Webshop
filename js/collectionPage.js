@@ -23,7 +23,7 @@ document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)
 
 
- async function getCategoryFromId(idToGet) {
+async function getCategoryFromId(idToGet) {
 
     const action = "getById";
     let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET") 
