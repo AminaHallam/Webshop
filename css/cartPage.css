@@ -1,0 +1,97 @@
+
+main {
+    flex-direction: row;
+}
+
+.itemContainer {
+    display: flex;
+    width: 650px;
+    border-bottom: 1px solid darkgray;
+    margin-bottom: 20px;
+}
+
+.cartItemImage {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.title {
+    font-size: 13px;
+}
+
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 280px;
+}
+
+.priceContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 50px;
+}
+
+.summaryContainer {
+    height: 300px;
+    width: 100%;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right: 30px;
+}
+
+.radioButton {
+    margin: 10px;
+}
+
+.orderSummary {
+    font-weight: bold;
+    font-size: large;
+
+}
+
+.totalpriceItem {
+    font-weight: 600;
+}
+
+.ajustQty {
+    display: flex;
+    align-items: center;
+    margin-top: 25px;                          
+    gap: 15px;                                  
+}
+
+.ajustBoxes {
+    width: 40px;                                
+    height: 40px;                                
+    font-size: 20px;                              
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid rgb(233, 232, 232);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    color: black;
+    cursor: pointer; 
+}
+
+.ajustBoxes:hover {
+    border: 2px solid rgb(233, 232, 232);   
+}
+
+.ajustBoxes:active {
+    transform: scale(0.95);
+}
+
+.noClick {
+    pointer-events: none;
+    color: rgb(255, 255, 255);
+    border: none;
+    
+}
+}

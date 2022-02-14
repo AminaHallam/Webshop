@@ -5,6 +5,8 @@ include_once("./../classes/category.php");
 
 include_once("./../classes/user.php");
 include_once("./../classes/order.php");
+include_once("./../classes/courrier.php");
+
 
 
 
@@ -32,6 +34,11 @@ function createOrder($Id, $StatusId, $UserId, $CourrierId, $RegisterDate, $Shipp
 /* Påbörjad. Vill få med quantity. Blev inge bra */
 function productDetails($Id, $name, $description, $unitPrice, $unitsInStock, $image/* , $quantity */) { 
 return new Product((int)$Id, $name, $description, $unitPrice, $unitsInStock, $image/* , $quantity */); 
+} 
+
+
+function createCourrier($Id, $courrierName, $Address, $Email, $CountryCode, $StandardPhone, $MobileNumber, $Contact) {
+    return new Courrier((int)$Id, $courrierName, $Address, $Email, $CountryCode, $StandardPhone, $MobileNumber, $Contact);
 } 
 
 ?>
