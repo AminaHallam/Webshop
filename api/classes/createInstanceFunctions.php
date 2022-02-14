@@ -25,8 +25,8 @@ function createOrder($Id, $StatusId, $UserId, $CourrierId, $RegisterDate, $Shipp
     return new Order((int)$Id, $StatusId, (int)$UserId, (int)$CourrierId, $RegisterDate, $ShippingDate, $CustRecDate);
 } 
 
-/* function createNewsLetter($Id, $Title, $Text, $Date) {
-    return new NewsLetter((int)$Id, $Title, $Text, $Date);
+/* function createSubscriptionNews($Id, $UserId, $FirstName, $Email) {
+    return new NewsLetter((int)$Id, $UserId, $FirstName, $Email);
 }  */
 
 /* Påbörjad. Vill få med quantity. Blev inge bra */
