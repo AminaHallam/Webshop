@@ -1,9 +1,6 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-<<<<<<< HEAD
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, getProductFromId} from './../helperFunctions/fetchHelper.js'
-=======
 import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut} from './../helperFunctions/fetchHelper.js'
->>>>>>> d9f37eac1ad018b22c7d8aec131fa9e17c39967d
+
 
 async function onLoad() {
     await showCorrectLayout();
