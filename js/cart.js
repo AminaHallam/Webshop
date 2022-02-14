@@ -18,15 +18,7 @@ getAllCategories();
 getUser();
 
 document.getElementById("menu").addEventListener("click", openMenu);
-async function onLoad() {
-    accountCheck();
-    await showCorrectLayout(); 
-    await printNrOfElements(); 
-    await renderCart() 
-    await getUser();
-    await getCourrier()
-    
-}document.querySelector(".logOut").addEventListener("click", logOut)
+document.querySelector(".logOut").addEventListener("click", logOut)
 
 
 
