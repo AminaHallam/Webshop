@@ -27,8 +27,6 @@ document.querySelector(".logOut").addEventListener("click", logOut)
 // Om du inte är inloggad så skickas du till loginsidan. 
 async function accountCheck() {
 
-    console.log("kommer in i accountcheck")
-
     let allowed = await getUser();
 
     if(!allowed) {
@@ -69,10 +67,14 @@ async function renderCart() {
 
     main.innerHTML = "";
 
+    let myTitle = document.createElement("h2")
+    myTitle.classList.add("myTitle")
+    myTitle.innerText = "My cart"
     let cartContainer = document.createElement("div")
     cartContainer.classList.add("cartContainer")
 
     main.append(cartContainer)
+    cartContainer.append(myTitle)
 
     for (let i = 0; i < cart.length; i++) {
         
@@ -178,14 +180,17 @@ async function renderCart() {
     let orderSummary = document.createElement("p")
     orderSummary.classList.add("orderSummary")
     orderSummary.innerHTML = "Order summary: " +  totalSum + " €"
+    let orderButton = document.createElement("button")
+    orderButton.classList.add("orderButton")
+    orderButton.innerText = "Check Out"
 
     main.append(summaryContainer)
-    summaryContainer.append(courrierForm, orderSummary)
+    summaryContainer.append(courrierForm, orderSummary, orderButton)
 
 }
 
 
-
+// Hämtar alla fraktbolag
 async function getCourrier() {
 
     const action = "getAll"
