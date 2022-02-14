@@ -1,4 +1,3 @@
-
 // Gör en request till PHP
 export async function makeRequest(url, method, body) {
     try {
@@ -58,8 +57,6 @@ export async function getUser() {
      /* console.log(getUser)  */
      return getUser
 }
-
-
 
 /* Order */
 
