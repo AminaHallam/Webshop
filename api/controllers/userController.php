@@ -65,7 +65,15 @@ class UserController extends MainController {
         }
     }
 
-
+    public function add($user) {
+        try {
+            $addUser = createUser(null, $user->Email, $user->Password, $user->FirstName, $user->LastName, $user->Street, $user->CO, $user->ZipCode, $user->City, $user->Country, $user->CountryCode, $user->StandardPhone, $user->MobileNumber, $user->Admin, $user->TermsOfPurchase);
+            return $this->database->insert($addUser);
+        }
+        catch(Exception $e) {
+            throw new Exception("This dosent work");
+        }
+    }
 
     
 

@@ -121,29 +121,37 @@ e.preventDefault();
     const action = 'addUser'; 
 
     let emailCheck = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${registerEmail}`, "GET")
-    console.log(emailCheck)
+    if (!emailCheck) {
+        alert("Kontot finns redan")
+        return 
+    }
 
 
 
 
 
     //POST till userReciever
+    const userToAdd = {
+        FirstName: registerFirstname,
+        LastName: registerLastname,
+        Street: registerStreet,
+        CO: registerCO,
+        ZipCode: registerZipcode,
+        City: registerCity,
+        Country: registerCountry,
+        Email: registerEmail,
+        CountryCode: registerCountrycode,
+        MobileNumber: registerMobilenumber,
+        StandardPhone: registerStandardphone,
+        Password: registerPassword,
+        Admin: false,
+        TermsOfPurchase: true
+    }
+    
     var myData = new FormData();
     myData.append("endpoint", "addUser");
-    myData.append("FirstName", registerFirstname);
-    myData.append("LastName", registerLastname);
-    myData.append("Street", registerStreet);
-    myData.append("CO", registerCO);
-    myData.append("ZipCode", registerZipcode);
-    myData.append("City", registerCity);
-    myData.append("Country", registerCountry);
-    myData.append("Email", registerEmail);
-    myData.append("CountryCode", registerCountrycode);
-    myData.append("MobileNumber", registerMobilenumber);
-    myData.append("StandardPhone", registerStandardphone);
-    myData.append("Password", registerPassword);
-    
-    console.log(myData)
+    myData.append("addUser", JSON.stringify(userToAdd))
+    console.log(userToAdd)
 
     let addUser = await makeRequest("./../api/receivers/userReceiver.php", "POST", myData)
     console.log(addUser)

@@ -63,10 +63,18 @@ try {
             exit;
         }
 
-    } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        
-        if($_POST["endpoint"] == "addUser") {
-            echo (json_encode("addUser"));
+    }  else if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        if ($_POST["endpoint"] == "addUser") {
+            if (isset($_POST["addUser"])) { 
+                $controller = new UserController();
+
+                $userToAdd = json_decode($_POST["addUser"]);
+                error_log(json_encode($userToAdd));
+                echo (json_encode($controller->add($userToAdd)));
+                error_log("hej");
+                exit;
+            }
         }
 }
 

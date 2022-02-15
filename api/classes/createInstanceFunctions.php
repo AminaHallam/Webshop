@@ -20,7 +20,7 @@ function createCategory($categoryId, $categoryName, $categoryDescription) {
 } 
 
 function createUser($Id, $Email, $Password, $FirstName, $LastName, $Street, $CO, $ZipCode, $City, $Country, $CountryCode, $StandardPhone, $MobileNumber, $Admin, $TermsOfPurchase) {
-    return new User((int)$Id, $Email, $Password, $FirstName, $LastName, $Street, $CO, $ZipCode, $City, $Country, $CountryCode, $StandardPhone, $MobileNumber, $Admin, $TermsOfPurchase);
+    return new User((int)$Id, $Email, $Password, $FirstName, $LastName, $Street, $CO, (int)$ZipCode, $City, $Country, (int)$CountryCode, (int)$StandardPhone, (int)$MobileNumber, (int)$Admin, (int)$TermsOfPurchase);
 }
 
 function createOrder($Id, $StatusId, $UserId, $CourrierId, $RegisterDate, $ShippingDate, $CustRecDate) {
