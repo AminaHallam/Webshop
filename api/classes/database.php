@@ -61,5 +61,29 @@ class Database {
         return $result;
     }
 
+    public function insert($entity) {
+        $columns = "";
+        $values = [];
+
+        foreach ((array)$entity as $key => $value) {
+            if ($key != "Id") {
+                $columns .= $key . ",";
+                array_push($values, $value);
+            }
+        }
+        
+        $columns = substr($columns, 0 , -1);
+        error_log(count($values));
+        error_log(json_encode($values));
+        error_log("detta är" .$columns);
+        /* $check = "INSERT INTO ". $this->selectedTable ." (" .$columns. ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        error_log($check); */
+        $query = $this->db->prepare("INSERT INTO ". $this->selectedTable ." (" .$columns. ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $query->execute($values);
+
+        return "New " . $this->selectedClass . " saved!";
+    }
 }
+
+
     ?>

@@ -16,16 +16,7 @@ getUser();
 
 
 document.getElementById("menu").addEventListener("click", openMenu);
-
-
-
-
-
-
-
-
-
-    
+  
 /*  Hämtar alla produkter som tillhör en specifik kategori
 async function getCategoryFromId(idToGet) {
     const action = "getById";
@@ -35,9 +26,6 @@ async function getCategoryFromId(idToGet) {
     for(let i = 0; i < specificCategory.categoryId; i++){
         console.log(specificCategory.categoryId)
     }
-
-
-    
 }
  */
 
