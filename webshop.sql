@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : lun. 14 fév. 2022 à 12:42
+-- Généré le : mar. 15 fév. 2022 à 14:20
 -- Version du serveur : 5.7.34
 -- Version de PHP : 7.4.21
 
@@ -267,8 +267,8 @@ INSERT INTO `productincategory` (`ProductID`, `CategoryID`, `LastUpdated`) VALUE
 CREATE TABLE `subscriptionnews` (
   `Id` int(11) NOT NULL,
   `UserID` int(11) DEFAULT NULL,
-  `FirstName` varchar(50) NOT NULL,
-  `Email` varchar(100) NOT NULL
+  `FirstName` varchar(50) DEFAULT NULL,
+  `Email` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -280,7 +280,9 @@ INSERT INTO `subscriptionnews` (`Id`, `UserID`, `FirstName`, `Email`) VALUES
 (4, 3, 'Sigge', 'telia@telia.se'),
 (5, NULL, 'Sebastian', 'sebastianlarsson@live.se'),
 (6, NULL, 'Amina', 'aminahallam@live.se'),
-(7, 1, 'Agda', 'tjena@hej.se');
+(7, 1, 'Agda', 'tjena@hej.se'),
+(13, 0, 'Hello', 'Hello@hello.se'),
+(14, 0, 'bonjour', 'bonjour@bonjour.se');
 
 -- --------------------------------------------------------
 
@@ -429,7 +431,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT pour la table `subscriptionnews`
 --
 ALTER TABLE `subscriptionnews`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `user`
