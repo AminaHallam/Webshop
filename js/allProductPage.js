@@ -9,7 +9,6 @@ async function onLoad() {
     getAllProductsId();
 }
 
-makeRequest();
 verifyAdmin();
 getAllCategories();
 getUser();

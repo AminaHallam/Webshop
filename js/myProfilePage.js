@@ -8,7 +8,6 @@ async function onLoad() {
     whichPageToDisplay()
 }
 
-makeRequest();
 getAllCategories();
 verifyAdmin();
 getUser();

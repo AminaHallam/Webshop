@@ -12,7 +12,7 @@ async function onLoad() {
     await printNrOfElements();
 }
 
-makeRequest();
+
 verifyAdmin();
 getAllCategories();
 getUser();

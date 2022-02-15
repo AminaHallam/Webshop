@@ -19,7 +19,7 @@ async function onLoad() {
 
 }
 
-makeRequest();
+
 verifyAdmin();
 getAllCategories();
 getUser();
