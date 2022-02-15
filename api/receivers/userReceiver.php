@@ -33,6 +33,7 @@ try {
                     "ZipCode" => $user->ZipCode,
                     "City" => $user->City,
                     "Country" => $user->Country,
+                    "Email" => $user->Email,
                     "Admin" => $user->Admin               
                 );
     
