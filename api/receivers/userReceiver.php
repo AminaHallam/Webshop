@@ -8,7 +8,7 @@ try {
 
         if($_GET["action"] == "loginUser") {
 
-          if($_GET["user"] && $_GET["password"]) {
+          if(isset($_GET["user"]) && isset($_GET["password"])) {
 
                 $controller = new UserController();
 
@@ -18,23 +18,28 @@ try {
             
         } else if($_GET["action"] == "getUser") {
 
-            $user = unserialize($_SESSION["inloggedUser"]);
+            if(isset($_SESSION["inloggedUser"])) {
 
-            error_log(serialize($user));
+                $user = unserialize($_SESSION["inloggedUser"]);
 
-            $basicUserInfo = array(
-                "id" => $user[0]->Id,
-                "FirstName" => $user[0]->FirstName,
-                "LastName" => $user[0]->LastName
-            );
+                $user = $user[0];
 
-            if($user == 0) {
+                $basicUserInfo = array(
+                    "id" => $user->Id,
+                    "FirstName" => $user->FirstName,
+                    "LastName" => $user->LastName,
+                    "Admin" => $user->Admin               
+                );
+    
+                echo json_encode($basicUserInfo); 
+                exit;
 
+            } else {
                 echo json_encode(false);
                 exit;
             }
 
-            echo json_encode($basicUserInfo); 
+           
 
 
         } else if($_GET["action"] == "verifyAdmin") {
@@ -45,7 +50,7 @@ try {
 
         } else if($_GET["action"] == "addUser") {
             
-            if($_GET["user"]) {
+            if(isset($_GET["user"])) {
                 $controller = new UserController();
                 echo(json_encode($controller->checkEmail($_GET["user"])));
                 exit;

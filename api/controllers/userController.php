@@ -51,7 +51,8 @@ class UserController extends MainController {
     // Kollar om den inloggade användaren är admin eller inte
     public function verifyAdmin() {
 
-        if($_SESSION["inloggedUser"]) {
+        if(isset($_SESSION["inloggedUser"])) {
+            
             $loggedInUser = unserialize($_SESSION["inloggedUser"]);
             $checkAdmin = $loggedInUser[0]->Admin;
 

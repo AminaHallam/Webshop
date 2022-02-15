@@ -41,6 +41,9 @@ export async function showCorrectLayout() {
     
     /* Checkar om någon användare finns i session(dvs inloggad) */
     let checkIfInlogged = await getUser();
+
+    console.log(checkIfInlogged)
+    
     if(!checkIfInlogged) {
         
         document.querySelector(".adminIcons").classList.add("none");
