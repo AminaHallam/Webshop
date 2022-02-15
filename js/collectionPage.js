@@ -1,10 +1,11 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
 
 
 
 async function onLoad() {
     await showCorrectLayout();
+    await printNrOfElements();
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const url = urlParams.get('id')

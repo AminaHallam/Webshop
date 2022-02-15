@@ -62,6 +62,9 @@ async function getCart() {
 async function renderCart() {
 
     let cart = await getCart()
+    let userInfo = await getUser()
+
+    console.log(userInfo)
 
     const main = document.getElementsByTagName("main")[0]
 
@@ -150,11 +153,43 @@ async function renderCart() {
     }
 
 
+
+
+   /*  Order Summary    */ 
+
+
     let totalSum = cart.reduce((sum,item) => sum + item.product.unitPrice * item.quantity, 0);
 
+    let summaryTitle = document.createElement("h2")
+    summaryTitle.innerText = "Order summary"
     let summaryContainer = document.createElement("div")
     summaryContainer.classList.add("summaryContainer")
+    
+    /* Delivery address */
+    let deliveryAddress = document.createElement("div")
+    deliveryAddress.classList.add("addressContainer")
+    let addressTitle = document.createElement("h4")
+    let firstName = document.createElement("p")
+    let lastName = document.createElement("p")
+    let street = document.createElement("p")
+    let CO = document.createElement("p")
+    let zipCode = document.createElement("p")
+    let city = document.createElement("p")
+    let country = document.createElement("p")
+    addressTitle.innerText = "Delivery address:"
+    firstName.innerText = userInfo.FirstName
+    lastName.innerText = userInfo.LastName
+    street.innerText = userInfo.Street
+    CO.innerText = userInfo.CO
+    zipCode.innerText = userInfo.ZipCode
+    city.innerText = userInfo.City
+    country.innerText = userInfo.Country
 
+
+    /* Courrier */
+    let courrierContainer = document.createElement("div")
+    let courrierTitle = document.createElement("h4")
+    courrierTitle.innerText = "Choose courrier: (Free shipping)"
     
     let courriers = await getCourrier();
     let courrierForm = document.createElement("form")
@@ -173,21 +208,33 @@ async function renderCart() {
         courrierName.innerText = courrierCompany.courrierName
 
         courrierForm.append(radioButton, courrierName)
-        
     }
 
+    let newsName = document.createElement("label")
+    newsName.innerText = "Please let me know about early previews of original paintings"
+    let newsButton = document.createElement("input")
+    newsButton.classList.add("newsButton")
+    newsButton.setAttribute("type", "checkbox")
+    newsButton.setAttribute("value", userInfo.id)
+    
+    /* Total amount and button */
 
-    let orderSummary = document.createElement("p")
-    orderSummary.classList.add("orderSummary")
-    orderSummary.innerHTML = "Order summary: " +  totalSum + " €"
+    let totalAmount = document.createElement("p")
+    totalAmount.classList.add("totalAmount")
+    totalAmount.innerHTML = "Total amount: " +  totalSum + " €"
     let orderButton = document.createElement("button")
     orderButton.classList.add("orderButton")
     orderButton.innerText = "Check Out"
 
     main.append(summaryContainer)
-    summaryContainer.append(courrierForm, orderSummary, orderButton)
+    summaryContainer.append(summaryTitle, deliveryAddress, courrierContainer, totalAmount, orderButton)
+    courrierContainer.append(courrierTitle, courrierForm, newsButton, newsName)
+    deliveryAddress.append(addressTitle, firstName, lastName, street, CO, zipCode, city, country)
 
 }
+
+
+
 
 
 // Hämtar alla fraktbolag

@@ -10,13 +10,14 @@ try {
 
             if(isset($_SESSION["myCart"])) {
 
-            echo json_encode($_SESSION["myCart"]);
-            exit;
+                echo json_encode($_SESSION["myCart"]);
+                exit;
 
+            } else {
+                echo json_encode(false);
+                exit;
             }
-
         } 
-
     }
     
     else if($_SERVER["REQUEST_METHOD"] == "POST") {
