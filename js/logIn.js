@@ -1,5 +1,5 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
 
 const myPage = document.querySelector(".myPage")
 const buttonCA = document.querySelector(".buttonCA")
@@ -9,6 +9,7 @@ const createAccountForm = document.querySelector("#createAccount")
 
 async function onLoad() {
     await showCorrectLayout();
+    await printNrOfElements();
 }
 
 makeRequest();
@@ -155,6 +156,7 @@ e.preventDefault();
 
     let addUser = await makeRequest("./../api/receivers/userReceiver.php", "POST", myData)
     console.log(addUser)
+
 }
 
 

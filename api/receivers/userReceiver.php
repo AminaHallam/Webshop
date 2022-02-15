@@ -28,6 +28,11 @@ try {
                     "id" => $user->Id,
                     "FirstName" => $user->FirstName,
                     "LastName" => $user->LastName,
+                    "Street" => $user->Street,
+                    "CO" => $user->CO,
+                    "ZipCode" => $user->ZipCode,
+                    "City" => $user->City,
+                    "Country" => $user->Country,
                     "Admin" => $user->Admin               
                 );
     
