@@ -9,9 +9,14 @@ async function onLoad() {
     await printNrOfElements();
 }
 
+
+// bör ligga i funk, inte i globalt skop, await 
+// sparas användare någonstans? 
 getAllCategories();
 verifyAdmin();
 getUser();
+
+
 
 
 document.getElementById("menu").addEventListener("click", openMenu);
@@ -21,10 +26,10 @@ document.getElementById("submitClick").addEventListener("click", addSubscription
 async function addSubscriptionNews(e) {
     e.preventDefault();
     const action = "addSubscriptionNews";
-    
+
     let registerFirstname = document.getElementById("firstNameNews").value
     let registerEmail = document.getElementById("emailNews").value
-
+    
     const subscriber = {
         FirstName: registerFirstname,
         Email: registerEmail,
@@ -33,10 +38,29 @@ async function addSubscriptionNews(e) {
     var body = new FormData()
     body.append("action", action)
     body.append("subscriber", JSON.stringify(subscriber))
-    
+     
 
-    let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
-    console.log(status) 
+    let getLoggedInUser = await getUser(); 
+   
+    // await getUser jsonencodad instans av user 
+    // vad returnerar den? 
+    if(getLoggedInUser){
+        var body = new FormData()
+        body.append("action", action)
+        
+        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
+        console.log(status) 
+
+    }else{
+
+        let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
+        if(!checkSubscription){
+            alert('You are already subscribed!')
+            exit;
+        }
+    }
+
+ 
 
 }
 
