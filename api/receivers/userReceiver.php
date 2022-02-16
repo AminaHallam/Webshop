@@ -22,8 +22,7 @@ try {
 
                 $user = unserialize($_SESSION["inloggedUser"]);
 
-                $user = $user[0];
-
+                // Skicka hela instansen istället
                 $basicUserInfo = array(
                     "id" => $user->Id,
                     "FirstName" => $user->FirstName,
@@ -44,8 +43,6 @@ try {
                 echo json_encode(false);
                 exit;
             }
-
-           
 
 
         } else if($_GET["action"] == "verifyAdmin") {
@@ -78,7 +75,7 @@ try {
                 $userToAdd = json_decode($_POST["addUser"]);
                 error_log(json_encode($userToAdd));
                 echo (json_encode($controller->add($userToAdd)));
-                error_log("hej");
+                
                 exit;
             }
         }
