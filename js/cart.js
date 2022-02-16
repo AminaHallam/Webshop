@@ -252,13 +252,11 @@ async function renderCart() {
 
         let checkCourrier = document.querySelector('input[name="selectCourrier"]:checked').value
 
+        createOrder(checkCourrier, userInfo.id, cart);
 
-
-        // Skapa en order här med info nedan
-
-        console.log(checkCourrier) // Får ID't fraktbolaget
-        console.log(userInfo.id) // ID från användaren
-        console.log(cart)   // Alla produkter i carten 
+        /* console.log(checkCourrier)  */// Får ID't fraktbolaget
+       /*  console.log(userInfo.id) */ // ID från användaren
+        /* console.log(cart)  */  // Alla produkter i carten 
     })
 
     main.append(summaryContainer)
@@ -272,6 +270,57 @@ async function renderCart() {
 
 }
 
+
+async function createOrder(courrierId, userId, cart) {
+
+/*     if(cart == 0) {
+        alert("Your cart is empty")
+        return
+    }
+
+    if(!document.querySelector('input[name="selectCourrier"]:checked')) {
+        alert("Please choose a courrier")
+        return
+    }
+
+
+    if(document.querySelector('.newsButton:checked')) {
+        
+        // Lägg till användaren i subscription news här
+
+        let checkedNews = document.querySelector('.newsButton:checked').value;
+        console.log(checkedNews) // ID från användaren
+    }
+
+    let checkCourrier = document.querySelector('input[name="selectCourrier"]:checked').value
+ */
+
+    let createOrder = {
+        StatusId: "REG",
+        UserId: userId,
+        CourrierId: courrierId,
+        RegisterDate: "CURRENT_TIMESTAMP"
+    }
+
+    console.log(createOrder)
+
+    let myData = new FormData();
+    myData.append("endpoint", "createOrder");
+    myData.append("createOrder", JSON.stringify(createOrder))
+
+
+    let resultOrder = await makeRequest("./../api/receivers/orderReceiver.php", "POST", myData)
+    
+    console.log(resultOrder)
+
+
+
+    // Skapa en order här med info nedan
+
+
+
+
+}
 
 
 

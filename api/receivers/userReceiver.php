@@ -22,21 +22,8 @@ try {
 
                 $user = unserialize($_SESSION["inloggedUser"]);
 
-                // Skicka hela instansen istället
-                $basicUserInfo = array(
-                    "id" => $user->Id,
-                    "FirstName" => $user->FirstName,
-                    "LastName" => $user->LastName,
-                    "Street" => $user->Street,
-                    "CO" => $user->CO,
-                    "ZipCode" => $user->ZipCode,
-                    "City" => $user->City,
-                    "Country" => $user->Country,
-                    "Email" => $user->Email,
-                    "Admin" => $user->Admin               
-                );
-    
-                echo json_encode($basicUserInfo); 
+                echo json_encode($user);
+
                 exit;
 
             } else {

@@ -52,6 +52,29 @@ try {
 
             }
         }
+
+    }  else if($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                echo json_decode("Hejsan!");
+
+                /* if($_POST["endpoint"] == "createOrder") {
+                */
+                    
+
+                /*    if($_SESSION["inloggedUser"]) {
+
+                        
+                        $controller = new OrderController();
+
+                        echo(json_encode($controller->add(json_decode($_POST["userId"]))));
+                        exit; 
+
+                    } else {
+                        echo json_encode("You have to be logged in before you proceed");
+                    } */
+
+                /* } */
+
     }    
 
 } catch(Exception $e) {
