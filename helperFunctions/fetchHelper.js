@@ -23,6 +23,7 @@ export async function makeRequest(url, method, body) {
 export async function verifyAdmin() {
     const action = 'verifyAdmin'; 
     let verifyA = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
+    console.log(verifyA);
     return verifyA    
 }
 
