@@ -17,6 +17,10 @@ class CourrierController extends MainController {
         return $this->database->fetchAll($this->createCourrier);
     }
 
+    function add($entity) {
+
+    }
+
 
 
     public function getById($id) {
