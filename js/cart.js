@@ -12,7 +12,6 @@ async function onLoad() {
 
 }
 
-makeRequest();
 verifyAdmin();
 getAllCategories();
 getUser();
@@ -150,6 +149,9 @@ async function renderCart() {
         priceContainer.append(ajustQty, totalPrice)
         ajustQty.append(deleteQty, unitQty, addQty)
 
+
+        
+
     }
 
 
@@ -210,6 +212,8 @@ async function renderCart() {
         courrierForm.append(radioButton, courrierName)
     }
 
+
+    /* Newsletter */
     let newsName = document.createElement("label")
     newsName.innerText = "Please let me know about early previews of original paintings"
     let newsButton = document.createElement("input")
@@ -218,18 +222,48 @@ async function renderCart() {
     newsButton.setAttribute("value", userInfo.id)
     
     /* Total amount and button */
-
     let totalAmount = document.createElement("p")
     totalAmount.classList.add("totalAmount")
     totalAmount.innerHTML = "Total amount: " +  totalSum + " €"
     let orderButton = document.createElement("button")
     orderButton.classList.add("orderButton")
     orderButton.innerText = "Check Out"
+    orderButton.addEventListener("click", () => {
+        
+
+        if(!document.querySelector('input[name="selectCourrier"]:checked')) {
+            alert("Please choose a courrier")
+            return
+        }
+
+
+        if(document.querySelector('.newsButton:checked')) {
+            
+            // Lägg till användaren i subscription news här
+
+            let checkedNews = document.querySelector('.newsButton:checked').value;
+            console.log(checkedNews) // ID från användaren
+        }
+
+        let checkCourrier = document.querySelector('input[name="selectCourrier"]:checked').value
+
+
+
+        // Skapa en order här med info nedan
+
+        console.log(checkCourrier) // Får ID't fraktbolaget
+        console.log(userInfo.id) // ID från användaren
+        console.log(cart)   // Alla produkter i carten 
+    })
 
     main.append(summaryContainer)
     summaryContainer.append(summaryTitle, deliveryAddress, courrierContainer, totalAmount, orderButton)
     courrierContainer.append(courrierTitle, courrierForm, newsButton, newsName)
     deliveryAddress.append(addressTitle, firstName, lastName, street, CO, zipCode, city, country)
+
+
+
+
 
 }
 

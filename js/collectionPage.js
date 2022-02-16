@@ -15,7 +15,7 @@ async function onLoad() {
     renderProductsFromCategory(url)
 }
 
-makeRequest();
+
 verifyAdmin();
 getAllCategories();
 getUser();

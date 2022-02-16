@@ -6,7 +6,6 @@ async function onLoad() {
     await showCorrectLayout();
 }
 
-makeRequest();
 verifyAdmin();
 getAllCategories();
 getUser();
