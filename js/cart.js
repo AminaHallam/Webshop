@@ -194,6 +194,7 @@ async function renderCart() {
     courrierTitle.innerText = "Choose courrier: (Free shipping)"
     
     let courriers = await getCourrier();
+
     let courrierForm = document.createElement("form")
     
     for (let i = 0; i < courriers.length; i++) {
@@ -230,6 +231,10 @@ async function renderCart() {
     orderButton.innerText = "Check Out"
     orderButton.addEventListener("click", () => {
         
+        if(cart == 0) {
+            alert("Your cart is empty")
+            return
+        }
 
         if(!document.querySelector('input[name="selectCourrier"]:checked')) {
             alert("Please choose a courrier")
