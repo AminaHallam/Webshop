@@ -67,6 +67,10 @@ export async function showCorrectLayout() {
         document.querySelector(".adminIcons").classList.remove("none");
         document.querySelector(".loginIcon").classList.add("none")
         document.querySelector(".qty").classList.add("qtyAdmin")
+        document.getElementById("firstNameNews").style.display = "none";
+        document.getElementById("emailNews").style.display = "none";
+
+
 
     } else {
         console.log("Du är en vanlig kund");
@@ -74,6 +78,8 @@ export async function showCorrectLayout() {
         document.querySelector(".adminSetting").classList.add("none");
         document.querySelector(".loginIcon").classList.add("none")
         document.querySelector(".qty").classList.add("qtyCustomer")
+        document.getElementById("firstNameNews").style.display = "none";
+        document.getElementById("emailNews").style.display = "none";
     } 
 }
 

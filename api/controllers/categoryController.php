@@ -28,6 +28,10 @@ class CategoryController extends MainController {
         return $category;
     }
 
+    public function add($entity) {
+
+    }
+
 }
 
     ?>
