@@ -157,6 +157,17 @@ e.preventDefault();
     let addUser = await makeRequest("./../api/receivers/userReceiver.php", "POST", myData)
     console.log(addUser)
 
+    if(addUser) {
+        alert("Ditt konto är skapat!")
+        loginForm.classList.remove("hidden");
+        createAccountForm.classList.add("hidden");
+        return
+    }
+
+    alert("Något gick fel")
+
+
+
 }
 
 
