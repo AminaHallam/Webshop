@@ -2,13 +2,13 @@
 
 class SubscriptionNews {
     public $Id;
-    public $UserId;
+    public $UserID;
     public $FirstName;
     public $Email;
 
-    function __construct($Id, $UserId, $FirstName, $Email) {
+    function __construct($Id, $UserID, $FirstName, $Email) {
         $this->Id = $Id;
-        $this->UserId = $UserId;
+        $this->UserID = $UserID;
         $this->FirstName = $FirstName;
         $this->Email = $Email;
     }

@@ -23,7 +23,9 @@ class ProductController extends MainController {
     }
 
 
+    public function add($entity) {
 
+    }
 
 
 

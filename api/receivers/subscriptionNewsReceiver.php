@@ -8,11 +8,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         
     if($_POST["action"] == "addSubscriptionNews") {
 
-        if($_POST["firstName"] && $_POST["email"])) {
+        if(isset($_POST["subscriber"])) {
 
             $controller = new SubscriptionNewsController();
 
-            echo(json_encode($controller->addSubscriptionNews($_POST["name"], $_POST["email"])));
+            echo(json_encode($controller->add(json_decode($_POST["subscriber"]))));
             exit;
             
         } else {
@@ -24,6 +24,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     
         
     }
+
+}
 
 } catch(Exception $err) {
     echo json_encode(array('Message' => $err->getMessage(), "Status" => $err->getCode()));

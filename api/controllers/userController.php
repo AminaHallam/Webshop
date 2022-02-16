@@ -98,6 +98,10 @@ class UserController extends MainController {
     public function getById($id) {
        /*  return $this->database->fetchById($id, $this->createFunction); */
     }
+
+    /* public function add($entity) {
+
+    } */
 }
 
 ?>
