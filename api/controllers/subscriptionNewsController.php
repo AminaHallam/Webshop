@@ -46,7 +46,7 @@ class SubscriptionNewsController extends MainController {
             if(isset($_SESSION['inloggedUser'])){
                 $user = unserialize($_SESSION["inloggedUser"]);
 
-                $subscriptionNewsToAdd = createSubscriptionNews(null, $user[0]->Id , null, null); 
+                $subscriptionNewsToAdd = createSubscriptionNews(null, $user->Id , null, null); 
                 return $this->database->insert($subscriptionNewsToAdd);
          
             }else if($subscriber){ 
