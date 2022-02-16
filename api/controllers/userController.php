@@ -4,6 +4,7 @@ session_start();
 
 include_once("./../classes/createInstanceFunctions.php");
 include_once("./../controllers/mainController.php");
+include_once("./../classes/user.php");
 
 class UserController extends MainController {
 
@@ -20,7 +21,6 @@ class UserController extends MainController {
         WHERE Email = "."'".$user."'";
 
         $checkEmail = $this->database->freeQuery($query, $this->createUser);
-        error_log(serialize($checkEmail));
 
         if(!$checkEmail == "{}") {
             return true;
@@ -29,23 +29,32 @@ class UserController extends MainController {
         
     }
 
-
+    
     // Kollar om username och password matchar databasen
-    public function loginUser($user, $password) { 
-        $query = "SELECT * 
-        FROM user
-        WHERE Email = "."'".$user."'"." AND Password = "."'"."$password"."'".";";
+        public function loginUser($user, $password) { 
+            
+            $listOfUsers = $this->database->fetchAll($this->createUser);
 
-        $checkAccount = $this->database->freeQuery($query, $this->createUser);
+            for ($i=0; $i < count($listOfUsers); $i++) { 
+                
+                $userDb = $listOfUsers[$i];
+                $checkEmail = $userDb->Email;
+        
+                if($checkEmail == $user) {
 
-        if(!$checkAccount == "{}") {
-            return false;
+                $hashedPw = $userDb->Password;
+                
+                    if (password_verify($password, $hashedPw)) {
+                        $_SESSION["inloggedUser"] = serialize($userDb);
+                        return true;
+
+                    } else {
+                        return false;       
+                    }
+                }   
+            }
         }
 
-        $_SESSION["inloggedUser"] = serialize($checkAccount);
-        
-        return true;
-    }
 
 
     // Kollar om den inloggade användaren är admin eller inte
@@ -54,7 +63,7 @@ class UserController extends MainController {
         if(isset($_SESSION["inloggedUser"])) {
             
             $loggedInUser = unserialize($_SESSION["inloggedUser"]);
-            $checkAdmin = $loggedInUser[0]->Admin;
+            $checkAdmin = $loggedInUser->Admin;
 
             if($checkAdmin == 1) {
                 return true;
@@ -67,9 +76,12 @@ class UserController extends MainController {
 
     public function add($user) {
         try {
-            $addUser = createUser(null, $user->Email, $user->Password, $user->FirstName, $user->LastName, $user->Street, $user->CO, $user->ZipCode, $user->City, $user->Country, $user->CountryCode, $user->StandardPhone, $user->MobileNumber, $user->Admin, $user->TermsOfPurchase);
+            $hashedPassword = password_hash($user->Password, PASSWORD_DEFAULT);
+            $addUser = createUser(null, $user->Email, $hashedPassword, $user->FirstName, $user->LastName, $user->Street, $user->CO, $user->ZipCode, $user->City, $user->Country, $user->CountryCode, $user->StandardPhone, $user->MobileNumber, $user->Admin, $user->TermsOfPurchase);        
+            
             return $this->database->insert($addUser);
-        }
+ 
+        }   
         catch(Exception $e) {
             throw new Exception("This dosent work");
         }
@@ -90,7 +102,6 @@ class UserController extends MainController {
 
 
 
-
     public function getAll() { 
         /* return $this->database->fetchAll($this->createFunction);  */ 
     }
@@ -98,10 +109,10 @@ class UserController extends MainController {
     public function getById($id) {
        /*  return $this->database->fetchById($id, $this->createFunction); */
     }
-
-    /* public function add($entity) {
-
-    } */
 }
 
+
 ?>
+
+    
+
