@@ -22,6 +22,8 @@ class OrderController extends MainController {
 
 
 
+
+
     public function getById($id) {
         
         /* Hämtar bara ordern */
@@ -44,7 +46,9 @@ class OrderController extends MainController {
 
 
 
-
+    public function add($entity) {
+        return "Hej";
+    }
 
 
 
