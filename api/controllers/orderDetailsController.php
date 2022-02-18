@@ -50,8 +50,6 @@ class OrderDetailsController extends MainController {
 
     }
 
-
-
 }
 
 

@@ -151,10 +151,10 @@ async function renderCart() {
         priceContainer.append(ajustQty, totalPrice)
         ajustQty.append(deleteQty, unitQty, addQty)
 
-
-        
-
     }
+
+
+
 
 
 
@@ -246,11 +246,7 @@ async function renderCart() {
 
 
         if(document.querySelector('.newsButton:checked')) {
-            
-           /*  let checkedNews = document.querySelector('.newsButton:checked').value; */
-
-            addSubscriber(/* checkedNews */);
-
+            addSubscriber();
         }
 
         let checkCourrier = document.querySelector('input[name="selectCourrier"]:checked').value
@@ -270,14 +266,12 @@ async function renderCart() {
 
 
 
-async function addSubscriber(/* userId */) {
+async function addSubscriber() {
 
     let addSub = "addSubscriptionNews"
 
     let body = new FormData();
     body.append("action", addSub);
-    /* body.append("userId", JSON.stringify(userId)); */
-
 
     let subscribeUser = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
     
@@ -326,8 +320,7 @@ async function createOrder(courrierId, userId, cart) {
         return
     }
 
-    alert("Something didn't went right. Your order is not placed");
-
+    alert("Something didn't go right. Your order is not placed");
 
 }
 
