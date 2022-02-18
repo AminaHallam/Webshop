@@ -70,10 +70,17 @@ async function renderProductsFromCategory(idToGet) {
         unitPrice.innerHTML = product.unitPrice + " €";
         let image = document.createElement("img")
         image.src = "./assets/" + product.image
+        let avaliableUnits = document.createElement('p')
+        let unitsInStock = product.unitsInStock;
+        if(unitsInStock > 0){
+            avaliableUnits.innerHTML = 'Product avaliable to order'; 
+        }else{
+            avaliableUnits.innerHTML = 'Product out of stock'
+        }
         image.addEventListener("click", () => {productPage(product)})
     
         main.append(productContainer)
-        productContainer.append(title, description, unitPrice, image)
+        productContainer.append(title, description, unitPrice, image, avaliableUnits)
 
     }
 

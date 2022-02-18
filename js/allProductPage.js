@@ -58,11 +58,22 @@ async function renderProducts(list){
         unitPrice.innerHTML = element.unitPrice + " €";
         let image = document.createElement("img")
         image.src = "./assets/" + element.image
+
+        let avaliableUnits = document.createElement('p')
+        let unitsInStock = element.unitsInStock;
+        if(unitsInStock > 0){
+            avaliableUnits.innerHTML = 'Product avaliable to order'; 
+        }else{
+            avaliableUnits.innerHTML = 'Product out of stock'
+        }
         image.addEventListener("click", () => {productPage(element)}) 
 
         main.append(productContainer)
-        productContainer.append(title, description, unitPrice, image)
+        productContainer.append(title, description, unitPrice, image, avaliableUnits)
     }
+
+
+   
 
 
 }
@@ -84,7 +95,7 @@ export async function getAllProductsId() {
     
     for (let i = 0; i < allProductsId.length; i++) {
         const element = allProductsId[i]
-        console.log(element.productId)
+        //console.log(element.productId)
       /*   const ul = document.getElementById("dropdown");
         let productContainer = document.createElement("div")
         productContainer.classList.add("productContainer")
@@ -99,6 +110,19 @@ export async function getAllProductsId() {
     }  
     
     
+}
+
+
+async function deleteProduct(id){
+    const action = "delete";
+    
+
+    var body = new FormData()
+    body.append("action", action)
+    body.append("id", id)
+
+    let status = await makeRequest(`./receivers/productReceiver.php`, "POST", body)
+    console.log(status)
 }
 
 
