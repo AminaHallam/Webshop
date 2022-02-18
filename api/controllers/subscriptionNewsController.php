@@ -24,21 +24,7 @@ class SubscriptionNewsController extends MainController {
 /*         return $this->database->fetchById($id, $this->createFunction); */
    }
 
-
-
-   //// SKALL IMPLEMENTERAS 
-
-  /*  public function checkSubscription($subscriber){
-       
    
-       $query = "SELECT userId 
-       FROM subscriptionNews 
-       WHERE userId = "."'".$subscriber."'";
-
-        $alreadySubscribed = $this->database->freeQuery($query, $this->$createSubscriptionNews); 
-        error_log(serialize($alreadySubscribed));
-    } */
-
 
      public function add($subscriber) { 
        
@@ -46,13 +32,13 @@ class SubscriptionNewsController extends MainController {
             if(isset($_SESSION['inloggedUser'])){
                 $user = unserialize($_SESSION["inloggedUser"]);
 
+
                 $subscriptionNewsToAdd = createSubscriptionNews(null, $user->Id , null, null); 
                 return $this->database->insert($subscriptionNewsToAdd);
          
             }else if($subscriber){ 
-
+                
                 $subscriptionNewsToAdd = createSubscriptionNews(null, null, $subscriber->FirstName, $subscriber->Email);
-
                 return $this->database->insert($subscriptionNewsToAdd);
                
             } 

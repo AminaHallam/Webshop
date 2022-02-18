@@ -8,7 +8,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         
     if($_POST["action"] == "addSubscriptionNews") {
 
-        if(isset($_POST["subscriber"]) || isset($_SESSION['inloggedUser'])) {// or in session)) {
+        if(isset($_POST["subscriber"]) || isset($_SESSION['inloggedUser'])) {
             
             $controller = new SubscriptionNewsController();
 
@@ -22,26 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode('The information is not correct');
         
         };
-            
-         
-
-/* 
-        } else if($_GET["action"] == "addUser") {
-            
-            if(isset($_GET["user"])) {
-                $controller = new UserController();
-                echo(json_encode($controller->checkEmail($_GET["user"])));
-                exit;
-            } */
-            
-  /*       } else {
-
-            throw new Exception("Missing info...", 501);
-            exit; 
-
-        }
-    }
-     */
+        
         
 };   
 

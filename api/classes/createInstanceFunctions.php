@@ -32,10 +32,6 @@ function createSubscriptionNews($Id, $UserID, $FirstName, $Email) {
     return new SubscriptionNews((int)$Id, $UserID, $FirstName, $Email);
 }
 
-function subscribe($id, $UserID, $FirstName, $Email) {
-    return new SubscriptionNews((int)$Id, $UserID, $FirstName, $Email);
-}
-
 /* Påbörjad. Vill få med quantity. Blev inge bra */
 function productDetails($Id, $name, $description, $unitPrice, $unitsInStock, $image/* , $quantity */) { 
 return new Product((int)$Id, $name, $description, $unitPrice, $unitsInStock, $image/* , $quantity */); 
