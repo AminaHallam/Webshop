@@ -35,6 +35,7 @@ async function addSubscriptionNews(e) {
         Email: registerEmail,
     }
     
+    // Mix av GET och POST
     var body = new FormData()
     body.append("action", action)
     body.append("subscriber", JSON.stringify(subscriber))

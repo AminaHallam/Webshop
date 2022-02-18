@@ -7,7 +7,6 @@ include_once("./../controllers/mainController.php");
 class ProductController extends MainController {
 
     private $createFunction = "createProduct";
-    private $productDetails = "productDetails";
 
     function __construct() {
         parent::__construct("Product", "Product");
@@ -27,11 +26,25 @@ class ProductController extends MainController {
 
     }
 
-    public function update($product) {
-        return "Hej";
+    // Uppdaterar unitsInStock på produkt
+    public function update($products, $direction) {
+        
+        for ($i=0; $i < count($products); $i++) { 
+                
+            $product = $products[$i];
+
+           $query = "UPDATE product
+           SET UnitsInStock = UnitsInStock ".$direction.$product->quantity.
+           " WHERE Id = ".$product->product->productId.";";
+
+           $updatedProducts = $this->database->freeQuery($query, $this->createFunction); 
+
+           /* error_log(serialize($updatedProducts)); */
+
+        }
+
     }
-
-
+        
 
 
 
@@ -56,6 +69,10 @@ class ProductController extends MainController {
 
 
 
+
+
+
+
     /* Hämtar alla produkter som är kopplade till en specifik order - Har lite proble med attributet quantity */
     ////////* påbörjad funktion 2022-02-07. Vill få med quantity som ligger i productDetails till instansen */ //////////////////////////////////////////////////
     public function getProductsFromOrder($orderId) { 
@@ -70,28 +87,6 @@ class ProductController extends MainController {
     }  
 
 ////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-/* 
-
-    public function add($product) {
-        try {
-
-            $producToAdd = createProduct(null, $product->name, $product->price, $product->description);
-            return $this->database->insert($producToAdd);
-
-        } catch(Exception $e) {
-            throw new Exception("The product is not in correct format...", 500);
-        }
-    }
-
-
-    public function delete($id) {
-        return $this->database->delete($id);
-    } */
-
 
 
 

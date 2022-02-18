@@ -247,10 +247,10 @@ async function renderCart() {
 
         if(document.querySelector('.newsButton:checked')) {
             
-            // Lägg till användaren i subscription news här
+           /*  let checkedNews = document.querySelector('.newsButton:checked').value; */
 
-            let checkedNews = document.querySelector('.newsButton:checked').value;
-            console.log(checkedNews) // ID från användaren
+            addSubscriber(/* checkedNews */);
+
         }
 
         let checkCourrier = document.querySelector('input[name="selectCourrier"]:checked').value
@@ -265,6 +265,41 @@ async function renderCart() {
     deliveryAddress.append(addressTitle, firstName, lastName, street, CO, zipCode, city, country)
 
 }
+
+
+
+
+
+async function addSubscriber(/* userId */) {
+
+    let addSub = "addSubscriptionNews"
+
+    let body = new FormData();
+    body.append("action", addSub);
+    /* body.append("userId", JSON.stringify(userId)); */
+
+
+    let subscribeUser = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
+    
+    console.log(subscribeUser)
+
+    if(!subscribeUser) {
+
+        alert("You are already a subscriber")
+
+     } else { 
+
+         alert("Welcome our new subscriber")
+
+     }
+
+}
+
+
+
+
+
+
 
 
 async function createOrder(courrierId, userId, cart) {
@@ -285,11 +320,13 @@ async function createOrder(courrierId, userId, cart) {
     
     console.log(resultOrder)
 
+    if(resultOrder) {
+        alert("Congratulation! Your order is placed")
+        location.reload();
+        return
+    }
 
-
-    // Skapa en order här med info nedan
-
-
+    alert("Something didn't went right. Your order is not placed");
 
 
 }

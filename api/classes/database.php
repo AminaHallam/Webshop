@@ -26,7 +26,6 @@ class Database {
         $query->execute(); 
         $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction); 
         
-        /* error_log(serialize($result)); */
         return $result;  
     }
 
@@ -74,9 +73,9 @@ class Database {
         $columns = substr($columns, 0 , -1);
         $columnsAmount = substr($columnsAmount, 0 , -1);
         
-        error_log(count($values));
+/*         error_log(count($values));
         error_log(json_encode($values));
-        error_log("detta är antalet kolumner " .$columns);
+        error_log("detta är antalet kolumner " .$columns); */
         
         $query = $this->db->prepare("INSERT INTO ". $this->selectedTable ." (" .$columns. ") VALUES (" . $columnsAmount . ")");
 
