@@ -13,7 +13,7 @@ verifyAdmin();
 getUser();
 
 document.getElementById("menu").addEventListener("click", openMenu);
-document.querySelector(".logOut").addEventListener("click", logOut)
+document.querySelector(".logOut").addEventListener("click", logOut);
 
 
 

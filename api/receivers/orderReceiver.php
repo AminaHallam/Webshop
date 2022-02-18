@@ -3,6 +3,9 @@
 try {
 
     include_once("./../controllers/orderController.php");
+    include_once("./../controllers/ProductController.php");
+    include_once("./../controllers/orderDetailsController.php");
+
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
 
@@ -21,6 +24,7 @@ try {
                 throw new Exception("Missing ID", 501);
                 exit;
             }
+
             
             echo(json_encode($controller->getById((int)$_GET["id"])));
             exit; 
@@ -55,27 +59,57 @@ try {
 
     }  else if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                echo json_decode("Hejsan!");
+        if($_POST["endpoint"] == "createOrder") {
+                
+            if($_SESSION["inloggedUser"]) {
 
-                /* if($_POST["endpoint"] == "createOrder") {
-                */
+                
+                if(!$_POST["products"] == $_SESSION["myCart"]) {
+                    throw new Exception("List in SESSION doesn´t match with client", 401);
+                    exit;
+                }
+                
+
+                $products = json_decode($_POST["products"]);
+
+                for ($i=0; $i < count($products); $i++) { 
+                
+                    $product = $products[$i];
                     
+                    if($product->product->unitsInStock <= 0 ) {
+        
+                        echo json_encode(false);
+                        exit;
+                    } 
+                } 
 
-                /*    if($_SESSION["inloggedUser"]) {
+                // Skapar order
+                $controller = new OrderController();
+                $lastInsertedId = json_encode($controller->add(json_decode($_POST["createOrder"])));
+                /*     error_log(serialize("Tillbaka på skapa order".$lastInsertedId)); */
 
-                        
-                        $controller = new OrderController();
+                // Lägger till produkter på order
+                $controller2 = new OrderDetailsController();
+                $addProducts = json_encode($controller2->addProducts(json_decode($_POST["products"]), json_decode($lastInsertedId)));
+                /* error_log(serialize("Tillbaka på lägg till produkter".$addProducts)); */
 
-                        echo(json_encode($controller->add(json_decode($_POST["userId"]))));
-                        exit; 
+                // Uppdaterar unitsInStock på produkt
+                $controller3 = new ProductController();
+                $updateUnitsInstock = json_encode($controller3->update(json_decode($_POST["products"]), "-"));
+               /*  error_log(serialize("Tillbaka på uppdatera saldo på produkt".$updateUnitsInstock)); */
 
-                    } else {
-                        echo json_encode("You have to be logged in before you proceed");
-                    } */
+            
+                unset($_SESSION["myCart"]);
 
-                /* } */
+                echo json_encode(true);
+                exit; 
 
-    }    
+            } 
+
+            throw new Exception("You have to be logged in to place an order", 401);
+            exit;
+        } 
+    }   
 
 } catch(Exception $e) {
     echo json_encode(array("Message" => $e->getMessage(), "Status" => $e->getCode()));

@@ -13,7 +13,7 @@ async function onLoad() {
     
     productPage(url); 
 
-    renderProduct(url); 
+    await renderProduct(url); 
 
 }
 
@@ -32,7 +32,7 @@ async function productPage(product) {
     const action = "getById";
     let specificProduct = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}&id=${product}`, "GET")
 
-    console.log(specificProduct)
+    return specificProduct;
     
 }   
 
@@ -43,7 +43,11 @@ async function renderProduct(idToGet) {
     const action = "getById";
     let product = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}&id=${idToGet}`, "GET")
 
+    console.log(product)
+
     let main = document.getElementsByTagName("main")[0]; 
+
+   /*  main.innerHTML = ""; */
        
     let productContainer = document.createElement("div")
     productContainer.classList.add("productContainer")
@@ -65,6 +69,9 @@ async function renderProduct(idToGet) {
     addToCartButton.innerText = "Add"
     addToCartButton.addEventListener("click", () => {addToCart(product)})
 
+
+ 
+
     /* let returnToProductPage = document.createElement('button'); 
     returnToProductPage.classList.add('returnToPpage')
     returnToProductPage.innerText = "Return to product page"
@@ -78,11 +85,18 @@ async function renderProduct(idToGet) {
     let cartButton = document.createElement('button')
     cartButton.classList.add('cartButton')
     cartButton.innerText = 'Continue to checkout'
+    cartButton.addEventListener("click", () => { location.href = "./../cartPage.html"; })
     main.append(productContainer, productInfo, cartElement)
     cartElement.append(cartButton)
     productInfo.append(title, description, unitPrice, addToCartButton, /*returnToProductPage*/)
     productContainer.append(image)
 
+    if(product.unitsInStock == 0) {
+        addToCartButton.classList.add("noClick")
+        return
+    }
+
+    addToCartButton.classList.remove("noClick")
 
 }
 
@@ -90,7 +104,7 @@ async function renderProduct(idToGet) {
 
 // Lägger till produkten i kundvagnen (SESSION)
 async function addToCart(product) {
-
+    
     /* Hämtar den sparade carten i SESSION */
     const action = "getCart"
 

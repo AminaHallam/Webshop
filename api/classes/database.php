@@ -1,5 +1,6 @@
 <?php
 
+
 class Database {
     
     public $db;
@@ -18,9 +19,6 @@ class Database {
         $this->selectedClass = $class; 
     }
 
-
-
-
     
     public function fetchAll($createInstanceFunction) { 
         
@@ -28,7 +26,6 @@ class Database {
         $query->execute(); 
         $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction); 
         
-        /* error_log(serialize($result)); */
         return $result;  
     }
 
@@ -49,19 +46,18 @@ class Database {
 
     public function freeQuery($sqlQuery, $createInstanceFunction) {
         
-      /*   error_log(serialize($sqlQuery));
-        error_log(serialize($createInstanceFunction)); */
 
         $query = $this->db->prepare($sqlQuery);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction);
-        
-       /*  error_log(serialize($result)); */
+
         
         return $result;
     }
 
     public function insert($entity) {
+       
+       
         $columns = "";
         $columnsAmount = ""; 
         $values = [];
@@ -77,11 +73,12 @@ class Database {
         $columns = substr($columns, 0 , -1);
         $columnsAmount = substr($columnsAmount, 0 , -1);
         
-        /* error_log(count($values));
+/*         error_log(count($values));
         error_log(json_encode($values));
-        error_log("detta är " .$columns); */
+        error_log("detta är antalet kolumner " .$columns); */
         
         $query = $this->db->prepare("INSERT INTO ". $this->selectedTable ." (" .$columns. ") VALUES (" . $columnsAmount . ")");
+
         
         $status = $query->execute($values);
 

@@ -9,12 +9,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     if($_POST["action"] == "addSubscriptionNews") {
 
         if(isset($_POST["subscriber"]) || isset($_SESSION['inloggedUser'])) {
-            
+
             $controller = new SubscriptionNewsController();
 
             echo(json_encode($controller->add(json_decode($_POST["subscriber"]))));
             
-            exit;
+            exit; 
         }
 
     }else{

@@ -6,6 +6,7 @@ include_once("./../controllers/productController.php");
 include_once("./../controllers/userController.php");
 
 
+
 class OrderController extends MainController {
 
     private $createFunction = "createOrder";   
@@ -45,10 +46,33 @@ class OrderController extends MainController {
     }
 
 
+    // Skapar order. 
+    public function add($OrderInfo) {
+        try {
 
-    public function add($entity) {
-        return "Hej";
+            $createOrder = createOrder(null, $OrderInfo->StatusId, $OrderInfo->UserId, $OrderInfo->CourrierId, date('Y-m-d H:i:s'), null, null);   
+            
+            return $this->database->insert($createOrder);
+ 
+        }   
+        catch(Exception $e) {
+            throw new Exception("This dosent work");
+        }
     }
+    
+
+    public function update(){
+
+
+    }
+
+
+    // Här skall jag radera unitsinstock på de produkter som lades till på ordrarna. 
+    public function delete() {
+
+
+    }
+
 
 
 
