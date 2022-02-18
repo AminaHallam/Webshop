@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : mar. 15 fév. 2022 à 14:20
+-- Généré le : ven. 18 fév. 2022 à 08:33
 -- Version du serveur : 5.7.34
 -- Version de PHP : 7.4.21
 
@@ -110,13 +110,9 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`Id`, `StatusID`, `UserID`, `CourrierID`, `RegisterDate`, `ShippingDate`, `CustRecDate`) VALUES
-(1, 'CREC', 1, 1, '2022-01-28 00:00:00', '2022-01-29 00:00:00', '2022-01-31 00:00:00'),
-(2, 'CREC', 2, 2, '2022-02-02 15:39:35', '2022-02-02 15:39:35', '2022-02-02 15:39:35'),
-(3, 'REG', 2, 1, '2022-01-24 00:00:00', NULL, NULL),
-(4, 'REG', 3, 1, '2022-01-28 00:00:00', NULL, NULL),
-(5, 'CREC', 3, 1, '2022-01-18 00:00:00', '2022-01-29 00:00:00', '2022-02-03 09:53:14'),
-(6, 'REG', 1, 2, '2022-01-29 00:00:00', NULL, NULL),
-(7, 'REG', 1, 1, '2022-02-02 15:24:07', NULL, NULL);
+(8, 'REG', 8, 1, '2022-02-18 08:25:34', NULL, NULL),
+(9, 'REG', 8, 2, '2022-02-18 08:26:18', NULL, NULL),
+(10, 'REG', 7, 2, '2022-02-18 08:26:18', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -135,11 +131,11 @@ CREATE TABLE `orderdetails` (
 --
 
 INSERT INTO `orderdetails` (`ProductID`, `OrderID`, `Quantity`) VALUES
-(5, 7, 1),
-(12, 1, 1),
-(19, 2, 1),
-(20, 5, 3),
-(27, 3, 2);
+(1, 8, 1),
+(4, 8, 1),
+(6, 9, 1),
+(10, 9, 1),
+(28, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -184,10 +180,10 @@ CREATE TABLE `product` (
 INSERT INTO `product` (`Id`, `Name`, `Description`, `UnitPrice`, `UnitsInStock`, `Image`) VALUES
 (1, 'Stop hiding', '100x150\r\nAcrylic and charcoal\r\nGallery canvas\r\nReady to hang!', 1490, 1, 'abStopHiding.png'),
 (2, 'Spirit of a wolf', '100 x 120\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame not necessary)\r\nReady to hang!', 1190, 1, 'wildSpiritOfAWolf.png'),
-(3, 'Everyone knows the price of evereything and the value of nothing', '100x150\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 1490, 1, 'womanEveryoneKnowsThePrice.JPG'),
+(3, 'Everyone knows the price of everything and the value of nothing', '100x150\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 1490, 1, 'womanEveryoneKnowsThePrice.JPG'),
 (4, 'Power', '100x120\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 1290, 1, 'womanStrongBianca.jpg'),
 (5, 'Prodigious', '100x120\r\nAcrylic\r\nGallery canvas\r\nReady to hang', 1190, 1, 'abProdigious.jpg'),
-(6, 'Dont worry bout me', '100x150\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 1490, 1, 'womanStrongBianca2.jpg'),
+(6, 'Don\'t worry bout me', '100x150\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 1490, 1, 'womanStrongBianca2.jpg'),
 (7, 'Epic', '60 x 80\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 890, 1, 'womanEpic.JPG'),
 (8, 'Front porch', '100x120\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 1290, 1, 'womanStrongPorch.JPG'),
 (9, 'To the moon and back', '100x80\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 990, 1, 'womanToTheMoonAndBack.JPG'),
@@ -276,13 +272,7 @@ CREATE TABLE `subscriptionnews` (
 --
 
 INSERT INTO `subscriptionnews` (`Id`, `UserID`, `FirstName`, `Email`) VALUES
-(3, NULL, 'Angelica', 'a.m.s@live.se'),
-(4, 3, 'Sigge', 'telia@telia.se'),
-(5, NULL, 'Sebastian', 'sebastianlarsson@live.se'),
-(6, NULL, 'Amina', 'aminahallam@live.se'),
-(7, 1, 'Agda', 'tjena@hej.se'),
-(13, 0, 'Hello', 'Hello@hello.se'),
-(14, 0, 'bonjour', 'bonjour@bonjour.se');
+(195, NULL, 'Hello', 'Hello@hello.se');
 
 -- --------------------------------------------------------
 
@@ -313,11 +303,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`Id`, `Email`, `Password`, `FirstName`, `LastName`, `Street`, `CO`, `ZipCode`, `City`, `Country`, `CountryCode`, `StandardPhone`, `MobileNumber`, `Admin`, `TermsOfPurchase`) VALUES
-(1, 'tjena@hej.se', 'hejsvej2014', 'Agda', 'Larsson', 'Tjolahoppsvägen', NULL, 51123, 'Borås', 'Sweden', 46, 31274843, 736544441, NULL, 1),
-(2, 'hejhejhej@tjose', 'tbnhjrejvn25', 'Örjan', 'Svedin', 'Andravägen 78', NULL, 12345, 'Bollebygd', 'Sweden', 46, NULL, 736761236, NULL, 1),
-(3, 'telia@telia.se', 'rfgerger98!', 'Sigge', 'Eklund', 'sistavägen 45', NULL, 25412, 'Göteborg', 'Sweden', 46, NULL, 765453658, NULL, 1),
-(4, 'grey@grey.se', 'ffefwfäfer', 'Per', 'Andersson', 'skitvägen', NULL, 12345, 'Malmö', 'Sweden', 46, NULL, 76123456, NULL, 1),
-(5, 'admin@admin.se', 'admin', 'admin', 'admin', 'skitvägen', NULL, 12345, 'Malmö', 'Sweden', 46, NULL, 76123456, 1, 1);
+(7, 'admin@admin.se', '$2y$10$1.rcwxqZ.tymDDlqCm8VBOUQ.M24JAQEXxILDdhZOgqdigIhHdy.W', 'Admin', 'Admin', 'hejhej', '', 1234, 'Göteborg', 'sweden', 1, 1, 123456, 1, 1),
+(8, 'customer@customer.se', '$2y$10$kXJA9cbGy.sVM6kMWeD66OCT5UoEphD..IGez/VoVYeOpR3hAxuyq', 'Customer', 'Customer', 'hejhej', '', 1234, 'Göteborg', 'sweden', 1, 1, 12345, 0, 1);
 
 --
 -- Index pour les tables déchargées
@@ -384,7 +371,9 @@ ALTER TABLE `productincategory`
 --
 ALTER TABLE `subscriptionnews`
   ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `Email` (`Email`);
+  ADD UNIQUE KEY `Email` (`Email`),
+  ADD UNIQUE KEY `UserID_2` (`UserID`),
+  ADD KEY `UserID` (`UserID`);
 
 --
 -- Index pour la table `user`
@@ -419,7 +408,7 @@ ALTER TABLE `newsletter`
 -- AUTO_INCREMENT pour la table `order`
 --
 ALTER TABLE `order`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `product`
@@ -431,13 +420,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT pour la table `subscriptionnews`
 --
 ALTER TABLE `subscriptionnews`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Contraintes pour les tables déchargées
@@ -464,6 +453,12 @@ ALTER TABLE `orderdetails`
 ALTER TABLE `productincategory`
   ADD CONSTRAINT `productincategory_ibfk_1` FOREIGN KEY (`CategoryID`) REFERENCES `category` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `productincategory_ibfk_2` FOREIGN KEY (`ProductID`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `subscriptionnews`
+--
+ALTER TABLE `subscriptionnews`
+  ADD CONSTRAINT `subscriptionnews_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`Id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

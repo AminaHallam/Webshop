@@ -1,5 +1,3 @@
-productPage.js
-
 
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
 import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
@@ -23,7 +21,6 @@ async function onLoad() {
 verifyAdmin();
 getAllCategories();
 getUser();
- 
 
 
 document.getElementById("menu").addEventListener("click", openMenu);
@@ -36,9 +33,8 @@ async function productPage(product) {
     let specificProduct = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}&id=${product}`, "GET")
 
     console.log(specificProduct)
-
+    
 }   
-
 
 
 
@@ -69,6 +65,13 @@ async function renderProduct(idToGet) {
     addToCartButton.innerText = "Add"
     addToCartButton.addEventListener("click", () => {addToCart(product)})
 
+    /* let returnToProductPage = document.createElement('button'); 
+    returnToProductPage.classList.add('returnToPpage')
+    returnToProductPage.innerText = "Return to product page"
+    returnToProductPage.addEventListener("click", () => {
+        window.location.href = "productPage.html?id=" + product.productId; 
+    }) */
+
 
     let cartElement = document.createElement('div');
     cartElement.classList.add('cartElement')
@@ -77,13 +80,11 @@ async function renderProduct(idToGet) {
     cartButton.innerText = 'Continue to checkout'
     main.append(productContainer, productInfo, cartElement)
     cartElement.append(cartButton)
-    productInfo.append(title, description, unitPrice, addToCartButton)
+    productInfo.append(title, description, unitPrice, addToCartButton, /*returnToProductPage*/)
     productContainer.append(image)
 
 
 }
-
-
 
 
 
@@ -147,6 +148,7 @@ async function addToCart(product) {
     printNrOfElements();
 
 }
+
 
 
 
