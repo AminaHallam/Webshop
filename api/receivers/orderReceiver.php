@@ -3,6 +3,8 @@
 try {
 
     include_once("./../controllers/orderController.php");
+    include_once("./../controllers/orderDetailsController.php");
+
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
 
@@ -21,6 +23,7 @@ try {
                 throw new Exception("Missing ID", 501);
                 exit;
             }
+
             
             echo(json_encode($controller->getById((int)$_GET["id"])));
             exit; 
@@ -55,26 +58,28 @@ try {
 
     }  else if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                echo json_decode("Hejsan!");
+        if($_POST["endpoint"] == "createOrder") {
+                
+            if($_SESSION["inloggedUser"]) {
+                // Skapar order
+                $controller = new OrderController();
+                $lastInsertedId = json_encode($controller->add(json_decode($_POST["createOrder"])));
 
-                /* if($_POST["endpoint"] == "createOrder") {
-                */
-                    
+                // Lägger till produkter på order
+                $controller2 = new OrderDetailsController();
+                $addProducts = json_encode($controller2->addProducts(json_decode($_POST["products"]), json_decode($lastInsertedId)));
 
-                /*    if($_SESSION["inloggedUser"]) {
+                $controller3 = new ProductController();
+                $updateUnitsInstock = json_encode($controller3->update(json_decode($_POST["products"])));
+                error_log(serialize($updateUnitsInstock));
+                // Gör en sista funktion med att ta bort quantity. 
+            
+                echo $lastInsertedId;
 
-                        
-                        $controller = new OrderController();
+                exit; 
 
-                        echo(json_encode($controller->add(json_decode($_POST["userId"]))));
-                        exit; 
-
-                    } else {
-                        echo json_encode("You have to be logged in before you proceed");
-                    } */
-
-                /* } */
-
+            }
+        } 
     }    
 
 } catch(Exception $e) {

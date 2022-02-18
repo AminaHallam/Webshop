@@ -27,6 +27,10 @@ class ProductController extends MainController {
 
     }
 
+    public function update($product) {
+        return "Hej";
+    }
+
 
 
 

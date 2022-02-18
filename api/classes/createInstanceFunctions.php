@@ -7,6 +7,7 @@ include_once("./../classes/user.php");
 include_once("./../classes/order.php");
 include_once("./../classes/courrier.php");
 include_once("./../classes/subscriptionNews.php");
+include_once("./../classes/orderDetails.php");
 
 
 
@@ -36,9 +37,9 @@ function subscribe($id, $UserID, $FirstName, $Email) {
     return new SubscriptionNews((int)$Id, $UserID, $FirstName, $Email);
 }
 
-/* Påbörjad. Vill få med quantity. Blev inge bra */
-function productDetails($Id, $name, $description, $unitPrice, $unitsInStock, $image/* , $quantity */) { 
-return new Product((int)$Id, $name, $description, $unitPrice, $unitsInStock, $image/* , $quantity */); 
+
+function createOrderDetails($orderId, $productId, $quantity) { 
+return new OrderDetails((int)$orderId, (int)$productId, (int)$quantity); 
 } 
 
 

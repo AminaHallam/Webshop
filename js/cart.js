@@ -53,6 +53,8 @@ async function getCart() {
         cart = []
     }
 
+    console.log(cart)
+
     return cart
 }
 
@@ -198,6 +200,7 @@ async function renderCart() {
     let courrierForm = document.createElement("form")
     
     for (let i = 0; i < courriers.length; i++) {
+        
         const courrierCompany = courriers[i];
 
         let radioButton = document.createElement("input")
@@ -220,7 +223,7 @@ async function renderCart() {
     let newsButton = document.createElement("input")
     newsButton.classList.add("newsButton")
     newsButton.setAttribute("type", "checkbox")
-    newsButton.setAttribute("value", userInfo.id)
+    newsButton.setAttribute("value", userInfo.Id)
     
     /* Total amount and button */
     let totalAmount = document.createElement("p")
@@ -252,11 +255,8 @@ async function renderCart() {
 
         let checkCourrier = document.querySelector('input[name="selectCourrier"]:checked').value
 
-        createOrder(checkCourrier, userInfo.id, cart);
-
-        /* console.log(checkCourrier)  */// Får ID't fraktbolaget
-       /*  console.log(userInfo.id) */ // ID från användaren
-        /* console.log(cart)  */  // Alla produkter i carten 
+        createOrder(checkCourrier, userInfo.Id, cart);
+  
     })
 
     main.append(summaryContainer)
@@ -264,50 +264,22 @@ async function renderCart() {
     courrierContainer.append(courrierTitle, courrierForm, newsButton, newsName)
     deliveryAddress.append(addressTitle, firstName, lastName, street, CO, zipCode, city, country)
 
-
-
-
-
 }
 
 
 async function createOrder(courrierId, userId, cart) {
 
-/*     if(cart == 0) {
-        alert("Your cart is empty")
-        return
-    }
-
-    if(!document.querySelector('input[name="selectCourrier"]:checked')) {
-        alert("Please choose a courrier")
-        return
-    }
-
-
-    if(document.querySelector('.newsButton:checked')) {
-        
-        // Lägg till användaren i subscription news här
-
-        let checkedNews = document.querySelector('.newsButton:checked').value;
-        console.log(checkedNews) // ID från användaren
-    }
-
-    let checkCourrier = document.querySelector('input[name="selectCourrier"]:checked').value
- */
-
     let createOrder = {
         StatusId: "REG",
         UserId: userId,
-        CourrierId: courrierId,
-        RegisterDate: "CURRENT_TIMESTAMP"
+        CourrierId: courrierId
     }
 
-    console.log(createOrder)
 
     let myData = new FormData();
     myData.append("endpoint", "createOrder");
-    myData.append("createOrder", JSON.stringify(createOrder))
-
+    myData.append("createOrder", JSON.stringify(createOrder));
+    myData.append("products", JSON.stringify(cart));
 
     let resultOrder = await makeRequest("./../api/receivers/orderReceiver.php", "POST", myData)
     

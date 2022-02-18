@@ -193,6 +193,8 @@ export async function printNrOfElements() {
         cart = []
     }
 
+    console.log(cart)
+
     let totalSum = cart.reduce((sum,item) => sum + item.quantity, 0)
     
     numberCart.innerText = totalSum
