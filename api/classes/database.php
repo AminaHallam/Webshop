@@ -81,14 +81,22 @@ class Database {
         $query = $this->db->prepare("INSERT INTO ". $this->selectedTable ." (" .$columns. ") VALUES (" . $columnsAmount . ")");
 
         
-        $query->execute($values);
-        $this->lastId = $this->db->lastInsertId();
+        $status = $query->execute($values);
 
-        return $this->lastId;
-        
+        if(!$status) {
+            
+            return false; 
+            
+        } else {
+            
+            return $lastId = $this->db->lastInsertId();
+
+        }
+
+
     }
 
 }
 
 
-    ?>
+?>

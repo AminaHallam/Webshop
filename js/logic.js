@@ -38,26 +38,41 @@ async function addSubscriptionNews(e) {
     var body = new FormData()
     body.append("action", action)
     body.append("subscriber", JSON.stringify(subscriber))
-     
+
 
     let getLoggedInUser = await getUser(); 
    
-    // await getUser jsonencodad instans av user 
-    // vad returnerar den? 
     if(getLoggedInUser){
         var body = new FormData()
         body.append("action", action)
         
-        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
+        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "POST", body)
         console.log(status) 
+
+        if(!status) {
+            alert("You are already a subscriber")
+        } else {
+
+            alert("Welcome our new subscriber")
+
+        }
+
 
     }else{
 
-        let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
-        if(!checkSubscription){
-            alert('You are already subscribed!')
-            exit;
-        }
+        let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "POST", body)
+        console.log(checkSubscription)
+        
+        if(!checkSubscription) {
+
+            alert("You are already a subscriber")
+    
+         } else { 
+
+             alert("Welcome our new subscriber")
+
+         }
+    
     }
 
  

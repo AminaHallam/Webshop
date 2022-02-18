@@ -14,10 +14,14 @@ Vi skall bygga en objekt-orienterad back-end webbshop applikation i PHP som är 
 Affärsidé:
 ZM Art erbjuder exklusiv och unik konst. Zeon Milo är en svensk konstnär som har nått framgång i Europa med sin unika konst. 
 
+Inloggningsuppgifter som Admin: 
+Email: admin@admin.se
+Lösenord: admins
+
 Kravspecifikation på projektet:
 1. Alla sidor skall vara responsiva. (G) ✅ ❌
 
-2. Arbetet ska implementeras med objektorienterade principer. (G) ✅ ❌
+2. Arbetet ska implementeras med objektorienterade principer. (G) ✅ 
 
 3. Skapa ett konceptuellt ER diagram, detta ska lämnas in vid idégodkännandet G) ✅ 
 
@@ -25,13 +29,13 @@ Kravspecifikation på projektet:
 
 5. Det skall finnas en kortare text som beskriver erat projekt i er readme.md (G) ✅ 
 
-6. All data som programmet utnyttjar ska vara sparat i en MYSQL databas (produkter, beställningar, konton mm. Ej kundvagn) (G) ✅ ❌
+6. All data som programmet utnyttjar ska vara sparat i en MYSQL databas (produkter, beställningar, konton mm. Ej kundvagn) (G) ✅ 
 
 7. Det ska finnas ett normaliserat diagram över databasen i ert Github-Repo (G) ✅ ❌ - Fysiskt-Diagram
 
-8. Man ska kunna logga in som administratör i systemet (G) ✅ ❌
+8. Man ska kunna logga in som administratör i systemet (G) ✅ 
 
-9. Inga Lösenord får sparas i klartext i databasen (G) ✅ ❌
+9. Inga Lösenord får sparas i klartext i databasen (G) ✅ 
 
 10. En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen (G) ✅ ❌
 
@@ -39,13 +43,13 @@ Kravspecifikation på projektet:
 
 12. Administratörer ska kunna se en lista på alla gjorda beställningar (G) ✅ ❌
 
-13. Sidans produkter ska delas upp i kategorier, en produkt ska tillhöra minst en kategori, men kan tillhöra flera (G) ✅ ❌
+13. Sidans produkter ska delas upp i kategorier, en produkt ska tillhöra minst en kategori, men kan tillhöra flera (G) ✅ 
 
-14. Från hemsidan ska man kunna se en lista över alla produkter, och man ska kunna lista bara dom produkter som tillhör en kategori (G) ✅ ❌
+14. Från hemsidan ska man kunna se en lista över alla produkter, och man ska kunna lista bara dom produkter som tillhör en kategori (G) ✅ 
 
-15. Kunder ska kunna lägga produkterna i en kundkorg, som är sparad i session på servern (G) ✅ ❌
+15. Kunder ska kunna lägga produkterna i en kundkorg, som är sparad i session på servern (G) ✅ 
 
-16. Man ska från hemsidan kunna skriva upp sig för att få butikens nyhetsbrev genom att ange sitt namn och epostadress (G) ✅ ❌
+16. Man ska från hemsidan kunna skriva upp sig för att få butikens nyhetsbrev genom att ange sitt namn och epostadress (G) ✅ 
 
 17. Administratörer ska kunna se en lista över personer som vill ha nyhetsbrevet och deras epost adresser (G) ✅ ❌
 
@@ -57,7 +61,7 @@ Kravspecifikation på projektet:
 
 21. När man gör en beställning ska Kunden också få chansen att skriva upp sig för nyhetsbrevet (VG). ✅ ❌
 
-22. Kunden måste ha ett registrerat konto för att få göra ett köp (registreringsfunktion skall finnas). Tänk på att en administratör också kan vara en kund (VG) ✅ ❌
+22. Kunden måste ha ett registrerat konto för att få göra ett köp (registreringsfunktion skall finnas). Tänk på att en administratör också kan vara en kund (VG) ✅ 
 
 23. När man är inloggad som kund ska man kunna se sina gjorda beställning och om det är skickade eller inte (VG) ✅ ❌
 
