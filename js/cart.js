@@ -390,6 +390,7 @@ async function addItem(cartItem) {
         if(cartItem.product.productId == myCart.product.productId) {
             
             myCart.quantity++
+            
         }
             
         const addQty = "updateCart"

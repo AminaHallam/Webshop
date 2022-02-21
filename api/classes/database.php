@@ -49,14 +49,14 @@ class Database {
 
     public function freeQuery($sqlQuery, $createInstanceFunction) {
         
-      /*   error_log(serialize($sqlQuery));
-        error_log(serialize($createInstanceFunction)); */
+      //   error_log(serialize($sqlQuery));
+        
 
         $query = $this->db->prepare($sqlQuery);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction);
         
-       /*  error_log(serialize($result)); */
+        error_log(serialize($result));
         
         return $result;
     }

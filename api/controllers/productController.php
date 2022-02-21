@@ -71,19 +71,14 @@ class ProductController extends MainController {
 
 
 /* 
-
     public function add($product) {
         try {
-
             $producToAdd = createProduct(null, $product->name, $product->price, $product->description);
             return $this->database->insert($producToAdd);
-
         } catch(Exception $e) {
             throw new Exception("The product is not in correct format...", 500);
         }
     }
-
-
     public function delete($id) {
         return $this->database->delete($id);
     } */

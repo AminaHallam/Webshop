@@ -24,7 +24,9 @@ try {
             
             echo(json_encode($controller->getById((int)$_GET["id"])));
             exit;
-        }
+        } 
+
+        
     }
         
 
