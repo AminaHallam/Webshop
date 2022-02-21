@@ -28,7 +28,7 @@ class ProductController extends MainController {
 
     
 
-    // Uppdaterar unitsInStock på produkt (add/delete)
+    // Uppdaterar unitsInStock på produkt vid orderläggning (add/delete)
     public function update($products, $direction) {
         
         for ($i=0; $i < count($products); $i++) { 
@@ -45,6 +45,17 @@ class ProductController extends MainController {
 
         return $updatedProducts;
 
+    }
+
+
+    // Uppdaterar unitsInStock på produkt (add/delete)
+    public function updateProduct($productId, $direction, $value) {
+
+        $query = "UPDATE product
+        SET UnitsInStock = UnitsInStock ".$direction.$value.
+        " WHERE Id = ".$productId.";";
+
+        return $this->database->update($query); 
     }
         
 

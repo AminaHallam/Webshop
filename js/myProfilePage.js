@@ -1,17 +1,15 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements, getAllProducts} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, showCorrectLayout, logOut, printNrOfElements, getAllProducts} from './../helperFunctions/fetchHelper.js'
 
 
 async function onLoad() {
     await showCorrectLayout();
     await printNrOfElements();
-    await whichPageToDisplay()
-    
+    await whichPageToDisplay();
+    await getAllCategories();
 }
 
-getAllCategories();
-verifyAdmin();
-getUser();
+
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut);
@@ -93,15 +91,45 @@ async function getUnitsInStock() {
 }
 
 
-// Update product
-document.querySelector(".updateProductButton").addEventListener("click", updateUnitsInStock)
 
-async function updateUnitsInStock() {
+
+
+
+// Update product buttons/links
+document.querySelector(".updateProductButton").addEventListener("click", setUnitsInStock)
+document.querySelector(".deleteQtyProductButton").addEventListener("click", () => {
+    let deleteUnits =  document.querySelector(".deleteUnits").value
+    updateUnitsInStock("-", deleteUnits)})
+
+document.querySelector(".addQtyProductButton").addEventListener("click", () => {
+    let addUnits =  document.querySelector(".addUnits").value
+    updateUnitsInStock("+", addUnits)})
+
+
+
+
+// Collapse toggle
+document.querySelector(".toggle").addEventListener("click", () => {
+    let updateProduct = document.querySelector(".updateProduct")
+    updateProduct.classList.toggle("menu")
+})
+document.querySelector(".toggle2").addEventListener("click", () => {
+    let addQtyProduct = document.querySelector(".addQtyProduct")
+    addQtyProduct.classList.toggle("menu")
+})
+document.querySelector(".toggle3").addEventListener("click", () => {
+    let deleteQtyProduct = document.querySelector(".deleteQtyProduct")
+    deleteQtyProduct.classList.toggle("menu")
+})
+
+
+// Set quantity on product
+async function setUnitsInStock() {
 
     let updateUnits =  document.querySelector(".updateUnits").value
     let productId =  document.querySelector(".productId").value
 
-    let action = "updateUnitsInStock"
+    let action = "setUnitsInStock"
 
     let myData = new FormData()
     myData.append("action", action)
@@ -119,6 +147,35 @@ async function updateUnitsInStock() {
         alert("Product not updated")
     }
 }
+
+
+
+// Update quantity on product (add/Delete)
+async function updateUnitsInStock(direction, value) {
+
+    let productId =  document.querySelector(".productId").value
+
+    let body = new FormData()
+    body.append("action", "updateUnitsInStock")
+    body.append("direction", direction)
+    body.append("value", value)
+    body.append("productId", productId)
+
+    let result = await makeRequest("./../api/receivers/productReceiver.php", "POST", body)
+
+    console.log(result)
+
+    if(result) {
+        alert("Sucess!")
+
+        location.reload();
+
+    } else {
+        alert("Product not updated")
+    }
+}
+
+
 
 
 window.addEventListener('load', onLoad)

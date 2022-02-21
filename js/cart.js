@@ -1,20 +1,20 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
 
 
 async function onLoad() {
-    accountCheck();
+    await accountCheck();
     await showCorrectLayout(); 
     await printNrOfElements(); 
     await renderCart() 
     await getUser();
     await getCourrier()
-
+    await getAllCategories();
 }
 
-verifyAdmin();
-getAllCategories();
-getUser();
+
+
+
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)
