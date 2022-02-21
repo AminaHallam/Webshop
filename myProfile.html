@@ -34,7 +34,7 @@
                 <li><a href="#contact">ABOUT</a></li>
                 <li><a href="#socialMedia">CONTACT</a></li>
             </div>
-            <div class="qty"></div><!-- New -->
+            <div class="qty"></div>
             <div class="icons">
                 <li><a class="loginIcon" href="./login.html"><img src="/assets/icons/account.png" alt="account" id='accountIcon'></a></li>
                 <li><a href="./cartPage.html"><img src="/assets/icons/shop-bag.png" alt="cartIcon" id='cartIcon'></a></li>
@@ -70,10 +70,20 @@
                         <input class="productId" type="number" placeholder="Product Id">
                         <button class="getProductButton">Select product</button>
                     </div>
-                    <label>Please enter new value</label>
+                    <label class="toggle">Set quantity <strong>+</strong></label>
                     <div class="updateProduct">
                         <input class="updateUnits" type="number" placeholder="New value">
-                        <button class="updateProductButton">Update quantity on selected product</button>
+                        <button class="updateProductButton">Set quantity on selected product</button>
+                    </div>
+                    <label class="toggle2">Add quantity <strong>+</strong></label>
+                    <div class="addQtyProduct">
+                        <input class="addUnits" type="number" placeholder="Value">
+                        <button class="addQtyProductButton">Add quantity to selected product</button>
+                    </div>
+                    <label class="toggle3">Delete quantity <strong>+</strong></label>
+                    <div class="deleteQtyProduct">
+                        <input class="deleteUnits" type="number" placeholder="Value">
+                        <button class="deleteQtyProductButton">Delete quantity from selected product</button>
                     </div>
                 </div>
 

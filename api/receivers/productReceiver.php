@@ -30,7 +30,7 @@ try {
 
     } else if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        if($_POST["action"] == "updateUnitsInStock") {
+        if($_POST["action"] == "setUnitsInStock") {
 
             $controller = new UserController();
             $checkAdmin = ($controller->verifyAdmin());
@@ -53,6 +53,36 @@ try {
                 exit;
             }         
 
+        } else if($_POST["action"] == "updateUnitsInStock") {
+
+            $controller = new UserController();
+            $checkAdmin = ($controller->verifyAdmin());
+
+            if($checkAdmin) {
+
+                if(isset($_POST["value"]) && isset($_POST["productId"])) {
+
+                    if(isset($_POST["direction"])) {
+
+                        $controller = new ProductController();
+                        echo (json_encode($controller->updateProduct(json_decode($_POST["productId"]), $_POST["direction"], json_decode($_POST["value"]))));
+                        exit;
+
+                    } else {
+                        throw new Exception("Missing direction", 401);
+                        exit;
+                    }
+                    
+                } else {
+                    throw new Exception("Missing ID or value", 401);
+                    exit;
+                }
+
+            } else {
+                echo json_encode(false);
+                exit;
+            }   
+        
         }
         
 

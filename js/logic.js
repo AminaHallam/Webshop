@@ -60,7 +60,7 @@ async function addSubscriptionNews(e) {
 
 
     }else{
-
+        // Mix av GET och POST  
         let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "POST", body)
         console.log(checkSubscription)
         
