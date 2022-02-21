@@ -4,6 +4,8 @@ try {
 
     session_start();
 
+    include_once("./../controllers/productController.php");
+
     if($_SERVER["REQUEST_METHOD"] == "GET") {
 
         if(isset($_GET["action"]) == "getCart") {
@@ -26,9 +28,28 @@ try {
 
             if(isset($_POST["cart"])) {
 
-                $cart = $_POST["cart"];
-                
-                $_SESSION["myCart"] = $cart;
+                $cart = json_decode($_POST["cart"]);
+
+                for ($i=0; $i < count($cart) ; $i++) { 
+
+                    $item = $cart[$i];
+
+                    $controller = new ProductController();
+                    $productDb = ($controller->getById($item->product->Id));
+
+                    if($item->quantity > $productDb->unitsInStock) {
+                        throw new Exception("Can't take more qty than we have available in stock", 400);
+                        exit;
+                    }
+
+
+                    if(!$item->product->unitPrice == $productDb->unitPrice) {
+                        throw new Exception("Price doesnt match with database", 400);
+                        exit;
+                    }
+                }
+
+                $_SESSION["myCart"] = json_encode($cart); 
                 
                 exit; 
             } 

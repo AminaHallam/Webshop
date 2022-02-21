@@ -36,7 +36,6 @@ async function accountCheck() {
 
         return
     }
-
 }
 
 
@@ -52,8 +51,6 @@ async function getCart() {
     } else { 
         cart = []
     }
-
-    console.log(cart)
 
     return cart
 }
@@ -226,6 +223,9 @@ async function renderCart() {
     newsButton.setAttribute("value", userInfo.Id)
     
     /* Total amount and button */
+
+    let checkOutContainer = document.createElement("div")
+    checkOutContainer.classList.add("checkOutContainer")
     let totalAmount = document.createElement("p")
     totalAmount.classList.add("totalAmount")
     totalAmount.innerHTML = "Total amount: " +  totalSum + " €"
@@ -256,9 +256,10 @@ async function renderCart() {
     })
 
     main.append(summaryContainer)
-    summaryContainer.append(summaryTitle, deliveryAddress, courrierContainer, totalAmount, orderButton)
+    summaryContainer.append(summaryTitle, deliveryAddress, courrierContainer, checkOutContainer)
     courrierContainer.append(courrierTitle, courrierForm, newsButton, newsName)
     deliveryAddress.append(addressTitle, firstName, lastName, street, CO, zipCode, city, country)
+    checkOutContainer.append(totalAmount, orderButton)
 
 }
 
@@ -291,6 +292,12 @@ async function addSubscriber() {
 
 
 
+// kolla om W och L redan gjort denna funktion
+async function getSubList() {
+
+// kolla om inloggad user är uppskriven på nyhetsbrev eller inte. Lägg in denna funktion i render cart sedan för att ta bort checkboxen när någon redan är subscribad.
+
+}
 
 
 
@@ -315,12 +322,12 @@ async function createOrder(courrierId, userId, cart) {
     console.log(resultOrder)
 
     if(resultOrder) {
-        alert("Congratulation! Your order is placed")
+        alert("Congratulations! Your order is placed")
         location.reload();
         return
     }
 
-    alert("Something didn't go right. Your order is not placed");
+    alert("Something went wrong. Your order is not placed. Contact administrator");
 
 }
 
@@ -348,7 +355,7 @@ async function deleteItem(cartItem) {
 
         let myCart = cart[i]
 
-        if (cartItem.product.productId == myCart.product.productId) {
+        if (cartItem.product.Id == myCart.product.Id) {
             
             if(myCart.quantity == 1) {
                 cart.splice(i, 1);
@@ -389,7 +396,7 @@ async function addItem(cartItem) {
 
         let myCart = cart[i]
 
-        if(cartItem.product.productId == myCart.product.productId) {
+        if(cartItem.product.Id == myCart.product.Id) {
             
             myCart.quantity++
         }

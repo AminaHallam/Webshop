@@ -39,7 +39,6 @@ class OrderController extends MainController {
         $productController = new ProductController();
         $products = $productController->getProductsFromOrder($id);
         $order->products = $products;
-        /* error_log(serialize($order)); */
 
         return $order;
 
@@ -67,7 +66,7 @@ class OrderController extends MainController {
     }
 
 
-    // Här skall jag radera unitsinstock på de produkter som lades till på ordrarna. 
+   
     public function delete() {
 
 

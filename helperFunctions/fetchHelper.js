@@ -23,7 +23,7 @@ export async function makeRequest(url, method, body) {
 export async function verifyAdmin() {
     const action = 'verifyAdmin'; 
     let verifyA = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
-    console.log(verifyA);
+
     return verifyA    
 }
 
@@ -121,7 +121,7 @@ export async function logOut(){
 export async function getAllOrders() {
     const action = "getAll";
     let allOrders = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET")
-    console.log(allOrders); 
+    console.log(allOrders);  // Return?
 }
 
 
@@ -129,14 +129,14 @@ export async function getAllOrders() {
 export async function getOrderById(idToGet) {
     const action = "getById";
     let specificOrder = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${idToGet}`, "GET")
-    console.log(specificOrder) 
+    console.log(specificOrder)  // Return?
 }
 
 // Hämtar ordrar baserat på statusid eller userid 
 export async function getOrdersByOtherId(idToGet, type) {
     const action = "getByOtherId";
     let specificOther = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${idToGet}&type=${type}`, "GET")
-    console.log(specificOther) 
+    console.log(specificOther)  // Return?
 }
 
 
@@ -152,7 +152,9 @@ export async function getAllProducts() {
     const action = "getAll";
 
     let allProducts = await makeRequest(`./api/receivers/productReceiver.php?action=${action}`, "GET")
-    console.log(allProducts)
+
+    return allProducts
+    
 }
 
 
@@ -160,16 +162,17 @@ export async function getAllProducts() {
 export async function getProductFromId(id) {
 const action = 'getById';  
 
-let product = product.productId; 
+let product = product.Id; 
+
 for (let index = 0; index < product.length; index++) {
     const element = product[index];
-    console.log(element)
+    
     
 }
 
 let specificProduct = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}&id=${id}`, "GET")
 
-console.log(specificProduct)
+// Return?
 
 }
      
@@ -192,8 +195,6 @@ export async function printNrOfElements() {
     } else { 
         cart = []
     }
-
-    console.log(cart)
 
     let totalSum = cart.reduce((sum,item) => sum + item.quantity, 0)
     

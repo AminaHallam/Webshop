@@ -23,6 +23,7 @@ class CategoryController extends MainController {
         $category = $this->database->fetchById($id, $this->createCategory);    
         $productController = new ProductController();
         $products = $productController->getProductsFromCategory($id); 
+
         $category->products = $products;  
 
         return $category;

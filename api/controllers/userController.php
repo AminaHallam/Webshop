@@ -14,7 +14,8 @@ class UserController extends MainController {
         parent::__construct("User", "User");
     }
 
-
+    
+    // Kollar om mejlen redan är registrerad i databasen
     public function checkEmail($user) {
         $query = "SELECT *
         FROM user

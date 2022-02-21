@@ -63,6 +63,7 @@ async function renderProduct(idToGet) {
     image.classList.add('productImage')
     image.src = "./assets/" + product.image
     image.addEventListener("click", () => {productPage(product)})
+    
 
     let addToCartButton = document.createElement('button'); 
     addToCartButton.classList.add('addToCart')
@@ -119,7 +120,7 @@ async function addToCart(product) {
     /* Kollar upp om produkten har lagts till tidigare, samt jämför antalet vi lagt till på produkten i carten och unitsinstock på produkten i databasen. */
     let index = cart.findIndex((cartItem) => { 
 
-        if(cartItem.product.productId == product.productId) {
+        if(cartItem.product.Id == product.Id) {
             
             if(cartItem.quantity >= product.unitsInStock) {
                 alert("Sorry, we do not have more of this product available for reservation")
