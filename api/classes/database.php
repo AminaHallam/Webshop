@@ -46,14 +46,29 @@ class Database {
 
     public function freeQuery($sqlQuery, $createInstanceFunction) {
         
-
         $query = $this->db->prepare($sqlQuery);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction);
 
-        
         return $result;
+
     }
+
+
+    public function update($sqlQuery) {
+
+        $query = $this->db->prepare($sqlQuery);
+        $result = $query->execute();
+
+        if($result) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
 
     public function insert($entity) {
        
@@ -81,15 +96,19 @@ class Database {
 
         
         $status = $query->execute($values);
+        $lastId = $this->db->lastInsertId();
 
         if(!$status) {
             
             return false; 
             
-        } else {
+        } else if($lastId > 0) {
             
-            return $lastId = $this->db->lastInsertId();
+            return $lastId;
 
+        } else {
+
+            return "Insert into ".$this->selectedTable. " was a success if no created Id was expected!";
         }
 
 

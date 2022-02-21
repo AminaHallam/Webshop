@@ -81,7 +81,7 @@ async function renderProducts(list){
 
 export function productPage(product) {
 
-    let productId = product.productId
+    let productId = product.Id
 
     window.location.href = "productPage.html?id=" + productId; 
 

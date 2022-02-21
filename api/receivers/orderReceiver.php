@@ -64,12 +64,13 @@ try {
             if($_SESSION["inloggedUser"]) {
 
                 
-                if(!$_POST["products"] == $_SESSION["myCart"]) {
+                if(!$_POST["products"] == $_SESSION["myCart"]) { // Onödig?
                     throw new Exception("List in SESSION doesn´t match with client", 401);
                     exit;
                 }
                 
 
+                // Checkar så att quantity inte är mindre än 0. (Fundera på denna igen) // checken görs mot products i databasen innan produkten läggs till i session. Göra samma här? kolla cartReceiver
                 $products = json_decode($_POST["products"]);
 
                 for ($i=0; $i < count($products); $i++) { 
@@ -86,17 +87,28 @@ try {
                 // Skapar order
                 $controller = new OrderController();
                 $lastInsertedId = json_encode($controller->add(json_decode($_POST["createOrder"])));
-                /*     error_log(serialize("Tillbaka på skapa order".$lastInsertedId)); */
+
+                 if(!$lastInsertedId) {
+                    echo json_encode(false);
+                } 
 
                 // Lägger till produkter på order
                 $controller2 = new OrderDetailsController();
                 $addProducts = json_encode($controller2->addProducts(json_decode($_POST["products"]), json_decode($lastInsertedId)));
-                /* error_log(serialize("Tillbaka på lägg till produkter".$addProducts)); */
+
+                if(!$addProducts) {
+                    throw new Exception("Products was not placed on order", 500);
+                    exit;
+                } 
 
                 // Uppdaterar unitsInStock på produkt
                 $controller3 = new ProductController();
                 $updateUnitsInstock = json_encode($controller3->update(json_decode($_POST["products"]), "-"));
-               /*  error_log(serialize("Tillbaka på uppdatera saldo på produkt".$updateUnitsInstock)); */
+
+                if(!$updateUnitsInstock) {
+                    throw new Exception("Updating qty in database failed", 500);
+                    exit;
+                }
 
             
                 unset($_SESSION["myCart"]);
@@ -104,10 +116,12 @@ try {
                 echo json_encode(true);
                 exit; 
 
-            } 
+            } else {
+                echo json_encode(false);
+                exit;
+            }
 
-            throw new Exception("You have to be logged in to place an order", 401);
-            exit;
+            
         } 
     }   
 

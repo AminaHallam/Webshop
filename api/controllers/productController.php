@@ -26,7 +26,9 @@ class ProductController extends MainController {
 
     }
 
-    // Uppdaterar unitsInStock på produkt
+    
+
+    // Uppdaterar unitsInStock på produkt (add/delete)
     public function update($products, $direction) {
         
         for ($i=0; $i < count($products); $i++) { 
@@ -35,17 +37,27 @@ class ProductController extends MainController {
 
            $query = "UPDATE product
            SET UnitsInStock = UnitsInStock ".$direction.$product->quantity.
-           " WHERE Id = ".$product->product->productId.";";
+           " WHERE Id = ".$product->product->Id.";";
 
-           $updatedProducts = $this->database->freeQuery($query, $this->createFunction); 
-
-           /* error_log(serialize($updatedProducts)); */
+           $updatedProducts = $this->database->update($query); 
 
         }
+
+        return $updatedProducts;
 
     }
         
 
+    // Sätter ett nytt värde på unitsInStock (set)
+    public function inventoryProduct($newValue, $productId) {
+       
+       $query = "UPDATE product p
+       SET p.UnitsInStock = ".$newValue.
+       " WHERE p.Id = ".$productId.";";
+       
+        return $this->database->update($query); 
+
+    }
 
 
 

@@ -42,11 +42,12 @@ class OrderDetailsController extends MainController {
                 
                 $product = $products[$i];
 
-                $createOrderDetails = createOrderDetails($orderId, $product->product->productId, $product->quantity);  
+                $createOrderDetails = createOrderDetails($orderId, $product->product->Id, $product->quantity);  
                 
-                $addedProducts = $this->database->insert($createOrderDetails); 
+                $addedProducts = $this->database->insert($createOrderDetails);    
+        }
 
-        };
+        return $addedProducts;
 
     }
 
