@@ -17,7 +17,7 @@ async function onLoad() {
 
 
 verifyAdmin();
-getAllCategories();
+
 getUser();
 
 document.getElementById("menu").addEventListener("click", openMenu);

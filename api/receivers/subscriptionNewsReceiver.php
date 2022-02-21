@@ -3,6 +3,7 @@
 try {
 
 include_once("./../controllers/subscriptionNewsController.php"); 
+//include_once("./../controllers/userController.php");
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
         
@@ -17,6 +18,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         }
 
+    }
+    }else if($_SERVER["REQUEST_METHOD"] == "GET") {
+            if($_GET["action"] == "getAllLoggedInSubscribers"){
+            
+            $controller = new SubscriptionNewsController(); 
+            error_log(serialize('hej'));
+    
+            echo(json_encode($controller->getAllLoggedInSubscribers()));
+           
+            
+    
+            exit; 
+    }
+
     }else{
 
         echo json_encode('The information is not correct');
@@ -24,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         };
         
         
-};   
+  
 
 } catch(Exception $err) {
     echo json_encode(array('Message' => $err->getMessage(), "Status" => $err->getCode()));

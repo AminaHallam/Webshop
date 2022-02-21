@@ -14,12 +14,12 @@ async function onLoad() {
     productPage(url); 
 
     renderProduct(url); 
-
+    getAllCategories(url);
 }
 
 
 verifyAdmin();
-getAllCategories();
+
 getUser();
 
 
@@ -45,8 +45,8 @@ async function renderProduct(idToGet) {
 
     let main = document.getElementsByTagName("main")[0]; 
        
-    let productContainer = document.createElement("div")
-    productContainer.classList.add("productContainer")
+    let productCont = document.createElement("div")
+    productCont.classList.add("productCont")
     let title = document.createElement("h2")
     title.innerHTML = product.name;
     let productInfo = document.createElement('div');
@@ -78,10 +78,10 @@ async function renderProduct(idToGet) {
     let cartButton = document.createElement('button')
     cartButton.classList.add('cartButton')
     cartButton.innerText = 'Continue to checkout'
-    main.append(productContainer, productInfo, cartElement)
+    main.append(productCont, productInfo, cartElement)
     cartElement.append(cartButton)
     productInfo.append(title, description, unitPrice, addToCartButton, /*returnToProductPage*/)
-    productContainer.append(image)
+    productCont.append(image)
 
 
 }

@@ -7,6 +7,7 @@ async function onLoad() {
     await getUser();
     await showCorrectLayout();
     await printNrOfElements();
+    await getAllLoggedInSubscribers();
 }
 
 
@@ -80,6 +81,17 @@ async function addSubscriptionNews(e) {
 }
 
 
+async function getAllLoggedInSubscribers(){
+    
+    const action = "getAllLoggedInSubscribers"; 
+
+
+    let allSubscribers = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "GET")
+    console.log(allSubscribers)
+
+}
+
+
 
 /*  Hämtar alla produkter som tillhör en specifik kategori
 async function getCategoryFromId(idToGet) {
@@ -92,6 +104,37 @@ async function getCategoryFromId(idToGet) {
     }
 }
  */
+
+
+const slider = document.querySelector('.gallery');
+let isDown = false;
+let startX;
+let scrollLeft;
+
+slider.addEventListener('mousedown', e => {
+  isDown = true;
+  slider.classList.add('active');
+  startX = e.pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+});
+slider.addEventListener('mouseleave', _ => {
+  isDown = false;
+  slider.classList.remove('active');
+});
+slider.addEventListener('mouseup', _ => {
+  isDown = false;
+  slider.classList.remove('active');
+});
+slider.addEventListener('mousemove', e => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - slider.offsetLeft;
+  const SCROLL_SPEED = 3;
+  const walk = (x - startX) * SCROLL_SPEED;
+  slider.scrollLeft = scrollLeft - walk;
+});
+
+
 
 
 window.addEventListener('load', onLoad)

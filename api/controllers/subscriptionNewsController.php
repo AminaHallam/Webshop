@@ -9,13 +9,51 @@ include_once("../controllers/mainController.php");
 class SubscriptionNewsController extends MainController {
 
     private $createSubscriptionNews = "createSubscriptionNews"; 
+    
 
     function __construct() {
         parent::__construct("SubscriptionNews", "SubscriptionNews"); 
     }
 
+
+    
+    public function getAllLoggedInSubscribers() {
+        $query = 
+        "SELECT u.id, sn.userid, u.FirstName, u.Email 
+        FROM `subscriptionnews` sn 
+        JOIN `user` u ON u.Id = sn.UserID;";
+
+        $query2 =
+        "SELECT *
+        FROM `subscriptionnews`
+        WHERE subscriptionnews.UserID IS NULL;"; 
+
+        
+   
+        $subscriberLoggedIn = $this->database->freeQuery($query, $this->createSubscriptionNews);
+        $subscriberGuest = $this->database->freeQuery($query2, $this->createSubscriptionNews);
+
+        error_log(serialize($subscriberLoggedIn));
+        //error_log(serialize($subscriberGuest));
+        
+        return $allSubscribers = array_merge($subscriberLoggedIn, $subscriberGuest);
+
+        //return $allSubscribers; 
+        //error_log(serialize($allSubscribers));
+
+       
+    }
+
+
+
+
+
+
+
     public function getAll() { 
-        /* return $this->database->fetchAll($this->createFunction); */  
+       
+        
+        return $this->database->fetchAll($this->$createSubscriptionNews); 
         // hämta datan från användare med id, gör en join. 
 
     }
@@ -50,8 +88,11 @@ class SubscriptionNewsController extends MainController {
     }
 
 
+
+
 }
- 
+
+
 
 
 ?> 
