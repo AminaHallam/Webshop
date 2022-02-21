@@ -103,6 +103,7 @@ async function renderProduct(idToGet) {
 
 
 
+
 // Lägger till produkten i kundvagnen (SESSION)
 async function addToCart(product) {
     
@@ -156,9 +157,7 @@ async function addToCart(product) {
     body.append("action", push)
     body.append("cart", JSON.stringify(cart))
 
-
     await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
-
 
     printNrOfElements();
 
