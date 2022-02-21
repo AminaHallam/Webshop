@@ -107,6 +107,9 @@ async function getCategoryFromId(idToGet) {
  */
 
 
+
+/* Kolla om man fortsätta på funktionen med att slida vidare  */
+
 const slider = document.querySelector('.gallery');
 let isDown = false;
 let startX;
