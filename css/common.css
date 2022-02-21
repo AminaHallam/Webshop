@@ -83,8 +83,6 @@ header {
     margin-right: 80px;
 }
 
-
- 
 .fas {
     position: absolute;
     margin-left: 6px;
@@ -160,6 +158,11 @@ li, a {
 }
 
 
+/* .fa-brands {
+    color: black;
+} */
+
+
 .qty {
     display: flex;
     position: absolute;
@@ -203,18 +206,32 @@ footer {
     left: 0px;
     right: 0px;
     height: 150px;
-     
 }
 
 .footerDiv {
     position: relative; 
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    text-align: left;
-    align-items: center;
-    
+    justify-content: space-around; 
+    align-items: center;    
 }
+
+.logoFooter img {
+    max-width: 200px;
+    margin-right: 40px;
+    margin-top: 20px;
+}
+
+.contactIcon {
+    padding-left: 0px;
+    padding-top: 20px;
+}
+
+.copy {
+    font-size: 14px;
+    text-align: center;
+}
+
 
 .none {
     display: none;

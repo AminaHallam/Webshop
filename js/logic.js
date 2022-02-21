@@ -36,6 +36,7 @@ async function addSubscriptionNews(e) {
         Email: registerEmail,
     }
     
+    // Mix av GET och POST
     var body = new FormData()
     body.append("action", action)
     body.append("subscriber", JSON.stringify(subscriber))
@@ -60,7 +61,7 @@ async function addSubscriptionNews(e) {
 
 
     }else{
-
+        // Mix av GET och POST  
         let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "POST", body)
         console.log(checkSubscription)
         

@@ -24,12 +24,7 @@ class CourrierController extends MainController {
 
 
     public function getById($id) {
-        /* $category = $this->database->fetchById($id, $this->createCourrier);    
-        $productController = new ProductController();
-        $products = $productController->getProductsFromCategory($id); 
-        $category->products = $products;  
 
-        return $category; */
     }
 
 }
