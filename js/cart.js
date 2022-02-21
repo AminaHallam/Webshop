@@ -1,20 +1,20 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
 
 
 async function onLoad() {
-    accountCheck();
+    await accountCheck();
     await showCorrectLayout(); 
     await printNrOfElements(); 
     await renderCart() 
     await getUser();
     await getCourrier()
-
+    await getAllCategories();
 }
 
-verifyAdmin();
-getAllCategories();
-getUser();
+
+
+
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)
@@ -36,7 +36,6 @@ async function accountCheck() {
 
         return
     }
-
 }
 
 
@@ -149,10 +148,10 @@ async function renderCart() {
         priceContainer.append(ajustQty, totalPrice)
         ajustQty.append(deleteQty, unitQty, addQty)
 
-
-        
-
     }
+
+
+
 
 
 
@@ -198,6 +197,7 @@ async function renderCart() {
     let courrierForm = document.createElement("form")
     
     for (let i = 0; i < courriers.length; i++) {
+        
         const courrierCompany = courriers[i];
 
         let radioButton = document.createElement("input")
@@ -220,9 +220,12 @@ async function renderCart() {
     let newsButton = document.createElement("input")
     newsButton.classList.add("newsButton")
     newsButton.setAttribute("type", "checkbox")
-    newsButton.setAttribute("value", userInfo.id)
+    newsButton.setAttribute("value", userInfo.Id)
     
     /* Total amount and button */
+
+    let checkOutContainer = document.createElement("div")
+    checkOutContainer.classList.add("checkOutContainer")
     let totalAmount = document.createElement("p")
     totalAmount.classList.add("totalAmount")
     totalAmount.innerHTML = "Total amount: " +  totalSum + " €"
@@ -243,82 +246,88 @@ async function renderCart() {
 
 
         if(document.querySelector('.newsButton:checked')) {
-            
-            // Lägg till användaren i subscription news här
-
-            let checkedNews = document.querySelector('.newsButton:checked').value;
-            console.log(checkedNews) // ID från användaren
+            addSubscriber();
         }
 
         let checkCourrier = document.querySelector('input[name="selectCourrier"]:checked').value
 
-        createOrder(checkCourrier, userInfo.id, cart);
-
-        /* console.log(checkCourrier)  */// Får ID't fraktbolaget
-       /*  console.log(userInfo.id) */ // ID från användaren
-        /* console.log(cart)  */  // Alla produkter i carten 
+        createOrder(checkCourrier, userInfo.Id, cart);
+  
     })
 
     main.append(summaryContainer)
-    summaryContainer.append(summaryTitle, deliveryAddress, courrierContainer, totalAmount, orderButton)
+    summaryContainer.append(summaryTitle, deliveryAddress, courrierContainer, checkOutContainer)
     courrierContainer.append(courrierTitle, courrierForm, newsButton, newsName)
     deliveryAddress.append(addressTitle, firstName, lastName, street, CO, zipCode, city, country)
-
-
-
-
+    checkOutContainer.append(totalAmount, orderButton)
 
 }
 
 
+
+
+
+async function addSubscriber() {
+
+    let addSub = "addSubscriptionNews"
+
+    let body = new FormData();
+    body.append("action", addSub);
+
+    let subscribeUser = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
+    
+    console.log(subscribeUser)
+
+    if(!subscribeUser) {
+
+        alert("You are already a subscriber")
+
+     } else { 
+
+         alert("Welcome our new subscriber")
+
+     }
+
+}
+
+
+
+// kolla om W och L redan gjort denna funktion
+async function getSubList() {
+
+// kolla om inloggad user är uppskriven på nyhetsbrev eller inte. Lägg in denna funktion i render cart sedan för att ta bort checkboxen när någon redan är subscribad.
+
+}
+
+
+
+
+
 async function createOrder(courrierId, userId, cart) {
-
-/*     if(cart == 0) {
-        alert("Your cart is empty")
-        return
-    }
-
-    if(!document.querySelector('input[name="selectCourrier"]:checked')) {
-        alert("Please choose a courrier")
-        return
-    }
-
-
-    if(document.querySelector('.newsButton:checked')) {
-        
-        // Lägg till användaren i subscription news här
-
-        let checkedNews = document.querySelector('.newsButton:checked').value;
-        console.log(checkedNews) // ID från användaren
-    }
-
-    let checkCourrier = document.querySelector('input[name="selectCourrier"]:checked').value
- */
 
     let createOrder = {
         StatusId: "REG",
         UserId: userId,
-        CourrierId: courrierId,
-        RegisterDate: "CURRENT_TIMESTAMP"
+        CourrierId: courrierId
     }
 
-    console.log(createOrder)
 
     let myData = new FormData();
     myData.append("endpoint", "createOrder");
-    myData.append("createOrder", JSON.stringify(createOrder))
-
+    myData.append("createOrder", JSON.stringify(createOrder));
+    myData.append("products", JSON.stringify(cart));
 
     let resultOrder = await makeRequest("./../api/receivers/orderReceiver.php", "POST", myData)
     
     console.log(resultOrder)
 
+    if(resultOrder) {
+        alert("Congratulations! Your order is placed")
+        location.reload();
+        return
+    }
 
-
-    // Skapa en order här med info nedan
-
-
-
+    alert("Something went wrong. Your order is not placed. Contact administrator");
 
 }
 
@@ -346,7 +355,7 @@ async function deleteItem(cartItem) {
 
         let myCart = cart[i]
 
-        if (cartItem.product.productId == myCart.product.productId) {
+        if (cartItem.product.Id == myCart.product.Id) {
             
             if(myCart.quantity == 1) {
                 cart.splice(i, 1);
@@ -387,7 +396,7 @@ async function addItem(cartItem) {
 
         let myCart = cart[i]
 
-        if(cartItem.product.productId == myCart.product.productId) {
+        if(cartItem.product.Id == myCart.product.Id) {
             
             myCart.quantity++
             

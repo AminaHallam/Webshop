@@ -24,7 +24,7 @@ export async function getAllCategories() {
         let productContainer = document.createElement("div")
         productContainer.classList.add("productContainer")
         let title = document.createElement("a")
-        title.href = 'collectionPage.html?id=' + element.categoryId
+        title.href = 'collectionPage.html?id=' + element.Id
         title.innerHTML = element.categoryName; 
         ul.append(productContainer)
         productContainer.append(title)
@@ -44,13 +44,13 @@ export async function getAllCategoriesAsList() {
     
     for (let i = 0; i < allCategories.length; i++) {
         const element = allCategories[i];
-        let categories = element.categoryId; 
+        let categories = element.Id; 
         return categories; 
     }
 
 }
 
-async function getCategoryFromId(idToGet) {
+export async function getCategoryFromId(idToGet) {
 
     const action = "getById";
     let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET")

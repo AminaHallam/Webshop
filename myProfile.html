@@ -7,6 +7,7 @@
     <script type="module" src="./js/myProfilePage.js" defer></script>
 
     <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/myProfile.css">
 
     <!-- Fonts -->
     <script src="https://morgan3d.github.io/include.js/include.min.js"></script>
@@ -33,7 +34,7 @@
                 <li><a href="#contact">ABOUT</a></li>
                 <li><a href="#socialMedia">CONTACT</a></li>
             </div>
-            <div class="qty"></div><!-- New -->
+            <div class="qty"></div>
             <div class="icons">
                 <li><a class="loginIcon" href="./login.html"><img src="/assets/icons/account.png" alt="account" id='accountIcon'></a></li>
                 <li><a href="./cartPage.html"><img src="/assets/icons/shop-bag.png" alt="cartIcon" id='cartIcon'></a></li>
@@ -47,7 +48,92 @@
     </header>
 
     <main>
-        
+        <div class="adminLayout">
+
+            <h1>Orders</h1>
+            <div class="orders">
+                <div class="overviewOrders">
+                    <h2>Overview</h2>
+                </div>
+            </div>
+
+
+
+
+            <h1>Product</h1>
+            <div class="product">
+
+                <div class="updateQty">
+                    <h2>Update quantity</h2>
+                    <label>Which product do you want to update?</label>
+                    <div class="getProduct">
+                        <input class="productId" type="number" placeholder="Product Id">
+                        <button class="getProductButton">Select product</button>
+                    </div>
+                    <label class="toggle">Set quantity <strong>+</strong></label>
+                    <div class="updateProduct">
+                        <input class="updateUnits" type="number" placeholder="New value">
+                        <button class="updateProductButton">Set quantity on selected product</button>
+                    </div>
+                    <label class="toggle2">Add quantity <strong>+</strong></label>
+                    <div class="addQtyProduct">
+                        <input class="addUnits" type="number" placeholder="Value">
+                        <button class="addQtyProductButton">Add quantity to selected product</button>
+                    </div>
+                    <label class="toggle3">Delete quantity <strong>+</strong></label>
+                    <div class="deleteQtyProduct">
+                        <input class="deleteUnits" type="number" placeholder="Value">
+                        <button class="deleteQtyProductButton">Delete quantity from selected product</button>
+                    </div>
+                </div>
+
+                <div class="modifyCategory">
+                    <h2>Modify category</h2>
+                    <label>Which product do you want to modify?</label>
+                    <div class="getProduct">
+                        <input class="productId" type="number" placeholder="Product Id">
+                        <button class="getProductButton">Select product</button>
+                    </div>
+                    <label>Add category - Select category you want to add</label>
+                    <div class="addCategory">
+                        <!-- SELECT - Hämta valbara kategorier -->
+                        <button class="addCategoryButton">Add category to product</button>
+                    </div>
+                    <label>Delete category - Select category you want to delete</label>
+                    <div class="deleteCategory">
+                        <!-- SELECT - Hämta categorierna som finns på produkten -->
+                        <button class="deleteCategoryButton">Delete category from product</button>
+                    </div>
+                </div>
+
+                <div class="addDeleteProduct">
+                    <h2>Add/Delete</h2>
+                    <label>Add product</label>
+                    <div class="addProduct">
+                        <button class="addProductButton">Add product</button>
+                    </div>
+                    <label>Delete product</label>
+                    <div class="deleteProduct">
+                        <button class="deleteProductButton">Delete product</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            
+
+            <h1>Newsletter and Subscribers</h1>
+            <div class="newsletter">
+                <div class="createNewsletter">
+                    <h2>Create Newsletter</h2>
+                </div>
+                <div class="subscribers">
+                    <h2>Subscribers</h2>
+                </div>
+            </div>
+        </div>
     </main>
 
 

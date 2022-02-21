@@ -7,7 +7,6 @@ include_once("./../controllers/mainController.php");
 class ProductController extends MainController {
 
     private $createFunction = "createProduct";
-    private $productDetails = "productDetails";
 
     function __construct() {
         parent::__construct("Product", "Product");
@@ -27,8 +26,49 @@ class ProductController extends MainController {
 
     }
 
+    
+
+    // Uppdaterar unitsInStock på produkt vid orderläggning (add/delete)
+    public function update($products, $direction) {
+        
+        for ($i=0; $i < count($products); $i++) { 
+                
+            $product = $products[$i];
+
+           $query = "UPDATE product
+           SET UnitsInStock = UnitsInStock ".$direction.$product->quantity.
+           " WHERE Id = ".$product->product->Id.";";
+
+           $updatedProducts = $this->database->update($query); 
+
+        }
+
+        return $updatedProducts;
+
+    }
 
 
+    // Uppdaterar unitsInStock på produkt (add/delete)
+    public function updateProduct($productId, $direction, $value) {
+
+        $query = "UPDATE product
+        SET UnitsInStock = UnitsInStock ".$direction.$value.
+        " WHERE Id = ".$productId.";";
+
+        return $this->database->update($query); 
+    }
+        
+
+    // Sätter ett nytt värde på unitsInStock (set)
+    public function inventoryProduct($newValue, $productId) {
+       
+       $query = "UPDATE product p
+       SET p.UnitsInStock = ".$newValue.
+       " WHERE p.Id = ".$productId.";";
+       
+        return $this->database->update($query); 
+
+    }
 
 
 
@@ -52,6 +92,10 @@ class ProductController extends MainController {
 
 
 
+
+
+
+
     /* Hämtar alla produkter som är kopplade till en specifik order - Har lite proble med attributet quantity */
     ////////* påbörjad funktion 2022-02-07. Vill få med quantity som ligger i productDetails till instansen */ //////////////////////////////////////////////////
     public function getProductsFromOrder($orderId) { 
@@ -64,26 +108,6 @@ class ProductController extends MainController {
 
         return $this->database->freeQuery($query, $this->productDetails); 
     }  
-
-////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-/* 
-    public function add($product) {
-        try {
-            $producToAdd = createProduct(null, $product->name, $product->price, $product->description);
-            return $this->database->insert($producToAdd);
-        } catch(Exception $e) {
-            throw new Exception("The product is not in correct format...", 500);
-        }
-    }
-    public function delete($id) {
-        return $this->database->delete($id);
-    } */
-
-
 
 
 

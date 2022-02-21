@@ -13,13 +13,18 @@ async function onLoad() {
     
     productPage(url); 
 
+
     renderProduct(url); 
+    getAllCategories(url);
+
+    await renderProduct(url); 
+
 
 }
 
 
 verifyAdmin();
-getAllCategories();
+
 getUser();
 
 
@@ -32,7 +37,7 @@ async function productPage(product) {
     const action = "getById";
     let specificProduct = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}&id=${product}`, "GET")
 
-    console.log(specificProduct)
+    return specificProduct;
     
 }   
 
@@ -43,10 +48,14 @@ async function renderProduct(idToGet) {
     const action = "getById";
     let product = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}&id=${idToGet}`, "GET")
 
+    console.log(product)
+
     let main = document.getElementsByTagName("main")[0]; 
+
+   /*  main.innerHTML = ""; */
        
-    let productContainer = document.createElement("div")
-    productContainer.classList.add("productContainer")
+    let productCont = document.createElement("div")
+    productCont.classList.add("productCont")
     let title = document.createElement("h2")
     title.innerHTML = product.name;
     let productInfo = document.createElement('div');
@@ -59,11 +68,15 @@ async function renderProduct(idToGet) {
     image.classList.add('productImage')
     image.src = "./assets/" + product.image
     image.addEventListener("click", () => {productPage(product)})
+    
 
     let addToCartButton = document.createElement('button'); 
     addToCartButton.classList.add('addToCart')
     addToCartButton.innerText = "Add"
     addToCartButton.addEventListener("click", () => {addToCart(product)})
+
+
+ 
 
     /* let returnToProductPage = document.createElement('button'); 
     returnToProductPage.classList.add('returnToPpage')
@@ -78,19 +91,31 @@ async function renderProduct(idToGet) {
     let cartButton = document.createElement('button')
     cartButton.classList.add('cartButton')
     cartButton.innerText = 'Continue to checkout'
+
+    main.append(productCont, productInfo, cartElement)
+
+    cartButton.addEventListener("click", () => { location.href = "./../cartPage.html"; })
     main.append(productContainer, productInfo, cartElement)
+
     cartElement.append(cartButton)
     productInfo.append(title, description, unitPrice, addToCartButton, /*returnToProductPage*/)
-    productContainer.append(image)
+    productCont.append(image)
 
+    if(product.unitsInStock == 0) {
+        addToCartButton.classList.add("noClick")
+        return
+    }
+
+    addToCartButton.classList.remove("noClick")
 
 }
 
 
 
+
 // Lägger till produkten i kundvagnen (SESSION)
 async function addToCart(product) {
-
+    
     /* Hämtar den sparade carten i SESSION */
     const action = "getCart"
 
@@ -105,7 +130,7 @@ async function addToCart(product) {
     /* Kollar upp om produkten har lagts till tidigare, samt jämför antalet vi lagt till på produkten i carten och unitsinstock på produkten i databasen. */
     let index = cart.findIndex((cartItem) => { 
 
-        if(cartItem.product.productId == product.productId) {
+        if(cartItem.product.Id == product.Id) {
             
             if(cartItem.quantity >= product.unitsInStock) {
                 alert("Sorry, we do not have more of this product available for reservation")
@@ -141,9 +166,7 @@ async function addToCart(product) {
     body.append("action", push)
     body.append("cart", JSON.stringify(cart))
 
-
     await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
-
 
     printNrOfElements();
 

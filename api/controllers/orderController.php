@@ -6,6 +6,7 @@ include_once("./../controllers/productController.php");
 include_once("./../controllers/userController.php");
 
 
+
 class OrderController extends MainController {
 
     private $createFunction = "createOrder";   
@@ -38,17 +39,39 @@ class OrderController extends MainController {
         $productController = new ProductController();
         $products = $productController->getProductsFromOrder($id);
         $order->products = $products;
-        /* error_log(serialize($order)); */
 
         return $order;
 
     }
 
 
+    // Skapar order. 
+    public function add($OrderInfo) {
+        try {
 
-    public function add($entity) {
-        return "Hej";
+            $createOrder = createOrder(null, $OrderInfo->StatusId, $OrderInfo->UserId, $OrderInfo->CourrierId, date('Y-m-d H:i:s'), null, null);   
+            
+            return $this->database->insert($createOrder);
+ 
+        }   
+        catch(Exception $e) {
+            throw new Exception("This dosent work");
+        }
     }
+    
+
+    public function update(){
+
+
+    }
+
+
+   
+    public function delete() {
+
+
+    }
+
 
 
 
