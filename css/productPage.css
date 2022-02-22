@@ -6,20 +6,21 @@ main {
 }
 
 
-.productContainer {
+.productCont {
     display: flex;
     height: 400px;
     width: 350px; 
     flex-direction: row-reverse;
     justify-content: flex-end;
     margin-left: 200px;
-    object-fit: contain;
+    object-fit: scale-down;
 }
 
 
 
 .productImage {
     margin-top: 20px;
+    object-fit: scale-down;
 }
 
 

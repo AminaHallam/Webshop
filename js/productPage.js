@@ -13,13 +13,18 @@ async function onLoad() {
     
     productPage(url); 
 
+
+    renderProduct(url); 
+    getAllCategories(url);
+
     await renderProduct(url); 
+
 
 }
 
 
 verifyAdmin();
-getAllCategories();
+
 getUser();
 
 
@@ -49,8 +54,8 @@ async function renderProduct(idToGet) {
 
    /*  main.innerHTML = ""; */
        
-    let productContainer = document.createElement("div")
-    productContainer.classList.add("productContainer")
+    let productCont = document.createElement("div")
+    productCont.classList.add("productCont")
     let title = document.createElement("h2")
     title.innerHTML = product.name;
     let productInfo = document.createElement('div');
@@ -86,11 +91,15 @@ async function renderProduct(idToGet) {
     let cartButton = document.createElement('button')
     cartButton.classList.add('cartButton')
     cartButton.innerText = 'Continue to checkout'
+
+    main.append(productCont, productInfo, cartElement)
+
     cartButton.addEventListener("click", () => { location.href = "./../cartPage.html"; })
     main.append(productContainer, productInfo, cartElement)
+
     cartElement.append(cartButton)
     productInfo.append(title, description, unitPrice, addToCartButton, /*returnToProductPage*/)
-    productContainer.append(image)
+    productCont.append(image)
 
     if(product.unitsInStock == 0) {
         addToCartButton.classList.add("noClick")
