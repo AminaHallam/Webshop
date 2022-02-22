@@ -1,15 +1,22 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
 import {makeRequest, verifyAdmin, showCorrectLayout, logOut, printNrOfElements, getAllProducts} from './../helperFunctions/fetchHelper.js'
 
-
 async function onLoad() {
     await showCorrectLayout();
     await printNrOfElements();
     await whichPageToDisplay();
     await getAllCategories();
+    await renderSubscribers();
 }
 
+async function getAllLoggedInSubscribers(){
 
+    const action = "getAllLoggedInSubscribers";
+
+    let allSubscribers = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "GET")
+    return allSubscribers;
+
+}
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut);
@@ -176,6 +183,54 @@ async function updateUnitsInStock(direction, value) {
 }
 
 
+async function renderSubscribers() {
 
+const renderSubList = await getAllLoggedInSubscribers();
+
+for (let i = 0; i < renderSubList.length; i++) {
+    
+    const subList = renderSubList[i];
+
+    const allSubscribers = document.querySelector(".firstname");
+    const emailCont = document.querySelector(".email")
+    let firstNameDiv = document.createElement("div")
+    firstNameDiv.classList.add("firstNameDiv")
+    let firstName = document.createElement("p")
+    firstName.classList.add("firstNameSub")
+    firstName.innerText = subList.FirstName
+
+    firstNameDiv.append(firstName)
+    allSubscribers.append(firstNameDiv)
+
+
+    let emailDiv = document.createElement("div")
+    emailDiv.classList.add("emailDiv")
+    let email = document.createElement("p")
+    email.classList.add("emailSub")
+    email.innerText = subList.Email 
+    emailDiv.append(email)
+    emailCont.append(emailDiv)
+    
+
+/* 
+    let firstNameDiv = document.createElement("div")
+    firstNameDiv.classList.add("firstNameDiv")
+    let firstName = document.createElement("p")
+    firstName.classList.add("firstNameSub")
+    firstName.innerText = subList.FirstName
+    
+    let emailDiv = document.createElement("div")
+    emailDiv.classList.add("emailDiv")
+    let email = document.createElement("p")
+    email.classList.add("emailSub")
+    email.innerText = subList.Email 
+    
+    firstNameDiv.append(firstName)
+    emailDiv.append(email)
+    allSubscribers.append(firstNameDiv, emailDiv) */
+
+    }
+
+}
 
 window.addEventListener('load', onLoad)

@@ -7,7 +7,7 @@ async function onLoad() {
     await getUser();
     await showCorrectLayout();
     await printNrOfElements();
-    await getAllLoggedInSubscribers();
+ /*    await getAllLoggedInSubscribers(); */
 }
 
 
@@ -82,15 +82,6 @@ async function addSubscriptionNews(e) {
 }
 
 
-async function getAllLoggedInSubscribers(){
-    
-    const action = "getAllLoggedInSubscribers"; 
-
-
-    let allSubscribers = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "GET")
-    console.log(allSubscribers)
-
-}
 
 
 
