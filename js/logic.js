@@ -8,14 +8,15 @@ async function onLoad() {
     await showCorrectLayout();
     await printNrOfElements();
     await getAllLoggedInSubscribers();
+    await getAllCategories();
 }
 
 
 // bör ligga i funk, inte i globalt skop, await 
 // sparas användare någonstans? 
-getAllCategories();
-verifyAdmin();
-getUser();
+
+/* verifyAdmin();
+getUser(); */
 
 
 

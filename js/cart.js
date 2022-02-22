@@ -46,6 +46,7 @@ async function getCart() {
 
     let cart = await makeRequest(`./../api/receivers/cartReceiver.php?action=${action}`, "GET")
 
+
     if(cart) {
         cart = JSON.parse(cart)
     } else { 
@@ -81,6 +82,8 @@ async function renderCart() {
         
         const cartItem = cart[i];
 
+        console.log(cartItem)
+
         let itemContainer = document.createElement("div")
         itemContainer.classList.add("itemContainer")
 
@@ -108,13 +111,13 @@ async function renderCart() {
         let deleteQty = document.createElement("div")
         deleteQty.classList.add("ajustBoxes")
         deleteQty.innerText = "-"
-        deleteQty.addEventListener("click", () => {deleteItem(cartItem)})
+        deleteQty.addEventListener("click", () => {modifyQty(cartItem, "-")})
 
         let addQty = document.createElement("div")
         addQty.classList.add("addQty")
         addQty.classList.add("ajustBoxes")
         addQty.innerText = "+"
-        addQty.addEventListener("click", () => {addItem(cartItem)})
+        addQty.addEventListener("click", () => {modifyQty(cartItem, "+")})
 
         let unitQty = document.createElement("p")
         unitQty.innerHTML = cartItem.quantity + " pcs"
@@ -127,7 +130,7 @@ async function renderCart() {
         // Jämför antalet i unitsinstock med det vi lagt till i carten. Om det inte finns mer tillgängligt i unitsinstock så tas plustecknet bort.
         cart.findIndex((shoppingCart) => { 
 
-            if(shoppingCart.product.productId == cartItem.product.productId) {
+            if(shoppingCart.product.Id == cartItem.product.Id) {
                  
                 if(shoppingCart.quantity >= cartItem.product.unitsInStock) {
 
@@ -303,7 +306,7 @@ async function getSubList() {
 
 
 
-async function createOrder(courrierId, userId, cart) {
+async function createOrder(courrierId, userId/* , cart */) {
 
     let createOrder = {
         StatusId: "REG",
@@ -315,12 +318,10 @@ async function createOrder(courrierId, userId, cart) {
     let myData = new FormData();
     myData.append("endpoint", "createOrder");
     myData.append("createOrder", JSON.stringify(createOrder));
-    myData.append("products", JSON.stringify(cart));
+   /*  myData.append("products", JSON.stringify(cart)); */
 
     let resultOrder = await makeRequest("./../api/receivers/orderReceiver.php", "POST", myData)
     
-    console.log(resultOrder)
-
     if(resultOrder) {
         alert("Congratulations! Your order is placed")
         location.reload();
@@ -346,77 +347,23 @@ async function getCourrier() {
 
 
 
-// Tar bort 1 st från produkten om du klickar på "-", samt ta bort hela produkten om den har 1 st. Avslutar med att skicka den nya versionen av carten till SESSION.
-async function deleteItem(cartItem) {
-
-    let cart = await getCart()
-
-    for (let i = 0; i < cart.length; i++) {
-
-        let myCart = cart[i]
-
-        if (cartItem.product.Id == myCart.product.Id) {
-            
-            if(myCart.quantity == 1) {
-                cart.splice(i, 1);
-            } else {
-                myCart.quantity--
-            } 
-
-            const deleteQty = "updateCart"
-
-            var body = new FormData()
-            body.append("action", deleteQty)
-            body.append("cart", JSON.stringify(cart))
-         
-            await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
-
-            renderCart();
-            printNrOfElements();
-        }  
-    }   
-}
-
-
-
-
-
-
-
-
-
-
-// Lägger till 1 st på produkten om du klickar på "+". Avslutar med att skicka den nya versionen av carten till SESSION.
-
-async function addItem(cartItem) {
+async function modifyQty(cartItem, direction) {
     
-    let cart = await getCart()
-    
-    for (let i = 0; i < cart.length; i++) {
+    let productId = cartItem.product.Id
+    const action = "updateCart"
 
-        let myCart = cart[i]
+    var body = new FormData()
+    body.append("action", action)
+    body.append("direction", direction)
+    body.append("productId", JSON.stringify(productId))
+ 
+    await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
 
-        if(cartItem.product.Id == myCart.product.Id) {
-            
-            myCart.quantity++
-        }
-            
-        const addQty = "updateCart"
 
-        var body = new FormData()
-        body.append("action", addQty)
-        body.append("cart", JSON.stringify(cart))
-    
-        await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
-
-    }
-
-    printNrOfElements();
     renderCart();
-}
+    printNrOfElements();
 
-
-
+}    
 
 
 window.addEventListener('load', onLoad)
