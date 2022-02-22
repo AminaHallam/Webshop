@@ -81,6 +81,8 @@ async function renderCart() {
         
         const cartItem = cart[i];
 
+        console.log(cartItem)
+
         let itemContainer = document.createElement("div")
         itemContainer.classList.add("itemContainer")
 
@@ -127,7 +129,7 @@ async function renderCart() {
         // Jämför antalet i unitsinstock med det vi lagt till i carten. Om det inte finns mer tillgängligt i unitsinstock så tas plustecknet bort.
         cart.findIndex((shoppingCart) => { 
 
-            if(shoppingCart.product.productId == cartItem.product.productId) {
+            if(shoppingCart.product.Id == cartItem.product.Id) {
                  
                 if(shoppingCart.quantity >= cartItem.product.unitsInStock) {
 
@@ -349,32 +351,39 @@ async function getCourrier() {
 // Tar bort 1 st från produkten om du klickar på "-", samt ta bort hela produkten om den har 1 st. Avslutar med att skicka den nya versionen av carten till SESSION.
 async function deleteItem(cartItem) {
 
-    let cart = await getCart()
+    // Ta bort forloopen och lägg in produkten med det antal du vill ta bort i ett objekt. Kolla productpage. Ta med direction på båda delarna.  
 
-    for (let i = 0; i < cart.length; i++) {
+        /* console.log(myCart.quantity) */
+        /* console.log(cartItem.product.Id) */
 
-        let myCart = cart[i]
 
-        if (cartItem.product.Id == myCart.product.Id) {
+
+       
             
-            if(myCart.quantity == 1) {
+           /*  if(myCart.quantity == 1) {
                 cart.splice(i, 1);
             } else {
                 myCart.quantity--
-            } 
+            }  */
 
+           
+
+
+            let productId = cartItem.product.Id
+            let direction = "-"
             const deleteQty = "updateCart"
 
             var body = new FormData()
             body.append("action", deleteQty)
-            body.append("cart", JSON.stringify(cart))
+            body.append("direction", direction)
+            body.append("productId", JSON.stringify(productId))
          
             await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
 
             renderCart();
             printNrOfElements();
-        }  
-    }   
+        
+    
 }
 
 

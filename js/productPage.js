@@ -103,11 +103,33 @@ async function renderProduct(idToGet) {
 
 
 
-
 // Lägger till produkten i kundvagnen (SESSION)
 async function addToCart(product) {
+
+    let productId = product.Id
+    let direction = "+"
+
+    const push = "updateCart"
+
+    var body = new FormData()
+    body.append("action", push)
+    body.append("direction", direction)
+    body.append("productId", JSON.stringify(productId))
+
+
+    let result =  await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
+
+    alert(result)
+
+    printNrOfElements();
+
+}
+
+
+
+// Lägger till produkten i kundvagnen (SESSION)
+/* async function addToCart(product) {
     
-    /* Hämtar den sparade carten i SESSION */
     const action = "getCart"
 
     let cart = await makeRequest(`./../api/receivers/cartReceiver.php?action=${action}`, "GET")
@@ -118,7 +140,6 @@ async function addToCart(product) {
         cart = []
     }
 
-    /* Kollar upp om produkten har lagts till tidigare, samt jämför antalet vi lagt till på produkten i carten och unitsinstock på produkten i databasen. */
     let index = cart.findIndex((cartItem) => { 
 
         if(cartItem.product.Id == product.Id) {
@@ -133,7 +154,6 @@ async function addToCart(product) {
 
     })
 
-    /* Om produkten inte finns i carten sedan tidigare, lägg till produkten samt quantity 1. Else, dvs om den redan finns, addera bara med 1 */
     if(index < 0) {
         cart.push({
             product: product, 
@@ -150,19 +170,19 @@ async function addToCart(product) {
     }
 
 
-    /* Skickar en uppdaterad version av carten till SESSION */
     const push = "updateCart"
 
     var body = new FormData()
     body.append("action", push)
     body.append("cart", JSON.stringify(cart))
 
+
     await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
+
 
     printNrOfElements();
 
-}
-
+} */
 
 
 

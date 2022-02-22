@@ -7,6 +7,7 @@ async function onLoad() {
     await printNrOfElements();
     await whichPageToDisplay();
     await getAllCategories();
+
 }
 
 
@@ -174,8 +175,6 @@ async function updateUnitsInStock(direction, value) {
         alert("Product not updated")
     }
 }
-
-
 
 
 window.addEventListener('load', onLoad)

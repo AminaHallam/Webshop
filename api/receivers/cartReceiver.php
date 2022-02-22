@@ -2,17 +2,20 @@
 
 try {
 
+    
     session_start();
 
     include_once("./../controllers/productController.php");
 
-    if($_SERVER["REQUEST_METHOD"] == "GET") {
+    if($_SERVER["REQUEST_METHOD"] == "GET") { 
 
         if(isset($_GET["action"]) == "getCart") {
 
             if(isset($_SESSION["myCart"])) {
 
-                echo json_encode($_SESSION["myCart"]);
+                $myCart = $_SESSION["myCart"]; 
+
+                echo json_encode($myCart);
                 exit;
 
             } else {
@@ -26,32 +29,140 @@ try {
 
         if($_POST["action"] == "updateCart") {
 
-            if(isset($_POST["cart"])) {
+            if(isset($_POST["productId"]) && isset($_POST["direction"])) {
+                
+                $productId = json_decode($_POST["productId"]);
+                $direction = $_POST["direction"];
 
-                $cart = json_decode($_POST["cart"]);
+                error_log(serialize($productId));
+                error_log($direction);
 
-                for ($i=0; $i < count($cart) ; $i++) { 
+  
+                $controller = new ProductController();
+                $productDb = ($controller->getById(json_decode($productId)));
 
-                    $item = $cart[$i];
+                $cart = json_decode($_SESSION["myCart"]);
 
-                    $controller = new ProductController();
-                    $productDb = ($controller->getById($item->product->Id));
 
-                    if($item->quantity > $productDb->unitsInStock) {
-                        throw new Exception("Can't take more qty than we have available in stock", 400);
+                if(!$productDb->Id == $productId) {
+                    echo json_encode("ID not found in DB");
+                    exit;
+                } 
+
+            
+                if($direction == "+") {
+                    
+                    if($productDb->unitsInStock == 0) {
+                        echo json_encode("We do not have more of this product");
                         exit;
-                    }
+                    } 
+                }
+                
 
 
-                    if(!$item->product->unitPrice == $productDb->unitPrice) {
-                        throw new Exception("Price doesnt match with database", 400);
-                        exit;
-                    }
+
+                $product = new stdClass;
+                $product->product = $productDb;
+
+                $quantity = new stdClass;
+                $quantity->quantity = 1;
+
+                $productToPush = (object)array_merge((array)$product, (array)$quantity);
+
+
+
+
+
+                if(!$cart) {
+                     $cart = []; 
                 }
 
-                $_SESSION["myCart"] = json_encode($cart); 
+
+                foreach ($cart as $i => $cartItem) { 
+                    error_log("kommer in i foreach");
+
+                    if($productDb->Id == $cartItem->product->Id) {
+
+                        error_log("ID't matchar i foreach");
+                       
+                        if($cartItem->quantity >= $productDb->unitsInStock) {
+                            echo json_encode("Sorry, we do not have more of this product available for reservation");
+                            exit;
+                        }
+
+                        error_log($direction);
+
+                        if($direction == "+") {
+
+                            error_log("Kom in i plus");
+
+                            $cart[$i]->quantity += 1; 
+
+                            $_SESSION["myCart"] = json_encode($cart);
+                            echo json_encode("Product is added to cart");
+                            exit;
+
+                        } else if($direction == "-"){
+
+                            error_log("Kom in i minus");
+
+                              if($cart[$i]->quantity == 1) {
+                                error_log("Kommer in här nummer 1");
+                                
+                                unset($cart[$i]);
+
+                                $_SESSION["myCart"] = json_encode($cart);
+                                echo json_encode("Product is REDUCED");
+                                exit;
+
+                                } else {
+                                    error_log("Kommer in här nummer 2");
+                                    
+                                    error_log(serialize($cart[$i]->quantity));
+
+                                    $cart[$i]->quantity -= 1; 
+
+                                    $_SESSION["myCart"] = json_encode($cart);
+                                    echo json_encode("Product is REDUCED");
+                                    exit;
+                                }  
+
+
+                                error_log("Kom in i ingenmansland");
+                            /* $cart[$i]->quantity -= 1;  */
+
+                            $_SESSION["myCart"] = json_encode($cart);
+                            echo json_encode("Product is reduced");
+                            exit;
+                        }
+
+                        error_log("Kom in i ingenmansland nummer 2");
+                        
+                    } 
+
+                    error_log("Kom in i ingenmansland nummer 3");
+
+                    if($key < 0) {
+
+                        array_push($cart, $productToPush);
+    
+                        $_SESSION["myCart"] = json_encode($cart);
+    
+                        echo json_encode("Product is added to cart");
+                        exit;
+    
+                    }
+
+                    error_log("Kom in i ingenmansland nummer 4");
+                }
+
+                array_push($cart, $productToPush);
+    
+                $_SESSION["myCart"] = json_encode($cart);
+
+                echo json_encode("Product is added to cart");
                 
-                exit; 
+                exit;  
             } 
         } 
     } 

@@ -194,7 +194,7 @@ export async function printNrOfElements() {
         cart = JSON.parse(cart)
     } else { 
         cart = []
-    }
+    } 
 
     let totalSum = cart.reduce((sum,item) => sum + item.quantity, 0)
     

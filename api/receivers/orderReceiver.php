@@ -55,7 +55,7 @@ try {
                 echo(json_encode($controller->getOrdersFromOtherId((int)$_GET["id"],$_GET["type"])));
 
             }
-        }
+        } 
 
     }  else if($_SERVER["REQUEST_METHOD"] == "POST") {
 
