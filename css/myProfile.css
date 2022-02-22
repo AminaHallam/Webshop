@@ -21,6 +21,100 @@ h2 {
     height: auto;
 }
 
+.containerForOrders, .row {
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+  justify-content: space-evenly;
+  height: 24px;
+}
+
+ 
+.overviewOrders {
+  display: flex;
+  flex-direction: column;
+}
+
+.orders{
+  width: 80vw;
+}
+
+.orderHeader {
+  width: 114px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.cell {
+  width: 114px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.orderButton {
+  font-size: 12px !important; 
+  height: 20px !important;
+  margin: 2px !important;
+}
+
+.specificOrder {
+  height: 500px;
+  width: 500px;
+  background-color: black;
+}
+
+
+
+@media only screen and (max-width: 1124px) {
+  .orderButton {
+    font-size: 8px !important;
+  }
+  .cell {
+    font-size: 10px;
+  }
+  .orderHeader {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 790px) {
+  .orderHeader {
+    font-size: 8px;
+  }
+  .orderButton {
+    width: 40px !important;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .orderButton {
+    width: 15px !important;
+    padding: 2px 15px !important;
+    font-size: 6px !important;
+  }
+  .cell {
+    font-size: 7px;
+  }
+  .orderHeader {
+    font-size: 8px;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .orderButton {
+    width: 15px !important;
+    padding: 2px 15px !important;
+    font-size: 6px !important;
+  }
+  .cell {
+    font-size: 7px;
+  }
+  .orderHeader {
+    font-size: 8px;
+  }
+}
+
 .product, .orders, .newsletter {
   display: flex;
   flex-wrap: wrap;
@@ -54,7 +148,7 @@ h2 {
   margin-bottom: 15px;
 }
 
-button {
+button, .orderButton {
     align-items: center;
     appearance: none;
     background-color: #fff;

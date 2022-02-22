@@ -6,7 +6,15 @@ async function onLoad() {
     await printNrOfElements();
     await whichPageToDisplay();
     await getAllCategories();
+
     await renderSubscribers();
+
+    
+    const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get("id");
+    myprofilePage(id);
+
 }
 
 async function getAllLoggedInSubscribers(){
@@ -46,7 +54,17 @@ async function whichPageToDisplay() {
 
 }
 
-
+//Hämtar ut alla ordrar
+async function myprofilePage() {
+    const action = "getAll";
+    let order = await makeRequest(
+      `./../api/receivers/orderReceiver.php?action=${action}`,
+      "GET"
+    );
+  
+    renderOrders(order);
+    
+  }
 
 
 
@@ -98,7 +116,58 @@ async function getUnitsInStock() {
 }
 
 
+async function renderOrders(list) {
+    let bigContainer = document.getElementsByClassName("overviewOrders")[0];
+  
+    let headers = [
+      "Id",
+      "StatusId",
+      "UserId",
+      "CourrierId",
+      "Reg-Date",
+      "Ship-Date",
+      "Rec-Date",
+      ""
+    ];
+  
+    let headerRow = document.createElement("div");
+    headerRow.classList.add('containerForOrders')
+    bigContainer.appendChild(headerRow);
+  
+    headers.forEach((headerText) => {
+      let orderHeader = document.createElement("div");
+      orderHeader.classList.add('orderHeader')
+      orderHeader.innerText = headerText;
+      headerRow.appendChild(orderHeader);
+    });
+  
+  
+    for (let i = 0; i < list.length; i++) {
+      const order = list[i];
+      let row = document.createElement('div')
+      row.classList.add('row')
+      const orderValues = Object.values(order);
+      let orderButton = document.createElement('button')
+      orderButton.classList.add('orderButton')
+      orderButton.innerText = "To Order"
+      
+      for (let i = 0; i < orderValues.length; i++) {
+        const orderDetail = orderValues[i]
+        let cell = document.createElement('div')
+        cell.classList.add('cell')
 
+        cell.innerText = orderDetail
+        
+        //console.log(orderDetail)
+        
+
+        row.appendChild(cell)
+        row.appendChild(orderButton)
+      }
+      bigContainer.appendChild(row)
+    } 
+  
+  }
 
 
 
