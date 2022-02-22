@@ -14,7 +14,7 @@ async function onLoad() {
     productPage(url); 
 
 
-    renderProduct(url); 
+    
     getAllCategories(url);
 
     await renderProduct(url); 
@@ -92,14 +92,16 @@ async function renderProduct(idToGet) {
     cartButton.classList.add('cartButton')
     cartButton.innerText = 'Continue to checkout'
 
-    main.append(productCont, productInfo, cartElement)
+  
 
     cartButton.addEventListener("click", () => { location.href = "./../cartPage.html"; })
-    main.append(productContainer, productInfo, cartElement)
+    
 
     cartElement.append(cartButton)
     productInfo.append(title, description, unitPrice, addToCartButton, /*returnToProductPage*/)
     productCont.append(image)
+ 
+    main.append(productCont, productInfo, cartElement) 
 
     if(product.unitsInStock == 0) {
         addToCartButton.classList.add("noClick")
