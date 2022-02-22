@@ -46,6 +46,7 @@ async function getCart() {
 
     let cart = await makeRequest(`./../api/receivers/cartReceiver.php?action=${action}`, "GET")
 
+
     if(cart) {
         cart = JSON.parse(cart)
     } else { 
@@ -357,6 +358,7 @@ async function modifyQty(cartItem, direction) {
     body.append("productId", JSON.stringify(productId))
  
     await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
+
 
     renderCart();
     printNrOfElements();

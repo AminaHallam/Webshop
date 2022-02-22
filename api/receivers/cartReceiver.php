@@ -84,12 +84,13 @@ try {
 
                         } else if($direction == "-"){
                                 /* error_log("5"); */
-                                /* error_log(serialize($cart[$i])); */
+                                 
 
                               if($cart[$i]->quantity == 1) {
-                                error_log("6");
-
-                                unset($cart[$i]);   // Om man tar bort den produkt man lade till först (med index 0) så tas alla bort istället bara för den enstaka. 
+                                
+                                unset($cart[$i]);  
+                                 
+                                $cart = array_values($cart);  // Finns det något bättre sätt som inte tar lika stor kapacitet? (fixar iordning index i numerisk ordning igen)
 
                                 $_SESSION["myCart"] = json_encode($cart);
                                 exit;
