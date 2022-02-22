@@ -54,24 +54,16 @@ try {
                 }
                 
 
-
-
                 $product = new stdClass;
                 $product->product = $productDb;
-
-                $quantity = new stdClass;
-                $quantity->quantity = 1;
-
-                $productToPush = (object)array_merge((array)$product, (array)$quantity);
-
-
-
+                $product->quantity = 1;
 
 
                 if(!$cart) {
                      $cart = []; 
                 }
 
+                /* error_log(serialize($cart)); */
 
                 foreach ($cart as $i => $cartItem) { 
 
@@ -91,33 +83,33 @@ try {
                             exit;
 
                         } else if($direction == "-"){
+                                /* error_log("5"); */
+                                /* error_log(serialize($cart[$i])); */
 
                               if($cart[$i]->quantity == 1) {
+                                error_log("6");
 
-                                unset($cart[$i]);
+                                unset($cart[$i]);   // Om man tar bort den produkt man lade till först (med index 0) så tas alla bort istället bara för den enstaka. 
 
                                 $_SESSION["myCart"] = json_encode($cart);
-                                echo json_encode("Product is REDUCED");
                                 exit;
-
+                                
                                 } else {
 
                                     $cart[$i]->quantity -= 1; 
 
                                     $_SESSION["myCart"] = json_encode($cart);
-                                    echo json_encode("Product is REDUCED");
                                     exit;
                                 }  
 
                             $_SESSION["myCart"] = json_encode($cart);
-                            echo json_encode("Product is reduced");
                             exit;
                         }
                     } 
 
-                    if($key < 0) {
+                    if($i < 0) {
 
-                        array_push($cart, $productToPush);
+                        array_push($cart, $product);
     
                         $_SESSION["myCart"] = json_encode($cart);
     
@@ -126,7 +118,7 @@ try {
                     }
                 }
 
-                array_push($cart, $productToPush);
+                array_push($cart, $product);
     
                 $_SESSION["myCart"] = json_encode($cart);
 

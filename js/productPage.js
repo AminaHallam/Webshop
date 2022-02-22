@@ -13,8 +13,6 @@ async function onLoad() {
     
     productPage(url); 
 
-
-    renderProduct(url); 
     getAllCategories(url);
 
     await renderProduct(url); 
@@ -95,7 +93,6 @@ async function renderProduct(idToGet) {
     main.append(productCont, productInfo, cartElement)
 
     cartButton.addEventListener("click", () => { location.href = "./../cartPage.html"; })
-    main.append(productContainer, productInfo, cartElement)
 
     cartElement.append(cartButton)
     productInfo.append(title, description, unitPrice, addToCartButton, /*returnToProductPage*/)
