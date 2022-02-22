@@ -110,13 +110,13 @@ async function renderCart() {
         let deleteQty = document.createElement("div")
         deleteQty.classList.add("ajustBoxes")
         deleteQty.innerText = "-"
-        deleteQty.addEventListener("click", () => {deleteItem(cartItem)})
+        deleteQty.addEventListener("click", () => {modifyQty(cartItem, "-")})
 
         let addQty = document.createElement("div")
         addQty.classList.add("addQty")
         addQty.classList.add("ajustBoxes")
         addQty.innerText = "+"
-        addQty.addEventListener("click", () => {addItem(cartItem)})
+        addQty.addEventListener("click", () => {modifyQty(cartItem, "+")})
 
         let unitQty = document.createElement("p")
         unitQty.innerHTML = cartItem.quantity + " pcs"
@@ -305,7 +305,7 @@ async function getSubList() {
 
 
 
-async function createOrder(courrierId, userId, cart) {
+async function createOrder(courrierId, userId/* , cart */) {
 
     let createOrder = {
         StatusId: "REG",
@@ -317,12 +317,10 @@ async function createOrder(courrierId, userId, cart) {
     let myData = new FormData();
     myData.append("endpoint", "createOrder");
     myData.append("createOrder", JSON.stringify(createOrder));
-    myData.append("products", JSON.stringify(cart));
+   /*  myData.append("products", JSON.stringify(cart)); */
 
     let resultOrder = await makeRequest("./../api/receivers/orderReceiver.php", "POST", myData)
     
-    console.log(resultOrder)
-
     if(resultOrder) {
         alert("Congratulations! Your order is placed")
         location.reload();
@@ -348,84 +346,22 @@ async function getCourrier() {
 
 
 
-// Tar bort 1 st från produkten om du klickar på "-", samt ta bort hela produkten om den har 1 st. Avslutar med att skicka den nya versionen av carten till SESSION.
-async function deleteItem(cartItem) {
-
-    // Ta bort forloopen och lägg in produkten med det antal du vill ta bort i ett objekt. Kolla productpage. Ta med direction på båda delarna.  
-
-        /* console.log(myCart.quantity) */
-        /* console.log(cartItem.product.Id) */
-
-
-
-       
-            
-           /*  if(myCart.quantity == 1) {
-                cart.splice(i, 1);
-            } else {
-                myCart.quantity--
-            }  */
-
-           
-
-
-            let productId = cartItem.product.Id
-            let direction = "-"
-            const deleteQty = "updateCart"
-
-            var body = new FormData()
-            body.append("action", deleteQty)
-            body.append("direction", direction)
-            body.append("productId", JSON.stringify(productId))
-         
-            await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
-
-            renderCart();
-            printNrOfElements();
-        
+async function modifyQty(cartItem, direction) {
     
-}
+    let productId = cartItem.product.Id
+    const action = "updateCart"
 
+    var body = new FormData()
+    body.append("action", action)
+    body.append("direction", direction)
+    body.append("productId", JSON.stringify(productId))
+ 
+    await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
 
-
-
-
-
-
-
-
-
-// Lägger till 1 st på produkten om du klickar på "+". Avslutar med att skicka den nya versionen av carten till SESSION.
-
-async function addItem(cartItem) {
-    
-    let cart = await getCart()
-    
-    for (let i = 0; i < cart.length; i++) {
-
-        let myCart = cart[i]
-
-        if(cartItem.product.Id == myCart.product.Id) {
-            
-            myCart.quantity++
-        }
-            
-        const addQty = "updateCart"
-
-        var body = new FormData()
-        body.append("action", addQty)
-        body.append("cart", JSON.stringify(cart))
-    
-        await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
-
-    }
-
-    printNrOfElements();
     renderCart();
-}
+    printNrOfElements();
 
-
-
+}    
 
 
 window.addEventListener('load', onLoad)
