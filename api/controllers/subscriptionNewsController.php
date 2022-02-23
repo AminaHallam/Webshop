@@ -30,8 +30,12 @@ class SubscriptionNewsController extends MainController {
    
         $subscriberLoggedIn = $this->database->freeQuery($query, $this->createSubscriptionNews);
         $subscriberGuest = $this->database->freeQuery($query2, $this->createSubscriptionNews);
+
         
-        return $allSubscribers = array_merge($subscriberLoggedIn, $subscriberGuest);     
+        
+        return $allSubscribers = array_merge($subscriberLoggedIn, $subscriberGuest);
+
+       
        
     }
 

@@ -25,7 +25,7 @@ try {
             
             echo(json_encode($controller->getById((int)$_GET["id"])));
             exit;
-        }
+        
 
 
     } else if($_SERVER["REQUEST_METHOD"] == "POST") {

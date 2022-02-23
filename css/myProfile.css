@@ -148,7 +148,7 @@ h2 {
   margin-bottom: 15px;
 }
 
-button, .orderButton {
+button, .orderButton, #sendNews {
     align-items: center;
     appearance: none;
     background-color: #fff;
@@ -185,38 +185,38 @@ button, .orderButton {
   }
   
   
-  button:hover {
+  button:hover, #sendNews:hover {
     background: #F6F9FE;
     color: #174ea6;
   }
   
-  button:active {
+  button:active, #sendNews:active {
     box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
     outline: none;
   }
   
-  button:focus{
+  button:focus, #sendNews:focus {
     outline: none;
     border: 2px solid #4285f4;
   }
   
-  button:not(:disabled), button:not(:disabled) {
+  button:not(:disabled), button:not(:disabled), #sendNews:not(:disabled) {
     box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
   }
   
-  button:not(:disabled):hover {
+  button:not(:disabled):hover, #sendNews:not(:disabled):hover {
     box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
   }
   
-  button:not(:disabled):focus {
+  button:not(:disabled):focus, #sendNews:not(:disabled):focus  {
     box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
   }
   
-  button:not(:disabled):active {
+  button:not(:disabled):active, #sendNews:not(:disabled):active  {
     box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
   }
   
-  button:disabled {
+  button:disabled, #sendNews:disabled {
     box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
   }
 
@@ -294,4 +294,11 @@ button, .orderButton {
   max-height: 1000px;
   height: 80px;
   transition: max-width 1s ease-in-out;
+}
+
+
+.content {
+  height: 150px;
+  width: 150px; 
+  margin: 2px; 
 }

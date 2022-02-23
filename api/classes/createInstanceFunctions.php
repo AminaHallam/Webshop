@@ -8,6 +8,7 @@ include_once("./../classes/order.php");
 include_once("./../classes/courrier.php");
 include_once("./../classes/subscriptionNews.php");
 include_once("./../classes/orderDetails.php");
+include_once("./../classes/newsletter.php");
 
 
 
@@ -40,12 +41,20 @@ function subscribe($id, $UserID, $FirstName, $Email) {
 
 function createOrderDetails($orderId, $productId, $quantity) { 
 return new OrderDetails((int)$orderId, (int)$productId, (int)$quantity); 
-} 
+}
 
 
 function createCourrier($Id, $courrierName, $Address, $Email, $CountryCode, $StandardPhone, $MobileNumber, $Contact) {
     return new Courrier((int)$Id, $courrierName, $Address, $Email, $CountryCode, $StandardPhone, $MobileNumber, $Contact);
 } 
+
+
+function createNewsletter($Id, $Title, $Text, $Date){
+    return new Newsletter((int)$Id, $Title, $Text, $Date);
+}
+
+
+
 
 ?>
 

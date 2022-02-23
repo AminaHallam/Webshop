@@ -109,9 +109,6 @@ class ProductController extends MainController {
         return $this->database->freeQuery($query, $this->productDetails); 
     }  
 
-////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 }
