@@ -5,8 +5,6 @@ main {
 /*   margin-top: 140px; */
   height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   padding-bottom: 30px;
