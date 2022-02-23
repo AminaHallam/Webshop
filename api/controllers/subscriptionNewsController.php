@@ -27,8 +27,6 @@ class SubscriptionNewsController extends MainController {
         "SELECT *
         FROM `subscriptionnews`
         WHERE subscriptionnews.UserID IS NULL;"; 
-
-        
    
         $subscriberLoggedIn = $this->database->freeQuery($query, $this->createSubscriptionNews);
         $subscriberGuest = $this->database->freeQuery($query2, $this->createSubscriptionNews);
@@ -37,8 +35,7 @@ class SubscriptionNewsController extends MainController {
         
         return $allSubscribers = array_merge($subscriberLoggedIn, $subscriberGuest);
 
-        
-
+       
        
     }
 

@@ -253,6 +253,43 @@ button, .orderButton, #sendNews {
   margin-bottom: 10px;
 }
 
+
+
+.newsAndSub{
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-around; 
+}
+
+.newsletterAndSubscriber {
+  display: flex; 
+  justify-content: space-around; 
+}
+
+
+.newsletter {
+  display:flex; 
+  
+}
+
+.subscribers {
+  display:flex; 
+  flex-direction: row-reverse;
+  margin: 5px;
+ 
+}
+
+
+
+.firstNameSub, .emailSub {
+  display: flex;
+  
+  padding: 0, 10px;
+  margin-top: 10px;
+  margin: 20px;
+}
+
+
 .menu {
   max-height: 1000px;
   height: 80px;

@@ -190,11 +190,13 @@ export async function printNrOfElements() {
 
     let cart = await makeRequest(`./../api/receivers/cartReceiver.php?action=${action}`, "GET")
 
+    
+
     if(cart) {
-        cart = JSON.parse(cart)
+        cart = await JSON.parse(cart)
     } else { 
         cart = []
-    }
+    } 
 
     let totalSum = cart.reduce((sum,item) => sum + item.quantity, 0)
     
