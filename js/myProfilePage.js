@@ -1,20 +1,30 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
 import {makeRequest, verifyAdmin, showCorrectLayout, logOut, printNrOfElements, getAllProducts} from './../helperFunctions/fetchHelper.js'
 
-
 async function onLoad() {
     await showCorrectLayout();
     await printNrOfElements();
     await whichPageToDisplay();
     await getAllCategories();
+
+    await renderSubscribers();
+
     
     const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const id = urlParams.get("id");
     myprofilePage(id);
+
 }
 
+async function getAllLoggedInSubscribers(){
 
+    const action = "getAllLoggedInSubscribers";
+
+    let allSubscribers = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "GET")
+    return allSubscribers;
+
+}
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut);
@@ -242,12 +252,92 @@ async function updateUnitsInStock(direction, value) {
 }
 
 
+async function renderSubscribers() {
+
+const renderSubList = await getAllLoggedInSubscribers();
+
+for (let i = 0; i < renderSubList.length; i++) {
+    
+    const subList = renderSubList[i];
+
+    const allSubscribers = document.querySelector(".firstname");
+    const emailCont = document.querySelector(".email")
+    let firstNameDiv = document.createElement("div")
+    firstNameDiv.classList.add("firstNameDiv")
+    let firstName = document.createElement("p")
+    firstName.classList.add("firstNameSub")
+    firstName.innerText = subList.FirstName
+
+    firstNameDiv.append(firstName)
+    allSubscribers.append(firstNameDiv)
+
+
+    let emailDiv = document.createElement("div")
+    emailDiv.classList.add("emailDiv")
+    let email = document.createElement("p")
+    email.classList.add("emailSub")
+    email.innerText = subList.Email 
+    emailDiv.append(email)
+    emailCont.append(emailDiv)
+    
+
+/* 
+    let firstNameDiv = document.createElement("div")
+    firstNameDiv.classList.add("firstNameDiv")
+    let firstName = document.createElement("p")
+    firstName.classList.add("firstNameSub")
+    firstName.innerText = subList.FirstName
+    
+    let emailDiv = document.createElement("div")
+    emailDiv.classList.add("emailDiv")
+    let email = document.createElement("p")
+    email.classList.add("emailSub")
+    email.innerText = subList.Email 
+    
+    firstNameDiv.append(firstName)
+    emailDiv.append(email)
+    allSubscribers.append(firstNameDiv, emailDiv) */
+
+    }
+
+}
 
 
 
+document.querySelector('#sendNews').addEventListener('click', createNewsLetter)
+
+async function createNewsLetter(e) {
+    e.preventDefault();
+    let title = document.getElementById('title').value;
+    let content = document.getElementById('content').value;
+    let success = document.querySelector('.success');
+    
+    const action = 'add'
 
 
+    const newsletter = {
+        Title: title, 
+        Text: content
+    }
+        
+    
+    let body = new FormData()
+    body.append('action', action)
+    body.append("news", JSON.stringify(newsletter))
+    
 
+    let result = await makeRequest("./../api/receivers/newsletterReceiver.php", "POST", body)
+    
+    console.log(result)
+
+    if(!result){
+        success.innerHTML = "Something went wrong"
+
+    }else{
+        success.innerHTML = "Your newsletter was succesfully created"
+    }
+
+}
 
 
 async function getorderDetails(id) {
@@ -259,3 +349,4 @@ async function getorderDetails(id) {
 }
 
 window.addEventListener('load', onLoad)
+

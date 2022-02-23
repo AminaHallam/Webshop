@@ -186,6 +186,18 @@ li, a {
     right: 212px;
 }
 
+/* main {
+    margin-top: 140px;
+    height: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+} */
 
 /* main {
     display: flex;

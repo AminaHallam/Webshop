@@ -19,15 +19,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
     }
-    }else if($_SERVER["REQUEST_METHOD"] == "GET") {
+    } else if($_SERVER["REQUEST_METHOD"] == "GET") {
+
             if($_GET["action"] == "getAllLoggedInSubscribers"){
             
             $controller = new SubscriptionNewsController(); 
-            error_log(serialize('hej'));
+
     
             echo(json_encode($controller->getAllLoggedInSubscribers()));
-           
-            
     
             exit; 
     }
