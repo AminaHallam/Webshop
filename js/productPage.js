@@ -46,7 +46,6 @@ async function renderProduct(idToGet) {
     const action = "getById";
     let product = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}&id=${idToGet}`, "GET")
 
-    console.log(product)
 
     let main = document.getElementsByTagName("main")[0]; 
 
@@ -59,8 +58,10 @@ async function renderProduct(idToGet) {
     let productInfo = document.createElement('div');
     productInfo.classList.add('productInfo')
     let description = document.createElement("p")
+    description.classList.add('textCont');
     description.innerHTML = product.description;
     let unitPrice = document.createElement("p")
+    description.classList.add('textCont');
     unitPrice.innerHTML = product.unitPrice + " €";
     let image = document.createElement("img")
     image.classList.add('productImage')
@@ -84,17 +85,19 @@ async function renderProduct(idToGet) {
     }) */
 
 
-    let cartElement = document.createElement('div');
-    cartElement.classList.add('cartElement')
+    let divForCart = document.createElement('div');
+    divForCart.classList.add('divForCart')
+    let spaceDiv = document.createElement('div');
+    spaceDiv.classList.add('spaceDiv');
     let cartButton = document.createElement('button')
     cartButton.classList.add('cartButton')
     cartButton.innerText = 'Continue to checkout'
 
-    main.append(productCont, productInfo, cartElement)
+    main.append(productCont, productInfo, divForCart)
 
     cartButton.addEventListener("click", () => { location.href = "./../cartPage.html"; })
 
-    cartElement.append(cartButton)
+    divForCart.append(spaceDiv, cartButton)
     productInfo.append(title, description, unitPrice, addToCartButton, /*returnToProductPage*/)
     productCont.append(image)
 

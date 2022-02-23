@@ -1,11 +1,12 @@
 <?php
 
 try {
-
     
-    session_start();
+    
 
     include_once("./../controllers/productController.php");
+
+/*     session_start(); */
 
     if($_SERVER["REQUEST_METHOD"] == "GET") { 
 
@@ -40,15 +41,15 @@ try {
                 $cart = json_decode($_SESSION["myCart"]);
 
 
-                if(!$productDb->Id == $productId) {
-                    echo json_encode("ID not found in DB");
+                if(!$productDb) {
+                    echo json_encode("ID not found in DB, contact administrator");
                     exit;
-                } 
+                }
 
             
                 if($direction == "+") {
                     if($productDb->unitsInStock == 0) {
-                        echo json_encode("We do not have more of this product");
+                        echo json_encode("Sorry, we do not have more of this product available for reservation");
                         exit;
                     } 
                 }
@@ -63,7 +64,6 @@ try {
                      $cart = []; 
                 }
 
-                /* error_log(serialize($cart)); */
 
                 foreach ($cart as $i => $cartItem) { 
 
@@ -82,9 +82,7 @@ try {
                             echo json_encode("Product is added to cart");
                             exit;
 
-                        } else if($direction == "-"){
-                                /* error_log("5"); */
-                                 
+                        } else if($direction == "-"){                                 
 
                               if($cart[$i]->quantity == 1) {
                                 
