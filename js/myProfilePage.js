@@ -29,7 +29,63 @@ async function getAllLoggedInSubscribers(){
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut);
 
+document.getElementById("submitClick").addEventListener("click", addSubscriptionNews)
 
+
+async function addSubscriptionNews(e) {
+    e.preventDefault();
+    const action = "addSubscriptionNews";
+
+    let registerFirstname = document.getElementById("firstNameNews").value
+    let registerEmail = document.getElementById("emailNews").value
+    
+    const subscriber = {
+        FirstName: registerFirstname,
+        Email: registerEmail,
+    }
+
+   
+    // Mix av GET och POST
+    var body = new FormData()
+    body.append("action", action)
+    body.append("subscriber", JSON.stringify(subscriber))
+ 
+
+    let getLoggedInUser = await getUser(); 
+   
+    if(getLoggedInUser){
+        var body = new FormData()
+        body.append("action", action)
+        
+        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "POST", body)
+        console.log(status) 
+
+        if(!status) {
+            alert("You are already a subscriber")
+        } else {
+
+            alert("Welcome our new subscriber")
+
+        }
+
+
+    }else{
+        // Mix av GET och POST  
+        let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "POST", body)
+        console.log(checkSubscription)
+        
+        if(!checkSubscription) {
+
+            alert("You are already a subscriber")
+    
+         } else { 
+
+             alert("Welcome our new subscriber")
+
+         }
+    
+    }
+ 
 
 async function whichPageToDisplay() {
     
