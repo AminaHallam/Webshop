@@ -2,7 +2,15 @@
 main {
     display: flex;
     flex-direction: row;
-    height: auto;
+    min-height: 100vh;
+    width: 100%;
+}
+
+
+
+.space {
+  height: 20em; 
+
 }
 
 
@@ -35,22 +43,74 @@ main {
 
 
 
-.cartElement {
-  height: auto;
-    display: flex;
-    align-items: flex-end;
+.divForCart {
+    
+    display:flex;
 
 }
 
 
 
 
-@media (min-width: 768px) {
-  .addToCart {
-    padding: 0.25em 0.75em;
+
+
+
+  @media screen and (max-width: 600px) {
+    .main {
+      max-width: 100%;
+      display:flex;
+      align-items: center;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      
+    }
+    .productInfo {
+      
+      justify-content: center;
+      align-items: center;
+      
+      width: 330px;
+      
+    }
+
+
+    .textCont {
+      width: 350px;
+      margin-left: 20px;
+     
+    }
+
+
+    .productCont, .divForCart, .addToCart {
+      margin: 0px; 
+      float: none; 
+      margin-bottom: 5px;
+      
+      justify-content: center;
+      align-items: center;
+      align-self: center;
+    }
+
+    .productImage{
+      margin: 0px; 
+
+     height: 350px;
+     width: 400px;
+     justify-content: center;
+     margin-left: 10px;
+     margin-top: 12px;
+
+    }
+
+    .addToCart{
+      margin-right: 26px;
+      margin-bottom: 5px;
+    }
+
+    .cartButton {
+      margin-right: 10px;
+    }
   }
-}
-
 
 
 
@@ -96,14 +156,23 @@ main {
     margin-top: 70px;
 }
 
-
+.divForCart {
+  margin: 0px;
+  width: 100%;
+  justify-content: space-around
+}
 
 .cartButton {
   
-    margin-right: 20px;
+    margin-left: 20px;
     width: 130px;
+    margin: 0px;
 }
 
+
+.spaceDiv{
+  width: 50px
+}
 
 .addToCart:hover, .cartButton:hover {
   background: #F6F9FE;

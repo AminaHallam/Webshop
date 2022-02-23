@@ -1,7 +1,7 @@
 <?php
 
 
-class newsLetter{
+class Newsletter{
     public $id;
     public $title;
     public $text;
