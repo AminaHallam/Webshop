@@ -3,9 +3,6 @@
 try {
 
     include_once("./../controllers/orderController.php");
-    include_once("./../controllers/ProductController.php");
-    include_once("./../controllers/orderDetailsController.php");
-
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
 
@@ -70,43 +67,18 @@ try {
                 
             if($_SESSION["inloggedUser"]) {
 
-               $products = json_decode($_SESSION["myCart"]);
-
-                // Skapar order
                 $controller = new OrderController();
-                $lastInsertedId = json_encode($controller->add(json_decode($_POST["createOrder"])));
+                $result = json_encode($controller->add(json_decode($_POST["createOrder"])));
 
-                 if(!$lastInsertedId) {
+                if($result == true) {
+                    echo json_encode(true);
+                    exit; 
+
+                }else {
                     echo json_encode(false);
-                } 
-
-                // Lägger till produkter på order
-                $controller2 = new OrderDetailsController();
-                $addProducts = json_encode($controller2->addProducts($products, json_decode($lastInsertedId)));
-
-                if(!$addProducts) {
-                    throw new Exception("Products was not placed on order", 500);
-                    exit;
-                } 
-
-                // Uppdaterar unitsInStock på produkt
-                $controller3 = new ProductController();
-                $updateUnitsInstock = json_encode($controller3->update($products, "-"));
-
-                if(!$updateUnitsInstock) {
-                    throw new Exception("Updating qty in database failed", 500);
                     exit;
                 }
-
-                unset($_SESSION["myCart"]);
-
-                echo json_encode(true);
-                exit; 
-
-            } else {
-                echo json_encode(false);
-                exit;
-            }
+            } 
         } 
     }   
 

@@ -1,9 +1,12 @@
 <?php 
 
+try {
+
 include_once("./../classes/createInstanceFunctions.php");
 include_once("./../controllers/mainController.php");
 include_once("./../controllers/productController.php");
 include_once("./../controllers/userController.php");
+include_once("./../controllers/orderDetailsController.php");
 
 
 
@@ -45,20 +48,57 @@ class OrderController extends MainController {
     }
 
 
-    // Skapar order. 
     public function add($OrderInfo) {
-        try {
+        
+        $products = json_decode($_SESSION["myCart"]);
 
-            $createOrder = createOrder(null, $OrderInfo->StatusId, $OrderInfo->UserId, $OrderInfo->CourrierId, date('Y-m-d H:i:s'), null, null);   
-            
-            return $this->database->insert($createOrder);
- 
-        }   
-        catch(Exception $e) {
-            throw new Exception("This dosent work");
+        $createOrder = createOrder(null, $OrderInfo->StatusId, $OrderInfo->UserId, $OrderInfo->CourrierId, date('Y-m-d H:i:s'), null, null);   
+        
+        $lastInsertedId = $this->database->insert($createOrder);
+
+        if(!$lastInsertedId) {
+            throw new Exception("Order was not created", 500);
+            exit;
+        } 
+
+        // Lägger till produkter på order
+        $controller = new OrderDetailsController();
+        $addProducts = json_encode($controller->addProducts($products, json_decode($lastInsertedId)));
+
+        if(!$addProducts) {
+            throw new Exception("Products was not placed on order", 500);
+            exit;
+        } 
+
+        // Uppdaterar unitsInStock på produkt
+        $controller2 = new ProductController();
+        $updateUnitsInstock = json_encode($controller2->update($products, "-"));
+
+        if(!$updateUnitsInstock) {
+            throw new Exception("Updating qty in database failed", 500);
+            exit;
         }
+
+        unset($_SESSION["myCart"]);
+
+        return true;
+
     }
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function update(){
 
@@ -87,6 +127,10 @@ class OrderController extends MainController {
     }  
 
 
+}
+
+} catch(Exception $e) {
+    echo json_encode(array("Message" => $e->getMessage(), "Status" => $e->getCode()));
 }
 
 

@@ -48,7 +48,7 @@ async function getCart() {
 
 
     if(cart) {
-        cart = JSON.parse(cart)
+        cart = JSON.parse(cart) // Ta bort? Görs i makerequest redan? 
     } else { 
         cart = []
     }
@@ -306,7 +306,7 @@ async function getSubList() {
 
 
 
-async function createOrder(courrierId, userId/* , cart */) {
+async function createOrder(courrierId, userId) {
 
     let createOrder = {
         StatusId: "REG",
@@ -318,11 +318,10 @@ async function createOrder(courrierId, userId/* , cart */) {
     let myData = new FormData();
     myData.append("endpoint", "createOrder");
     myData.append("createOrder", JSON.stringify(createOrder));
-   /*  myData.append("products", JSON.stringify(cart)); */
 
     let resultOrder = await makeRequest("./../api/receivers/orderReceiver.php", "POST", myData)
     
-    if(resultOrder) {
+    if(resultOrder == true) {
         alert("Congratulations! Your order is placed")
         location.reload();
         return
@@ -347,6 +346,7 @@ async function getCourrier() {
 
 
 
+// Modifies quantity
 async function modifyQty(cartItem, direction) {
     
     let productId = cartItem.product.Id
@@ -355,7 +355,7 @@ async function modifyQty(cartItem, direction) {
     var body = new FormData()
     body.append("action", action)
     body.append("direction", direction)
-    body.append("productId", JSON.stringify(productId))
+    body.append("productId", productId)
  
     await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
 

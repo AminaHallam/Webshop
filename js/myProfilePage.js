@@ -204,7 +204,9 @@ async function setUnitsInStock() {
 
     let updateUnitsInStock = await makeRequest("./../api/receivers/productReceiver.php", "POST", myData)
 
-    if(updateUnitsInStock) {
+    console.log(updateUnitsInStock)
+
+    if(updateUnitsInStock == true) { // Annars blev även throw error true. 
         alert("Sucess!")
 
         location.reload();
@@ -231,7 +233,7 @@ async function updateUnitsInStock(direction, value) {
 
     console.log(result)
 
-    if(result) {
+    if(result == true) { // Annars blev även throw error true. 
         alert("Sucess!")
 
         location.reload();

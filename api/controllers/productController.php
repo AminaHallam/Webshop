@@ -1,7 +1,10 @@
 <?php 
 
+try {
+
 include_once("./../classes/createInstanceFunctions.php");
 include_once("./../controllers/mainController.php");
+include_once("./../controllers/userController.php");
 
 
 class ProductController extends MainController {
@@ -51,6 +54,14 @@ class ProductController extends MainController {
     // Uppdaterar unitsInStock på produkt (add/delete)
     public function updateProduct($productId, $direction, $value) {
 
+        $controller = new UserController();
+        $checkAdmin = ($controller->verifyAdmin());
+        
+        if(!$checkAdmin) {
+            throw new Exception("Action not allowed", 401);
+            exit;
+        } 
+
         $query = "UPDATE product
         SET UnitsInStock = UnitsInStock ".$direction.$value.
         " WHERE Id = ".$productId.";";
@@ -59,9 +70,32 @@ class ProductController extends MainController {
     }
         
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Sätter ett nytt värde på unitsInStock (set)
     public function inventoryProduct($newValue, $productId) {
        
+        $controller = new UserController();
+        $checkAdmin = ($controller->verifyAdmin());
+
+        if(!$checkAdmin) {
+            throw new Exception("Action not allowed", 401);
+            exit;
+        }
+
        $query = "UPDATE product p
        SET p.UnitsInStock = ".$newValue.
        " WHERE p.Id = ".$productId.";";
@@ -69,6 +103,58 @@ class ProductController extends MainController {
         return $this->database->update($query); 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+                    /* TESTING */
+
+    /////////////////////////////////////////////////////////////////
+
+    public function updateTestController() { 
+       
+        try{
+             if(isset($_SESSION['inloggedUser'])){
+                 $user = unserialize($_SESSION["inloggedUser"]);
+ 
+ 
+                 $subscriptionNewsToAdd = createSubscriptionNews(null, $user->Id , null, null); 
+                 return $this->database->insert($subscriptionNewsToAdd);
+          
+             }
+          
+         
+         } catch(Exception $e) {
+             throw new Exception("The information is not in correct format...", 500);
+         }
+     }
+ 
+
+
+    /////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
 
 
@@ -114,6 +200,10 @@ class ProductController extends MainController {
 
 
 
+}
+
+} catch(Exception $err) {
+    echo json_encode(array('Message' => $err->getMessage(), "Status" => $err->getCode()));
 }
 
 
