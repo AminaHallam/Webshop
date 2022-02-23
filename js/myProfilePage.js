@@ -12,6 +12,8 @@ async function onLoad() {
   const urlParams = new URLSearchParams(queryString);
   const id = urlParams.get("id");
     myprofilePage(id);
+
+    
 }
 
 
@@ -243,5 +245,41 @@ async function updateUnitsInStock(direction, value) {
 
 
 
+
+
+document.querySelector('#sendNews').addEventListener('click', createNewsLetter)
+
+async function createNewsLetter(e) {
+    e.preventDefault();
+    let title = document.getElementById('title').value;
+    let content = document.getElementById('content').value;
+    let success = document.querySelector('.success');
+    
+    const action = 'add'
+
+
+    const newsletter = {
+        Title: title, 
+        Text: content
+    }
+        
+    
+    let body = new FormData()
+    body.append('action', action)
+    body.append("news", JSON.stringify(newsletter))
+    
+
+    let result = await makeRequest("./../api/receivers/newsletterReceiver.php", "POST", body)
+    
+    console.log(result)
+
+    if(!result){
+        success.innerHTML = "Something went wrong"
+
+    }else{
+        success.innerHTML = "Your newsletter was succesfully created"
+    }
+
+}
 
 window.addEventListener('load', onLoad)

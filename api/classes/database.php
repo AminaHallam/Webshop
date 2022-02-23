@@ -49,7 +49,7 @@ class Database {
         $query = $this->db->prepare($sqlQuery);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction);
-
+        error_log($createInstanceFunction);
         return $result;
 
     }
