@@ -6,7 +6,6 @@ try {
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
        
-        
         if($_GET["action"] == "getAll") {
         
             $controller = new ProductController();
@@ -25,7 +24,7 @@ try {
             echo(json_encode($controller->getById((int)$_GET["id"])));
             exit;
         
-
+        }
 
     } else if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -105,7 +104,7 @@ try {
         }  
 
     }
-} 
+ 
 
 }catch(Exception $err) {
     echo json_encode(array('Message' => $err->getMessage(), "Status" => $err->getCode()));
