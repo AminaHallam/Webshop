@@ -2,9 +2,11 @@
 
 try {
     
-    session_start();
+    
 
     include_once("./../controllers/productController.php");
+
+/*     session_start(); */
 
     if($_SERVER["REQUEST_METHOD"] == "GET") { 
 
