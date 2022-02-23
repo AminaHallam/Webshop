@@ -9,7 +9,7 @@ async function onLoad() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const url = urlParams.get('id')
-    
+    getAllCategories();
     getCategoryFromId(url)
     
     renderProductsFromCategory(url)
