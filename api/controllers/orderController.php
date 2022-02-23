@@ -52,6 +52,11 @@ class OrderController extends MainController {
         
         $products = json_decode($_SESSION["myCart"]);
 
+        if(!$products) {
+            throw new Exception("Cart is empty", 500);
+            exit;
+        }
+
         $createOrder = createOrder(null, $OrderInfo->StatusId, $OrderInfo->UserId, $OrderInfo->CourrierId, date('Y-m-d H:i:s'), null, null);   
         
         $lastInsertedId = $this->database->insert($createOrder);

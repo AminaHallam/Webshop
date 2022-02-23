@@ -31,7 +31,7 @@ class ProductController extends MainController {
 
     
 
-    // Uppdaterar unitsInStock på produkt vid orderläggning (add/delete)
+    // Uppdaterar unitsInStock på produkt vid orderläggning (add/delete) 
     public function update($products, $direction) {
         
         for ($i=0; $i < count($products); $i++) { 
@@ -51,6 +51,7 @@ class ProductController extends MainController {
     }
 
 
+   
     // Uppdaterar unitsInStock på produkt (add/delete)
     public function updateProduct($productId, $direction, $value) {
 
@@ -71,20 +72,7 @@ class ProductController extends MainController {
         
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // Flytta query till database när funktionen där är klar
     // Sätter ett nytt värde på unitsInStock (set)
     public function inventoryProduct($newValue, $productId) {
        

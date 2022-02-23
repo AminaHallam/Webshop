@@ -22,7 +22,6 @@ try {
                 exit;
             }
 
-            
             echo(json_encode($controller->getById((int)$_GET["id"])));
             exit; 
 
@@ -64,21 +63,26 @@ try {
     }  else if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if($_POST["endpoint"] == "createOrder") {
-                
-            if($_SESSION["inloggedUser"]) {
 
-                $controller = new OrderController();
-                $result = json_encode($controller->add(json_decode($_POST["createOrder"])));
+            if($_POST["createOrder"]) {
 
-                if($result == true) {
-                    echo json_encode(true);
-                    exit; 
+                if($_SESSION["inloggedUser"]) {
 
-                }else {
-                    echo json_encode(false);
-                    exit;
-                }
-            } 
+                    $controller = new OrderController();
+                    $result = json_encode($controller->add(json_decode($_POST["createOrder"])));
+    
+                    if($result == true) {
+                        echo json_encode(true);
+                        exit; 
+    
+                    }else {
+                        echo json_encode(false);
+                        exit;
+                    }
+                } 
+
+            }        
+            
         } 
     }   
 
