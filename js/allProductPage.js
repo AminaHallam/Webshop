@@ -51,12 +51,16 @@ async function renderProducts(list){
         let productContainer = document.createElement("div")
         productContainer.classList.add("productContainer")
         let title = document.createElement("h2")
+        title.classList.add("productTitle")
         title.innerHTML = element.name;
-        let description = document.createElement("p")
-        description.innerHTML = element.description;
+        /* let description = document.createElement("p")
+        description.classList.add("productDescription")
+        description.innerHTML = element.description; */
         let unitPrice = document.createElement("p")
+        unitPrice.classList.add("productUnitPrice")
         unitPrice.innerHTML = element.unitPrice + " €";
         let image = document.createElement("img")
+        image.classList.add("collectionImage")
         image.src = "./assets/" + element.image
 
         let avaliableUnits = document.createElement('p')
@@ -69,7 +73,7 @@ async function renderProducts(list){
         image.addEventListener("click", () => {productPage(element)}) 
 
         main.append(productContainer)
-        productContainer.append(title, description, unitPrice, image, avaliableUnits)
+        productContainer.append( /* description, */ image, title, unitPrice, avaliableUnits)
     }
 
 
