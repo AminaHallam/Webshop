@@ -1,3 +1,137 @@
+/* Main - common? */
+
+
+main {
+/*   margin-top: 140px; */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* News image section */
+
+.h1 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 20px;
+  background-color: #EDEDE9;
+}
+
+.imageDiv {
+  display: block;
+  width: 100%;
+  overflow-y: auto;
+  /* overflow:auto; */
+  padding: 40px 40px;
+  background-color: #EDEDE9;
+  cursor: pointer;
+}
+
+/* Funkar bara på mobil-siter*/
+.imageDiv::-webkit-scrollbar {
+  display: none;
+}
+
+.imageSlider {
+  display: block; 
+  white-space: nowrap; 
+}
+
+.imageScroller {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.imageScroller img {
+  width: 250px; 
+  max-height: 250px;
+  min-height: 250px;
+}
+
+/* Hero-carousel */
+
+.gallery {
+	padding: 1rem;
+	display: grid;
+    background-color: white;
+	grid-template-columns: repeat(10, 80vw);
+	grid-template-rows: 1fr;
+	grid-column-gap: 1rem;
+	grid-row-gap: 1rem;
+	overflow: scroll;
+	height: 70vh;
+   
+	scroll-snap-type: both mandatory;
+	scroll-padding: 1rem;
+  object-fit: scale-down;
+  cursor: pointer;
+}
+
+.gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.active {
+	scroll-snap-type: unset;
+}
+
+.carousel {
+	scroll-snap-align: center;
+	display: inline-block;
+	border-radius: 3px;
+	font-size: 0;
+}
+
+#photo1 {
+    background-image:url("./../assets/abKnowledge.jpg");
+    background-size: cover;
+    height: 100%;
+    width: 100%
+}
+
+#photo2 {
+    background-image:url("./../assets/womanStrongBianca2.jpg");
+    background-size: cover;
+   
+    object-fit: scale-down;
+}
+
+#photo3 {
+    background-image:url("./../assets/figSometimesIFeelTransparent.jpg");
+    background-size: cover;
+    height: 100%;
+    width: 100%
+}
+
+#photo4 {
+    background-image:url("./../assets/wildCountryDreams.png");
+    background-size: cover;
+    height: 100%;
+    width: 100%
+}
+
+#photo5 {
+    background-image:url("./../assets/figDylan.JPG");
+    background-size: cover;
+    height: 100%;
+    width: 100%
+}
+
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
 /* Style for Newsletter */
 
 .container {
