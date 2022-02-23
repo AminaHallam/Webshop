@@ -302,4 +302,18 @@ for (let i = 0; i < renderSubList.length; i++) {
 
 }
 
+
+
+
+
+
+
+async function getorderDetails(id) {
+
+    const action = "getorderDetails"
+
+    let result = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}`, "GET")
+    console.log(result)
+}
+
 window.addEventListener('load', onLoad)
