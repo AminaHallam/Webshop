@@ -352,12 +352,14 @@ async function modifyQty(cartItem, direction) {
     let productId = cartItem.product.Id
     const action = "updateCart"
 
+
     var body = new FormData()
     body.append("action", action)
     body.append("direction", direction)
     body.append("productId", productId)
  
     await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
+
 
 
     renderCart();

@@ -27,20 +27,15 @@ class SubscriptionNewsController extends MainController {
         "SELECT *
         FROM `subscriptionnews`
         WHERE subscriptionnews.UserID IS NULL;"; 
-
-        
    
         $subscriberLoggedIn = $this->database->freeQuery($query, $this->createSubscriptionNews);
         $subscriberGuest = $this->database->freeQuery($query2, $this->createSubscriptionNews);
 
-        error_log(serialize($subscriberLoggedIn));
-        //error_log(serialize($subscriberGuest));
+        
         
         return $allSubscribers = array_merge($subscriberLoggedIn, $subscriberGuest);
 
-        //return $allSubscribers; 
-        //error_log(serialize($allSubscribers));
-
+       
        
     }
 
