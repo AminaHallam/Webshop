@@ -77,7 +77,7 @@ class OrderController extends MainController {
 
         // Uppdaterar unitsInStock på produkt
         $controller2 = new ProductController();
-        $updateUnitsInstock = json_encode($controller2->update($products, "-"));
+        $updateUnitsInstock = json_encode($controller2->updateQtyProductOrder($products, "-"));
 
         if(!$updateUnitsInstock) {
             throw new Exception("Updating qty in database failed", 500);

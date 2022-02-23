@@ -28,32 +28,48 @@ class ProductController extends MainController {
     public function add($entity) {
 
     }
+    // Admin - Sätter unitsInStock på produkt  (Set)
+    public function update($newValue, $product) {
+       
+        $controller = new UserController();
+        $checkAdmin = ($controller->verifyAdmin());
 
-    
+        if(!$checkAdmin) {
+            throw new Exception("Action not allowed", 401);
+            exit;
+        }
 
-    // Uppdaterar unitsInStock på produkt vid orderläggning (add/delete) 
-    public function update($products, $direction) {
+        $productToUpdate = createProduct((int)$product->Id, "'$product->name'" , "'$product->description'", (int)$product->unitPrice, (int)$newValue, "'$product->image'"); 
+        $result = $this->database->update($productToUpdate); 
+        
+        return $result;
+
+    }
+
+    // Uppdaterar unitsInStock på produkter när ordern är lagd
+    public function updateQtyProductOrder($products, $direction) {
         
         for ($i=0; $i < count($products); $i++) { 
                 
             $product = $products[$i];
 
-           $query = "UPDATE product
-           SET UnitsInStock = UnitsInStock ".$direction.$product->quantity.
-           " WHERE Id = ".$product->product->Id.";";
+            $name = $product->product->name;
+            $description = $product->product->description;
+            $image = $product->product->image;
 
-           $updatedProducts = $this->database->update($query); 
+            $query = "UPDATE product
+            SET Id = ".$product->product->Id.", name = "."'$name'".", description = "."'$description'".", unitPrice = ".(int)$product->product->unitPrice.", unitsInStock = unitsInStock ".$direction.$product->quantity.", image = "."'$image'"." 
+            WHERE Id = ".$product->product->Id.";";
 
+            $updatedProducts = $this->database->freeQuery($query, $this->createFunction);
         }
 
         return $updatedProducts;
 
     }
 
-
-   
-    // Uppdaterar unitsInStock på produkt (add/delete)
-    public function updateProduct($productId, $direction, $value) {
+    // Admin -  Uppdaterar unitsInStock på produkt (add/delete)
+    public function updateDirection($product, $direction, $value) {
 
         $controller = new UserController();
         $checkAdmin = ($controller->verifyAdmin());
@@ -64,79 +80,16 @@ class ProductController extends MainController {
         } 
 
         $query = "UPDATE product
-        SET UnitsInStock = UnitsInStock ".$direction.$value.
-        " WHERE Id = ".$productId.";";
+        SET Id = ".$product->Id.", name = "."'$product->name'".", description = "."'$product->description'".", unitPrice = ".(int)$product->unitPrice.", unitsInStock = unitsInStock ".$direction.(int)$value.", image = "."'$product->image'"." 
+         WHERE Id = ".$product->Id.";";
 
-        return $this->database->update($query); 
+        return $this->database->freeQuery($query, $this->createFunction);
     }
         
 
 
-    // Flytta query till database när funktionen där är klar
-    // Sätter ett nytt värde på unitsInStock (set)
-    public function inventoryProduct($newValue, $productId) {
-       
-        $controller = new UserController();
-        $checkAdmin = ($controller->verifyAdmin());
-
-        if(!$checkAdmin) {
-            throw new Exception("Action not allowed", 401);
-            exit;
-        }
-
-       $query = "UPDATE product p
-       SET p.UnitsInStock = ".$newValue.
-       " WHERE p.Id = ".$productId.";";
-       
-        return $this->database->update($query); 
-
-    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-                    /* TESTING */
-
-    /////////////////////////////////////////////////////////////////
-
-    public function updateTestController() { 
-       
-        try{
-             if(isset($_SESSION['inloggedUser'])){
-                 $user = unserialize($_SESSION["inloggedUser"]);
- 
- 
-                 $subscriptionNewsToAdd = createSubscriptionNews(null, $user->Id , null, null); 
-                 return $this->database->insert($subscriptionNewsToAdd);
-          
-             }
-          
-         
-         } catch(Exception $e) {
-             throw new Exception("The information is not in correct format...", 500);
-         }
-     }
- 
-
-
-    /////////////////////////////////////////////////////////////
 
 
 
