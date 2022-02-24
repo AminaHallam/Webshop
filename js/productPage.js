@@ -135,66 +135,6 @@ async function addToCart(product) {
 }
 
 
-
-// Lägger till produkten i kundvagnen (SESSION)
-/* async function addToCart(product) {
-    
-    const action = "getCart"
-
-    let cart = await makeRequest(`./../api/receivers/cartReceiver.php?action=${action}`, "GET")
-
-    if(cart) {
-        cart = JSON.parse(cart) 
-    } else {
-        cart = []
-    }
-
-    let index = cart.findIndex((cartItem) => { 
-
-        if(cartItem.product.Id == product.Id) {
-            
-            if(cartItem.quantity >= product.unitsInStock) {
-                alert("Sorry, we do not have more of this product available for reservation")
-                return index = false
-            }
-
-            return true
-        }
-
-    })
-
-    if(index < 0) {
-        cart.push({
-            product: product, 
-            quantity: 1
-        })
-
-
-        alert(product.name + " is added to cart")
-
-    } else {
-        cart[index].quantity++
-
-        alert(product.name + " is added to cart")
-    }
-
-
-    const push = "updateCart"
-
-    var body = new FormData()
-    body.append("action", push)
-    body.append("cart", JSON.stringify(cart))
-
-
-    await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
-
-
-    printNrOfElements();
-
-} */
-
-
-
 window.addEventListener('load', onLoad)
 
 

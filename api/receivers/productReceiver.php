@@ -48,7 +48,8 @@ try {
                 }
 
                 $controller2 = new ProductController();
-                echo (json_encode($controller2->inventoryProduct($newValue, $productId)));
+                echo (json_encode($controller2->update($newValue, $productDb)));
+
                 exit;
 
             } else {
@@ -88,7 +89,7 @@ try {
                     }
 
                     $controller2 = new ProductController();
-                    echo (json_encode($controller2->updateProduct($productId, $direction, $value)));
+                    echo (json_encode($controller2->updateDirection($productDb, $direction, $value)));
                     exit;
 
                 } else {

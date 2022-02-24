@@ -47,73 +47,44 @@ class Database {
     public function freeQuery($sqlQuery, $createInstanceFunction) {
         
         $query = $this->db->prepare($sqlQuery);
-        $query->execute();
+        $response = $query->execute();
         $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction);
-        error_log($createInstanceFunction);
-        return $result;
-
-    }
-
-
-    public function update($sqlQuery) {
-
-        $query = $this->db->prepare($sqlQuery);
-        $result = $query->execute();
-
+        
         if($result) {
+            return $result;
+
+        } else if($response) {
             return true;
+
         } else {
             return false;
         }
 
     }
+ 
 
-                            /* TESTING */
-
-/////////////////////////////////////////////////////////////////////////////
-    public function updateTest($entity) {
+    public function update($entity) {
        
         $columns = "";
-        $columnsAmount = ""; 
-        $values = [];
-
+      
         foreach ((array)$entity as $key => $value) {
-            if ($key != "Id") {
-                $columns .= $key . ",";
-                $columnsAmount .= "?,"; 
-                array_push($values, $value);
-            }
+            $columns .= "$key = $value, ";  
         }
         
-        $columns = substr($columns, 0 , -1);
-        $columnsAmount = substr($columnsAmount, 0 , -1);
-        
-/*      error_log(count($values));
-        error_log(json_encode($values));
-        error_log("detta är antalet kolumner " .$columns); */
-        
-        $query = $this->db->prepare("UPDATE ". $this->selectedTable ." (" .$columns. ") VALUES (" . $columnsAmount . ")");
+        $columns = substr($columns, 0 , -2);
 
-        
-        $status = $query->execute($values);
-
+        $query = $this->db->prepare("UPDATE ". $this->selectedTable ." SET " .$columns. " WHERE Id= ".$entity->Id.";");
+        $status = $query->execute();
 
         if(!$status) {
-            
             return false; 
             
         } else {
-
-            return "Insert into ".$this->selectedTable. " was a success if no created Id was expected!";
+            return true;
         }
-
 
     }
     
-/////////////////////////////////////////////////////////////////////////////
-
-
-
 
 
     public function insert($entity) {
