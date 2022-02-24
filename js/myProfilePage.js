@@ -24,16 +24,18 @@ async function getAllLoggedInSubscribers(){
     let allSubscribers = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "GET")
     return allSubscribers;
 
-}
+} 
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut);
 
-document.getElementById("submitClick").addEventListener("click", addSubscriptionNews)
+ document.getElementById("sendNews").addEventListener("click", addSubscriptionNews); 
+
 
 
 
 async function addSubscriptionNews(e) {
+
     e.preventDefault();
     const action = "addSubscriptionNews";
 
@@ -86,7 +88,9 @@ async function addSubscriptionNews(e) {
          }
     
     }
+
 }
+
 
 async function whichPageToDisplay() {
     
@@ -224,7 +228,7 @@ async function renderOrders(list) {
       bigContainer.appendChild(row)
     } 
   
-  }
+}
 
 
 

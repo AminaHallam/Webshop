@@ -7,8 +7,8 @@ async function onLoad() {
     await getUser();
     await showCorrectLayout();
     await printNrOfElements();
+    /* await getAllLoggedInSubscribers(); */
     await getAllCategories();
-
 }
 
 
@@ -17,6 +17,16 @@ async function onLoad() {
 
 /* verifyAdmin();
 getUser(); */
+
+// Hamburgermeny
+const hamburger = document.querySelector(".hamburgerMenu");
+const menu = document.querySelector(".contactDiv");
+
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    menu.classList.toggle("active");
+
+});
 
 
 
@@ -36,13 +46,12 @@ async function addSubscriptionNews(e) {
         FirstName: registerFirstname,
         Email: registerEmail,
     }
-
-   
+    
     // Mix av GET och POST
     var body = new FormData()
     body.append("action", action)
     body.append("subscriber", JSON.stringify(subscriber))
- 
+
 
     let getLoggedInUser = await getUser(); 
    
@@ -62,7 +71,7 @@ async function addSubscriptionNews(e) {
         }
 
 
-    }else{
+    } else {
         // Mix av GET och POST  
         let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "POST", body)
         console.log(checkSubscription)
@@ -78,16 +87,15 @@ async function addSubscriptionNews(e) {
          }
     
     }
+
  
- 
+
 }
 
 
 
 
-
-
- // Hämtar alla produkter som tillhör en specifik kategori
+/*  Hämtar alla produkter som tillhör en specifik kategori
 async function getCategoryFromId(idToGet) {
     const action = "getById";
     let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET")
@@ -97,9 +105,7 @@ async function getCategoryFromId(idToGet) {
         console.log(specificCategory.categoryId)
     }
 }
- 
-
-
+ */
 
 /* Kolla om man fortsätta på funktionen med att slida vidare  */
 
@@ -134,5 +140,5 @@ slider.addEventListener('mousemove', e => {
 
 
 
-window.addEventListener('load', onLoad) 
+window.addEventListener('load', onLoad)
 
