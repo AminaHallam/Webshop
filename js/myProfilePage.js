@@ -6,7 +6,7 @@ async function onLoad() {
     await printNrOfElements();
     await whichPageToDisplay();
     await getAllCategories();
-
+    
     await renderSubscribers();
 
     
@@ -30,6 +30,7 @@ document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut);
 
 document.getElementById("submitClick").addEventListener("click", addSubscriptionNews)
+
 
 
 async function addSubscriptionNews(e) {
@@ -85,7 +86,7 @@ async function addSubscriptionNews(e) {
          }
     
     }
- 
+}
 
 async function whichPageToDisplay() {
     
@@ -398,13 +399,6 @@ async function createNewsLetter(e) {
 }
 
 
-async function getorderDetails(id) {
-
-    const action = "getorderDetails"
-
-    let result = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}`, "GET")
-    console.log(result)
-}
 
 window.addEventListener('load', onLoad)
 
