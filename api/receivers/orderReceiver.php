@@ -3,9 +3,6 @@
 try {
 
     include_once("./../controllers/orderController.php");
-    include_once("./../controllers/ProductController.php");
-    include_once("./../controllers/orderDetailsController.php");
-
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
 
@@ -25,7 +22,6 @@ try {
                 exit;
             }
 
-            
             echo(json_encode($controller->getById((int)$_GET["id"])));
             exit; 
 
@@ -67,46 +63,26 @@ try {
     }  else if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if($_POST["endpoint"] == "createOrder") {
-                
-            if($_SESSION["inloggedUser"]) {
 
-               $products = json_decode($_SESSION["myCart"]);
+            if($_POST["createOrder"]) {
 
-                // Skapar order
-                $controller = new OrderController();
-                $lastInsertedId = json_encode($controller->add(json_decode($_POST["createOrder"])));
+                if($_SESSION["inloggedUser"]) {
 
-                 if(!$lastInsertedId) {
-                    echo json_encode(false);
+                    $controller = new OrderController();
+                    $result = json_encode($controller->add(json_decode($_POST["createOrder"])));
+    
+                    if($result == true) {
+                        echo json_encode(true);
+                        exit; 
+    
+                    }else {
+                        echo json_encode(false);
+                        exit;
+                    }
                 } 
 
-                // Lägger till produkter på order
-                $controller2 = new OrderDetailsController();
-                $addProducts = json_encode($controller2->addProducts($products, json_decode($lastInsertedId)));
-
-                if(!$addProducts) {
-                    throw new Exception("Products was not placed on order", 500);
-                    exit;
-                } 
-
-                // Uppdaterar unitsInStock på produkt
-                $controller3 = new ProductController();
-                $updateUnitsInstock = json_encode($controller3->update($products, "-"));
-
-                if(!$updateUnitsInstock) {
-                    throw new Exception("Updating qty in database failed", 500);
-                    exit;
-                }
-
-                unset($_SESSION["myCart"]);
-
-                echo json_encode(true);
-                exit; 
-
-            } else {
-                echo json_encode(false);
-                exit;
-            }
+            }        
+            
         } 
     }   
 
