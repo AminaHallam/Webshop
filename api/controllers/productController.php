@@ -28,85 +28,54 @@ class ProductController extends MainController {
     public function add($entity) {
 
     }
-    // Admin - Sätter unitsInStock på produkt  (Set)
+
+
     public function update($newValue, $product) {
-       
-        $controller = new UserController();
-        $checkAdmin = ($controller->verifyAdmin());
+
+        $userController = new UserController();
+        $checkAdmin = ($userController->verifyAdmin());
 
         if(!$checkAdmin) {
             throw new Exception("Action not allowed", 401);
             exit;
         }
 
-        $productToUpdate = createProduct((int)$product->Id, "'$product->name'" , "'$product->description'", (int)$product->unitPrice, (int)$newValue, "'$product->image'"); 
+        if(strpos($newValue, '+') !== false || strpos($newValue, '-') !== false) {
+            
+            $newValue = (int)$product->unitsInStock + (int)$newValue;
+        } 
+
+        $productToUpdate = createProduct((int)$product->Id, $product->name , $product->description, (int)$product->unitPrice, (int)$newValue, $product->image); 
         $result = $this->database->update($productToUpdate); 
         
-        return $result;
-
+         return $result;
     }
 
+
+
+
     // Uppdaterar unitsInStock på produkter när ordern är lagd
-    public function updateQtyProductOrder($products, $direction) {
-        
+    public function updateQtyProductOrder($products) {
+
         for ($i=0; $i < count($products); $i++) { 
                 
             $product = $products[$i];
 
+            $newValue = $product->product->unitsInStock - $product->quantity; 
             $name = $product->product->name;
             $description = $product->product->description;
             $image = $product->product->image;
 
-            $query = "UPDATE product
-            SET Id = ".$product->product->Id.", name = "."'$name'".", description = "."'$description'".", unitPrice = ".(int)$product->product->unitPrice.", unitsInStock = unitsInStock ".$direction.$product->quantity.", image = "."'$image'"." 
-            WHERE Id = ".$product->product->Id.";";
-
-            $updatedProducts = $this->database->freeQuery($query, $this->createFunction);
+            $productToUpdate = createProduct((int)$product->product->Id, $name , $description, (int)$product->product->unitPrice, (int)$newValue, $image); 
+            $updatedProducts = $this->database->update($productToUpdate); 
         }
 
         return $updatedProducts;
-
     }
 
-    // Admin -  Uppdaterar unitsInStock på produkt (add/delete)
-    public function updateDirection($product, $direction, $value) {
-
-        $controller = new UserController();
-        $checkAdmin = ($controller->verifyAdmin());
-        
-        if(!$checkAdmin) {
-            throw new Exception("Action not allowed", 401);
-            exit;
-        } 
-
-        $query = "UPDATE product
-        SET Id = ".$product->Id.", name = "."'$product->name'".", description = "."'$product->description'".", unitPrice = ".(int)$product->unitPrice.", unitsInStock = unitsInStock ".$direction.(int)$value.", image = "."'$product->image'"." 
-         WHERE Id = ".$product->Id.";";
-
-        return $this->database->freeQuery($query, $this->createFunction);
-    }
-        
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    /* Special Queries */
-
-
-
-
-
-    /* Hämtar alla produkter som tillhör en specifik kategori */
     public function getProductsFromCategory($categoryID) { 
         $query = "SELECT p.Id, p.Name, p.Description, p.UnitPrice, p.UnitsInStock, p.Image
         FROM product p 
@@ -115,9 +84,6 @@ class ProductController extends MainController {
         WHERE pc.CategoryId = " . $categoryID. ";";
         return $this->database->freeQuery($query, $this->createFunction); 
     }  
-
-
-
 
 
 

@@ -9,9 +9,9 @@ class Order {
     public $ShippingDate;
     public $CustRecDate;
     
-/* 
-    public $products;  */
-    /* public $user;  */
+ 
+  /*public $products;  
+    public $user;  */
 
     function __construct($Id, $StatusId, $UserId, $CourrierId, $RegisterDate, $ShippingDate, $CustRecDate) {
         $this->Id = $Id;

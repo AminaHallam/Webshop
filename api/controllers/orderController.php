@@ -30,10 +30,8 @@ class OrderController extends MainController {
 
     public function getById($id) {
         
-        /* Hämtar bara ordern */
         $order = $this->database->fetchById($id, $this->createFunction); 
 
-        /* Hämtar usern som är kopplad till ordern */
         $userController = new UserController();
         $user = $userController->getUserFromOrder($id);
         $order->user = $user;
@@ -67,8 +65,8 @@ class OrderController extends MainController {
         } 
 
         // Lägger till produkter på order
-        $controller = new OrderDetailsController();
-        $addProducts = json_encode($controller->addProducts($products, json_decode($lastInsertedId)));
+        $orderDetailsController = new OrderDetailsController();
+        $addProducts = json_encode($orderDetailsController->addProducts($products, json_decode($lastInsertedId)));
 
         if(!$addProducts) {
             throw new Exception("Products was not placed on order", 500);
@@ -76,8 +74,8 @@ class OrderController extends MainController {
         } 
 
         // Uppdaterar unitsInStock på produkt
-        $controller2 = new ProductController();
-        $updateUnitsInstock = json_encode($controller2->updateQtyProductOrder($products, "-"));
+        $productController = new ProductController();
+        $updateUnitsInstock = json_encode($productController->updateQtyProductOrder($products));
 
         if(!$updateUnitsInstock) {
             throw new Exception("Updating qty in database failed", 500);
@@ -89,17 +87,6 @@ class OrderController extends MainController {
         return true;
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

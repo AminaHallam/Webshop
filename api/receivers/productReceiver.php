@@ -28,7 +28,7 @@ try {
 
     } else if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        if($_POST["action"] == "setUnitsInStock") {
+        if($_POST["action"] == "setQuantity") {
 
             if(isset($_POST["newValue"]) && isset($_POST["productId"])) {
                 
@@ -58,44 +58,65 @@ try {
             }
 
 
-        } else if($_POST["action"] == "updateUnitsInStock") {
+        }  else if($_POST["action"] == "addQuantity") {
 
             if(isset($_POST["value"]) && isset($_POST["productId"])) {
 
-                if(isset($_POST["direction"])) {
-                
-                    $direction = $_POST["direction"];
-                    $value = $_POST["value"];
-                    $productId = $_POST["productId"];
-                    $controller = new ProductController();
-                    $productDb = ($controller->getById($productId));
+                $value = $_POST["value"];
+                $productId = $_POST["productId"];
+                $controller = new ProductController();
+                $productDb = ($controller->getById($productId));
 
-                    if(!$productDb) {
-                        throw new Exception("Id does not match with DB", 401);
-                        exit;
-                    }
-
-                    if($value < 0) {
-                        throw new Exception("Value can't be minus", 401);
-                        exit;
-                    }
-
-                    if($direction == "-") {
-
-                        if($productDb->unitsInStock < $value ) {
-                            throw new Exception("Total quantity can't be minus", 401);
-                            exit;
-                        }
-                    }
-
-                    $controller2 = new ProductController();
-                    echo (json_encode($controller2->updateDirection($productDb, $direction, $value)));
-                    exit;
-
-                } else {
-                    throw new Exception("Missing direction", 401);
+                if(!$productDb) {
+                    throw new Exception("Id does not match with DB", 401);
                     exit;
                 }
+
+                if($value < 0) {
+                    throw new Exception("Value can't be minus", 401);
+                    exit;
+                }
+
+                $value = "+".$value;
+
+                $controller2 = new ProductController();
+                echo (json_encode($controller2->update($value, $productDb)));
+                exit;
+                
+            } else {
+                throw new Exception("Missing ID or value", 401);
+                exit;
+            } 
+        
+        }   else if($_POST["action"] == "deleteQuantity") {
+
+            if(isset($_POST["value"]) && isset($_POST["productId"])) {
+
+                $value = $_POST["value"];
+                $productId = $_POST["productId"];
+                $controller = new ProductController();
+                $productDb = ($controller->getById($productId));
+
+                if(!$productDb) {
+                    throw new Exception("Id does not match with DB", 401);
+                    exit;
+                }
+
+                if($value < 0) {
+                    throw new Exception("Value can't be minus", 401);
+                    exit;
+                }
+
+                if($productDb->unitsInStock < $value ) {
+                    throw new Exception("Total quantity can't be minus", 401);
+                    exit;
+                }
+
+                $value = "-".$value;
+
+                $controller2 = new ProductController();
+                echo (json_encode($controller2->update($value, $productDb)));
+                exit;
                 
             } else {
                 throw new Exception("Missing ID or value", 401);

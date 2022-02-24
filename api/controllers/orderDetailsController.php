@@ -22,9 +22,6 @@ class OrderDetailsController extends MainController {
     }
 
 
-
-
-
     public function getById($id) {
 
     }

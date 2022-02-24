@@ -50,16 +50,17 @@ class Database {
         $response = $query->execute();
         $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction);
         
-        if($result) {
-            return $result;
+        if($response) {
+            if($result) {
+                return $result;
 
-        } else if($response) {
-            return true;
+            } else {
+                return true;
+            }
 
         } else {
             return false;
         }
-
     }
  
 
@@ -68,10 +69,15 @@ class Database {
         $columns = "";
       
         foreach ((array)$entity as $key => $value) {
-            $columns .= "$key = $value, ";  
+
+            $value = json_encode($value);
+
+            $columns .= "$key = $value, "; 
         }
         
         $columns = substr($columns, 0 , -2);
+
+        error_log(serialize($columns));
 
         $query = $this->db->prepare("UPDATE ". $this->selectedTable ." SET " .$columns. " WHERE Id= ".$entity->Id.";");
         $status = $query->execute();
@@ -89,7 +95,6 @@ class Database {
 
     public function insert($entity) {
        
-       
         $columns = "";
         $columnsAmount = ""; 
         $values = [];
@@ -104,10 +109,6 @@ class Database {
         
         $columns = substr($columns, 0 , -1);
         $columnsAmount = substr($columnsAmount, 0 , -1);
-        
-/*         error_log(count($values));
-        error_log(json_encode($values));
-        error_log("detta är antalet kolumner " .$columns); */
         
         $query = $this->db->prepare("INSERT INTO ". $this->selectedTable ." (" .$columns. ") VALUES (" . $columnsAmount . ")");
 
