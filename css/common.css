@@ -3,9 +3,7 @@
     box-sizing: border-box;
     margin: 0px;
     padding: 0px; 
-
 }
-
 
 :root {
     --color1: #EDEDE9;
@@ -16,16 +14,11 @@
     --primaryFont: 'Montserrat', sans-serif;
 }
 
-
-
-
 body {
     font-family: var(--primaryFont);
     color: black; 
     min-height: 100vh;
 }
-
-
 
 header {
     position: relative;
@@ -45,13 +38,11 @@ header {
 
 .logoHeader img {
     max-width: 200px;
-    /*margin-right: 50px;*/
-    margin-top: 35px;
-    margin-left: 20px;
+    padding-top: 35px;
 }
  
 .containerHeader {
-    width: 100vw;
+    width: 100%; 
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -59,36 +50,54 @@ header {
  
 /* Parent to dropdown */ 
 #menu { 
-    /*padding: 4px;*/
     position: relative; 
     width: 130px;
     text-align: center;
     cursor: pointer;
-    margin-right: 20px;
+    padding-right: 15px;
 }
 
 .contactDiv {
-    justify-content: center;
-    width: 4em;
-    flex-direction: row;
     display: flex;
-    margin-top: 70px;
+    align-items: center;
+    justify-content: center;
+    padding-right: 50px;
+    width: 4em;
+    gap: 20px;
     font-weight: bold;
 }
 
+.hamburgerMenu {
+    display: none;
+    cursor: pointer;       
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: black;
+}
+
 .icons {
+    display: flex;
+    flex-direction: row;
     justify-content: flex-end;
     width: 4em;
-    flex-direction: row;
-    display: flex;
     margin-top: 70px;
-    margin-right: 80px;
+}
+
+.allIcons {
+    padding-right: 100px;
 }
 
 .fas {
     position: absolute;
-    margin-left: 6px;
-    margin-top: 2px;
+    padding-left: 5px;
+    padding-top: 2px;
 }
  
 /* Child to menu*/
@@ -121,12 +130,18 @@ ul, li {
     
 }
  
-li, a {
+li {
     color: black; 
     text-decoration: none;
     padding: 5px;
     transition: all 0.8s ease;
-   
+}
+
+a {
+    color: black; 
+    text-decoration: none;
+    transition: all 0.8s ease;
+
 }
 
 .adminIcons {
@@ -159,19 +174,13 @@ li, a {
     width: 26px; 
 }
 
-
-/* .fa-brands {
-    color: black;
-} */
-
-
 .qty {
     display: flex;
     position: absolute;
     justify-content: center;
     width: 15px;
     height: 15px;
-    right:115px;
+    right:125px;
     top:92px;
     font-size: 10px;
     border-radius: 50%;
@@ -241,6 +250,7 @@ footer {
 .copy {
     font-size: 14px;
     text-align: center;
+    padding-bottom: 5px;
 }
 
 
@@ -248,23 +258,143 @@ footer {
     display: none;
 }
 
+
 /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ 
-@media screen and (max-width:320px) 
-{ 
+@media screen and (max-width:320px) { 
+    
+    .logoHeader img {
+        max-width: 150px;
+    }        
 
 }
 
 /* smartphones, Android phones, landscape iPhone */
 @media screen and (max-width: 480px) { 
 
+    .logoHeader img {
+        max-width: 150px;
+    }        
+
 }
 
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
 @media screen and (max-width:600px) { 
+    
+    .logoHeader img {
+        width: 170px;
+    }        
+
+    header {
+        height: 130px;
+    }
+
+    .some.hidden {
+        display: none;
+    }
+
+    .contactInfo.hidden {
+        display: none;
+    }
+
+    .logoFooter img {
+        width: 100px;
+    }
+
+    .copy {
+        font-size: 10px;
+    }
+}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */ 
+@media screen and (max-width:800px) {
+ 
+    .logoHeader img {
+        max-width: 200px;
+    }    
+
+/* Hamburgermeny */
+
+    .hamburgerMenu {
+        display: block; 
+        flex-grow: auto;
+    }
+
+    .hamburgerMenu {
+        display: block;
+        padding-left: 40px;
+        padding-bottom: 40px;
+    }
+
+    .hamburgerMenu.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburgerMenu.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg)
+    }
+    .hamburgerMenu.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .contactDiv {
+        position: absolute;
+        left: -100%;
+        top: 100px;
+        flex-direction: column;
+        align-items: flex-start;
+        flex-basis: 100px;
+        background-color: #D5BDAF;
+        width: 20%;
+        object-fit: contain;
+
+        transition: 0.3s;
+        padding: 10px;
+    }
+
+    /* Fortsätt med att få hela boxen anpassad. flex?  */
+  /*   ul, li {
+        width: 20%;
+        background-color: white;   
+    }
+
+    #menu.nav-item {
+    } */
+
+    .nav-item {        
+        margin: 16px 0;
+    }
+
+    .contactDiv.active {
+        left: 0;
+    }
+
+    #accountIcon {
+        height: 27px;
+        width: 27px; 
+    }
+    
+    #cartIcon {
+        height: 22px;
+        width: 22px; 
+    }
+
+    .allIcons {
+        padding-right: 20px;
+    }
 
 }
 
 /* tablet, landscape iPad, lo-res laptops ands desktops */ 
-@media screen and (max-width:801px) {
+/* @media screen and (max-width:1100px) { */
+    
 
+/* tablet, landscape iPad, lo-res laptops ands desktops */ 
+@media screen and (max-width:1200px) {
+    
+    .allIcons {
+        padding-right: 30px;
+    }
+
+    .qty {
+        right: 45px;
+    } 
 }
