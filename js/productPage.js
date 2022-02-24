@@ -48,8 +48,6 @@ async function renderProduct(idToGet) {
 
 
     let main = document.getElementsByTagName("main")[0]; 
-
-   /*  main.innerHTML = ""; */
        
     let productCont = document.createElement("div")
     productCont.classList.add("productCont")
@@ -72,7 +70,7 @@ async function renderProduct(idToGet) {
     let addToCartButton = document.createElement('button'); 
     addToCartButton.classList.add('addToCart')
     addToCartButton.innerText = "Add"
-    addToCartButton.addEventListener("click", () => {addToCart(product)})
+    addToCartButton.addEventListener("click", () => {addToCart(product.Id)})
 
 
  
@@ -113,18 +111,13 @@ async function renderProduct(idToGet) {
 
 
 // Lägger till produkten i kundvagnen (SESSION)
-async function addToCart(product) {
+async function addToCart(productId) {
 
-    let productId = product.Id
-    let direction = "+"
-
-    const push = "updateCart"
+    const push = "addProduct"
 
     var body = new FormData()
     body.append("action", push)
-    body.append("direction", direction)
     body.append("productId", JSON.stringify(productId))
-
 
     let result =  await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
 

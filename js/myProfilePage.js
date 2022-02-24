@@ -228,14 +228,14 @@ async function renderOrders(list) {
 
 
 // Update product buttons/links
-document.querySelector(".updateProductButton").addEventListener("click", setUnitsInStock)
+document.querySelector(".updateProductButton").addEventListener("click", setQuantity)
 document.querySelector(".deleteQtyProductButton").addEventListener("click", () => {
     let deleteUnits =  document.querySelector(".deleteUnits").value
-    updateUnitsInStock("-", deleteUnits)})
+    deleteQuantity(deleteUnits)})
 
 document.querySelector(".addQtyProductButton").addEventListener("click", () => {
     let addUnits =  document.querySelector(".addUnits").value
-    updateUnitsInStock("+", addUnits)})
+    addQuantity(addUnits)})
 
 
 
@@ -256,12 +256,12 @@ document.querySelector(".toggle3").addEventListener("click", () => {
 
 
 // Set quantity on product
-async function setUnitsInStock() {
+async function setQuantity() {
 
     let updateUnits =  document.querySelector(".updateUnits").value
     let productId =  document.querySelector(".productId").value
 
-    let action = "setUnitsInStock"
+    let action = "setQuantity"
 
     let myData = new FormData()
     myData.append("action", action)
@@ -269,8 +269,6 @@ async function setUnitsInStock() {
     myData.append("productId", productId)
 
     let updateUnitsInStock = await makeRequest("./../api/receivers/productReceiver.php", "POST", myData)
-
-    console.log(updateUnitsInStock)
 
     if(updateUnitsInStock == true) { // Annars blev även throw error true. 
         alert("Sucess!")
@@ -284,14 +282,12 @@ async function setUnitsInStock() {
 
 
 
-// Update quantity on product (add/Delete)
-async function updateUnitsInStock(direction, value) {
-
+async function addQuantity(value) {
+    console.log(value)
     let productId =  document.querySelector(".productId").value
 
     let body = new FormData()
-    body.append("action", "updateUnitsInStock")
-    body.append("direction", direction)
+    body.append("action", "addQuantity")
     body.append("value", value)
     body.append("productId", productId)
 
@@ -299,7 +295,7 @@ async function updateUnitsInStock(direction, value) {
 
     console.log(result)
 
-    if(result == true) { // Annars blev även throw error true. 
+    if(result == true) { 
         alert("Sucess!")
 
         location.reload();
@@ -308,6 +304,57 @@ async function updateUnitsInStock(direction, value) {
         alert("Product not updated")
     }
 }
+
+async function deleteQuantity(value) {
+    console.log(value)
+    let productId =  document.querySelector(".productId").value
+
+    let body = new FormData()
+    body.append("action", "deleteQuantity")
+    body.append("value", value)
+    body.append("productId", productId)
+
+    let result = await makeRequest("./../api/receivers/productReceiver.php", "POST", body)
+
+    console.log(result)
+
+    if(result == true) {
+        alert("Sucess!")
+
+        location.reload();
+
+    } else {
+        alert("Product not updated")
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 async function renderSubscribers() {
