@@ -6,8 +6,8 @@ async function onLoad() {
     await printNrOfElements();
     await whichPageToDisplay();
     await getAllCategories();
-
-    await renderSubscribers(); 
+    
+    await renderSubscribers();
 
     
     const queryString = window.location.search;
@@ -32,7 +32,10 @@ document.querySelector(".logOut").addEventListener("click", logOut);
  document.getElementById("sendNews").addEventListener("click", addSubscriptionNews); 
 
 
- async function addSubscriptionNews(e) {
+
+
+async function addSubscriptionNews(e) {
+
     e.preventDefault();
     const action = "addSubscriptionNews";
 
@@ -85,7 +88,9 @@ document.querySelector(".logOut").addEventListener("click", logOut);
          }
     
     }
- } 
+
+}
+
 
 async function whichPageToDisplay() {
     
@@ -398,13 +403,6 @@ async function createNewsLetter(e) {
 }
 
 
-async function getorderDetails(id) {
-
-    const action = "getorderDetails"
-
-    let result = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}`, "GET")
-    console.log(result)
-}
 
 window.addEventListener('load', onLoad)
 

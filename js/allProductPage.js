@@ -30,17 +30,24 @@ async function getAllProducts() {
 async function renderProducts(list){
 
     const main = document.getElementsByTagName("main")[0]; 
-
+    let allproductsDiv = document.createElement("div")
+    allproductsDiv.classList.add("allproductsDiv")
+    let titleOfAllProducts = document.createElement("h2")
+    titleOfAllProducts.classList.add("titleOfAllProducts")
+    titleOfAllProducts.innerText = "All Products"
     
+    main.append(titleOfAllProducts)
+    
+
     if(list[0].categoryName) {
 
     let categoryContainer = document.createElement("div")
     categoryContainer.classList.add("categoryContainer")
-    let category = document.createElement("h2")
+    let category = document.createElement("h1")
     category.innerHTML = list[0].categoryName;
     
-    main.appendChild(categoryContainer)
-    categoryContainer.appendChild(category)
+    //main.appendChild(categoryContainer)
+    //categoryContainer.appendChild(category)
 
     }
 
@@ -72,7 +79,8 @@ async function renderProducts(list){
         }
         image.addEventListener("click", () => {productPage(element)}) 
 
-        main.append(productContainer)
+        main.append(allproductsDiv)
+        allproductsDiv.append(productContainer)
         productContainer.append( /* description, */ image, title, unitPrice, avaliableUnits)
     }
 
