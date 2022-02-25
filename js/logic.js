@@ -11,14 +11,15 @@ async function onLoad() {
     await getAllCategories();
 }
 
-
 // bör ligga i funk, inte i globalt skop, await 
 // sparas användare någonstans? 
 
 /* verifyAdmin();
 getUser(); */
 
-// Hamburgermeny
+
+// Hamburgermeny - lägg till på alla sidor!
+
 const hamburger = document.querySelector(".hamburgerMenu");
 const menu = document.querySelector(".contactDiv");
 
