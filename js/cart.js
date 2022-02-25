@@ -10,16 +10,24 @@ async function onLoad() {
     await getUser();
     await getCourrier()
     await getAllCategories();
+    burger();
 }
-
-
-
 
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)
 
+function burger() {
 
+    const hamburger = document.querySelector(".hamburgerMenu");
+    const menu = document.querySelector(".contactDiv");
+    
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menu.classList.toggle("active");
+    
+    });
+}
 
 
 
@@ -45,7 +53,6 @@ async function getCart() {
     const action = "getCart"
 
     let cart = await makeRequest(`./../api/receivers/cartReceiver.php?action=${action}`, "GET")
-
 
     if(cart) {
         cart = JSON.parse(cart) // Ta bort? Görs i makerequest redan? 
@@ -126,8 +133,6 @@ async function renderCart() {
         totalPrice.classList.add("totalpriceItem")
         totalPrice.innerHTML = cartItem.quantity * cartItem.product.unitPrice + " €"
 
-
-        // Jämför antalet i unitsinstock med det vi lagt till i carten. Om det inte finns mer tillgängligt i unitsinstock så tas plustecknet bort.
         cart.findIndex((shoppingCart) => { 
 
             if(shoppingCart.product.Id == cartItem.product.Id) {
@@ -226,7 +231,6 @@ async function renderCart() {
     newsButton.setAttribute("value", userInfo.Id)
     
     /* Total amount and button */
-
     let checkOutContainer = document.createElement("div")
     checkOutContainer.classList.add("checkOutContainer")
     let totalAmount = document.createElement("p")
@@ -276,8 +280,6 @@ async function addSubscriber() {
     body.append("action", addSub);
 
     let subscribeUser = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
-    
-    console.log(subscribeUser)
 
     if(!subscribeUser) {
 

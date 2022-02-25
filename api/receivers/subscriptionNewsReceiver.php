@@ -3,7 +3,6 @@
 try {
 
 include_once("./../controllers/subscriptionNewsController.php"); 
-//include_once("./../controllers/userController.php");
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
         

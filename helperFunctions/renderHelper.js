@@ -6,9 +6,7 @@ export function openMenu() {
     
 } 
 
-//const categories = getAllCategoriesAsList(); 
 
-/* makeRequest(); */
 /* Category */
 
 /* Hämtar alla kategorier */

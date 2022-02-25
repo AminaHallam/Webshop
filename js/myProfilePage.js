@@ -6,15 +6,25 @@ async function onLoad() {
     await printNrOfElements();
     await whichPageToDisplay();
     await getAllCategories();
-    
     await renderSubscribers();
 
-    
     const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const id = urlParams.get("id");
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get("id");
     myprofilePage(id);
+    burger();
+}
 
+function burger() {
+
+    const hamburger = document.querySelector(".hamburgerMenu");
+    const menu = document.querySelector(".contactDiv");
+    
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menu.classList.toggle("active");
+    
+    });
 }
 
 async function getAllLoggedInSubscribers(){
@@ -28,7 +38,6 @@ async function getAllLoggedInSubscribers(){
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut);
-
 document.getElementById("sendNews").addEventListener("click", addSubscriptionNews); 
 
 
@@ -48,7 +57,7 @@ async function addSubscriptionNews(e) {
     }
 
    
-    // Mix av GET och POST
+   
     var body = new FormData()
     body.append("action", action)
     body.append("subscriber", JSON.stringify(subscriber))
@@ -60,8 +69,7 @@ async function addSubscriptionNews(e) {
         var body = new FormData()
         body.append("action", action)
         
-        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "POST", body)
-        console.log(status) 
+        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
 
         if(!status) {
             alert("You are already a subscriber")
@@ -73,9 +81,8 @@ async function addSubscriptionNews(e) {
 
 
     }else{
-        // Mix av GET och POST  
-        let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "POST", body)
-        console.log(checkSubscription)
+        
+        let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
         
         if(!checkSubscription) {
 
@@ -115,13 +122,10 @@ async function whichPageToDisplay() {
 
 }
 
-//Hämtar ut alla ordrar
-async function myprofilePage() {
+    //Hämtar ut alla ordrar
+    async function myprofilePage() {
     const action = "getAll";
-    let order = await makeRequest(
-      `./../api/receivers/orderReceiver.php?action=${action}`,
-      "GET"
-    );
+    let order = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET");
   
     renderOrders(order);
     
@@ -130,51 +134,6 @@ async function myprofilePage() {
 
 
 
-/* Update quantity on product */
-
-
-
-// Get product
-async function getUnitsInStock() {
-
-    let getProduct = document.querySelector(".getProduct")
-
-    let products = await getAllProducts()
-    let overviewProduct = document.createElement("div")
-    overviewProduct.classList.add("overviewProduct")
-
-    document.querySelector(".getProductButton").addEventListener("click", () => {
-        
-        overviewProduct.innerHTML = "";
-
-        let productId =  document.querySelector(".productId").value
-        
-        for (let i = 0; i < products.length; i++) {
-        
-            const product = products[i];
-    
-            if(product.Id == productId) {
-    
-                let infoProductContainer = document.createElement("div")
-                infoProductContainer.classList.add("infoProductContainer")
-                let pId = document.createElement("p")
-                let pName = document.createElement("p")
-                let pQty = document.createElement("p")
-                let pImage = document.createElement("img")
-                pImage.classList.add("pImage")
-    
-                pId.innerText = "Id: " + product.Id
-                pName.innerText = "Name: " + product.name
-                pQty.innerText = "Current Qty: " + product.unitsInStock
-                pImage.src = "./assets/" + product.image
-    
-                getProduct.append(overviewProduct)
-                overviewProduct.append(pImage, infoProductContainer)
-                infoProductContainer.append(pId, pName, pQty)
-            }
-        }
-    })
-}
 
 
 async function renderOrders(list) {
@@ -218,9 +177,6 @@ async function renderOrders(list) {
         cell.classList.add('cell')
 
         cell.innerText = orderDetail
-        
-        //console.log(orderDetail)
-        
 
         row.appendChild(cell)
         row.appendChild(orderButton)
@@ -229,6 +185,9 @@ async function renderOrders(list) {
     } 
   
 }
+
+
+
 
 
 
@@ -241,7 +200,6 @@ document.querySelector(".deleteQtyProductButton").addEventListener("click", () =
 document.querySelector(".addQtyProductButton").addEventListener("click", () => {
     let addUnits =  document.querySelector(".addUnits").value
     addQuantity(addUnits)})
-
 
 
 
@@ -260,7 +218,53 @@ document.querySelector(".toggle3").addEventListener("click", () => {
 })
 
 
-// Set quantity on product
+
+
+
+async function getUnitsInStock() {
+
+    let getProduct = document.querySelector(".getProduct")
+
+    let products = await getAllProducts()
+    let overviewProduct = document.createElement("div")
+    overviewProduct.classList.add("overviewProduct")
+
+    document.querySelector(".getProductButton").addEventListener("click", () => {
+        
+        overviewProduct.innerHTML = "";
+
+        let productId =  document.querySelector(".productId").value
+        
+        for (let i = 0; i < products.length; i++) {
+        
+            const product = products[i];
+    
+            if(product.Id == productId) {
+    
+                let infoProductContainer = document.createElement("div")
+                infoProductContainer.classList.add("infoProductContainer")
+                let pId = document.createElement("p")
+                let pName = document.createElement("p")
+                let pQty = document.createElement("p")
+                let pImage = document.createElement("img")
+                pImage.classList.add("pImage")
+    
+                pId.innerText = "Id: " + product.Id
+                pName.innerText = "Name: " + product.name
+                pQty.innerText = "Current Qty: " + product.unitsInStock
+                pImage.src = "./assets/" + product.image
+    
+                getProduct.append(overviewProduct)
+                overviewProduct.append(pImage, infoProductContainer)
+                infoProductContainer.append(pId, pName, pQty)
+            }
+        }
+    })
+}
+
+
+
+
 async function setQuantity() {
 
     let updateUnits =  document.querySelector(".updateUnits").value
@@ -275,8 +279,8 @@ async function setQuantity() {
 
     let updateUnitsInStock = await makeRequest("./../api/receivers/productReceiver.php", "POST", myData)
 
-    if(updateUnitsInStock == true) { // Annars blev även throw error true. 
-        alert("Sucess!")
+    if(updateUnitsInStock == true) { 
+        alert("Sucess!"). 
 
         location.reload();
 
@@ -297,8 +301,6 @@ async function addQuantity(value) {
     body.append("productId", productId)
 
     let result = await makeRequest("./../api/receivers/productReceiver.php", "POST", body)
-
-    console.log(result)
 
     if(result == true) { 
         alert("Sucess!")
@@ -321,8 +323,6 @@ async function deleteQuantity(value) {
 
     let result = await makeRequest("./../api/receivers/productReceiver.php", "POST", body)
 
-    console.log(result)
-
     if(result == true) {
         alert("Sucess!")
 
@@ -332,32 +332,6 @@ async function deleteQuantity(value) {
         alert("Product not updated")
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -389,24 +363,6 @@ for (let i = 0; i < renderSubList.length; i++) {
     email.innerText = subList.Email 
     emailDiv.append(email)
     emailCont.append(emailDiv)
-    
-
-/* 
-    let firstNameDiv = document.createElement("div")
-    firstNameDiv.classList.add("firstNameDiv")
-    let firstName = document.createElement("p")
-    firstName.classList.add("firstNameSub")
-    firstName.innerText = subList.FirstName
-    
-    let emailDiv = document.createElement("div")
-    emailDiv.classList.add("emailDiv")
-    let email = document.createElement("p")
-    email.classList.add("emailSub")
-    email.innerText = subList.Email 
-    
-    firstNameDiv.append(firstName)
-    emailDiv.append(email)
-    allSubscribers.append(firstNameDiv, emailDiv) */
 
     }
 
@@ -424,7 +380,6 @@ async function createNewsLetter(e) {
     
     const action = 'add'
 
-
     const newsletter = {
         Title: title, 
         Text: content
@@ -437,11 +392,9 @@ async function createNewsLetter(e) {
     
 
     let result = await makeRequest("./../api/receivers/newsletterReceiver.php", "POST", body)
-    
-    console.log(result)
 
     if(!result){
-        success.innerHTML = "Something went wrong"
+        success.innerHTML = "Something went wrong, please try again!"
 
     }else{
         success.innerHTML = "Your newsletter was succesfully created"
