@@ -104,7 +104,15 @@ e.preventDefault();
     const isValid = validateInputs(registerPassword) 
     const validPw = validatePasswords(registerPassword, confirmPassword)
     const inputPwUser = sameInputs(registerEmail, registerPassword)
-    
+    const firstIsValid = validateRegistrationFormfName();
+    const lastIsValid = validateRegistrationFormlName();
+    const streetIsValid = validateRegistrationFormStreet();
+    const zipIsValid = validateRegistrationFormzip();
+    const cityIsValid = validateRegistrationFormCity();
+    const countryIsValid = validateRegistrationFormCountry();
+    const emailIsValid = validateRegistrationFormEmail();
+    const cCodeIsValid = validateRegistrationFormCcode();
+    const mobileIsValid = validateRegistrationFormMobile();
     
     /* If all these are true, the credentials  will be sent to PHP */
     
@@ -113,6 +121,57 @@ e.preventDefault();
         alert("You need to use more than 5 characters")
         return
     }
+
+    if(!firstIsValid) {
+        
+        alert('Make sure everything is filled out correctly before proceeding')
+        return;
+    }
+
+    
+    if(!lastIsValid) {
+    
+        alert('Make sure everything is filled out correctly before proceeding')
+        return;
+    }
+
+    
+    if(!streetIsValid) {
+     
+        alert('Make sure everything is filled out correctly before proceeding')
+        return;
+    }
+
+    
+    if(!zipIsValid) {
+        
+        alert('Make sure everything is filled out correctly before proceeding')
+        return;
+    }
+
+    
+    if(!countryIsValid) {
+        
+        alert('Make sure everything is filled out correctly before proceeding')
+        return;
+    }
+
+    
+    if(!cCodeIsValid) {
+       
+        alert('Make sure everything is filled out correctly before proceeding')
+        return;
+    }
+
+    
+    if(!mobileIsValid) {
+       
+        alert('Make sure everything is filled out correctly before proceeding')
+        return;
+    }
+
+
+    
     
     // If username and password are the same
     if(!inputPwUser) {
@@ -130,7 +189,9 @@ e.preventDefault();
 
     let emailCheck = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${registerEmail}`, "GET")
     if (!emailCheck) {
-        alert("The account already exists!")
+
+        alert("Account already exists")
+
         return 
     }
 
@@ -207,6 +268,169 @@ function sameInputs(username, password){
     }
         return true
 }
+
+//document.querySelector(".buttonCA").addEventListener('click', validateRegistrationForm)
+
+function validateRegistrationFormfName() {
+    var x = document.forms["registrationForm"]["firstname"].value;
+    
+    if (x == "" || x == null) {
+     
+      return false;
+    }else{
+        return true; 
+    }
+}
+
+
+function validateRegistrationFormlName() {
+    var x = document.forms["registrationForm"]["lastname"].value;
+    
+    if (x == "" || x == null) {
+     
+      return false;
+    }else{
+        return true; 
+    }
+}
+
+function validateRegistrationFormStreet() {
+    var x = document.forms["registrationForm"]["street"].value;
+    
+    if (x == "" || x == null) {
+     
+      return false;
+    }else{
+        return true; 
+    }
+}
+
+function validateRegistrationFormzip() {
+    var x = document.forms["registrationForm"]["zipcode"].value;
+    
+    if (x == "" || x == null) {
+     
+      return false;
+    }else{
+        return true; 
+    }
+}
+
+function validateRegistrationFormCity() {
+    var x = document.forms["registrationForm"]["city"].value;
+    
+    if (x == "" || x == null) {
+     
+      return false;
+    }else{
+        return true; 
+    }
+}
+
+function validateRegistrationFormCountry() {
+    var x = document.forms["registrationForm"]["country"].value;
+    
+    if (x == "" || x == null) {
+     
+      return false;
+    }else{
+        return true; 
+    }
+}
+
+function validateRegistrationFormEmail() {
+    var x = document.forms["registrationForm"]["email"].value;
+    
+    if (x == "" || x == null) {
+     
+      return false;
+    }else{
+        return true; 
+    }
+}
+
+
+
+function validateRegistrationFormCcode() {
+    var x = document.forms["registrationForm"]["countrycode"].value;
+    
+    if (x == "" || x == null) {
+     
+      return false;
+    }else{
+        return true; 
+    }
+}
+
+function validateRegistrationFormMobile() {
+    var x = document.forms["registrationForm"]["mobileNumber"].value;
+    
+    if (x == "" || x == null) {
+     
+      return false;
+    }else{
+        return true; 
+    }
+}
+   /*  let lastName = document.forms["registrationForm"]["lastName"].value;
+
+    if (lastName == "" || x == null) {
+        //alert("Lastname must be filled out");
+        return false;
+      }
+
+      let street = document.forms["registrationForm"]["street"].value;
+
+      if (street == "" || x == null) {
+          //alert("Street must be filled out");
+          return false;
+        }
+        let zipCode = document.forms["registrationForm"]["zipcode"].value;
+
+        if (zipCode == "" || x == null) {
+            //alert("Zipcode must be filled out");
+            return false;
+          }
+        
+          let city = document.forms["registrationForm"]["city"].value;
+
+          if (city == "" || x == null) {
+              //alert("Please enter city");
+              return false;
+            }
+
+            let country = document.forms["registrationForm"]["country"].value;
+
+            if (country == "" || x == null) {
+                //alert("Country must be filled out");
+                return false;
+              }
+
+              let email = document.forms["registrationForm"]["email"].value;
+
+              if (email == "" || x == null) {
+                  //alert("Email must be filled out");
+                  return false;
+                }
+
+                let countryCode = document.forms["registrationForm"]["countrycode"].value;
+
+                if (countryCode == "" || x == null) {
+                    //alert("Countrycode must be filled out");
+                    return false;
+                  }
+
+                  let mobile = document.forms["registrationForm"]["mobileNumber"].value;
+
+                  if (mobile == "" || x == null) {
+                      //alert("Mobile number must be filled out");
+                      return false;
+                    }
+
+                   
+                 */
+
+  
 
 
 window.addEventListener("load", onLoad);
