@@ -42,7 +42,7 @@ async function renderProducts(list){
     const main = document.getElementsByTagName("main")[0]; 
     let allproductsDiv = document.createElement("div")
     allproductsDiv.classList.add("allproductsDiv")
-    let titleOfAllProducts = document.createElement("h2")
+    let titleOfAllProducts = document.createElement("div")
     titleOfAllProducts.classList.add("titleOfAllProducts")
     titleOfAllProducts.innerText = "All Products"
     
@@ -75,6 +75,7 @@ async function renderProducts(list){
         image.src = "./assets/" + element.image
 
         let avaliableUnits = document.createElement('p')
+        avaliableUnits.classList.add('avaliableUnits')
         let unitsInStock = element.unitsInStock;
         if(unitsInStock > 0){
             avaliableUnits.innerHTML = 'Product avaliable to order'; 
@@ -87,11 +88,6 @@ async function renderProducts(list){
         allproductsDiv.append(productContainer)
         productContainer.append(image, title, unitPrice, avaliableUnits)
     }
-
-
-   
-
-
 }
 
 // Kika på om denna skall läggas in i helperfunctions istället
@@ -113,8 +109,6 @@ async function getAllProductsId() {
         const element = allProductsId[i]
 
     }  
-    
-    
 }
 
 
