@@ -107,7 +107,7 @@ async function whichPageToDisplay() {
         document.querySelector(".adminLayout").classList.add("none")
 
        let titleKund = document.createElement("h1")
-       titleKund.innerText ="Du har kommit till kundsidan!" 
+       titleKund.innerText ="Welcome to my pages!" 
        main.appendChild(titleKund)
 
        
