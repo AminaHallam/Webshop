@@ -8,7 +8,7 @@ class Product {
     public $unitsInStock;
     public $image;
 
-    /* public $quantity; */
+    public $quantity;
 
     function __construct($Id, $name, $description, $unitPrice, $unitsInStock, $image) {
         $this->Id = $Id;

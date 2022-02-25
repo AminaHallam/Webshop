@@ -30,6 +30,12 @@ class OrderController extends MainController {
 
         $createOrder = createOrder(null, $OrderInfo->StatusId, $OrderInfo->UserId, $OrderInfo->CourrierId, date('Y-m-d H:i:s'), null, null);   
         
+        // Tar bort adderade attribut som ligger i klassen order som inte tillhör instansen.
+        unset($createOrder->products);
+        unset($createOrder->user);
+        unset($createOrder->courrier);
+        unset($createOrder->status);
+
         $lastInsertedId = $this->database->insert($createOrder);
 
         if(!$lastInsertedId) {

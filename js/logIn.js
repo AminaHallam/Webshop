@@ -120,7 +120,7 @@ e.preventDefault();
 
     let emailCheck = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${registerEmail}`, "GET")
     if (!emailCheck) {
-        alert("Kontot finns redan")
+        alert("The account already exists!")
         return 
     }
 
@@ -155,13 +155,13 @@ e.preventDefault();
     console.log(addUser)
 
     if(addUser) {
-        alert("Ditt konto är skapat!")
+        alert("Your account has been created!")
         loginForm.classList.remove("hidden");
         createAccountForm.classList.add("hidden");
         return
     }
 
-    alert("Något gick fel")
+    alert("Something went wrong!")
 
 
 

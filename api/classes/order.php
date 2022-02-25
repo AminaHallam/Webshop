@@ -10,8 +10,11 @@ class Order {
     public $CustRecDate;
     
  
-  /*public $products;  
-    public $user;  */
+    public $products;  
+    public $user;
+    public $courrier;  
+    public $status;  
+
 
     function __construct($Id, $StatusId, $UserId, $CourrierId, $RegisterDate, $ShippingDate, $CustRecDate) {
         $this->Id = $Id;

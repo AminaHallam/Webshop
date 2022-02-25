@@ -48,6 +48,9 @@ class ProductController extends MainController {
         } 
 
         $productToUpdate = createProduct((int)$product->Id, $product->name , $product->description, (int)$product->unitPrice, (int)$newValue, $product->image); 
+
+        unset($productToUpdate->quantity);
+
         $result = $this->database->update($productToUpdate); 
         
          return $result;
@@ -80,6 +83,9 @@ class ProductController extends MainController {
             $image = $product->product->image;
 
             $productToUpdate = createProduct((int)$product->product->Id, $name , $description, (int)$product->product->unitPrice, (int)$newValue, $image); 
+            
+            unset($productToUpdate->quantity);
+
             $updatedProducts = $this->database->update($productToUpdate); 
         }
 

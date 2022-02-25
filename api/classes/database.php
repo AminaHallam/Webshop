@@ -77,8 +77,6 @@ class Database {
         
         $columns = substr($columns, 0 , -2);
 
-        error_log(serialize($columns));
-
         $query = $this->db->prepare("UPDATE ". $this->selectedTable ." SET " .$columns. " WHERE Id= ".$entity->Id.";");
         $status = $query->execute();
 
@@ -106,7 +104,7 @@ class Database {
                 array_push($values, $value);
             }
         }
-        
+
         $columns = substr($columns, 0 , -1);
         $columnsAmount = substr($columnsAmount, 0 , -1);
         
