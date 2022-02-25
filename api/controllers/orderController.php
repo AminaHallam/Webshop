@@ -7,6 +7,8 @@ include_once("./../controllers/mainController.php");
 include_once("./../controllers/productController.php");
 include_once("./../controllers/userController.php");
 include_once("./../controllers/orderDetailsController.php");
+include_once("./../controllers/courrierController.php"); 
+include_once("./../controllers/orderStatusController.php"); 
 
 
 
@@ -82,10 +84,20 @@ class OrderController extends MainController {
         $user = $userController->getUserFromOrder($id);
         $order->user = $user;
 
+        $courrierController = new courrierController(); 
+        $courrier = $courrierController->getCourrierFromOrder($id); 
+        $order->courrier = $courrier;
+
+        $orderStatusController = new orderStatusController(); 
+        $orderStatus = $orderStatusController->getOrderStatus($id); 
+        $order->orderStatus = $orderStatus; 
+
         /* Hämtar produkterna som är kopplade till det specifika orderidt - Lyckas inte med quantity */
         $productController = new ProductController();
         $products = $productController->getProductsFromOrder($id);
-        $order->products = $products;
+        //$order->products = $products;
+
+        
 
         return $order;
 

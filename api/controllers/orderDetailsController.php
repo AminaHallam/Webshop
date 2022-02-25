@@ -28,7 +28,10 @@ class OrderDetailsController extends MainController {
 
 
     public function getById($id) {
+
+        
         return $this->database->fetchById($id, $this->createFunction);
+
     }
 
 
@@ -57,6 +60,22 @@ class OrderDetailsController extends MainController {
         }
 
         return $addedProducts;
+
+    }
+
+
+    public function getOrderDetailsFromOrder($id) {
+
+        $query = "SELECT o.ProductID, o.OrderID, o.Quantity
+        FROM `orderdetails` o
+        JOIN `order` od
+        ON o.OrderID = od.Id
+        WHERE o.OrderID = ".$id.";";
+
+        $orderDetails = $this->database->freeQuery($query, $this->createOrderDetails); 
+
+        return $orderDetails; 
+
 
     }
 

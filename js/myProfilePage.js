@@ -8,6 +8,8 @@ async function onLoad() {
     await getAllCategories();
     await renderSubscribers();
 
+    await getUserByOrder(); 
+
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const id = urlParams.get("id");
@@ -131,6 +133,19 @@ async function whichPageToDisplay() {
     
   }
 
+
+
+// Hämtar Order/User by id 
+
+async function getUserByOrder(id) {
+
+    const action = "getById"; 
+    
+    let result = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${8}`, "GET"); 
+    
+    console.log(result) 
+    
+}
 
 
 
