@@ -132,49 +132,22 @@ class ProductController extends MainController {
         WHERE od.orderId = ".$orderId.";";
 
         $products =  $this->database->freeQuery($query, $this->createFunction); 
-
-        
-        $orderDetailsController = new OrderDetailsController();
-        $orderDetails = $orderDetailsController->getOrderDetailsFromOrder($orderId); 
-
-        //$orderDetailAndProductList = array_merge($products, $orderDetails); 
-
-        
-        //return $orderDetails;
         
         for ($i=0; $i < count($products); $i++) { 
+            
             $product = $products[$i]; 
+            $productId = $product->Id;
             
+            $orderDetailsController = new OrderDetailsController();
+            $orderDetails = $orderDetailsController->getOrderDetailsFromOrder($orderId, $productId); 
             
-            $key = array_search($product->Id, $orderDetails); 
-            
-            
-            error_log(serialize($key)); 
+            $quantity = $orderDetails[0]->quantity;
 
+            $product->quantity = $quantity; 
+
+            return $product;
+            
         }
-            
-
-            /* for ($i=0; $i < count($products); $i++) { 
-        
-                $product = $products[$i]; 
-
-                error_log(serialize($product->Id));
-        
-
-                for ($i=0; $i < count($orderDetails); $i++) { 
-            
-                    $orderDetail = $orderDetails[$i]; 
-
-
-
-                /* if($orderDetail->productId == $product->Id) {
-                
-            
-
-
-                } 
-
-        }  */
 
     }
 

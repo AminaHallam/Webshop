@@ -64,13 +64,15 @@ class OrderDetailsController extends MainController {
     }
 
 
-    public function getOrderDetailsFromOrder($id) {
+    public function getOrderDetailsFromOrder($orderId, $productId) {
 
-        $query = "SELECT o.ProductID, o.OrderID, o.Quantity
-        FROM `orderdetails` o
-        JOIN `order` od
-        ON o.OrderID = od.Id
-        WHERE o.OrderID = ".$id.";";
+        $query = "SELECT od.ProductID, od.OrderID, od.Quantity
+        FROM `orderdetails` od
+        JOIN `order` o
+        ON od.OrderID = o.Id
+        WHERE od.OrderID = ".$orderId." AND od.productId = ".$productId.";";
+
+        error_log(serialize($query));
 
         $orderDetails = $this->database->freeQuery($query, $this->createOrderDetails); 
 
