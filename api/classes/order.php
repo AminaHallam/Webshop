@@ -13,7 +13,7 @@ class Order {
     public $products;  
     public $user;
     public $courrier;  
-    public $status;  
+    public $orderStatus;  
 
 
     function __construct($Id, $StatusId, $UserId, $CourrierId, $RegisterDate, $ShippingDate, $CustRecDate) {

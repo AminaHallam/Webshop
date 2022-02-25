@@ -26,6 +26,10 @@ class CourrierController extends MainController {
 
     public function getById($id) {
 
+        $courrier = $this->database->fetchById($id, $this->createCourrier); 
+
+        return $courrier; 
+
     }
 
 
@@ -38,6 +42,17 @@ class CourrierController extends MainController {
     }
 
 
+
+
+    public function getCourrierFromOrder($id) { 
+       $query = "SELECT c.Id, c.CourrierName, c.Address, c.Email, c.CountryCode, c.StandardPhone, c.MobileNumber, c.Contact
+       FROM `courrier` c
+       JOIN `order` o
+       ON o.CourrierID = c.Id
+       WHERE o.id = ".$id.";";
+
+        return $this->database->freeQuery($query, $this->createCourrier);
+    }
 
 
 

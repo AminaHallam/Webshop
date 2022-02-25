@@ -133,15 +133,54 @@ class ProductController extends MainController {
 
         $products =  $this->database->freeQuery($query, $this->createFunction); 
 
+        
         $orderDetailsController = new OrderDetailsController();
-        $orderDetails = json_encode($orderDetailsController->getById($orderId));
+        $orderDetails = $orderDetailsController->getOrderDetailsFromOrder($orderId); 
+
+        //$orderDetailAndProductList = array_merge($products, $orderDetails); 
+
+        
+        //return $orderDetails;
+        
+        for ($i=0; $i < count($products); $i++) { 
+            $product = $products[$i]; 
+            
+            
+            $key = array_search($product->Id, $orderDetails); 
+            
+            
+            error_log(serialize($key)); 
+
+        }
+            
+
+            /* for ($i=0; $i < count($products); $i++) { 
+        
+                $product = $products[$i]; 
+
+                error_log(serialize($product->Id));
+        
+
+                for ($i=0; $i < count($orderDetails); $i++) { 
+            
+                    $orderDetail = $orderDetails[$i]; 
 
 
-    }  
+
+                /* if($orderDetail->productId == $product->Id) {
+                
+            
 
 
+                } 
+
+        }  */
+
+    }
 
 }
+
+
 
 } catch(Exception $err) {
     echo json_encode(array('Message' => $err->getMessage(), "Status" => $err->getCode()));
