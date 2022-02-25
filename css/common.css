@@ -17,7 +17,7 @@
 body {
     font-family: var(--primaryFont);
     color: black; 
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }
 
 header {
@@ -25,8 +25,9 @@ header {
     top: 0px;
     left: 0px;
     right: 0px;
+
     height: 130px;
-    width: 100vw;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
@@ -38,7 +39,7 @@ header {
 .logoHeader img {
     max-width: 250px;
     padding-top: 25px;
-    padding-left: 25px;
+/*     padding-left: 25px; */
 }
  
 .containerHeader {
@@ -99,7 +100,7 @@ header {
 }
 
 .allIcons {
-    padding-right: 100px;
+    padding-right: 60px;
 }
 
 .fas {
@@ -112,13 +113,6 @@ ul, li {
     list-style: none;
     color: black;
     background-color: white;    
-}
- 
-li {
-    color: black; 
-    text-decoration: none;
-    padding: 5px;
-    transition: all 0.8s ease;
 }
 
 a {
@@ -139,6 +133,7 @@ a {
     padding-right: 5px;
 }
  
+
 .adminIcons {
     display: flex;
 }
@@ -147,28 +142,35 @@ a {
 #accountIcon {
     height: 34px;
     width: 34px; 
+    margin-left: 5px;
 }
 
 #cartIcon {
     height: 30px;
     width: 30px; 
+    margin-left: 5px;
 }
 
-/* Dessa är ej stylade responsivt */
-
+.adminSetting {
+    display: none;
+}
+ 
 #adminIcon {
     height: 34px;
     width: 34px; 
+    margin-left: 5px;
 }
 
 #orderIcon {
     height: 34px;
     width: 34px; 
+    margin-left: 5px;
 }
 
 #logOutIcon {
     height: 34px;
-    width: 34px; 
+    width: 34px;
+    margin-left: 5px;
 }
 
 .qty {
@@ -192,7 +194,6 @@ a {
     right: 212px;
 }
 
-
 .footerDiv {
     position: relative; 
     display: flex;
@@ -204,18 +205,14 @@ a {
 
 .logoFooter img {
     max-width: 250px;
-    padding-right: 40px;
-    padding-top: 20px;
 }
 
 .fab {
     color: #D5BDAF;
-    height: 34px;
-    width: 34px; 
+    width: 40px; 
     text-align: center;
     font-size: 2em;
 }
- 
 
 .some {
     text-align: center;
@@ -224,7 +221,7 @@ a {
 .copy {
     font-size: 16px;
     text-align: center;
-    background-color: #f8f3ee;
+    background-color: #fdf6ef;
     padding-top: 30px;
     padding-bottom: 30px;
 }
@@ -233,26 +230,59 @@ a {
     display: none;
 }
 
-
-/* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ 
+/* Se över detta */
 @media screen and (max-width:320px) { 
     
     .logoHeader img {
-        max-width: 150px;
+        max-width: 110px;
     }        
+
+    .logoFooter img {
+        width: 110px;
+    }
 
 }
 
-/* smartphones, Android phones, landscape iPhone */
+/* Se över detta - bild funkar ej att göra mindre + main fuckas, fortsätter lördag*/
 @media screen and (max-width: 480px) { 
 
     .logoHeader img {
-        max-width: 150px;
-    }        
+        max-width: 100px;
+    }    
+
+    .logoFooter img {
+        max-width: 110px;
+    }
+
+    .allIcons {
+        padding-right: 5px; 
+    }
+
+    /* Ikonerna vill ej bli mindre */
+    /* 
+    #accountIcon {
+        height: 20px;
+        width: 20px;    
+    }
+
+    #cartIcon {
+        height: 18px;
+        width: 18px;    
+    }
+
+    #logOutIcon {
+        height: 20px;
+        width: 20px;
+    }
+
+    #orderIcon {
+        height: 20px;
+        width: 20px;
+    } */
 
 }
 
-/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
+
 @media screen and (max-width:600px) { 
     
     .logoHeader img {
@@ -263,40 +293,71 @@ a {
         height: 130px;
     }
 
-/*     .some.hidden {
-        display: none;
-    } */
+    .containerHeader {
+        width: 100%;
+    }
 
-  /*   .contactInfo.hidden {
-        display: none;
-    } */
+
+    #accountIcon {
+        height: 22px;
+        width: 22px;    
+    }
+
+    #cartIcon {
+        height: 20px;
+        width: 20px;    
+    }
+
+    #logOutIcon {
+        height: 22px;
+        width: 22px;
+    }
+
+    #orderIcon {
+        height: 22px;
+        width: 22px;
+    }
+
+    .bar {
+        display: block;
+        width: 30px;
+        height: 3px;
+        margin: 5px auto;
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg)
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
 
     .logoFooter img {
-        width: 150px;
+        max-width: 110px;
+        padding-left: 0px;
     }
 
-    .copy {
-        font-size: 14px;
+    .fab {
+        font-size: 1.5em;
+        width: 30px;
     }
+
 }
 
-/* tablet, landscape iPad, lo-res laptops ands desktops */ 
 @media screen and (max-width:800px) {
  
     .logoHeader img {
-        max-width: 200px;
+        max-width: 170px;
         padding-top: 0px;
+        padding-left: 0px;
     }    
 
     header {
         justify-content: space-around;
     }
 
-/* Hamburgermeny */
-
-#menu {
-    text-align: start;
-}
+    #menu {
+        text-align: start;
+    }
 
     .hamburgerMenu {
         display: block; 
@@ -304,7 +365,7 @@ a {
 
     .hamburgerMenu {
         display: block;
-        padding-left: 40px;
+        padding-left: 30px;
     }
 
     .hamburgerMenu.active .bar:nth-child(2) {
@@ -344,18 +405,6 @@ a {
         left: 0;
     }
 
-    /* Icons */
-
-    #accountIcon {
-        height: 34px;
-        width: 34px;    
-    }
-
-    #cartIcon {
-        height: 30px;
-        width: 30px;    
-    }
-
     .icons {
         margin-top: 0px;
     }
@@ -365,19 +414,73 @@ a {
     }
 
     .logoFooter img {
-        width: 200px;
+        max-width: 150px;
+        padding-left: 0px;
+    }
+    
+    .contactInfo {
+        display: none;
+    }
+
+    .socialMedia {
+        display: flex; 
+    }
+
+    .some {
+        display: none;
+    }
+
+    .footerDiv {
+        height: 100px;
+        justify-content: space-evenly;
+    }
+
+    .copy {
+        padding-top: 7px;
+        padding-bottom: 7px;
+        font-size: 12px;
     }
 }
  
 
-/* tablet, landscape iPad, lo-res laptops ands desktops */ 
-@media screen and (max-width:1200px) {
-    
+@media screen and (max-width:1000px) {
+
+    .logoHeader img {
+        max-width: 200px;
+        padding-left: 0px;
+    }  
+
+    #accountIcon {
+        height: 26px;
+        width: 26px;    
+    }
+
+    #cartIcon {
+        height: 24px;
+        width: 24px;    
+    }
+
+    #logOutIcon {
+        height: 26px;
+        width: 26px;
+    }
+
+    #orderIcon {
+        height: 26px;
+        width: 26px;
+    }
+
     .allIcons {
-        padding-right: 40px;
+        padding-right: 20px;
     }
 
     .qty {
         right: 60px;
-    } 
+    }
+    
+    .loggedInUser p {
+        font-size: 12px;
+    }
+
 }
+
