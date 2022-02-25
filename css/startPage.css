@@ -1,7 +1,6 @@
 
-/* Ta bort?? */
 main {
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;

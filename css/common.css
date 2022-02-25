@@ -48,7 +48,6 @@ header {
     justify-content: space-between;
 }
  
-/* Parent to dropdown */ 
 #menu { 
     position: relative; 
     width: 150px;
@@ -56,6 +55,16 @@ header {
     cursor: pointer;
     padding-right: 15px;
 }
+
+#dropdown {
+    display: none;
+    position: absolute;
+    width: 100%;
+}
+
+#dropdown.active {
+    display: block;
+} 
 
 .contactDiv {
     display: flex;
@@ -99,23 +108,10 @@ header {
     padding-top: 2px;
 }
 
-
-/* Child to menu*/
-#dropdown {
-    display: none;
-    position: absolute;
-    width: 100%;
-}
-
-#dropdown.active {
-    display: block;
-}
- 
 ul, li {
     list-style: none;
     color: black;
-    background-color: white;
-    
+    background-color: white;    
 }
  
 li {
@@ -196,13 +192,6 @@ a {
     right: 212px;
 }
 
-/* footer { 
-    position: relative;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    height: 250px;
-} */
 
 .footerDiv {
     position: relative; 
@@ -210,7 +199,6 @@ a {
     flex-direction: row;
     justify-content: space-around; 
     align-items: center;
-
     height: 200px;  
 }
 
@@ -225,6 +213,7 @@ a {
     height: 34px;
     width: 34px; 
     text-align: center;
+    font-size: 2em;
 }
  
 
@@ -235,7 +224,7 @@ a {
 .copy {
     font-size: 16px;
     text-align: center;
-    background-color: #fffcf8;
+    background-color: #f8f3ee;
     padding-top: 30px;
     padding-bottom: 30px;
 }
