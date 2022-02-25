@@ -131,6 +131,8 @@ class ProductController extends MainController {
             ON od.ProductID = p.Id
         WHERE od.orderId = ".$orderId.";";
 
+        $productList = []; 
+
         $products =  $this->database->freeQuery($query, $this->createFunction); 
         
         for ($i=0; $i < count($products); $i++) { 
@@ -145,10 +147,12 @@ class ProductController extends MainController {
 
             $product->quantity = $quantity; 
 
-            return $product;
+            array_push($productList, $product); 
+
             
         }
-
+        
+        return $productList;
     }
 
 }

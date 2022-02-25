@@ -8,7 +8,7 @@ async function onLoad() {
     await getAllCategories();
     await renderSubscribers();
 
-    await getUserByOrder(); 
+    //getOrderDetails(); 
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -135,73 +135,133 @@ async function whichPageToDisplay() {
 
 
 
-// Hämtar Order/User by id 
-
-async function getUserByOrder(id) {
-
-    const action = "getById"; 
-    
-    let result = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${8}`, "GET"); 
-    
-    console.log(result) 
-    
-}
-
-
-
-
 
 async function renderOrders(list) {
     let bigContainer = document.getElementsByClassName("overviewOrders")[0];
-  
+    
     let headers = [
-      "Id",
-      "StatusId",
-      "UserId",
-      "CourrierId",
-      "Reg-Date",
-      "Ship-Date",
-      "Rec-Date",
-      ""
+        "Id",
+        "StatusId",
+        "UserId",
+        "CourrierId",
+        "Reg-Date",
+        "Ship-Date",
+        "Rec-Date",
+        ""
     ];
-  
+    
     let headerRow = document.createElement("div");
     headerRow.classList.add('containerForOrders')
     bigContainer.appendChild(headerRow);
-  
+    
     headers.forEach((headerText) => {
-      let orderHeader = document.createElement("div");
-      orderHeader.classList.add('orderHeader')
-      orderHeader.innerText = headerText;
-      headerRow.appendChild(orderHeader);
+        let orderHeader = document.createElement("div");
+        orderHeader.classList.add('orderHeader')
+        orderHeader.innerText = headerText;
+        headerRow.appendChild(orderHeader);
     });
-  
-  
+    
+    
     for (let i = 0; i < list.length; i++) {
-      const order = list[i];
-      let row = document.createElement('div')
-      row.classList.add('row')
-      const orderValues = Object.values(order);
-      let orderButton = document.createElement('button')
-      orderButton.classList.add('orderButton')
-      orderButton.innerText = "To Order"
-      
-      for (let i = 0; i < orderValues.length; i++) {
-        const orderDetail = orderValues[i]
-        let cell = document.createElement('div')
-        cell.classList.add('cell')
-
-        cell.innerText = orderDetail
-
-        row.appendChild(cell)
-        row.appendChild(orderButton)
-      }
-      bigContainer.appendChild(row)
+        const order = list[i];
+        let row = document.createElement('div')
+        row.classList.add('row')
+        const orderValues = Object.values(order);
+        let orderButton = document.createElement('button')
+        orderButton.addEventListener("click", () => {
+            getOrderDetails(order.Id)
+            
+        })
+        orderButton.classList.add('orderButton')
+        orderButton.innerText = "To Order"
+        orderValues.splice(6, 4) 
+        
+        for (let i = 0; i < orderValues.length; i++) {
+            const orderDetail = orderValues[i]
+            let cell = document.createElement('div')
+            cell.classList.add('cell')
+            
+            cell.innerText = orderDetail
+            
+            row.appendChild(cell)
+            row.appendChild(orderButton)
+        }
+        bigContainer.appendChild(row)
     } 
-  
+    
 }
 
 
+// render orderList By id 
+
+async function getOrderDetails(id) {
+    
+    const action = "getById"; 
+    
+    let orderDetailsList = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}`, "GET"); 
+
+    
+    let showOrderDetail = document.querySelector(".orderDetail")
+    showOrderDetail.classList.toggle("none")
+    
+    //let orderDetails = Object.entries(orderDetailsList)
+    
+    console.log(orderDetailsList)
+    let leftBox = document.createElement("div")
+    leftBox.classList.add("leftBox")
+
+    let rightBox = document.createElement("div")
+    rightBox.classList.add("rightBox")
+
+    orderDetailsList.orderStatus.forEach(orderStatus => {
+        leftBox.innerText = "Order with id: " + orderDetailsList.Id + " - " + orderStatus.Status 
+
+        showOrderDetail.append(leftBox)
+    });
+
+    orderDetailsList.courrier.forEach(courrierList => {
+        let courrierBox = document.createElement("div")
+        courrierBox.classList.add("courrierBox")
+        courrierBox.innerText = "Courrier: " + courrierList.courrierName
+   
+        leftBox.append(courrierBox)
+
+    })
+
+    orderDetailsList.products.forEach(productList => {
+        let productBox = document.createElement("div")
+        productBox.classList.add("productBox")
+        productBox.innerHTML = "Product with id: " + productList.Id + "<br>" + " Name: " + productList.name + "<br>" +  " UnitPrice: " + productList.unitPrice + " € " + "<br>" + " Quantity: " + productList.quantity
+    
+        leftBox.append(productBox)
+    })
+
+    orderDetailsList.user.forEach(userList => {
+    
+        rightBox.innerHTML = "User id: " + userList.Id + "<br>" + " FirstName: " + userList.FirstName + "<br>" + " LastName: " + userList.LastName + "<br>" + " Email " + userList.Email + "<br>" + " Mobile: " + userList.MobileNumber + "<br>" + " Adress: " + userList.Street + "<br>" + " ZipCode: " + userList.ZipCode + "<br>" + " City: " + userList.City + "<br>" + " Country: " + userList.Country
+    
+        leftBox.append(rightBox)
+    })
+
+    showOrderDetail.append(rightBox)
+
+
+
+
+
+
+
+  /*   for (let i = 0; i < orderDetails.courrier.length; i++) {
+        const element = orderDetails[i];
+        
+
+
+    } */
+
+
+  
+    
+}
 
 
 

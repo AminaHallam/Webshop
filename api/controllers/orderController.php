@@ -36,7 +36,7 @@ class OrderController extends MainController {
         unset($createOrder->products);
         unset($createOrder->user);
         unset($createOrder->courrier);
-        unset($createOrder->status);
+        unset($createOrder->orderStatus);
 
         $lastInsertedId = $this->database->insert($createOrder);
 
