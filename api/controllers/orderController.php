@@ -7,6 +7,8 @@ include_once("./../controllers/mainController.php");
 include_once("./../controllers/productController.php");
 include_once("./../controllers/userController.php");
 include_once("./../controllers/orderDetailsController.php");
+include_once("./../controllers/courrierController.php"); 
+include_once("./../controllers/orderStatusController.php"); 
 
 
 
@@ -16,35 +18,6 @@ class OrderController extends MainController {
 
     function __construct() {
         parent::__construct("`Order`", "Order"); 
-    }
-
-
-
-    public function getAll() {  
-        return $this->database->fetchAll($this->createFunction);  
-    }
-
-
-
-
-
-    public function getById($id) {
-        
-        /* Hämtar bara ordern */
-        $order = $this->database->fetchById($id, $this->createFunction); 
-
-        /* Hämtar usern som är kopplad till ordern */
-        $userController = new UserController();
-        $user = $userController->getUserFromOrder($id);
-        $order->user = $user;
-
-        /* Hämtar produkterna som är kopplade till det specifika orderidt - Lyckas inte med quantity */
-        $productController = new ProductController();
-        $products = $productController->getProductsFromOrder($id);
-        $order->products = $products;
-
-        return $order;
-
     }
 
 
@@ -59,6 +32,12 @@ class OrderController extends MainController {
 
         $createOrder = createOrder(null, $OrderInfo->StatusId, $OrderInfo->UserId, $OrderInfo->CourrierId, date('Y-m-d H:i:s'), null, null);   
         
+        // Tar bort adderade attribut som ligger i klassen order som inte tillhör instansen.
+        unset($createOrder->products);
+        unset($createOrder->user);
+        unset($createOrder->courrier);
+        unset($createOrder->status);
+
         $lastInsertedId = $this->database->insert($createOrder);
 
         if(!$lastInsertedId) {
@@ -67,8 +46,8 @@ class OrderController extends MainController {
         } 
 
         // Lägger till produkter på order
-        $controller = new OrderDetailsController();
-        $addProducts = json_encode($controller->addProducts($products, json_decode($lastInsertedId)));
+        $orderDetailsController = new OrderDetailsController();
+        $addProducts = json_encode($orderDetailsController->addProducts($products, json_decode($lastInsertedId)));
 
         if(!$addProducts) {
             throw new Exception("Products was not placed on order", 500);
@@ -76,8 +55,8 @@ class OrderController extends MainController {
         } 
 
         // Uppdaterar unitsInStock på produkt
-        $controller2 = new ProductController();
-        $updateUnitsInstock = json_encode($controller2->update($products, "-"));
+        $productController = new ProductController();
+        $updateUnitsInstock = json_encode($productController->updateQtyProductOrder($products));
 
         if(!$updateUnitsInstock) {
             throw new Exception("Updating qty in database failed", 500);
@@ -92,30 +71,53 @@ class OrderController extends MainController {
 
 
 
+    public function getAll() {  
+        return $this->database->fetchAll($this->createFunction);  
+    }
 
 
+    public function getById($id) {
+        
+        $order = $this->database->fetchById($id, $this->createFunction); 
 
+        $userController = new UserController();
+        $user = $userController->getUserFromOrder($id);
+        $order->user = $user;
 
+        $courrierController = new courrierController(); 
+        $courrier = $courrierController->getCourrierFromOrder($id); 
+        $order->courrier = $courrier;
 
+        $orderStatusController = new orderStatusController(); 
+        $orderStatus = $orderStatusController->getOrderStatus($id); 
+        $order->orderStatus = $orderStatus; 
 
+        /* Hämtar produkterna som är kopplade till det specifika orderidt - Lyckas inte med quantity */
+        $productController = new ProductController();
+        $products = $productController->getProductsFromOrder($id);
+        $order->products = $products;
 
-
-
-
-
-
-
-    public function update(){
-
+        return $order;
 
     }
 
 
-   
-    public function delete() {
-
+    public function update($newValue, $entity) {
 
     }
+
+
+    public function delete($id) {
+
+    }
+
+
+
+
+
+
+
+
 
 
 
@@ -123,7 +125,6 @@ class OrderController extends MainController {
 /* Special Queries */
 
 
-    /* Hämtar orders som är kopplade till ett specifikt userid eller statusid */
     public function getOrdersFromOtherId($Id, $type) { 
         $query = "SELECT * FROM `order`
         WHERE ".$type."Id = ".$Id.";";

@@ -64,7 +64,7 @@ try {
 
         if($_POST["endpoint"] == "createOrder") {
 
-            if($_POST["createOrder"]) {
+            if(isset($_POST["createOrder"])) {
 
                 if($_SESSION["inloggedUser"]) {
 

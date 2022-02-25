@@ -9,16 +9,25 @@ async function onLoad() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const url = urlParams.get('id')
-    getAllCategories();
+    await getAllCategories();
     getCategoryFromId(url)
     
     renderProductsFromCategory(url)
+    burger();
 }
 
 
-verifyAdmin();
+function burger() {
 
-getUser();
+    const hamburger = document.querySelector(".hamburgerMenu");
+    const menu = document.querySelector(".contactDiv");
+    
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menu.classList.toggle("active");
+    
+    });
+}
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)
@@ -54,23 +63,28 @@ async function renderProductsFromCategory(idToGet) {
 
     const action = "getById";
     let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET")
+    let bigProductBox = document.createElement("div")
+    bigProductBox.classList.add("bigProductBox") 
     
     for (let i = 0; i < specificCategory.products.length; i++) {
         const product = specificCategory.products[i];
         
         const main = document.getElementsByTagName("main")[0]; 
-       
-       let productContainer = document.createElement("div")
+        
+
+        let productContainer = document.createElement("div")
         productContainer.classList.add("productContainer")
         let title = document.createElement("h2")
+        title.classList.add('collectionPageTitle')
         title.innerHTML = product.name;
-        let description = document.createElement("p")
-        description.innerHTML = product.description;
         let unitPrice = document.createElement("p")
+        unitPrice.classList.add('collectionPageUnitPrice')
         unitPrice.innerHTML = product.unitPrice + " €";
         let image = document.createElement("img")
+        image.classList.add('collectionPageImage')
         image.src = "./assets/" + product.image
         let avaliableUnits = document.createElement('p')
+        avaliableUnits.classList.add('avaliableUnits')
         let unitsInStock = product.unitsInStock;
         if(unitsInStock > 0){
             avaliableUnits.innerHTML = 'Product avaliable to order'; 
@@ -79,8 +93,9 @@ async function renderProductsFromCategory(idToGet) {
         }
         image.addEventListener("click", () => {productPage(product)})
     
-        main.append(productContainer)
-        productContainer.append(title, description, unitPrice, image, avaliableUnits)
+        main.append(bigProductBox)
+        bigProductBox.append(productContainer)
+        productContainer.append(image, title, unitPrice, avaliableUnits)
 
     }
 

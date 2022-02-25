@@ -6,15 +6,27 @@ async function onLoad() {
     await printNrOfElements();
     await whichPageToDisplay();
     await getAllCategories();
-
     await renderSubscribers();
 
-    
-    const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const id = urlParams.get("id");
-    myprofilePage(id);
+    await getUserByOrder(); 
 
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get("id");
+    myprofilePage(id);
+    burger();
+}
+
+function burger() {
+
+    const hamburger = document.querySelector(".hamburgerMenu");
+    const menu = document.querySelector(".contactDiv");
+    
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menu.classList.toggle("active");
+    
+    });
 }
 
 async function getAllLoggedInSubscribers(){
@@ -24,15 +36,17 @@ async function getAllLoggedInSubscribers(){
     let allSubscribers = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "GET")
     return allSubscribers;
 
-}
+} 
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut);
+document.getElementById("sendNews").addEventListener("click", addSubscriptionNews); 
 
-document.getElementById("submitClick").addEventListener("click", addSubscriptionNews)
+
 
 
 async function addSubscriptionNews(e) {
+
     e.preventDefault();
     const action = "addSubscriptionNews";
 
@@ -45,7 +59,7 @@ async function addSubscriptionNews(e) {
     }
 
    
-    // Mix av GET och POST
+   
     var body = new FormData()
     body.append("action", action)
     body.append("subscriber", JSON.stringify(subscriber))
@@ -57,8 +71,7 @@ async function addSubscriptionNews(e) {
         var body = new FormData()
         body.append("action", action)
         
-        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "POST", body)
-        console.log(status) 
+        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
 
         if(!status) {
             alert("You are already a subscriber")
@@ -70,9 +83,8 @@ async function addSubscriptionNews(e) {
 
 
     }else{
-        // Mix av GET och POST  
-        let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "POST", body)
-        console.log(checkSubscription)
+        
+        let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
         
         if(!checkSubscription) {
 
@@ -85,7 +97,9 @@ async function addSubscriptionNews(e) {
          }
     
     }
- 
+
+}
+
 
 async function whichPageToDisplay() {
     
@@ -102,7 +116,7 @@ async function whichPageToDisplay() {
         document.querySelector(".adminLayout").classList.add("none")
 
        let titleKund = document.createElement("h1")
-       titleKund.innerText ="Du har kommit till kundsidan!" 
+       titleKund.innerText ="Welcome to my pages!" 
        main.appendChild(titleKund)
 
        
@@ -110,13 +124,10 @@ async function whichPageToDisplay() {
 
 }
 
-//Hämtar ut alla ordrar
-async function myprofilePage() {
+    //Hämtar ut alla ordrar
+    async function myprofilePage() {
     const action = "getAll";
-    let order = await makeRequest(
-      `./../api/receivers/orderReceiver.php?action=${action}`,
-      "GET"
-    );
+    let order = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET");
   
     renderOrders(order);
     
@@ -124,52 +135,20 @@ async function myprofilePage() {
 
 
 
+// Hämtar Order/User by id 
 
-/* Update quantity on product */
+async function getUserByOrder(id) {
 
-
-
-// Get product
-async function getUnitsInStock() {
-
-    let getProduct = document.querySelector(".getProduct")
-
-    let products = await getAllProducts()
-    let overviewProduct = document.createElement("div")
-    overviewProduct.classList.add("overviewProduct")
-
-    document.querySelector(".getProductButton").addEventListener("click", () => {
-        
-        overviewProduct.innerHTML = "";
-
-        let productId =  document.querySelector(".productId").value
-        
-        for (let i = 0; i < products.length; i++) {
-        
-            const product = products[i];
+    const action = "getById"; 
     
-            if(product.Id == productId) {
+    let result = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${8}`, "GET"); 
     
-                let infoProductContainer = document.createElement("div")
-                infoProductContainer.classList.add("infoProductContainer")
-                let pId = document.createElement("p")
-                let pName = document.createElement("p")
-                let pQty = document.createElement("p")
-                let pImage = document.createElement("img")
-                pImage.classList.add("pImage")
+    console.log(result) 
     
-                pId.innerText = "Id: " + product.Id
-                pName.innerText = "Name: " + product.name
-                pQty.innerText = "Current Qty: " + product.unitsInStock
-                pImage.src = "./assets/" + product.image
-    
-                getProduct.append(overviewProduct)
-                overviewProduct.append(pImage, infoProductContainer)
-                infoProductContainer.append(pId, pName, pQty)
-            }
-        }
-    })
 }
+
+
+
 
 
 async function renderOrders(list) {
@@ -213,9 +192,6 @@ async function renderOrders(list) {
         cell.classList.add('cell')
 
         cell.innerText = orderDetail
-        
-        //console.log(orderDetail)
-        
 
         row.appendChild(cell)
         row.appendChild(orderButton)
@@ -223,20 +199,22 @@ async function renderOrders(list) {
       bigContainer.appendChild(row)
     } 
   
-  }
+}
+
+
+
 
 
 
 // Update product buttons/links
-document.querySelector(".updateProductButton").addEventListener("click", setUnitsInStock)
+document.querySelector(".updateProductButton").addEventListener("click", setQuantity)
 document.querySelector(".deleteQtyProductButton").addEventListener("click", () => {
     let deleteUnits =  document.querySelector(".deleteUnits").value
-    updateUnitsInStock("-", deleteUnits)})
+    deleteQuantity(deleteUnits)})
 
 document.querySelector(".addQtyProductButton").addEventListener("click", () => {
     let addUnits =  document.querySelector(".addUnits").value
-    updateUnitsInStock("+", addUnits)})
-
+    addQuantity(addUnits)})
 
 
 
@@ -255,13 +233,59 @@ document.querySelector(".toggle3").addEventListener("click", () => {
 })
 
 
-// Set quantity on product
-async function setUnitsInStock() {
+
+
+
+async function getUnitsInStock() {
+
+    let getProduct = document.querySelector(".getProduct")
+
+    let products = await getAllProducts()
+    let overviewProduct = document.createElement("div")
+    overviewProduct.classList.add("overviewProduct")
+
+    document.querySelector(".getProductButton").addEventListener("click", () => {
+        
+        overviewProduct.innerHTML = "";
+
+        let productId =  document.querySelector(".productId").value
+        
+        for (let i = 0; i < products.length; i++) {
+        
+            const product = products[i];
+    
+            if(product.Id == productId) {
+    
+                let infoProductContainer = document.createElement("div")
+                infoProductContainer.classList.add("infoProductContainer")
+                let pId = document.createElement("p")
+                let pName = document.createElement("p")
+                let pQty = document.createElement("p")
+                let pImage = document.createElement("img")
+                pImage.classList.add("pImage")
+    
+                pId.innerText = "Id: " + product.Id
+                pName.innerText = "Name: " + product.name
+                pQty.innerText = "Current Qty: " + product.unitsInStock
+                pImage.src = "./assets/" + product.image
+    
+                getProduct.append(overviewProduct)
+                overviewProduct.append(pImage, infoProductContainer)
+                infoProductContainer.append(pId, pName, pQty)
+            }
+        }
+    })
+}
+
+
+
+
+async function setQuantity() {
 
     let updateUnits =  document.querySelector(".updateUnits").value
     let productId =  document.querySelector(".productId").value
 
-    let action = "setUnitsInStock"
+    let action = "setQuantity"
 
     let myData = new FormData()
     myData.append("action", action)
@@ -270,10 +294,8 @@ async function setUnitsInStock() {
 
     let updateUnitsInStock = await makeRequest("./../api/receivers/productReceiver.php", "POST", myData)
 
-    console.log(updateUnitsInStock)
-
-    if(updateUnitsInStock == true) { // Annars blev även throw error true. 
-        alert("Sucess!")
+    if(updateUnitsInStock == true) { 
+        alert("Sucess!"). 
 
         location.reload();
 
@@ -284,22 +306,18 @@ async function setUnitsInStock() {
 
 
 
-// Update quantity on product (add/Delete)
-async function updateUnitsInStock(direction, value) {
-
+async function addQuantity(value) {
+    console.log(value)
     let productId =  document.querySelector(".productId").value
 
     let body = new FormData()
-    body.append("action", "updateUnitsInStock")
-    body.append("direction", direction)
+    body.append("action", "addQuantity")
     body.append("value", value)
     body.append("productId", productId)
 
     let result = await makeRequest("./../api/receivers/productReceiver.php", "POST", body)
 
-    console.log(result)
-
-    if(result == true) { // Annars blev även throw error true. 
+    if(result == true) { 
         alert("Sucess!")
 
         location.reload();
@@ -308,6 +326,29 @@ async function updateUnitsInStock(direction, value) {
         alert("Product not updated")
     }
 }
+
+async function deleteQuantity(value) {
+    console.log(value)
+    let productId =  document.querySelector(".productId").value
+
+    let body = new FormData()
+    body.append("action", "deleteQuantity")
+    body.append("value", value)
+    body.append("productId", productId)
+
+    let result = await makeRequest("./../api/receivers/productReceiver.php", "POST", body)
+
+    if(result == true) {
+        alert("Sucess!")
+
+        location.reload();
+
+    } else {
+        alert("Product not updated")
+    }
+}
+
+
 
 
 async function renderSubscribers() {
@@ -337,24 +378,6 @@ for (let i = 0; i < renderSubList.length; i++) {
     email.innerText = subList.Email 
     emailDiv.append(email)
     emailCont.append(emailDiv)
-    
-
-/* 
-    let firstNameDiv = document.createElement("div")
-    firstNameDiv.classList.add("firstNameDiv")
-    let firstName = document.createElement("p")
-    firstName.classList.add("firstNameSub")
-    firstName.innerText = subList.FirstName
-    
-    let emailDiv = document.createElement("div")
-    emailDiv.classList.add("emailDiv")
-    let email = document.createElement("p")
-    email.classList.add("emailSub")
-    email.innerText = subList.Email 
-    
-    firstNameDiv.append(firstName)
-    emailDiv.append(email)
-    allSubscribers.append(firstNameDiv, emailDiv) */
 
     }
 
@@ -372,7 +395,6 @@ async function createNewsLetter(e) {
     
     const action = 'add'
 
-
     const newsletter = {
         Title: title, 
         Text: content
@@ -385,11 +407,9 @@ async function createNewsLetter(e) {
     
 
     let result = await makeRequest("./../api/receivers/newsletterReceiver.php", "POST", body)
-    
-    console.log(result)
 
     if(!result){
-        success.innerHTML = "Something went wrong"
+        success.innerHTML = "Something went wrong, please try again!"
 
     }else{
         success.innerHTML = "Your newsletter was succesfully created"
@@ -398,13 +418,6 @@ async function createNewsLetter(e) {
 }
 
 
-async function getorderDetails(id) {
-
-    const action = "getorderDetails"
-
-    let result = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}`, "GET")
-    console.log(result)
-}
 
 window.addEventListener('load', onLoad)
 

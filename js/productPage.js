@@ -11,19 +11,25 @@ async function onLoad() {
     const urlParams = new URLSearchParams(queryString);
     const url = urlParams.get('id')
     
-    productPage(url); 
-
-    getAllCategories(url);
-
+    await productPage(url); 
+    await getAllCategories(url);
     await renderProduct(url); 
 
+    burger();
 
 }
 
+function burger() {
 
-verifyAdmin();
-
-getUser();
+    const hamburger = document.querySelector(".hamburgerMenu");
+    const menu = document.querySelector(".contactDiv");
+    
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menu.classList.toggle("active");
+    
+    });
+}
 
 
 document.getElementById("menu").addEventListener("click", openMenu);
@@ -48,8 +54,6 @@ async function renderProduct(idToGet) {
 
 
     let main = document.getElementsByTagName("main")[0]; 
-
-   /*  main.innerHTML = ""; */
        
     let productCont = document.createElement("div")
     productCont.classList.add("productCont")
@@ -72,11 +76,11 @@ async function renderProduct(idToGet) {
     let addToCartButton = document.createElement('button'); 
     addToCartButton.classList.add('addToCart')
     addToCartButton.innerText = "Add"
-    addToCartButton.addEventListener("click", () => {addToCart(product)})
+    addToCartButton.addEventListener("click", () => {addToCart(product.Id)})
 
 
  
-
+    // Knapp som går tillbaka - På G
     /* let returnToProductPage = document.createElement('button'); 
     returnToProductPage.classList.add('returnToPpage')
     returnToProductPage.innerText = "Return to product page"
@@ -113,18 +117,13 @@ async function renderProduct(idToGet) {
 
 
 // Lägger till produkten i kundvagnen (SESSION)
-async function addToCart(product) {
+async function addToCart(productId) {
 
-    let productId = product.Id
-    let direction = "+"
-
-    const push = "updateCart"
+    const push = "addProduct"
 
     var body = new FormData()
     body.append("action", push)
-    body.append("direction", direction)
     body.append("productId", JSON.stringify(productId))
-
 
     let result =  await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
 
@@ -133,66 +132,6 @@ async function addToCart(product) {
     printNrOfElements();
 
 }
-
-
-
-// Lägger till produkten i kundvagnen (SESSION)
-/* async function addToCart(product) {
-    
-    const action = "getCart"
-
-    let cart = await makeRequest(`./../api/receivers/cartReceiver.php?action=${action}`, "GET")
-
-    if(cart) {
-        cart = JSON.parse(cart) 
-    } else {
-        cart = []
-    }
-
-    let index = cart.findIndex((cartItem) => { 
-
-        if(cartItem.product.Id == product.Id) {
-            
-            if(cartItem.quantity >= product.unitsInStock) {
-                alert("Sorry, we do not have more of this product available for reservation")
-                return index = false
-            }
-
-            return true
-        }
-
-    })
-
-    if(index < 0) {
-        cart.push({
-            product: product, 
-            quantity: 1
-        })
-
-
-        alert(product.name + " is added to cart")
-
-    } else {
-        cart[index].quantity++
-
-        alert(product.name + " is added to cart")
-    }
-
-
-    const push = "updateCart"
-
-    var body = new FormData()
-    body.append("action", push)
-    body.append("cart", JSON.stringify(cart))
-
-
-    await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
-
-
-    printNrOfElements();
-
-} */
-
 
 
 window.addEventListener('load', onLoad)

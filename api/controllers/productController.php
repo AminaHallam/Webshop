@@ -16,130 +16,50 @@ class ProductController extends MainController {
     }
 
 
+    public function add($entity) {
+
+    }
+
+
     public function getAll() { 
         return $this->database->fetchAll($this->createFunction);  
     }
+    
 
     public function getById($id) {
         return $this->database->fetchById($id, $this->createFunction);
     }
 
 
-    public function add($entity) {
 
-    }
+    public function update($newValue, $product) {
 
-    
+        $userController = new UserController();
+        $checkAdmin = ($userController->verifyAdmin());
 
-    // Uppdaterar unitsInStock på produkt vid orderläggning (add/delete) 
-    public function update($products, $direction) {
-        
-        for ($i=0; $i < count($products); $i++) { 
-                
-            $product = $products[$i];
-
-           $query = "UPDATE product
-           SET UnitsInStock = UnitsInStock ".$direction.$product->quantity.
-           " WHERE Id = ".$product->product->Id.";";
-
-           $updatedProducts = $this->database->update($query); 
-
-        }
-
-        return $updatedProducts;
-
-    }
-
-
-   
-    // Uppdaterar unitsInStock på produkt (add/delete)
-    public function updateProduct($productId, $direction, $value) {
-
-        $controller = new UserController();
-        $checkAdmin = ($controller->verifyAdmin());
-        
         if(!$checkAdmin) {
             throw new Exception("Action not allowed", 401);
             exit;
+        }
+
+        if(strpos($newValue, '+') !== false || strpos($newValue, '-') !== false) {
+            
+            $newValue = (int)$product->unitsInStock + (int)$newValue;
         } 
 
-        $query = "UPDATE product
-        SET UnitsInStock = UnitsInStock ".$direction.$value.
-        " WHERE Id = ".$productId.";";
+        $productToUpdate = createProduct((int)$product->Id, $product->name , $product->description, (int)$product->unitPrice, (int)$newValue, $product->image); 
 
-        return $this->database->update($query); 
-    }
+        unset($productToUpdate->quantity);
+
+        $result = $this->database->update($productToUpdate); 
         
-
-
-    // Flytta query till database när funktionen där är klar
-    // Sätter ett nytt värde på unitsInStock (set)
-    public function inventoryProduct($newValue, $productId) {
-       
-        $controller = new UserController();
-        $checkAdmin = ($controller->verifyAdmin());
-
-        if(!$checkAdmin) {
-            throw new Exception("Action not allowed", 401);
-            exit;
-        }
-
-       $query = "UPDATE product p
-       SET p.UnitsInStock = ".$newValue.
-       " WHERE p.Id = ".$productId.";";
-       
-        return $this->database->update($query); 
-
+         return $result;
     }
 
 
+    public function delete($id) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-                    /* TESTING */
-
-    /////////////////////////////////////////////////////////////////
-
-    public function updateTestController() { 
-       
-        try{
-             if(isset($_SESSION['inloggedUser'])){
-                 $user = unserialize($_SESSION["inloggedUser"]);
- 
- 
-                 $subscriptionNewsToAdd = createSubscriptionNews(null, $user->Id , null, null); 
-                 return $this->database->insert($subscriptionNewsToAdd);
-          
-             }
-          
-         
-         } catch(Exception $e) {
-             throw new Exception("The information is not in correct format...", 500);
-         }
-     }
- 
-
-
-    /////////////////////////////////////////////////////////////
-
-
-
+    }
 
 
 
@@ -150,10 +70,30 @@ class ProductController extends MainController {
     /* Special Queries */
 
 
+    // Uppdaterar unitsInStock på produkter när ordern är lagd
+    public function updateQtyProductOrder($products) {
+
+        for ($i=0; $i < count($products); $i++) { 
+                
+            $product = $products[$i];
+
+            $newValue = $product->product->unitsInStock - $product->quantity; 
+            $name = $product->product->name;
+            $description = $product->product->description;
+            $image = $product->product->image;
+
+            $productToUpdate = createProduct((int)$product->product->Id, $name , $description, (int)$product->product->unitPrice, (int)$newValue, $image); 
+            
+            unset($productToUpdate->quantity);
+
+            $updatedProducts = $this->database->update($productToUpdate); 
+        }
+
+        return $updatedProducts;
+    }
 
 
 
-    /* Hämtar alla produkter som tillhör en specifik kategori */
     public function getProductsFromCategory($categoryID) { 
         $query = "SELECT p.Id, p.Name, p.Description, p.UnitPrice, p.UnitsInStock, p.Image
         FROM product p 
@@ -167,12 +107,9 @@ class ProductController extends MainController {
 
 
 
-
-
-
     /* Hämtar alla produkter som är kopplade till en specifik order - Har lite proble med attributet quantity */
     ////////* påbörjad funktion 2022-02-07. Vill få med quantity som ligger i productDetails till instansen */ //////////////////////////////////////////////////
-    public function getProductsFromOrder($orderId) { 
+/*     public function getProductsFromOrder($orderId) { 
         $query = "SELECT p.id, p.Name, p.Description, p.UnitPrice, p.UnitsInStock, p.Image, od.Quantity FROM `order` o
         JOIN orderdetails od
             ON od.OrderID = o.id
@@ -181,11 +118,42 @@ class ProductController extends MainController {
             WHERE o.id = ".$orderId.";";
 
         return $this->database->freeQuery($query, $this->productDetails); 
-    }  
+    }   */
 
 
+
+
+
+    public function getProductsFromOrder($orderId) { 
+        
+        $query = "SELECT p.Id, p.name, p.description, p.unitPrice, p.unitsinstock, p.image FROM `product` p
+        JOIN orderdetails od
+            ON od.ProductID = p.Id
+        WHERE od.orderId = ".$orderId.";";
+
+        $products =  $this->database->freeQuery($query, $this->createFunction); 
+        
+        for ($i=0; $i < count($products); $i++) { 
+            
+            $product = $products[$i]; 
+            $productId = $product->Id;
+            
+            $orderDetailsController = new OrderDetailsController();
+            $orderDetails = $orderDetailsController->getOrderDetailsFromOrder($orderId, $productId); 
+            
+            $quantity = $orderDetails[0]->quantity;
+
+            $product->quantity = $quantity; 
+
+            return $product;
+            
+        }
+
+    }
 
 }
+
+
 
 } catch(Exception $err) {
     echo json_encode(array('Message' => $err->getMessage(), "Status" => $err->getCode()));

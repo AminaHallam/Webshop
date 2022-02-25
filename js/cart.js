@@ -10,16 +10,24 @@ async function onLoad() {
     await getUser();
     await getCourrier()
     await getAllCategories();
+    burger();
 }
-
-
-
 
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)
 
+function burger() {
 
+    const hamburger = document.querySelector(".hamburgerMenu");
+    const menu = document.querySelector(".contactDiv");
+    
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menu.classList.toggle("active");
+    
+    });
+}
 
 
 
@@ -45,7 +53,6 @@ async function getCart() {
     const action = "getCart"
 
     let cart = await makeRequest(`./../api/receivers/cartReceiver.php?action=${action}`, "GET")
-
 
     if(cart) {
         cart = JSON.parse(cart) // Ta bort? Görs i makerequest redan? 
@@ -111,13 +118,13 @@ async function renderCart() {
         let deleteQty = document.createElement("div")
         deleteQty.classList.add("ajustBoxes")
         deleteQty.innerText = "-"
-        deleteQty.addEventListener("click", () => {modifyQty(cartItem, "-")})
+        deleteQty.addEventListener("click", () => {deleteProduct(cartItem.product.Id)})
 
         let addQty = document.createElement("div")
         addQty.classList.add("addQty")
         addQty.classList.add("ajustBoxes")
         addQty.innerText = "+"
-        addQty.addEventListener("click", () => {modifyQty(cartItem, "+")})
+        addQty.addEventListener("click", () => {addProduct(cartItem.product.Id)})
 
         let unitQty = document.createElement("p")
         unitQty.innerHTML = cartItem.quantity + " pcs"
@@ -126,8 +133,6 @@ async function renderCart() {
         totalPrice.classList.add("totalpriceItem")
         totalPrice.innerHTML = cartItem.quantity * cartItem.product.unitPrice + " €"
 
-
-        // Jämför antalet i unitsinstock med det vi lagt till i carten. Om det inte finns mer tillgängligt i unitsinstock så tas plustecknet bort.
         cart.findIndex((shoppingCart) => { 
 
             if(shoppingCart.product.Id == cartItem.product.Id) {
@@ -226,7 +231,6 @@ async function renderCart() {
     newsButton.setAttribute("value", userInfo.Id)
     
     /* Total amount and button */
-
     let checkOutContainer = document.createElement("div")
     checkOutContainer.classList.add("checkOutContainer")
     let totalAmount = document.createElement("p")
@@ -254,7 +258,7 @@ async function renderCart() {
 
         let checkCourrier = document.querySelector('input[name="selectCourrier"]:checked').value
 
-        createOrder(checkCourrier, userInfo.Id, cart);
+        createOrder(checkCourrier, userInfo.Id, cart); // ta bort cart ? 
   
     })
 
@@ -268,8 +272,6 @@ async function renderCart() {
 
 
 
-
-
 async function addSubscriber() {
 
     let addSub = "addSubscriptionNews"
@@ -278,8 +280,6 @@ async function addSubscriber() {
     body.append("action", addSub);
 
     let subscribeUser = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
-    
-    console.log(subscribeUser)
 
     if(!subscribeUser) {
 
@@ -292,18 +292,6 @@ async function addSubscriber() {
      }
 
 }
-
-
-
-// kolla om W och L redan gjort denna funktion
-async function getSubList() {
-
-// kolla om inloggad user är uppskriven på nyhetsbrev eller inte. Lägg in denna funktion i render cart sedan för att ta bort checkboxen när någon redan är subscribad.
-
-}
-
-
-
 
 
 async function createOrder(courrierId, userId) {
@@ -332,9 +320,6 @@ async function createOrder(courrierId, userId) {
 }
 
 
-
-
-// Hämtar alla fraktbolag
 async function getCourrier() {
 
     const action = "getAll"
@@ -345,26 +330,28 @@ async function getCourrier() {
 }
 
 
-
-// Modifies quantity
-async function modifyQty(cartItem, direction) {
-    
-    let productId = cartItem.product.Id
-    const action = "updateCart"
-
-
+async function addProduct(productId) {
+    const action = "addProduct"
     var body = new FormData()
     body.append("action", action)
-    body.append("direction", direction)
     body.append("productId", productId)
  
     await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
 
+    renderCart();
+    printNrOfElements();
+}    
 
+async function deleteProduct(productId) {
+    const action = "deleteProduct"
+    var body = new FormData()
+    body.append("action", action)
+    body.append("productId", productId)
+ 
+   await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
 
     renderCart();
     printNrOfElements();
-
 }    
 
 

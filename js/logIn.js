@@ -1,5 +1,5 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'  // checka verifyadmin och getuser
 
 const myPage = document.querySelector(".myPage")
 const buttonCA = document.querySelector(".buttonCA")
@@ -10,12 +10,21 @@ const createAccountForm = document.querySelector("#createAccount")
 async function onLoad() {
     await showCorrectLayout();
     await printNrOfElements();
+    await getAllCategories();
+    burger();
 }
 
+function burger() {
 
-verifyAdmin();
-getAllCategories();
-getUser();
+    const hamburger = document.querySelector(".hamburgerMenu");
+    const menu = document.querySelector(".contactDiv");
+    
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menu.classList.toggle("active");
+    
+    });
+}
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)
@@ -24,16 +33,14 @@ document.querySelector(".logOut").addEventListener("click", logOut)
 // Switching between Login-form and create account-form
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Clicking on the link - Login-form will appear and create account-form will dissapear
     document.querySelector("#linkCreateAccount").addEventListener("click", e => {
-        e.preventDefault(); // e will prevent us going back to startpage when clicking on button
+        e.preventDefault(); 
         loginForm.classList.add("hidden");
         createAccountForm.classList.remove("hidden");
     });
 
-    // Clicking on the link - create account-form will appear and Login-form will dissapear
     document.querySelector("#linkLogIn").addEventListener("click", e => {
-        e.preventDefault();  // e will prevent us going back to startpage when clicking on button
+        e.preventDefault();  
         loginForm.classList.remove("hidden");
         createAccountForm.classList.add("hidden");
     });
@@ -182,7 +189,9 @@ e.preventDefault();
 
     let emailCheck = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}&user=${registerEmail}`, "GET")
     if (!emailCheck) {
+
         alert("Account already exists")
+
         return 
     }
 
@@ -217,25 +226,20 @@ e.preventDefault();
     console.log(addUser)
 
     if(addUser) {
-        alert("Ditt konto är skapat!")
+        alert("Your account has been created!")
         loginForm.classList.remove("hidden");
         createAccountForm.classList.add("hidden");
         return
     }
 
-    alert("Något gick fel")
+    alert("Something went wrong!")
 
 
 
 }
 
 
-    /* 
-    * Gör funktioner som checkar våra krav på initialerna innan vi skickar dem till PHP. CHECK!
 
-    * Skicka in värdena i requests. Tror vi behöver två stycken. En där vi checkar om email redan finns i databasen och en där vi lägger till användaren i databasen. 
-
-    * Vi behöver göra en hashning på lösenorden. Men få det andra att funka först*/
 
 
 /* Functions to register account */

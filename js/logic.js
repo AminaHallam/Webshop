@@ -1,5 +1,5 @@
 import {openMenu, getAllCategories} from '.././helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from '.././helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from '.././helperFunctions/fetchHelper.js'  // checka verifyadmin
 
 document.querySelector(".logOut").addEventListener("click", logOut)
 
@@ -8,15 +8,22 @@ async function onLoad() {
     await showCorrectLayout();
     await printNrOfElements();
     await getAllCategories();
-
+    burger()
 }
 
 
-// bör ligga i funk, inte i globalt skop, await 
-// sparas användare någonstans? 
+function burger() {
 
-/* verifyAdmin();
-getUser(); */
+    const hamburger = document.querySelector(".hamburgerMenu");
+    const menu = document.querySelector(".contactDiv");
+    
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menu.classList.toggle("active");
+    
+    });
+}
+
 
 
 
@@ -36,13 +43,11 @@ async function addSubscriptionNews(e) {
         FirstName: registerFirstname,
         Email: registerEmail,
     }
-
-   
-    // Mix av GET och POST
+    
     var body = new FormData()
     body.append("action", action)
     body.append("subscriber", JSON.stringify(subscriber))
- 
+
 
     let getLoggedInUser = await getUser(); 
    
@@ -50,8 +55,7 @@ async function addSubscriptionNews(e) {
         var body = new FormData()
         body.append("action", action)
         
-        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "POST", body)
-        console.log(status) 
+        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
 
         if(!status) {
             alert("You are already a subscriber")
@@ -62,10 +66,9 @@ async function addSubscriptionNews(e) {
         }
 
 
-    }else{
-        // Mix av GET och POST  
-        let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "POST", body)
-        console.log(checkSubscription)
+    } else {
+        
+        let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
         
         if(!checkSubscription) {
 
@@ -78,26 +81,11 @@ async function addSubscriptionNews(e) {
          }
     
     }
+
  
- 
+
 }
 
-
-
-
-
-
- // Hämtar alla produkter som tillhör en specifik kategori
-async function getCategoryFromId(idToGet) {
-    const action = "getById";
-    let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET")
-    console.log(specificCategory, 'test') 
-    console.log(specificCategory.categoryId)
-    for(let i = 0; i < specificCategory.categoryId; i++){
-        console.log(specificCategory.categoryId)
-    }
-}
- 
 
 
 
@@ -134,5 +122,5 @@ slider.addEventListener('mousemove', e => {
 
 
 
-window.addEventListener('load', onLoad) 
+window.addEventListener('load', onLoad)
 

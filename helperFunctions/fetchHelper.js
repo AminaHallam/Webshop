@@ -29,13 +29,6 @@ export async function verifyAdmin() {
 
 
 
-
-
-
-
-
-
-
 // Visar den rätta layouten beroende på om det är en kund eller admin som är inloggad. Om ingen är inloggad behålls den befintliga layouten.
 export async function showCorrectLayout() {
     const loggedInUser = document.querySelector(".loggedInUser")
@@ -91,13 +84,6 @@ export async function showCorrectLayout() {
 }
 
 
-
-
-
-
-
-
-
 // Hämtar Id, förnamn och efternamn från SESSION vid inloggad användare. Vid ej inloggad användare så returnerar getUser false.
 export async function getUser() {
     const action = 'getUser'; 
@@ -112,6 +98,7 @@ export async function logOut(){
     let logoutUser = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
     alert("You are out!")    
 }
+
 
 
 
@@ -138,9 +125,6 @@ export async function getOrdersByOtherId(idToGet, type) {
     let specificOther = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${idToGet}&type=${type}`, "GET")
     console.log(specificOther)  // Return?
 }
-
-
-
 
 
 
@@ -190,10 +174,8 @@ export async function printNrOfElements() {
 
     let cart = await makeRequest(`./../api/receivers/cartReceiver.php?action=${action}`, "GET")
 
-    
-
     if(cart) {
-        cart = await JSON.parse(cart)
+        cart = await JSON.parse(cart) //parse överflödig?
     } else { 
         cart = []
     } 

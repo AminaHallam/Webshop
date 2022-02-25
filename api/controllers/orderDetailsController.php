@@ -12,22 +12,9 @@ class OrderDetailsController extends MainController {
     private $createOrderDetails = "createOrderDetails";   
 
     function __construct() {
-        parent::__construct("orderdetails", "orderdetails"); 
+        parent::__construct("orderdetails", "Orderdetails"); 
     }
 
-
-
-    public function getAll() {  
-        return $this->database->fetchAll($this->createFunction);  
-    }
-
-
-
-
-
-    public function getById($id) {
-
-    }
 
 
     public function add($entity) {
@@ -35,19 +22,62 @@ class OrderDetailsController extends MainController {
     }
 
 
-    // Lägger till produkter på ordern
+    public function getAll() {  
+        return $this->database->fetchAll($this->createFunction);  
+    }
+
+
+    public function getById($id) {
+
+        
+        return $this->database->fetchById($id, $this->createFunction);
+
+    }
+
+
+    public function update($newValue, $entity) {
+
+    }
+    public function delete($id) {
+
+    }
+
+
+
+
+
+    /* Special Queries */
+
     public function addProducts($products, $orderId) {
-    
+
         for ($i=0; $i < count($products); $i++) { 
                 
-                $product = $products[$i];
+            $product = $products[$i];
 
-                $createOrderDetails = createOrderDetails($orderId, $product->product->Id, $product->quantity);  
-                
-                $addedProducts = $this->database->insert($createOrderDetails);    
+            $createOrderDetails = createOrderDetails($orderId, $product->product->Id, $product->quantity);  
+            
+            $addedProducts = $this->database->insert($createOrderDetails);    
         }
 
         return $addedProducts;
+
+    }
+
+
+    public function getOrderDetailsFromOrder($orderId, $productId) {
+
+        $query = "SELECT od.ProductID, od.OrderID, od.Quantity
+        FROM `orderdetails` od
+        JOIN `order` o
+        ON od.OrderID = o.Id
+        WHERE od.OrderID = ".$orderId." AND od.productId = ".$productId.";";
+
+        error_log(serialize($query));
+
+        $orderDetails = $this->database->freeQuery($query, $this->createOrderDetails); 
+
+        return $orderDetails; 
+
 
     }
 

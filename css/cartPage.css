@@ -1,5 +1,6 @@
 
 main {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 110px;
@@ -285,7 +286,8 @@ main {
 
 .priceContainer {
     min-width: 200px;
-    justify-content: center;
+    width: 400px;
+    justify-content: space-around;
 }
 
 .summaryContainer {
@@ -362,6 +364,7 @@ main {
     .summaryContainer {
         padding-right: 20px;
         padding-left: 20px;
+        margin-right:0px;
     }
 
     .priceContainer {
@@ -378,12 +381,45 @@ main {
     @media screen and (max-width: 350px) {
 
         .itemContainer {
-            width: 280px;
+            width: auto;
         }
 
         .infoContainer {
             min-width: auto;
         }
+
+        .summaryContainer {
+            min-width: unset;
+           
+        }
     
         
         }
+
+        @media screen and (max-width: 320px) {
+
+            .cartItemImage{
+                width: 70px;
+                height: 70px;
+            }
+
+            .ajustQty p {
+                font-size: 12px;
+            }
+        
+            
+            }
+
+            @media screen and (max-width: 300px) {
+
+                .cartItemImage{
+                    width: 60px;
+                    height: 60px;
+                }
+    
+                .ajustQty p {
+                    font-size: 12px;
+                }
+            
+                
+                }

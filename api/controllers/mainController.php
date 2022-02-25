@@ -13,10 +13,9 @@ abstract class MainController {
     abstract function getAll();
     abstract function getById($id);
     abstract function add($entity);
-    
-    /*
+    abstract function update($newValue, $entity);
     abstract function delete($id);
-    */
+    
 }
 
 ?>

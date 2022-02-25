@@ -9,6 +9,7 @@ include_once("./../classes/courrier.php");
 include_once("./../classes/subscriptionNews.php");
 include_once("./../classes/orderDetails.php");
 include_once("./../classes/newsletter.php");
+include_once("./../classes/orderStatus.php"); 
 
 
 
@@ -47,6 +48,10 @@ return new OrderDetails((int)$orderId, (int)$productId, (int)$quantity);
 function createCourrier($Id, $courrierName, $Address, $Email, $CountryCode, $StandardPhone, $MobileNumber, $Contact) {
     return new Courrier((int)$Id, $courrierName, $Address, $Email, $CountryCode, $StandardPhone, $MobileNumber, $Contact);
 } 
+
+function createOrderStatus($Id, $Status, $Description) {
+    return new OrderStatus($Id, $Status, $Description); 
+}
 
 
 function createNewsletter($Id, $Title, $Text, $Date){
