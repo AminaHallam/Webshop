@@ -16,18 +16,20 @@ class ProductController extends MainController {
     }
 
 
+    public function add($entity) {
+
+    }
+
+
     public function getAll() { 
         return $this->database->fetchAll($this->createFunction);  
     }
+    
 
     public function getById($id) {
         return $this->database->fetchById($id, $this->createFunction);
     }
 
-
-    public function add($entity) {
-
-    }
 
 
     public function update($newValue, $product) {
@@ -52,6 +54,17 @@ class ProductController extends MainController {
     }
 
 
+    public function delete($id) {
+
+    }
+
+
+
+
+
+
+
+    /* Special Queries */
 
 
     // Uppdaterar unitsInStock på produkter när ordern är lagd
@@ -75,7 +88,6 @@ class ProductController extends MainController {
 
 
 
-
     public function getProductsFromCategory($categoryID) { 
         $query = "SELECT p.Id, p.Name, p.Description, p.UnitPrice, p.UnitsInStock, p.Image
         FROM product p 
@@ -91,7 +103,7 @@ class ProductController extends MainController {
 
     /* Hämtar alla produkter som är kopplade till en specifik order - Har lite proble med attributet quantity */
     ////////* påbörjad funktion 2022-02-07. Vill få med quantity som ligger i productDetails till instansen */ //////////////////////////////////////////////////
-    public function getProductsFromOrder($orderId) { 
+/*     public function getProductsFromOrder($orderId) { 
         $query = "SELECT p.id, p.Name, p.Description, p.UnitPrice, p.UnitsInStock, p.Image, od.Quantity FROM `order` o
         JOIN orderdetails od
             ON od.OrderID = o.id
@@ -100,6 +112,25 @@ class ProductController extends MainController {
             WHERE o.id = ".$orderId.";";
 
         return $this->database->freeQuery($query, $this->productDetails); 
+    }   */
+
+
+
+
+
+    public function getProductsFromOrder($orderId) { 
+        
+        $query = "SELECT p.Id, p.name, p.description, p.unitPrice, p.unitsinstock, p.image FROM `product` p
+        JOIN orderdetails od
+            ON od.ProductID = p.Id
+        WHERE od.orderId = ".$orderId.";";
+
+        $products =  $this->database->freeQuery($query, $this->createFunction); 
+
+        $orderDetailsController = new OrderDetailsController();
+        $orderDetails = json_encode($orderDetailsController->getById($orderId));
+
+
     }  
 
 

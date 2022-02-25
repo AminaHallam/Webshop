@@ -13,19 +13,33 @@ class CourrierController extends MainController {
         parent::__construct("Courrier", "Courrier");
     }
 
-    function getAll() {
-        return $this->database->fetchAll($this->createCourrier);
-    }
+
+
 
     function add($entity) {
 
     }
 
-
+    function getAll() {
+        return $this->database->fetchAll($this->createCourrier);
+    }
 
     public function getById($id) {
 
     }
+
+
+    public function update($newValue, $entity) {
+
+    }
+    
+    public function delete($id) {
+
+    }
+
+
+
+
 
 }
 

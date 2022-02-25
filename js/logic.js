@@ -12,12 +12,6 @@ async function onLoad() {
 }
 
 
-// bör ligga i funk, inte i globalt skop, await 
-// sparas användare någonstans? 
-
-/* verifyAdmin();
-getUser(); */
-
 // Hamburgermeny
 const hamburger = document.querySelector(".hamburgerMenu");
 const menu = document.querySelector(".contactDiv");

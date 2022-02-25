@@ -16,7 +16,63 @@ class SubscriptionNewsController extends MainController {
     }
 
 
-    
+    public function add($subscriber) { 
+       
+    try{
+            if(isset($_SESSION['inloggedUser'])){
+                $user = unserialize($_SESSION["inloggedUser"]);
+
+
+                $subscriptionNewsToAdd = createSubscriptionNews(null, $user->Id , null, null); 
+                return $this->database->insert($subscriptionNewsToAdd);
+        
+            }else if($subscriber){ 
+                
+                $subscriptionNewsToAdd = createSubscriptionNews(null, null, $subscriber->FirstName, $subscriber->Email);
+                return $this->database->insert($subscriptionNewsToAdd);
+            
+            } 
+        
+        
+        } catch(Exception $e) {
+            throw new Exception("The information is not in correct format...", 500);
+        }
+    }
+
+
+
+
+    public function getAll() { 
+       
+        
+        return $this->database->fetchAll($this->$createSubscriptionNews); 
+        // hämta datan från användare med id, gör en join. 
+
+    }
+
+    public function getById($id) {
+        /*return $this->database->fetchById($id, $this->createFunction); */
+   }
+
+   
+
+   public function update($newValue, $entity) {
+
+    }
+
+
+
+    public function delete($id) {
+
+    }
+
+
+
+
+
+   /* Special Queries */
+
+
     public function getAllLoggedInSubscribers() {
         $query = 
         "SELECT u.id, sn.userid, u.FirstName, u.Email 
@@ -41,42 +97,9 @@ class SubscriptionNewsController extends MainController {
 
 
 
-    public function getAll() { 
-       
-        
-        return $this->database->fetchAll($this->$createSubscriptionNews); 
-        // hämta datan från användare med id, gör en join. 
-
-    }
-
-    public function getById($id) {
-/*         return $this->database->fetchById($id, $this->createFunction); */
-   }
-
-   
-
-     public function add($subscriber) { 
-       
-       try{
-            if(isset($_SESSION['inloggedUser'])){
-                $user = unserialize($_SESSION["inloggedUser"]);
 
 
-                $subscriptionNewsToAdd = createSubscriptionNews(null, $user->Id , null, null); 
-                return $this->database->insert($subscriptionNewsToAdd);
-         
-            }else if($subscriber){ 
-                
-                $subscriptionNewsToAdd = createSubscriptionNews(null, null, $subscriber->FirstName, $subscriber->Email);
-                return $this->database->insert($subscriptionNewsToAdd);
-               
-            } 
-         
-        
-        } catch(Exception $e) {
-            throw new Exception("The information is not in correct format...", 500);
-        }
-    }
+
 
 
 

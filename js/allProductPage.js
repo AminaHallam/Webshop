@@ -7,11 +7,9 @@ async function onLoad() {
     await printNrOfElements();
     getAllProducts();
     getAllProductsId();
+    getAllCategories();
 }
 
-verifyAdmin();
-getAllCategories();
-getUser();
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)

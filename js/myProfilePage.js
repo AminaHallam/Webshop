@@ -29,7 +29,7 @@ async function getAllLoggedInSubscribers(){
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut);
 
- document.getElementById("sendNews").addEventListener("click", addSubscriptionNews); 
+document.getElementById("sendNews").addEventListener("click", addSubscriptionNews); 
 
 
 

@@ -19,33 +19,6 @@ class OrderController extends MainController {
     }
 
 
-
-    public function getAll() {  
-        return $this->database->fetchAll($this->createFunction);  
-    }
-
-
-
-
-
-    public function getById($id) {
-        
-        $order = $this->database->fetchById($id, $this->createFunction); 
-
-        $userController = new UserController();
-        $user = $userController->getUserFromOrder($id);
-        $order->user = $user;
-
-        /* Hämtar produkterna som är kopplade till det specifika orderidt - Lyckas inte med quantity */
-        $productController = new ProductController();
-        $products = $productController->getProductsFromOrder($id);
-        $order->products = $products;
-
-        return $order;
-
-    }
-
-
     public function add($OrderInfo) {
         
         $products = json_decode($_SESSION["myCart"]);
@@ -90,19 +63,45 @@ class OrderController extends MainController {
 
 
 
+    public function getAll() {  
+        return $this->database->fetchAll($this->createFunction);  
+    }
 
 
-    public function update(){
+    public function getById($id) {
+        
+        $order = $this->database->fetchById($id, $this->createFunction); 
 
+        $userController = new UserController();
+        $user = $userController->getUserFromOrder($id);
+        $order->user = $user;
+
+        /* Hämtar produkterna som är kopplade till det specifika orderidt - Lyckas inte med quantity */
+        $productController = new ProductController();
+        $products = $productController->getProductsFromOrder($id);
+        $order->products = $products;
+
+        return $order;
 
     }
 
 
-   
-    public function delete() {
-
+    public function update($newValue, $entity) {
 
     }
+
+
+    public function delete($id) {
+
+    }
+
+
+
+
+
+
+
+
 
 
 
@@ -110,7 +109,6 @@ class OrderController extends MainController {
 /* Special Queries */
 
 
-    /* Hämtar orders som är kopplade till ett specifikt userid eller statusid */
     public function getOrdersFromOtherId($Id, $type) { 
         $query = "SELECT * FROM `order`
         WHERE ".$type."Id = ".$Id.";";

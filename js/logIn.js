@@ -10,12 +10,9 @@ const createAccountForm = document.querySelector("#createAccount")
 async function onLoad() {
     await showCorrectLayout();
     await printNrOfElements();
+    await getAllCategories();
 }
 
-
-verifyAdmin();
-getAllCategories();
-getUser();
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)

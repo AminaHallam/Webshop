@@ -9,16 +9,12 @@ async function onLoad() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const url = urlParams.get('id')
-    getAllCategories();
+    await getAllCategories();
     getCategoryFromId(url)
     
     renderProductsFromCategory(url)
 }
 
-
-verifyAdmin();
-
-getUser();
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)

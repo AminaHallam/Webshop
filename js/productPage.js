@@ -21,10 +21,6 @@ async function onLoad() {
 }
 
 
-verifyAdmin();
-
-getUser();
-
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)

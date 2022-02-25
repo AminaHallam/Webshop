@@ -13,11 +13,14 @@ class CategoryController extends MainController {
         parent::__construct("Category", "Category");
     }
 
+
+    public function add($entity) {
+
+    }
+
     function getAll() {
         return $this->database->fetchAll($this->createCategory);
     }
-
-
 
     public function getById($id) {
         $category = $this->database->fetchById($id, $this->createCategory);    
@@ -29,9 +32,19 @@ class CategoryController extends MainController {
         return $category;
     }
 
-    public function add($entity) {
+
+    public function update($newValue, $entity) {
 
     }
+
+    public function delete($id) {
+
+    }
+
+
+
+
+
 
 }
 
