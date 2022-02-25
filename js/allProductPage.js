@@ -1,21 +1,31 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
 import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
 
-
+// Se över vad vi kallar på 
 async function onLoad() {
     await showCorrectLayout();
     await printNrOfElements();
     getAllProducts();
     getAllProductsId();
+    getAllCategories();
+    burger();
 }
 
-verifyAdmin();
-getAllCategories();
-getUser();
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)
 
+function burger() {
+
+    const hamburger = document.querySelector(".hamburgerMenu");
+    const menu = document.querySelector(".contactDiv");
+    
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menu.classList.toggle("active");
+    
+    });
+}
 
 async function getAllProducts() {
     const action = "getAll";
@@ -45,9 +55,6 @@ async function renderProducts(list){
     categoryContainer.classList.add("categoryContainer")
     let category = document.createElement("h1")
     category.innerHTML = list[0].categoryName;
-    
-    //main.appendChild(categoryContainer)
-    //categoryContainer.appendChild(category)
 
     }
 
@@ -60,9 +67,6 @@ async function renderProducts(list){
         let title = document.createElement("h2")
         title.classList.add("productTitle")
         title.innerHTML = element.name;
-        /* let description = document.createElement("p")
-        description.classList.add("productDescription")
-        description.innerHTML = element.description; */
         let unitPrice = document.createElement("p")
         unitPrice.classList.add("productUnitPrice")
         unitPrice.innerHTML = element.unitPrice + " €";
@@ -81,7 +85,7 @@ async function renderProducts(list){
 
         main.append(allproductsDiv)
         allproductsDiv.append(productContainer)
-        productContainer.append( /* description, */ image, title, unitPrice, avaliableUnits)
+        productContainer.append(image, title, unitPrice, avaliableUnits)
     }
 
 
@@ -90,7 +94,7 @@ async function renderProducts(list){
 
 }
 
-
+// Kika på om denna skall läggas in i helperfunctions istället
 export function productPage(product) {
 
     let productId = product.Id
@@ -99,42 +103,18 @@ export function productPage(product) {
 
 }
 
-
-export async function getAllProductsId() {
+// Se över denna
+async function getAllProductsId() {
     const action = "getAll";
     let allProductsId = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}`, "GET")
     
     
     for (let i = 0; i < allProductsId.length; i++) {
         const element = allProductsId[i]
-        //console.log(element.productId)
-      /*   const ul = document.getElementById("dropdown");
-        let productContainer = document.createElement("div")
-        productContainer.classList.add("productContainer")
-        let title = document.createElement("a")
-        title.href = 'collectionPage.html?id=' + element.categoryId
-        title.innerHTML = element.categoryName; 
-        ul.append(productContainer)
-        productContainer.append(title) */
 
-        
-        
     }  
     
     
-}
-
-
-async function deleteProduct(id){
-    const action = "delete";
-    
-
-    var body = new FormData()
-    body.append("action", action)
-    body.append("id", id)
-
-    let status = await makeRequest(`./receivers/productReceiver.php`, "POST", body)
-    console.log(status)
 }
 
 

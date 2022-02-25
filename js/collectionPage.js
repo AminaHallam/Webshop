@@ -9,16 +9,25 @@ async function onLoad() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const url = urlParams.get('id')
-    getAllCategories();
+    await getAllCategories();
     getCategoryFromId(url)
     
     renderProductsFromCategory(url)
+    burger();
 }
 
 
-verifyAdmin();
+function burger() {
 
-getUser();
+    const hamburger = document.querySelector(".hamburgerMenu");
+    const menu = document.querySelector(".contactDiv");
+    
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menu.classList.toggle("active");
+    
+    });
+}
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)
@@ -68,9 +77,6 @@ async function renderProductsFromCategory(idToGet) {
         let title = document.createElement("h2")
         title.classList.add('collectionPageTitle')
         title.innerHTML = product.name;
-        /* let description = document.createElement("p")
-        description.classList.add('collectionPageDescription')
-        description.innerHTML = product.description; */
         let unitPrice = document.createElement("p")
         unitPrice.classList.add('collectionPageUnitPrice')
         unitPrice.innerHTML = product.unitPrice + " €";
@@ -89,7 +95,7 @@ async function renderProductsFromCategory(idToGet) {
     
         main.append(bigProductBox)
         bigProductBox.append(productContainer)
-        productContainer.append( /* description, */ image, title, unitPrice, avaliableUnits)
+        productContainer.append(image, title, unitPrice, avaliableUnits)
 
     }
 

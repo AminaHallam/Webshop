@@ -12,9 +12,14 @@ class OrderDetailsController extends MainController {
     private $createOrderDetails = "createOrderDetails";   
 
     function __construct() {
-        parent::__construct("orderdetails", "orderdetails"); 
+        parent::__construct("orderdetails", "Orderdetails"); 
     }
 
+
+
+    public function add($entity) {
+
+    }
 
 
     public function getAll() {  
@@ -23,25 +28,32 @@ class OrderDetailsController extends MainController {
 
 
     public function getById($id) {
+        return $this->database->fetchById($id, $this->createFunction);
+    }
+
+
+    public function update($newValue, $entity) {
+
+    }
+    public function delete($id) {
 
     }
 
 
-    public function add($entity) {
-
-    }
 
 
-    // Lägger till produkter på ordern
+
+    /* Special Queries */
+
     public function addProducts($products, $orderId) {
-    
+
         for ($i=0; $i < count($products); $i++) { 
                 
-                $product = $products[$i];
+            $product = $products[$i];
 
-                $createOrderDetails = createOrderDetails($orderId, $product->product->Id, $product->quantity);  
-                
-                $addedProducts = $this->database->insert($createOrderDetails);    
+            $createOrderDetails = createOrderDetails($orderId, $product->product->Id, $product->quantity);  
+            
+            $addedProducts = $this->database->insert($createOrderDetails);    
         }
 
         return $addedProducts;

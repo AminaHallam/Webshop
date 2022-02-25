@@ -11,19 +11,25 @@ async function onLoad() {
     const urlParams = new URLSearchParams(queryString);
     const url = urlParams.get('id')
     
-    productPage(url); 
-
-    getAllCategories(url);
-
+    await productPage(url); 
+    await getAllCategories(url);
     await renderProduct(url); 
 
+    burger();
 
 }
 
+function burger() {
 
-verifyAdmin();
-
-getUser();
+    const hamburger = document.querySelector(".hamburgerMenu");
+    const menu = document.querySelector(".contactDiv");
+    
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menu.classList.toggle("active");
+    
+    });
+}
 
 
 document.getElementById("menu").addEventListener("click", openMenu);
@@ -74,7 +80,7 @@ async function renderProduct(idToGet) {
 
 
  
-
+    // Knapp som går tillbaka - På G
     /* let returnToProductPage = document.createElement('button'); 
     returnToProductPage.classList.add('returnToPpage')
     returnToProductPage.innerText = "Return to product page"

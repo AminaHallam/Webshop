@@ -22,6 +22,8 @@ try {
 
                 $user = unserialize($_SESSION["inloggedUser"]);
 
+                // ifsats true eller false
+
                 echo json_encode($user);
 
                 exit;
@@ -60,7 +62,6 @@ try {
                 $controller = new UserController();
 
                 $userToAdd = json_decode($_POST["addUser"]);
-                error_log(json_encode($userToAdd));
                 echo (json_encode($controller->add($userToAdd)));
                 
                 exit;

@@ -14,14 +14,6 @@ class NewsletterController extends MainController{
 
     }
 
-    public function getAll(){
-        return $this->database->fetchAll($this->createNewsletter);
-    }
-
-    public function getById($id){
-        $newsletter = $this->database->fetchById($id, $this->createNewsLetter); 
-    }
-
 
     public function add($news){
         try {
@@ -35,19 +27,28 @@ class NewsletterController extends MainController{
             throw new Exception("Not possible");
         }
     }
-    
-    
-    public function update(){
 
+
+    public function getAll(){
+        return $this->database->fetchAll($this->createNewsletter);
+    }
+
+    public function getById($id){
+        $newsletter = $this->database->fetchById($id, $this->createNewsLetter); 
+    }
+
+    public function update($newValue, $entity) {
+
+    }
+    
+    public function delete($id) {
 
     }
 
 
-   
-    public function delete() {
 
-
-    }
+    
+    
 }   
 
 
