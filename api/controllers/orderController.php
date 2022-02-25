@@ -95,9 +95,7 @@ class OrderController extends MainController {
         /* Hämtar produkterna som är kopplade till det specifika orderidt - Lyckas inte med quantity */
         $productController = new ProductController();
         $products = $productController->getProductsFromOrder($id);
-        //$order->products = $products;
-
-        
+        $order->products = $products;
 
         return $order;
 
