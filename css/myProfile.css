@@ -84,57 +84,6 @@ h2 {
   background-color: black;
 }
 
-
-
-@media only screen and (max-width: 1124px) {
-  .orderButton {
-    font-size: 8px !important;
-  }
-  .cell {
-    font-size: 10px;
-  }
-  .orderHeader {
-    font-size: 12px;
-  }
-}
-
-@media only screen and (max-width: 790px) {
-  .orderHeader {
-    font-size: 8px;
-  }
-  .orderButton {
-    width: 40px !important;
-  }
-}
-
-@media only screen and (max-width: 540px) {
-  .orderButton {
-    width: 15px !important;
-    padding: 2px 15px !important;
-    font-size: 6px !important;
-  }
-  .cell {
-    font-size: 7px;
-  }
-  .orderHeader {
-    font-size: 8px;
-  }
-}
-
-@media only screen and (max-width: 540px) {
-  .orderButton {
-    width: 15px !important;
-    padding: 2px 15px !important;
-    font-size: 6px !important;
-  }
-  .cell {
-    font-size: 7px;
-  }
-  .orderHeader {
-    font-size: 8px;
-  }
-}
-
 .product, .orders, .newsletter {
   display: flex;
   flex-wrap: wrap;
@@ -284,6 +233,7 @@ button, .orderButton, #sendNews {
 .newsletterAndSubscriber {
   display: flex; 
   justify-content: space-around; 
+  flex-wrap: wrap;
 }
 
 
@@ -322,3 +272,55 @@ button, .orderButton, #sendNews {
   width: 150px; 
   margin: 2px; 
 }
+
+
+
+@media only screen and (max-width: 1124px) {
+  .orderButton {
+    font-size: 8px !important;
+  }
+  .cell {
+    font-size: 10px;
+  }
+  .orderHeader {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 790px) {
+  .orderHeader {
+    font-size: 8px;
+  }
+  .orderButton {
+    width: 40px !important;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .orderButton {
+    width: 15px !important;
+    padding: 2px 15px !important;
+    font-size: 6px !important;
+  }
+  .cell {
+    font-size: 7px;
+  }
+  .orderHeader {
+    font-size: 8px;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .orderButton {
+    width: 15px !important;
+    padding: 2px 15px !important;
+    font-size: 6px !important;
+  }
+  .cell {
+    font-size: 7px;
+  }
+  .orderHeader {
+    font-size: 8px;
+  }
+}
+
