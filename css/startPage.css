@@ -258,6 +258,57 @@ input[type=submit]:hover {
 
 }
 
+/* tablet, landscape iPad, lo-res laptops ands desktops */ 
+@media screen and (max-width:1050px) {
+  .gallery {
+    height: 65vh;
+  }
+
+  .imageScroller img {
+    width: 200px; 
+    max-height: 250px;
+    min-height: 250px;
+  }
+
+}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */ 
+@media screen and (max-width:800px) {
+
+  .gallery {
+    padding-bottom: 2rem;
+    height: 45vh;
+  }
+
+  .textContainer {
+    flex-direction: column;
+  }
+
+/*   .imageScroller img {
+    width: 200px; 
+    max-height: 200px;
+    min-height: 200px;
+  }
+ */
+}
+
+
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
+@media screen and (max-width:760px) { 
+  .textContainer {
+    flex-direction: column;
+  }
+
+  .newsTitle {
+    font-size: 20px;
+  }
+  .litleTitle {
+    font-size: 15px;
+  }
+
+}
+
+
 /* End of Style for About */ 
 @media screen and (max-width:700px) {
   #photo1 {
@@ -270,39 +321,7 @@ input[type=submit]:hover {
 }
 
 
-
 /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ 
-
-
-=======
-@media screen and (max-width:380px) {
-  
-  
-  .imageScroller img { 
-    max-height: 200px;
-    min-height: 200px;
-  }
-     
-
-
-
-
-/* smartphones, Android phones, landscape iPhone */
-@media screen and (max-width: 540px) { 
- 
-  .textAbout {
-    font-size: 10px;
-  }
-  .litleTitle {
-    font-size: 5px;
-  }
-
-  .newsLetterContainer {
-    flex-direction: column;
-  }
-
-}
-
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
 @media screen and (max-width:660px) { 
   
@@ -320,49 +339,33 @@ input[type=submit]:hover {
 
 }
 
-/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
-@media screen and (max-width:760px) { 
-  .textContainer {
+
+
+/* smartphones, Android phones, landscape iPhone */
+@media screen and (max-width: 540px) { 
+ 
+  .textAbout {
+    font-size: 10px;
+  }
+  .litleTitle {
+    font-size: 10px;
+  }
+
+  .newsLetterContainer {
     flex-direction: column;
   }
 
-  .newsTitle {
-    font-size: 20px;
-  }
-  .litleTitle {
-    font-size: 15px;
-  }
-
 }
 
-/* Fortsätt med gallery.. */
 
-/* tablet, landscape iPad, lo-res laptops ands desktops */ 
-@media screen and (max-width:800px) {
 
-  .gallery {
-    padding-bottom: 2rem;
-    height: 45vh;
-  }
+@media screen and (max-width:380px) {
+  
 
-/*   .imageScroller img {
-    width: 200px; 
+  
+  .imageScroller img { 
     max-height: 200px;
     min-height: 200px;
   }
- */
-}
-
-/* tablet, landscape iPad, lo-res laptops ands desktops */ 
-@media screen and (max-width:1050px) {
-  .gallery {
-    height: 65vh;
-  }
-
-  .imageScroller img {
-    width: 200px; 
-    max-height: 250px;
-    min-height: 250px;
-  }
-
+     
 }
