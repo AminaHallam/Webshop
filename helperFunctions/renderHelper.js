@@ -20,7 +20,7 @@ export async function getAllCategories() {
         
         const ul = document.getElementById("dropdown");
         let productContainer = document.createElement("div")
-        productContainer.classList.add("productContainer")
+        productContainer.classList.add("productContainerForDropdown")
         let title = document.createElement("a")
         title.href = 'collectionPage.html?id=' + element.Id
         title.innerHTML = element.categoryName; 

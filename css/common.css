@@ -67,12 +67,17 @@ header {
     display: block;
 } 
 
+.productContainerForDropdown {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .contactDiv {
     display: flex;
     align-items: center;
     justify-content: center;
     padding-right: 50px;
-    width: 4em;
+    /* width: 4em; */
     gap: 20px;
 }
 
@@ -113,6 +118,11 @@ ul, li {
     list-style: none;
     color: black;
     background-color: white;    
+}
+
+li {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 a {
@@ -325,7 +335,7 @@ a {
     .contactDiv {
         position: absolute;
         left: -100%;
-        top: 80px;
+        top: 90px;
         flex-direction: column;
         align-items: flex-start;
 

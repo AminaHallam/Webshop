@@ -42,6 +42,7 @@ async function getCategoryFromId(idToGet) {
         const category = specificCategory[i]; 
         
     }
+
     const main = document.getElementsByTagName("main")[0]; 
 
     if(specificCategory.categoryName) {
@@ -65,6 +66,7 @@ async function renderProductsFromCategory(idToGet) {
     let specificCategory = await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${idToGet}`, "GET")
     let bigProductBox = document.createElement("div")
     bigProductBox.classList.add("bigProductBox") 
+
     
     for (let i = 0; i < specificCategory.products.length; i++) {
         const product = specificCategory.products[i];
@@ -105,7 +107,7 @@ async function renderProductsFromCategory(idToGet) {
 function productPage(product) {
 
     let productId = product.Id
-
+    
     window.location.href = "productPage.html?id=" + productId; 
 
 } 
