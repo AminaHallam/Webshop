@@ -42,19 +42,16 @@ class ProductController extends MainController {
             exit;
         }
 
-        if(strpos($newValue, '+') !== false || strpos($newValue, '-') !== false) {
-            
-            $newValue = (int)$product->unitsInStock + (int)$newValue;
-        } 
-
         $productToUpdate = createProduct((int)$product->Id, $product->name , $product->description, (int)$product->unitPrice, (int)$newValue, $product->image); 
 
         unset($productToUpdate->quantity);
 
         $result = $this->database->update($productToUpdate); 
         
-         return $result;
+        return $result;
     }
+
+
 
 
     public function delete($id) {
@@ -68,6 +65,30 @@ class ProductController extends MainController {
 
 
     /* Special Queries */
+
+     // Ok att slå ihop denna med update med :   if(strpos($newValue, '+') !== false || strpos($newValue, '-') !== false) {$newValue = (int)$product->unitsInStock + (int)$newValue;}   ?
+     // Eller vill du att jag delar upp även denna i addQuantity och deleteQuantity? Eller fick man göra vad man vill i controller? :P 
+    public function addAndDeleteQuantity($newValue, $product) {
+        
+        $userController = new UserController();
+        $checkAdmin = ($userController->verifyAdmin());
+
+        if(!$checkAdmin) {
+            throw new Exception("Action not allowed", 401);
+            exit;
+        }
+
+        $newValue = (int)$product->unitsInStock + (int)$newValue;
+        
+        $productToUpdate = createProduct((int)$product->Id, $product->name , $product->description, (int)$product->unitPrice, (int)$newValue, $product->image); 
+
+        unset($productToUpdate->quantity);
+
+        $result = $this->database->update($productToUpdate); 
+        
+        return $result;
+
+    }
 
 
     // Uppdaterar unitsInStock på produkter när ordern är lagd
