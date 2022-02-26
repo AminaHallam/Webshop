@@ -202,6 +202,7 @@ async function getOrderDetails(id) {
 
     
     let showOrderDetail = document.querySelector(".orderDetail")
+    showOrderDetail.innerText = "";
     showOrderDetail.classList.toggle("none")
     
     //let orderDetails = Object.entries(orderDetailsList)
