@@ -179,7 +179,7 @@ a {
     justify-content: center;
     width: 15px;
     height: 15px;
-    right:125px;
+    right:82px;
     top:92px;
     font-size: 10px;
     border-radius: 50%;
@@ -187,11 +187,11 @@ a {
 }
 
 .qtyAdmin {
-    right: 247px;
+    right: 62px;
 }
 
 .qtyCustomer {
-    right: 212px;
+    right: 160px;
 }
 
 .footerDiv {
@@ -231,114 +231,54 @@ a {
 }
 
 /* Se över detta */
-@media screen and (max-width:320px) { 
-    
-    .logoHeader img {
-        max-width: 110px;
-    }        
 
-    .logoFooter img {
-        width: 110px;
+
+
+@media screen and (max-width:1000px) {
+
+    .logoHeader img {
+        max-width: 200px;
+        padding-left: 0px;
+    }  
+
+    #accountIcon {
+        height: 26px;
+        width: 26px;    
     }
 
-}
+    #cartIcon {
+        height: 24px;
+        width: 24px;    
+    }
 
-/* Se över detta - bild funkar ej att göra mindre + main fuckas, fortsätter lördag*/
-@media screen and (max-width: 480px) { 
+    #logOutIcon {
+        height: 26px;
+        width: 26px;
+    }
 
-    .logoHeader img {
-        max-width: 100px;
-    }    
-
-    .logoFooter img {
-        max-width: 110px;
+    #orderIcon {
+        height: 26px;
+        width: 26px;
     }
 
     .allIcons {
-        padding-right: 5px; 
+        padding-right: 20px;
     }
 
-    /* Ikonerna vill ej bli mindre */
-    /* 
-    #accountIcon {
-        height: 20px;
-        width: 20px;    
+    .qty {
+        right: 37px;
+        top: 75px;
+    }
+    .qtyAdmin {
+        right: 100px;
     }
 
-    #cartIcon {
-        height: 18px;
-        width: 18px;    
+    .qtyCustomer {
+        right: 97px;
     }
 
-    #logOutIcon {
-        height: 20px;
-        width: 20px;
-    }
-
-    #orderIcon {
-        height: 20px;
-        width: 20px;
-    } */
-
-}
-
-
-@media screen and (max-width:600px) { 
-    
-    .logoHeader img {
-        width: 170px;
-    }        
-
-    header {
-        height: 130px;
-    }
-
-    .containerHeader {
-        width: 100%;
-    }
-
-
-    #accountIcon {
-        height: 22px;
-        width: 22px;    
-    }
-
-    #cartIcon {
-        height: 20px;
-        width: 20px;    
-    }
-
-    #logOutIcon {
-        height: 22px;
-        width: 22px;
-    }
-
-    #orderIcon {
-        height: 22px;
-        width: 22px;
-    }
-
-    .bar {
-        display: block;
-        width: 30px;
-        height: 3px;
-        margin: 5px auto;
-    }
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg)
-    }
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-
-    .logoFooter img {
-        max-width: 110px;
-        padding-left: 0px;
-    }
-
-    .fab {
-        font-size: 1.5em;
-        width: 30px;
+    .loggedInUser p {
+        font-size: 12px;
     }
 
 }
@@ -410,7 +350,16 @@ a {
     }
     
     .qty {
-        top: 43px;
+        top: 38px;
+        right: 37px;
+    }
+
+    .qtyAdmin {
+        right: 100px;
+    }
+
+    .qtyCustomer {
+        right: 97px;
     }
 
     .logoFooter img {
@@ -443,44 +392,139 @@ a {
 }
  
 
-@media screen and (max-width:1000px) {
 
+@media screen and (max-width:600px) { 
+    
     .logoHeader img {
-        max-width: 200px;
-        padding-left: 0px;
-    }  
+        width: 170px;
+    }        
+
+    header {
+        height: 130px;
+    }
+
+    .containerHeader {
+        width: 100%;
+    }
+
 
     #accountIcon {
-        height: 26px;
-        width: 26px;    
+        height: 22px;
+        width: 22px;    
     }
 
     #cartIcon {
-        height: 24px;
-        width: 24px;    
+        height: 20px;
+        width: 20px;    
     }
 
     #logOutIcon {
-        height: 26px;
-        width: 26px;
+        height: 22px;
+        width: 22px;
     }
 
     #orderIcon {
-        height: 26px;
-        width: 26px;
+        height: 22px;
+        width: 22px;
     }
 
-    .allIcons {
-        padding-right: 20px;
+    .bar {
+        display: block;
+        width: 30px;
+        height: 3px;
+        margin: 5px auto;
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg)
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .logoFooter img {
+        max-width: 110px;
+        padding-left: 0px;
+    }
+
+    .fab {
+        font-size: 1.5em;
+        width: 30px;
     }
 
     .qty {
-        right: 60px;
+        right: 32px;
     }
-    
-    .loggedInUser p {
-        font-size: 12px;
+    .qtyAdmin {
+        right: 87px;
+    }
+
+    .qtyCustomer {
+        right: 87px;
     }
 
 }
 
+
+/* Se över detta - bild funkar ej att göra mindre + main fuckas, fortsätter lördag*/
+@media screen and (max-width: 480px) { 
+
+    .logoHeader img {
+        max-width: 100px;
+    }    
+
+    .logoFooter img {
+        max-width: 110px;
+    }
+
+    .allIcons {
+        padding-right: 5px; 
+    }
+
+    .qty {
+        right: 15px;
+    }
+
+    .qtyAdmin {
+        right: 73px;
+    }
+
+    .qtyCustomer {
+        right: 73px;
+    }
+
+    /* Ikonerna vill ej bli mindre */
+    /* 
+    #accountIcon {
+        height: 20px;
+        width: 20px;    
+    }
+
+    #cartIcon {
+        height: 18px;
+        width: 18px;    
+    }
+
+    #logOutIcon {
+        height: 20px;
+        width: 20px;
+    }
+
+    #orderIcon {
+        height: 20px;
+        width: 20px;
+    } */
+
+}
+
+
+@media screen and (max-width:320px) { 
+    
+    .logoHeader img {
+        max-width: 110px;
+    }        
+
+    .logoFooter img {
+        width: 110px;
+    }
+
+}
