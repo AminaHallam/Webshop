@@ -55,7 +55,7 @@ async function getCart() {
     let cart = await makeRequest(`./../api/receivers/cartReceiver.php?action=${action}`, "GET")
 
     if(cart) {
-        cart = JSON.parse(cart) // Ta bort? Görs i makerequest redan? 
+        cart = JSON.parse(cart)
     } else { 
         cart = []
     }
@@ -258,7 +258,7 @@ async function renderCart() {
 
         let checkCourrier = document.querySelector('input[name="selectCourrier"]:checked').value
 
-        createOrder(checkCourrier, userInfo.Id, cart); // ta bort cart ? 
+        createOrder(checkCourrier, userInfo.Id);
   
     })
 

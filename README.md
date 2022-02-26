@@ -37,11 +37,11 @@ Kravspecifikation på projektet:
 
 9. Inga Lösenord får sparas i klartext i databasen (G) ✅ 
 
-10. En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen (G) ✅ ❌
+10. En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen (G) ✅ 
 
-11. Administratörer ska kunna uppdatera antalet produkter i lager från admin delen av sidan (G) ✅ ❌
+11. Administratörer ska kunna uppdatera antalet produkter i lager från admin delen av sidan (G) ✅ 
 
-12. Administratörer ska kunna se en lista på alla gjorda beställningar (G) ✅ ❌
+12. Administratörer ska kunna se en lista på alla gjorda beställningar (G) ✅ 
 
 13. Sidans produkter ska delas upp i kategorier, en produkt ska tillhöra minst en kategori, men kan tillhöra flera (G) ✅ 
 
@@ -51,15 +51,15 @@ Kravspecifikation på projektet:
 
 16. Man ska från hemsidan kunna skriva upp sig för att få butikens nyhetsbrev genom att ange sitt namn och epostadress (G) ✅ 
 
-17. Administratörer ska kunna se en lista över personer som vill ha nyhetsbrevet och deras epost adresser (G) ✅ ❌
+17. Administratörer ska kunna se en lista över personer som vill ha nyhetsbrevet och deras epost adresser (G) ✅ 
 
-18. Alla kunder skall sparas i databasen och innehålla minst Förnamn(string), Efternamn(string), Adress(string) och om hen godkänner köpevillkoren (boolean)(G) ✅ ❌
+18. Alla kunder skall sparas i databasen och innehålla minst Förnamn(string), Efternamn(string), Adress(string) och om hen godkänner köpevillkoren (boolean)(G) ✅ 
 
-19. Kunder ska kunna välja ett av flera fraktalternativ (G) ✅ ❌
+19. Kunder ska kunna välja ett av flera fraktalternativ (G) ✅ 
 
-20. Tillgängliga fraktalternativ ska vara hämtade från databasen (G) ✅ ❌
+20. Tillgängliga fraktalternativ ska vara hämtade från databasen (G) ✅ 
 
-21. När man gör en beställning ska Kunden också få chansen att skriva upp sig för nyhetsbrevet (VG). ✅ ❌
+21. När man gör en beställning ska Kunden också få chansen att skriva upp sig för nyhetsbrevet (VG). ✅ 
 
 22. Kunden måste ha ett registrerat konto för att få göra ett köp (registreringsfunktion skall finnas). Tänk på att en administratör också kan vara en kund (VG) ✅ 
 
@@ -71,13 +71,13 @@ Kravspecifikation på projektet:
 
 26. Administratörer ska kunna redigera vilka kategorier en produkt tillhör (VG) ✅ ❌
 
-27. Administratörer ska kunna skicka nyhetsbrev från sitt gränssnitt, nyhetsbrevet ska sparas i databasen samt innehålla en titel och en brödtext (VG) ✅ ❌
+27. Administratörer ska kunna skicka nyhetsbrev från sitt gränssnitt, nyhetsbrevet ska sparas i databasen samt innehålla en titel och en brödtext (VG) ✅ 
 
 28. Som inloggad kund ska man kunna markera sin beställning som mottagen, detta skall sparas i databasen (VG) ✅ ❌
 
 29. Administratörer ska kunna lägga till och ta bort produkter (VG) ✅ ❌
 
-30. Om en produkt är slut i saldo skall detta visas på sidan. Kunden skall inte heller kunna köpa denna produkt tills positivt saldo finns (VG). ✅ ❌
+30. Om en produkt är slut i saldo skall detta visas på sidan. Kunden skall inte heller kunna köpa denna produkt tills positivt saldo finns (VG). ✅ 
 
 31. Administratörer ska kunna markera beställningar som skickade och se vilka ordrar som blivit mottagna (VG) ✅ ❌
 

@@ -31,13 +31,13 @@ class UserController extends MainController {
     
 
     public function getAll() { 
-        /* return $this->database->fetchAll($this->createFunction);  */ 
+        return $this->database->fetchAll($this->createFunction); 
     }
 
 
 
     public function getById($id) {
-       /*  return $this->database->fetchById($id, $this->createFunction); */
+       return $this->database->fetchById($id, $this->createFunction);
     }
 
     public function update($newValue, $entity) {
@@ -59,13 +59,16 @@ class UserController extends MainController {
     
     // Kollar om mejlen redan är registrerad i databasen
     public function checkEmail($user) {
+
         $query = "SELECT *
         FROM user
         WHERE Email = "."'".$user."'";
 
-        $checkEmail = $this->database->freeQuery($query, $this->createUser);
+        $checkEmail = $this->database->freeQuery($query, $this->createUser); 
 
-        if(!$checkEmail == "{}") {
+        error_log(serialize($checkEmail));
+
+        if($checkEmail == "{}") {
             return true;
         }
         return false;
