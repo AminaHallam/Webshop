@@ -42,19 +42,16 @@ class ProductController extends MainController {
             exit;
         }
 
-        if(strpos($newValue, '+') !== false || strpos($newValue, '-') !== false) {
-            
-            $newValue = (int)$product->unitsInStock + (int)$newValue;
-        } 
-
         $productToUpdate = createProduct((int)$product->Id, $product->name , $product->description, (int)$product->unitPrice, (int)$newValue, $product->image); 
 
         unset($productToUpdate->quantity);
 
         $result = $this->database->update($productToUpdate); 
         
-         return $result;
+        return $result;
     }
+
+
 
 
     public function delete($id) {
@@ -68,6 +65,30 @@ class ProductController extends MainController {
 
 
     /* Special Queries */
+
+     // Ok att slå ihop denna med update med :   if(strpos($newValue, '+') !== false || strpos($newValue, '-') !== false) {$newValue = (int)$product->unitsInStock + (int)$newValue;}   ?
+     // Eller vill du att jag delar upp även denna i addQuantity och deleteQuantity? Eller fick man göra vad man vill i controller? :P 
+    public function addAndDeleteQuantity($newValue, $product) {
+        
+        $userController = new UserController();
+        $checkAdmin = ($userController->verifyAdmin());
+
+        if(!$checkAdmin) {
+            throw new Exception("Action not allowed", 401);
+            exit;
+        }
+
+        $newValue = (int)$product->unitsInStock + (int)$newValue;
+        
+        $productToUpdate = createProduct((int)$product->Id, $product->name , $product->description, (int)$product->unitPrice, (int)$newValue, $product->image); 
+
+        unset($productToUpdate->quantity);
+
+        $result = $this->database->update($productToUpdate); 
+        
+        return $result;
+
+    }
 
 
     // Uppdaterar unitsInStock på produkter när ordern är lagd
@@ -102,25 +123,6 @@ class ProductController extends MainController {
         WHERE pc.CategoryId = " . $categoryID. ";";
         return $this->database->freeQuery($query, $this->createFunction); 
     }  
-
-
-
-
-
-    /* Hämtar alla produkter som är kopplade till en specifik order - Har lite proble med attributet quantity */
-    ////////* påbörjad funktion 2022-02-07. Vill få med quantity som ligger i productDetails till instansen */ //////////////////////////////////////////////////
-/*     public function getProductsFromOrder($orderId) { 
-        $query = "SELECT p.id, p.Name, p.Description, p.UnitPrice, p.UnitsInStock, p.Image, od.Quantity FROM `order` o
-        JOIN orderdetails od
-            ON od.OrderID = o.id
-        JOIN Product p
-            ON p.id = od.ProductID
-            WHERE o.id = ".$orderId.";";
-
-        return $this->database->freeQuery($query, $this->productDetails); 
-    }   */
-
-
 
 
 
