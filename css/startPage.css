@@ -104,6 +104,7 @@ main {
   padding: 40px 40px;
   background-color: #EDEDE9;
   cursor: pointer;
+  object-fit: contain;
 }
 
 .imageDiv::-webkit-scrollbar {
@@ -117,7 +118,7 @@ main {
 
 .imageScroller {
   display: inline-block;
-  margin-right: 40px;
+  padding-right: 40px;
 }
 
 .imageScroller img {
@@ -261,7 +262,13 @@ input[type=submit]:hover {
 
 
 /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ 
-@media screen and (max-width:320px) { 
+@media screen and (max-width:380px) {
+  
+  
+  .imageScroller img { 
+    max-height: 200px;
+    min-height: 200px;
+  }
      
 
 }
@@ -324,6 +331,12 @@ input[type=submit]:hover {
     height: 45vh;
   }
 
+/*   .imageScroller img {
+    width: 200px; 
+    max-height: 200px;
+    min-height: 200px;
+  }
+ */
 }
 
 /* tablet, landscape iPad, lo-res laptops ands desktops */ 
@@ -332,7 +345,10 @@ input[type=submit]:hover {
     height: 65vh;
   }
 
-  .imageDiv {
-    flex-wrap: wrap;
+  .imageScroller img {
+    width: 200px; 
+    max-height: 250px;
+    min-height: 250px;
   }
+
 }
