@@ -114,6 +114,19 @@ p {
     .collectionPageTitle {
         width: 150px;
     }
+    .titleOfAllProducts {
+        padding-top: 20px;
+        padding-bottom: 30px;
+    }
+    .productContainer {
+        height: 300px;
+    }
+    .collectionPageImage {
+        width: 200px;
+}
+.categoryContainer {
+    padding-bottom: 30px;
+}
 }
 
 
