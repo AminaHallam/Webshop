@@ -5,7 +5,6 @@ main {
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  padding-bottom: 30px;
 }
 
 
@@ -167,7 +166,7 @@ form {
 
 
 input[type=text] {
-  width: 20%;
+
   padding: 12px;
   margin: 8px 10px;
   display: inline-block;
@@ -176,7 +175,7 @@ input[type=text] {
 }
 
 input[type=submit] {
-  width: 10%;
+  font-size: 15px;
   padding: 12px;
   margin: 10px 0;
   display: inline-block;
@@ -204,6 +203,62 @@ input[type=submit]:hover {
 /* End of Style for Newsletter */ 
 
 
+/* Style for About */ 
+
+.aboutContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 2.1px;
+  line-height: 1;
+  padding-top: 30px;
+}
+
+.textAbout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 13px;
+  margin: 20px;
+}
+
+.imageAbout {
+  width: 60%;
+  height: auto;
+  max-height: 30em;
+  object-fit: cover;
+  margin: 25px;
+  border-radius: 100em;
+  flex-wrap: nowrap;
+  box-shadow: 11px 6px 5px #d5bdaf;
+  
+}
+
+.TextAbout {
+  display: flex;
+  flex-direction: row;
+
+}
+
+/* End of Style for About */ 
+
+
 
 /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ 
 @media screen and (max-width:320px) { 
@@ -212,14 +267,50 @@ input[type=submit]:hover {
 }
 
 /* smartphones, Android phones, landscape iPhone */
-@media screen and (max-width: 480px) { 
+@media screen and (max-width: 540px) { 
  
+  .textAbout {
+    font-size: 10px;
+  }
+  .litleTitle {
+    font-size: 5px;
+  }
+
+  .newsLetterContainer {
+    flex-direction: column;
+  }
 
 }
 
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
-@media screen and (max-width:600px) { 
+@media screen and (max-width:660px) { 
   
+  .newsTitle {
+    font-size: 15px;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .litleTitle {
+    font-size: 10px;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+
+}
+
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
+@media screen and (max-width:760px) { 
+  .textContainer {
+    flex-direction: column;
+  }
+
+  .newsTitle {
+    font-size: 20px;
+  }
+  .litleTitle {
+    font-size: 15px;
+  }
 
 }
 
