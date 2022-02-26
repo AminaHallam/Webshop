@@ -190,18 +190,19 @@ a {
     width: 15px;
     height: 15px;
     right:82px;
-    top:92px;
+    top:100px;
     font-size: 10px;
     border-radius: 50%;
     background-color: #E3D5CA;
 }
 
 .qtyAdmin {
-    right: 62px;
+    right: 160px;
 }
 
 .qtyCustomer {
     right: 160px;
+    top: 100px;
 }
 
 .footerDiv {
@@ -277,14 +278,15 @@ a {
 
     .qty {
         right: 37px;
-        top: 75px;
+        top: 85px;
     }
     .qtyAdmin {
-        right: 100px;
+        right: 97px;
     }
 
     .qtyCustomer {
         right: 97px;
+        top: 84px;
     }
 
     .loggedInUser p {
