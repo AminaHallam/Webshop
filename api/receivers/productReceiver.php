@@ -80,7 +80,7 @@ try {
                 $value = "+".$value;
 
                 $controller2 = new ProductController();
-                echo (json_encode($controller2->update($value, $productDb)));
+                echo (json_encode($controller2->addAndDeleteQuantity($value, $productDb)));
                 exit;
                 
             } else {
@@ -115,7 +115,7 @@ try {
                 $value = "-".$value;
 
                 $controller2 = new ProductController();
-                echo (json_encode($controller2->update($value, $productDb)));
+                echo (json_encode($controller2->addAndDeleteQuantity($value, $productDb)));
                 exit;
                 
             } else {
