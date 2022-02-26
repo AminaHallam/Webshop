@@ -1,5 +1,5 @@
 main {
-
+    
 }
 
 
@@ -9,6 +9,7 @@ flex-direction: row;
 flex-wrap: wrap;
 justify-content: center;
 text-align: center;
+padding-bottom: 10%;
 }
 
 .productTitle {
