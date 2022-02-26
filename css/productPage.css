@@ -2,41 +2,58 @@
 main {
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-
   margin-bottom: 7em;
+  flex:1 1 auto
 }
 
+html {
+  height: 100%;
+}
 
+body {
+  min-height: 100%;
+}
 
+footer {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
 
-
+.returnButton {
+  padding-top: 100px;
+  display: flex;
+  flex-direction: row;
+  padding-left: 1em;
+  margin-left: 80px;
+}
 
 .productCont {
-    padding-left: 1em;
-    padding-top: 1em;
-    margin-top: 3em; 
-    margin-left: 1em;
-    display: flex;
-    height: 400px;
-    width: 350px; 
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    margin-left: 200px;
-    object-fit: scale-down;
+  padding-left: 1em;
+  display: flex;
+  height: auto;
+  width: 80%;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: 8%;
 }
 
-
+.leftDiv {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  object-fit: contain;
+  
+}
 
 .productImage {
     padding-top: 1em; 
     margin-top: 20px;
     margin-right: 2em;
     object-fit: scale-down;
+    height: 100%;
 }
-
 
 
 .productInfo {
@@ -44,181 +61,18 @@ main {
     margin-top: 3em;
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
     margin-bottom:4em;
 }
 
-
-
-
-.divForCart {
-    
-    display:flex;
-
+.textCont {
+  line-height: 2;
 }
 
-
-@media only screen and (max-width: 950px) {
-  .main {
-    font-size: 10px;
-    flex-direction: column;
-  }
-  .productInfo {
-      font-size: 10px;
-  }
-  .productInfo {
-      padding-top: 3em;
-  }
-  .productImage {
-      display: flex;
-      height: 350px;
-}
+.priceCont {
+  line-height: 5;
+  font-weight: 600;
 }
 
-@media only screen and (max-width: 873px) {
-  .main {
-      padding-bottom: 0px;
-  }
-}
-
-
-@media only screen and (max-width: 650px) {
-  .main {
-      display: flex;
-      flex-direction: column;
-      padding-top: 8px;
-      padding-top: 3px;
-      font-size: 10px;
-  
-  }
-  p {
-      margin-top: 2px;
-      font-size: smaller;
-  }
-  .productInfo {
-      width: 150px;
-}
-.productInfo {
-  display: flex;
-  flex-direction: column;
-  font-size: 10px;
-  padding-top: 40px;
-  padding-bottom: 1px;
-}
-}
-
-@media only screen and (max-width: 370px) {
-  .main {
-      display:flex;
-      font-size: 10px;
-      padding-top: 18px;
-      padding-bottom: 20px;
-      flex-direction: column;
-     
-  }
-  .productInfo {
-      display: flex;
-      font-size: smaller;
-      padding-top: 18px;
-  }
-  .productCont, .divForCart, .addToCart {
-      height: 250px;
-  }
-}
-
-@media only screen and (max-width: 315px) {
-  .main{
-    display:flex;
-
-    flex-direction: column;
-  }
-  .productCont {
-      height: 223px;
-      flex-direction: column;
-  }
-  .productInfo {
-      width: 150px;
-      font-size: 10px;
-      padding-top: 18px;
-  }
-
-  .productImage {
-    width: 150px;
-  }
-  p {
-    margin-top: 2px;
-    font-size: smaller;
-} 
-
-
-.addToCart {
-   display:flex; 
-   flex-direction: column;
-   flex-direction: wrap;}
-}
-
-
-
-/* 
-
-  @media screen and (max-width: 600px) {
-    .main {
-      max-width: 100%;
-      display:flex;
-      align-items: center;
-      flex-direction: column;
-      flex-wrap: nowrap;
-      
-    }
-    .productInfo {
-      
-      justify-content: center;
-      align-items: center;
-      
-      width: 330px;
-      
-    }
-
-
-    .textCont {
-      width: 350px;
-      margin-left: 20px;
-     
-    }
-
-
-    .productCont, .divForCart, .addToCart {
-      margin: 0px; 
-      float: none; 
-      margin-bottom: 5px;
-      
-      justify-content: center;
-      align-items: center;
-      align-self: center;
-    }
-
-    .productImage{
-      margin: 0px; 
-
-     height: 350px;
-     width: 400px;
-     justify-content: center;
-     margin-left: 10px;
-     margin-top: 12px;
-
-    }
-
-    .addToCart{
-      margin-right: 26px;
-      margin-bottom: 5px;
-    }
-
-    .cartButton {
-      margin-right: 30px;
-    }
-  }
-
- */
 
 /* CSS */
 .addToCart, .cartButton {
@@ -257,15 +111,20 @@ main {
 
 }
 
-
-.addToCart {
-    margin-top: 70px;
+.imgBackArrow {
+  height: 20px;
+  width: 20px;
 }
 
+
+
 .divForCart {
-  margin: 0px;
-  width: 100%;
-  justify-content: space-around
+  display: flex;
+  width: 88%;
+  justify-content: flex-end;
+  margin-top: 40px;
+  gap: 21px;
+
 }
 
 .cartButton {
@@ -324,4 +183,112 @@ main {
 .noClick:hover {
   background: unset;
   color: unset;
+}
+
+
+@media only screen and (max-width: 1180px) {
+  .returnButton {
+    margin-left: 20px;
+  }
+  .divForCart {
+    margin-top: 0px !important;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  
+  .textCont {
+      font-size: 14px;
+  }
+  .productInfo {
+      padding-top: 3em;
+  }
+  .productImage {
+      display: flex;
+      height: 350px;
+}
+}
+
+@media only screen and (max-width: 800px) {
+  .returnButton {
+    padding-top: 70px;
+  }
+
+}
+
+@media only screen and (max-width: 700px) {
+  .productCont {
+    flex-wrap: wrap;
+  }
+  .productImage {
+    width: 100%;
+    height: unset;
+  
+  }
+  .leftDiv {
+    width: 50vw;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .returnButton {
+    padding-top: 40px;
+  }
+}
+
+
+
+@media only screen and (max-width: 370px) {
+  .main {
+      display:flex;
+      font-size: 10px;
+      padding-top: 18px;
+      padding-bottom: 20px;
+      flex-direction: column;
+     
+  }
+  .productInfo {
+      display: flex;
+      font-size: smaller;
+      padding-top: 18px;
+  }
+  .returnButton {
+    padding-top: 30px;
+  }
+}
+
+@media only screen and (max-width: 315px) {
+ 
+  
+  .productCont {
+      
+      flex-direction: row;
+      flex-wrap: wrap;
+  }
+  .productInfo {
+      width: 150px;
+      font-size: 10px;
+      padding-top: 18px;
+  }
+
+  .productImage {
+    width: 150px;
+  }
+  p {
+    margin-top: 2px;
+    font-size: smaller;
+} 
+
+
+.divForCart {
+   display:flex; 
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+  }
+  .priceCont {
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+  }
 }

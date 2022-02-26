@@ -37,10 +37,10 @@ document.querySelector(".logOut").addEventListener("click", logOut)
 
 
 async function productPage(product) {
-
+    
     const action = "getById";
     let specificProduct = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}&id=${product}`, "GET")
-
+    
     return specificProduct;
     
 }   
@@ -48,13 +48,13 @@ async function productPage(product) {
 
 
 async function renderProduct(idToGet) {
-
+    
     const action = "getById";
     let product = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}&id=${idToGet}`, "GET")
-
-
+    
+    
     let main = document.getElementsByTagName("main")[0]; 
-       
+    
     
     
     let productCont = document.createElement("div")
@@ -67,9 +67,11 @@ async function renderProduct(idToGet) {
     description.classList.add('textCont');
     description.innerHTML = product.description;
     let unitPrice = document.createElement("p")
-    description.classList.add('textCont');
+    unitPrice.classList.add('priceCont');
     unitPrice.innerHTML = product.unitPrice + " €";
     let image = document.createElement("img")
+    let leftDiv = document.createElement('div')
+    leftDiv.classList.add('leftDiv')
     image.classList.add('productImage')
     image.src = "./assets/" + product.image
     image.addEventListener("click", () => {productPage(product)})
@@ -80,29 +82,33 @@ async function renderProduct(idToGet) {
     addToCartButton.innerText = "Add"
     addToCartButton.addEventListener("click", () => {addToCart(product.Id)})
     
-    let returnToProductPage = document.createElement('button'); 
-    returnToProductPage.classList.add('returnToPpage')
-    returnToProductPage.innerText = "Return to previous page"
-    returnToProductPage.addEventListener("click", () => {
-        
+    /* let returnToProductPage = document.getElementsByClassName('returnToPpage'); 
+    returnToProductPage.innerText = "Return to previous page" */
+    
+    document.querySelector(".returnToPpage").addEventListener("click", () => {
         history.back()
     })
+    
+    
+    /* returnToProductPage.addEventListener("click", () => {
+        
+        history.back()
+    }) */
 
     let divForCart = document.createElement('div');
     divForCart.classList.add('divForCart')
-    let spaceDiv = document.createElement('div');
-    spaceDiv.classList.add('spaceDiv');
     let cartButton = document.createElement('button')
     cartButton.classList.add('cartButton')
     cartButton.innerText = 'Continue to checkout'
-
-    main.append(productCont, productInfo, divForCart)
-
+    
+    main.append(productCont)
+    
     cartButton.addEventListener("click", () => { location.href = "./../cartPage.html"; })
-
-    divForCart.append(spaceDiv, cartButton)
-    productInfo.append(title, description, unitPrice, addToCartButton, returnToProductPage)
-    productCont.append(image)
+    
+    divForCart.append(addToCartButton, cartButton)
+    productInfo.append(title, description, unitPrice, divForCart)
+    leftDiv.append(image)
+    productCont.append(leftDiv, productInfo)
 
     if(product.unitsInStock == 0) {
         addToCartButton.classList.add("noClick")
