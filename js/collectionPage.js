@@ -91,6 +91,7 @@ async function renderProductsFromCategory(idToGet) {
         if(unitsInStock > 0){
             avaliableUnits.innerHTML = 'Product avaliable to order'; 
         }else{
+            avaliableUnits.style.color = "red"
             avaliableUnits.innerHTML = 'Product out of stock'
         }
         image.addEventListener("click", () => {productPage(product)})
