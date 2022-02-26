@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : ven. 18 fév. 2022 à 08:33
+-- Généré le : sam. 26 fév. 2022 à 10:57
 -- Version du serveur : 5.7.34
 -- Version de PHP : 7.4.21
 
@@ -112,7 +112,8 @@ CREATE TABLE `order` (
 INSERT INTO `order` (`Id`, `StatusID`, `UserID`, `CourrierID`, `RegisterDate`, `ShippingDate`, `CustRecDate`) VALUES
 (8, 'REG', 8, 1, '2022-02-18 08:25:34', NULL, NULL),
 (9, 'REG', 8, 2, '2022-02-18 08:26:18', NULL, NULL),
-(10, 'REG', 7, 2, '2022-02-18 08:26:18', NULL, NULL);
+(10, 'REG', 7, 2, '2022-02-18 08:26:18', NULL, NULL),
+(11, 'REG', 7, 2, '2022-02-25 17:51:27', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -133,6 +134,7 @@ CREATE TABLE `orderdetails` (
 INSERT INTO `orderdetails` (`ProductID`, `OrderID`, `Quantity`) VALUES
 (1, 8, 1),
 (4, 8, 1),
+(4, 11, 1),
 (6, 9, 1),
 (10, 9, 1),
 (28, 10, 1);
@@ -179,9 +181,9 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`Id`, `Name`, `Description`, `UnitPrice`, `UnitsInStock`, `Image`) VALUES
 (1, 'Stop hiding', '100x150\r\nAcrylic and charcoal\r\nGallery canvas\r\nReady to hang!', 1490, 1, 'abStopHiding.png'),
-(2, 'Spirit of a wolf', '100 x 120\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame not necessary)\r\nReady to hang!', 1190, 1, 'wildSpiritOfAWolf.png'),
+(2, 'Spirit of a wolf', '100 x 120\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame not necessary)\r\nReady to hang!', 1190, 2, 'wildSpiritOfAWolf.png'),
 (3, 'Everyone knows the price of everything and the value of nothing', '100x150\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 1490, 1, 'womanEveryoneKnowsThePrice.JPG'),
-(4, 'Power', '100x120\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 1290, 1, 'womanStrongBianca.jpg'),
+(4, 'Power', '100x120\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 1290, 0, 'womanStrongBianca.jpg'),
 (5, 'Prodigious', '100x120\r\nAcrylic\r\nGallery canvas\r\nReady to hang', 1190, 1, 'abProdigious.jpg'),
 (6, 'Don\'t worry bout me', '100x150\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 1490, 1, 'womanStrongBianca2.jpg'),
 (7, 'Epic', '60 x 80\r\nAcrylic\r\nGallery canvas with 40mm black painted edges (frame is not a need)\r\nReady to hang!', 890, 1, 'womanEpic.JPG'),
@@ -272,7 +274,9 @@ CREATE TABLE `subscriptionnews` (
 --
 
 INSERT INTO `subscriptionnews` (`Id`, `UserID`, `FirstName`, `Email`) VALUES
-(195, NULL, 'Hello', 'Hello@hello.se');
+(195, NULL, 'Hello', 'Hello@hello.se'),
+(196, NULL, 'hej', 'hej@hej.se'),
+(198, 7, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -372,8 +376,7 @@ ALTER TABLE `productincategory`
 ALTER TABLE `subscriptionnews`
   ADD PRIMARY KEY (`Id`),
   ADD UNIQUE KEY `Email` (`Email`),
-  ADD UNIQUE KEY `UserID_2` (`UserID`),
-  ADD KEY `UserID` (`UserID`);
+  ADD UNIQUE KEY `UserID_2` (`UserID`);
 
 --
 -- Index pour la table `user`
@@ -408,7 +411,7 @@ ALTER TABLE `newsletter`
 -- AUTO_INCREMENT pour la table `order`
 --
 ALTER TABLE `order`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `product`
@@ -420,7 +423,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT pour la table `subscriptionnews`
 --
 ALTER TABLE `subscriptionnews`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
 
 --
 -- AUTO_INCREMENT pour la table `user`
