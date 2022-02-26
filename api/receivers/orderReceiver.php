@@ -68,9 +68,10 @@ try {
 
                 if($_SESSION["inloggedUser"]) {
 
+                    
                     $controller = new OrderController();
                     $result = json_encode($controller->add(json_decode($_POST["createOrder"])));
-    
+                    
                     if($result == true) {
                         echo json_encode(true);
                         exit; 

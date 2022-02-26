@@ -26,7 +26,12 @@ class Database {
         $query->execute(); 
         $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction); 
         
-        return $result;  
+
+        if($result) {
+            return $result; 
+        }
+
+        return false;  
     }
 
 

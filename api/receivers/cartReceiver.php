@@ -116,10 +116,8 @@ try {
                     if($productDb->Id == $cartItem->product->Id) {
            
                         if($cart[$i]->quantity == 1) {
-                        
-                            unset($cart[$i]);  
-                                
-                            $cart = array_values($cart);
+
+                            array_splice($cart, $i, 1);
 
                             $_SESSION["myCart"] = json_encode($cart);
                             exit;

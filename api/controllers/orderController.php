@@ -29,7 +29,7 @@ class OrderController extends MainController {
             throw new Exception("Cart is empty", 500);
             exit;
         }
-
+        
         $createOrder = createOrder(null, $OrderInfo->StatusId, $OrderInfo->UserId, $OrderInfo->CourrierId, date('Y-m-d H:i:s'), null, null);   
         
         // Tar bort adderade attribut som ligger i klassen order som inte tillhör instansen.
@@ -40,6 +40,7 @@ class OrderController extends MainController {
 
         $lastInsertedId = $this->database->insert($createOrder);
 
+       
         if(!$lastInsertedId) {
             throw new Exception("Order was not created", 500);
             exit;

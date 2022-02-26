@@ -202,6 +202,7 @@ async function getOrderDetails(id) {
 
     
     let showOrderDetail = document.querySelector(".orderDetail")
+    showOrderDetail.innerText = "";
     showOrderDetail.classList.toggle("none")
     
     //let orderDetails = Object.entries(orderDetailsList)
@@ -355,7 +356,7 @@ async function setQuantity() {
     let updateUnitsInStock = await makeRequest("./../api/receivers/productReceiver.php", "POST", myData)
 
     if(updateUnitsInStock == true) { 
-        alert("Sucess!"). 
+        alert("Sucess!")
 
         location.reload();
 
@@ -367,7 +368,7 @@ async function setQuantity() {
 
 
 async function addQuantity(value) {
-    console.log(value)
+
     let productId =  document.querySelector(".productId").value
 
     let body = new FormData()
@@ -388,7 +389,7 @@ async function addQuantity(value) {
 }
 
 async function deleteQuantity(value) {
-    console.log(value)
+
     let productId =  document.querySelector(".productId").value
 
     let body = new FormData()
