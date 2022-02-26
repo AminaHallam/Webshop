@@ -55,6 +55,8 @@ async function renderProduct(idToGet) {
 
     let main = document.getElementsByTagName("main")[0]; 
        
+    
+    
     let productCont = document.createElement("div")
     productCont.classList.add("productCont")
     let title = document.createElement("h2")
@@ -72,22 +74,19 @@ async function renderProduct(idToGet) {
     image.src = "./assets/" + product.image
     image.addEventListener("click", () => {productPage(product)})
     
-
+    
     let addToCartButton = document.createElement('button'); 
     addToCartButton.classList.add('addToCart')
     addToCartButton.innerText = "Add"
     addToCartButton.addEventListener("click", () => {addToCart(product.Id)})
-
-
- 
-    // Knapp som går tillbaka - På G
-    /* let returnToProductPage = document.createElement('button'); 
+    
+    let returnToProductPage = document.createElement('button'); 
     returnToProductPage.classList.add('returnToPpage')
-    returnToProductPage.innerText = "Return to product page"
+    returnToProductPage.innerText = "Return to previous page"
     returnToProductPage.addEventListener("click", () => {
-        window.location.href = "productPage.html?id=" + product.productId; 
-    }) */
-
+        
+        history.back()
+    })
 
     let divForCart = document.createElement('div');
     divForCart.classList.add('divForCart')
@@ -102,7 +101,7 @@ async function renderProduct(idToGet) {
     cartButton.addEventListener("click", () => { location.href = "./../cartPage.html"; })
 
     divForCart.append(spaceDiv, cartButton)
-    productInfo.append(title, description, unitPrice, addToCartButton, /*returnToProductPage*/)
+    productInfo.append(title, description, unitPrice, addToCartButton, returnToProductPage)
     productCont.append(image)
 
     if(product.unitsInStock == 0) {

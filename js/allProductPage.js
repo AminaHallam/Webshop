@@ -6,7 +6,6 @@ async function onLoad() {
     await showCorrectLayout();
     await printNrOfElements();
     getAllProducts();
-    getAllProductsId();
     getAllCategories();
     burger();
 }
@@ -47,16 +46,7 @@ async function renderProducts(list){
     titleOfAllProducts.innerText = "All Products"
     
     main.append(titleOfAllProducts)
-    
 
-    if(list[0].categoryName) {
-
-    let categoryContainer = document.createElement("div")
-    categoryContainer.classList.add("categoryContainer")
-    let category = document.createElement("h1")
-    category.innerHTML = list[0].categoryName;
-
-    }
 
     for (let i = 0; i < list.length; i++) {
         
@@ -90,27 +80,14 @@ async function renderProducts(list){
     }
 }
 
-// Kika på om denna skall läggas in i helperfunctions istället
-export function productPage(product) {
+
+function productPage(product) {
 
     let productId = product.Id
 
     window.location.href = "productPage.html?id=" + productId; 
 
 }
-
-// Se över denna
-async function getAllProductsId() {
-    const action = "getAll";
-    let allProductsId = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}`, "GET")
-    
-    
-    for (let i = 0; i < allProductsId.length; i++) {
-        const element = allProductsId[i]
-
-    }  
-}
-
 
 
 
