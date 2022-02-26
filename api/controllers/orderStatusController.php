@@ -22,9 +22,7 @@ class OrderStatusController extends MainController {
 
     public function getById($id) {
 
-        $orderStatus = $this->database->fetchById($id, $this->createOrderStatus); 
-
-        return $orderStatus; 
+        $this->database->fetchById($id, $this->createOrderStatus); 
 
     }
 
