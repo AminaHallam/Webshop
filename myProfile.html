@@ -95,34 +95,62 @@
                     <div class="updateProduct">
                         <input class="updateUnits" type="number" placeholder="New value">
                         <button class="updateProductButton">Set quantity on selected product</button>
-                    </div>
+                    </div><br>
                     <label class="toggle2">Add quantity <strong>+</strong></label>
                     <div class="addQtyProduct">
                         <input class="addUnits" type="number" placeholder="Value">
                         <button class="addQtyProductButton">Add quantity to selected product</button>
-                    </div>
-                    <label class="toggle3">Delete quantity <strong>+</strong></label>
+                    </div><br>
+                    <label class="toggle3">Delete quantity <strong>+</strong></label><br>
                     <div class="deleteQtyProduct">
                         <input class="deleteUnits" type="number" placeholder="Value">
                         <button class="deleteQtyProductButton">Delete quantity from selected product</button>
                     </div>
                 </div>
 
+
+
+
+
                 <div class="modifyCategory">
                     <h2>Modify category</h2>
                     <label>Which product do you want to modify?</label>
-                    <div class="getProduct">
-                        <input class="productId" type="number" placeholder="Product Id">
-                        <button class="getProductButton">Select product</button>
+                    <div class="getProductCategory">
+                        <input class="getId" type="number" placeholder="Product Id">
+                        <button class="getProductWithCategoryButton">Select product</button>
                     </div>
-                    <label>Add category - Select category you want to add</label>
+                    
+                    
+                    <label class="toggle4">Replace category <strong>+</strong></label><br><br>
+                    <div class="replaceCategory">
+                        <label>Select category you want to replace</label>
+                        <select name="categoryToBeReplaced" id="categoryToBeReplaced">
+                            <option value="" disabled selected>Choose category</option>
+                        </select><br><br>
+                        <label>Select new category</label>
+                        <select name="newCategory" id="newCategory">
+                            <option value="" disabled selected>Choose category</option>
+                        </select><br>
+                        <button class="replaceCategoryButton">Replace category on product</button><br><br>
+                    </div>
+                    
+                    
+                    <label class="toggle5">Add category <strong>+</strong></label><br><br>
                     <div class="addCategory">
-                        <!-- SELECT - Hämta valbara kategorier -->
+                        <label>Select category you want to add</label>
+                        <select name="addCategory" id="addCategory">
+                            <option value="" disabled selected>Choose category</option>
+                        </select><br>
                         <button class="addCategoryButton">Add category to product</button>
                     </div>
-                    <label>Delete category - Select category you want to delete</label>
+                    
+                    
+                    <label class="toggle6">Delete category <strong>+</strong></label><br><br>
                     <div class="deleteCategory">
-                        <!-- SELECT - Hämta categorierna som finns på produkten -->
+                        <label>Select category you want to delete</label>
+                        <select name="deleteCategory" id="deleteCategory">
+                            <option value="" disabled selected>Choose category</option>
+                        </select><br>
                         <button class="deleteCategoryButton">Delete category from product</button>
                     </div>
                 </div>
@@ -144,7 +172,7 @@
 
             <div class="newsAndSub">
                 <h1>Newsletter</h1>
-                <h1>Subscribers</h1>
+                
             </div>
             <div class="newsletterAndSubscriber">
 
@@ -164,17 +192,17 @@
                       </form>
                 </div>   
             </div> 
-
-                <div class="subscribers">
-                  
-                    <div class="firstname">
-                        <h2>Firstname</h2>
-                    </div>
-                    <div class="email">
-                        <h2>Email</h2>
+                <div>
+                    <h1>Subscribers</h1>
+                    <div class="subscribers">
+                        <div class="firstname">
+                            <h2>Firstname</h2>
+                        </div>
+                        <div class="email">
+                            <h2>Email</h2>
+                        </div>
                     </div>
                 </div>
-            </div>
 
         </div>
     </main>

@@ -10,6 +10,7 @@ include_once("./../classes/subscriptionNews.php");
 include_once("./../classes/orderDetails.php");
 include_once("./../classes/newsletter.php");
 include_once("./../classes/orderStatus.php"); 
+include_once("./../classes/productInCategory.php"); 
 
 
 
@@ -58,6 +59,9 @@ function createNewsletter($Id, $Title, $Text, $Date){
     return new Newsletter((int)$Id, $Title, $Text, $Date);
 }
 
+function createProductInCategory($productId, $categoryId, $lastUpdated) {
+    return new ProductInCategory((int)$productId, (int)$categoryId, $lastUpdated);
+}
 
 
 

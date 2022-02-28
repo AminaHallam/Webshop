@@ -39,7 +39,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 280px;
+    width: 380px;
     margin-left: 10px;
     overflow: hidden;
 }
@@ -82,6 +82,10 @@ main {
 
 .totalpriceItem {
     font-weight: 600;
+    padding-top: 5px;
+    display:flex;
+    justify-content: flex-end;
+
 }
 
 .ajustQty {
@@ -381,7 +385,7 @@ main {
     }
 
     .totalpriceItem {
-        display: none;
+        padding-top: 5px;
     }
     
     }

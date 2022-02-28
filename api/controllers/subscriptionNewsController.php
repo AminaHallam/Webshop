@@ -63,7 +63,7 @@ class SubscriptionNewsController extends MainController {
 
 
     public function delete($id) {
-
+        return $this->database->delete($id);
     }
 
 
@@ -100,9 +100,6 @@ class SubscriptionNewsController extends MainController {
             array_push($subscriberList, $sub); 
 
         }
-           
-
-           
 
         }
 
@@ -111,11 +108,6 @@ class SubscriptionNewsController extends MainController {
         for ($i=0; $i < count($subscriberGuest); $i++) { 
             
             $sub1 = $subscriberGuest[$i]; 
-            error_log(serialize($sub1));
-         
-
-      
-           
 
             array_push($subscriberList, $sub1);
         } 

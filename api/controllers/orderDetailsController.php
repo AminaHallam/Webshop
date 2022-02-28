@@ -18,7 +18,7 @@ class OrderDetailsController extends MainController {
 
 
     public function add($entity) {
-
+        // Fungerar ej med normalisering? 
     }
 
 
@@ -28,8 +28,6 @@ class OrderDetailsController extends MainController {
 
 
     public function getById($id) {
-
-        
         return $this->database->fetchById($id, $this->createFunction);
 
     }
@@ -38,8 +36,9 @@ class OrderDetailsController extends MainController {
     public function update($newValue, $entity) {
 
     }
-    public function delete($id) {
 
+    public function delete($id) {
+       // Fungerar ej med normalisering? 
     }
 
 
@@ -71,8 +70,6 @@ class OrderDetailsController extends MainController {
         JOIN `order` o
         ON od.OrderID = o.Id
         WHERE od.OrderID = ".$orderId." AND od.productId = ".$productId.";";
-
-        error_log(serialize($query));
 
         $orderDetails = $this->database->freeQuery($query, $this->createOrderDetails); 
 
