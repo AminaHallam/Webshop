@@ -414,37 +414,39 @@ async function deleteQuantity(value) {
 
 async function renderSubscribers() {
 
-const renderSubList = await getAllLoggedInSubscribers();
-
-for (let i = 0; i < renderSubList.length; i++) {
-    
-    const subList = renderSubList[i];
-
-    const allSubscribers = document.querySelector(".firstname");
-    const emailCont = document.querySelector(".email")
-    let firstNameDiv = document.createElement("div")
-    firstNameDiv.classList.add("firstNameDiv")
-    let firstName = document.createElement("p")
-    firstName.classList.add("firstNameSub")
-    firstName.innerText = subList.FirstName
-
-    firstNameDiv.append(firstName)
-    allSubscribers.append(firstNameDiv)
-
-
-    let emailDiv = document.createElement("div")
-    emailDiv.classList.add("emailDiv")
-    let email = document.createElement("p")
-    email.classList.add("emailSub")
-    email.innerText = subList.Email 
-    emailDiv.append(email)
-    emailCont.append(emailDiv)
-
+        const renderSubList = await getAllLoggedInSubscribers();
+        
+        
+        console.log(renderSubList)
+        for (let i = 0; i < renderSubList.length; i++) {
+            
+            let subList = renderSubList[i]
+        
+           
+            const allSubscribers = document.querySelector(".firstname");
+            const emailCont = document.querySelector(".email")
+            let firstNameDiv = document.createElement("div")
+            firstNameDiv.classList.add("firstNameDiv")
+            let firstName = document.createElement("p")
+            firstName.classList.add("firstNameSub")
+        
+            firstName.innerText = subList.FirstName
+         
+            firstNameDiv.append(firstName)
+            allSubscribers.append(firstNameDiv)
+        
+        
+            let emailDiv = document.createElement("div")
+            emailDiv.classList.add("emailDiv")
+            let email = document.createElement("p")
+            email.classList.add("emailSub")
+  
+            email.innerText = subList.Email
+            emailDiv.append(email)
+            emailCont.append(emailDiv)
+ 
+        }
     }
-
-}
-
-
 
 document.querySelector('#sendNews').addEventListener('click', createNewsLetter)
 
