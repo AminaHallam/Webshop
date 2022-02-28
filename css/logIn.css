@@ -55,19 +55,29 @@ main {
     padding-left: 50px;
     padding-right: 50px;
     text-align: center;
+    padding-bottom: 100px;
 }
 
 .containerForms {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    margin-top: 30px;
-    margin-left: 20px;
-    margin-right: 20px;
+    column-gap: 40px;
+    flex-grow: 1;
 }
 
 .registerBlock{
-    margin: 40px;
+    flex-grow: 1;
+}
+
+.registerBlockPassword {
+    /* gap */
+    flex-grow: 1;
+}
+
+.registerBlockContact {
+    /* gap */
+    flex-grow: 1;
 }
 
 .inputGroup input {
@@ -144,9 +154,51 @@ a:link {
     padding-top: 10px;
 }
 
+.connectRegisterBlocks {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    column-gap: 40px;
+    row-gap: 11px;
+}
+
+
+@media screen and (max-width: 980px){
+    /*   .containerForms {
+          flex-flow: row wrap;
+      } */
+      .connectRegisterBlocks {
+          row-gap: 11px;
+          width: 50%;
+      }
+      
+      .connectRegisterBlocks {
+          flex-grow: 1;
+      }
+      
+      .registerBlockContact {
+          flex-grow: 1;
+          /* gap */
+      }
+      .connectRegisterBlocks {
+          flex-grow: 1;
+          flex-wrap: column;
+          flex-wrap: wrap;
+      }
+      .registerBlockPassword {
+          flex-grow: 1;
+          /* gap */
+      }
+      .registerBlock{
+          /* gap */
+          width: 50%;
+      }
+  }
+
+
 @media screen and (max-width: 600px) {
     .form {
-        margin-top: 30px;
+        /* gap */
         width: 100%;
         height: 100%;
     }
@@ -158,5 +210,8 @@ a:link {
 
     main {
         background-color: white;
+    }
+    .containerForms {
+        flex-wrap: wrap;
     }
 }
