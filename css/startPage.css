@@ -1,4 +1,3 @@
-
 main {
   width: 100%;
   height: 100%;
@@ -7,9 +6,6 @@ main {
   align-items: center;
   flex-wrap: wrap;
 }
-
-
-/* Hero-carousel */
 
 .gallery {
 	display: grid;
@@ -86,9 +82,6 @@ main {
     transform: translate(-50%, -50%);
   }
 
-/* Hero slutar */
-
-/* News image section */
 .h1 {
   display: inline-block;
   text-align: center;
@@ -128,18 +121,13 @@ main {
   min-height: 300px;
 }
 
-/* News slutar */
-
-/* Style for Newsletter */
-
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   letter-spacing: 2.1px;
-  padding-top: 25px; 
-  
+  padding-top: 25px;  
 }
 
 p {
@@ -201,10 +189,6 @@ input[type=submit]:hover {
 .none {
   display: none;
 }
-/* End of Style for Newsletter */ 
-
-
-/* Style for About */ 
 
 .aboutContainer {
   display: flex;
@@ -258,7 +242,6 @@ input[type=submit]:hover {
 
 }
 
-/* tablet, landscape iPad, lo-res laptops ands desktops */ 
 @media screen and (max-width:1050px) {
   .gallery {
     height: 65vh;
@@ -272,7 +255,6 @@ input[type=submit]:hover {
 
 }
 
-/* tablet, landscape iPad, lo-res laptops ands desktops */ 
 @media screen and (max-width:800px) {
 
   .gallery {
@@ -292,8 +274,6 @@ input[type=submit]:hover {
  */
 }
 
-
-/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
 @media screen and (max-width:760px) { 
   .textContainer {
     flex-direction: column;
@@ -309,7 +289,6 @@ input[type=submit]:hover {
 }
 
 
-/* End of Style for About */ 
 @media screen and (max-width:700px) {
   #photo1 {
     background-image:url("./../assets/womanEveryoneKnowsThePrice.JPG");
@@ -320,9 +299,6 @@ input[type=submit]:hover {
 
 }
 
-
-/* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ 
-/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
 @media screen and (max-width:660px) { 
   
   .newsTitle {
