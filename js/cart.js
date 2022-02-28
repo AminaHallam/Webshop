@@ -151,9 +151,9 @@ async function renderCart() {
         })
 
         cartContainer.append(itemContainer)
-        itemContainer.append(image, infoContainer, priceContainer)
-        infoContainer.append(title, unitPrice)
-        priceContainer.append(ajustQty, totalPrice)
+        itemContainer.append(image, infoContainer)
+        infoContainer.append(title, unitPrice, priceContainer, ajustQty, totalPrice)
+        //priceContainer.append(ajustQty, totalPrice)
         ajustQty.append(deleteQty, unitQty, addQty)
 
     }
