@@ -38,10 +38,36 @@ class CategoryController extends MainController {
     }
 
     public function delete($id) {
-
+        return $this->database->delete($id);
     }
 
 
+    /* Special Queries */
+
+    public function getCategoryWithProductId($id) {
+
+        $userController = new UserController();
+        $checkAdmin = ($userController->verifyAdmin());
+
+        if(!$checkAdmin) {
+            throw new Exception("Action not allowed", 401);
+            exit;
+        }
+
+        $query = "SELECT c.Id, c.CategoryName, c.Description 
+        FROM category c 
+        JOIN `productincategory` pc
+            ON pc.categoryid = c.Id
+        WHERE pc.productid = ".$id.";";
+
+        $categories = $this->database->freeQuery($query, $this->createCategory); 
+
+        if(empty($categories)) {
+            return false;
+        }
+
+        return $categories;
+    }
 
 
 
