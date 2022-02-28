@@ -55,7 +55,7 @@ class ProductController extends MainController {
 
 
     public function delete($id) {
-
+        return $this->database->delete($id);
     }
 
 
@@ -112,8 +112,6 @@ class ProductController extends MainController {
 
         return $updatedProducts;
     }
-
-
 
     public function getProductsFromCategory($categoryID) { 
         $query = "SELECT p.Id, p.Name, p.Description, p.UnitPrice, p.UnitsInStock, p.Image

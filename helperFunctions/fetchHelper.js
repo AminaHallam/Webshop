@@ -142,21 +142,15 @@ export async function getAllProducts() {
 }
 
 
+
 // Hämtar en produkt baserat på ett produktid 
 export async function getProductFromId(id) {
+
 const action = 'getById';  
-
-let product = product.Id; 
-
-for (let index = 0; index < product.length; index++) {
-    const element = product[index];
-    
-    
-}
 
 let specificProduct = await makeRequest(`./../api/receivers/productReceiver.php?action=${action}&id=${id}`, "GET")
 
-// Return?
+return specificProduct
 
 }
      
@@ -185,3 +179,8 @@ export async function printNrOfElements() {
     numberCart.innerText = totalSum
 
 }
+
+
+
+
+

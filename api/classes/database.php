@@ -54,8 +54,9 @@ class Database {
         $query = $this->db->prepare($sqlQuery);
         $response = $query->execute();
         $result = $query->fetchAll(PDO::FETCH_FUNC, $createInstanceFunction);
-        
+
         if($response) {
+
             if($result) {
                 return $result;
 
@@ -132,8 +133,21 @@ class Database {
             return "Insert into ".$this->selectedTable. " was a success if no created Id was expected!";
         }
 
-
     }
+
+
+    public function delete($id) {
+        $query = $this->db->prepare("DELETE FROM ". $this->selectedTable ." WHERE id=" . $id . ";");
+        $query->execute();
+
+        if($query->rowCount() > 0) {
+            return $this->selectedClass . " with id: " . $id . " is deleted!";
+        } else {
+            return "There are no " . $this->selectedClass . " with id: " . $id . "...";
+        }
+    }
+
+
 
 }
 

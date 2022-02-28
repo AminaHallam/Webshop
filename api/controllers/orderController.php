@@ -109,7 +109,7 @@ class OrderController extends MainController {
 
 
     public function delete($id) {
-
+        return $this->database->delete($id);
     }
 
 

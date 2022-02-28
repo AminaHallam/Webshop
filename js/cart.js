@@ -70,8 +70,6 @@ async function renderCart() {
     let cart = await getCart()
     let userInfo = await getUser()
 
-    console.log(userInfo)
-
     const main = document.getElementsByTagName("main")[0]
 
     main.innerHTML = "";
@@ -88,8 +86,6 @@ async function renderCart() {
     for (let i = 0; i < cart.length; i++) {
         
         const cartItem = cart[i];
-
-        console.log(cartItem)
 
         let itemContainer = document.createElement("div")
         itemContainer.classList.add("itemContainer")
@@ -338,8 +334,8 @@ async function addProduct(productId) {
  
     await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
 
-    renderCart();
-    printNrOfElements();
+    await renderCart();
+    await printNrOfElements();
 }    
 
 async function deleteProduct(productId) {
@@ -348,10 +344,10 @@ async function deleteProduct(productId) {
     body.append("action", action)
     body.append("productId", productId)
  
-   await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
+    await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
 
-    renderCart();
-    printNrOfElements();
+    await renderCart();
+    await printNrOfElements();
 }    
 
 
