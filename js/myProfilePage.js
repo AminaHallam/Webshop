@@ -1,4 +1,4 @@
-import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
+import {openMenu, getAllCategories, burger} from './../helperFunctions/renderHelper.js'
 import {makeRequest,  getUser, verifyAdmin, showCorrectLayout, logOut, printNrOfElements, getAllProducts, getProductFromId} from './../helperFunctions/fetchHelper.js'
 
 
@@ -30,18 +30,6 @@ async function accountCheck() {
 
         return
     }
-}
-
-function burger() {
-
-    const hamburger = document.querySelector(".hamburgerMenu");
-    const menu = document.querySelector(".contactDiv");
-    
-    hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        menu.classList.toggle("active");
-    
-    });
 }
 
 async function getAllLoggedInSubscribers(){
@@ -125,8 +113,8 @@ async function whichPageToDisplay() {
     if(checkAdmin) {
         
         document.querySelector(".adminLayout").classList.remove("none")
-        getUnitsInStock()
-        getProductWithCategory() 
+        overviewUnitsInStock()
+        overviewCategory() 
 
    } else {
         document.querySelector(".adminLayout").classList.add("none")
@@ -153,6 +141,13 @@ async function whichPageToDisplay() {
 
 
 async function renderOrders(list) {
+    
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        return
+    }
+
     let bigContainer = document.getElementsByClassName("overviewOrders")[0];
     
     let headers = [
@@ -214,35 +209,69 @@ async function renderOrders(list) {
 // render orderList By id 
 
 async function getOrderDetails(id) {
+
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        return
+    }
     
     const action = "getById"; 
     
     let orderDetailsList = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}`, "GET"); 
 
+   
     
     let showOrderDetail = document.querySelector(".orderDetail")
-    showOrderDetail.innerText = "";
     showOrderDetail.classList.toggle("none")
+
+    let orderHeader = document.createElement("h2")
+    orderHeader.innerHTML = "Order Details"
+    showOrderDetail.innerHTML = ""
     
-    //let orderDetails = Object.entries(orderDetailsList)
+    showOrderDetail.append(orderHeader)
     
-    console.log(orderDetailsList)
     let leftBox = document.createElement("div")
     leftBox.classList.add("leftBox")
 
     let rightBox = document.createElement("div")
     rightBox.classList.add("rightBox")
+    showOrderDetail.append(leftBox)
+
+    let orderId = orderDetailsList.Id
 
     orderDetailsList.orderStatus.forEach(orderStatus => {
-        leftBox.innerText = "Order with id: " + orderDetailsList.Id + " - " + orderStatus.Status 
 
-        showOrderDetail.append(leftBox)
+        let orderDetails = document.createElement("div")
+        orderDetails.classList.add("orderDetails")
+        orderDetails.innerHTML = "<h3>Order status</h3>" + "Order with id: " + orderDetailsList.Id + " - " + orderStatus.Status + "  "
+
+        let sendOrderButton = document.createElement("button")
+        sendOrderButton.classList.add("sendOrderButton")
+        sendOrderButton.innerText = " Send the order!"
+        sendOrderButton.addEventListener("click", () => {
+            sendOrder(orderId)
+
+        })
+
+        leftBox.append(orderDetails)
+        orderDetails.append(sendOrderButton)
+
+      if(orderStatus.Status == "Shipped" || orderStatus.Status == "CustReceived") {
+            sendOrderButton.classList.add("none")
+            return
+
+        } else {
+            sendOrderButton.classList.remove("none")
+
+        }
+    
     });
 
     orderDetailsList.courrier.forEach(courrierList => {
         let courrierBox = document.createElement("div")
         courrierBox.classList.add("courrierBox")
-        courrierBox.innerText = "Courrier: " + courrierList.courrierName
+        courrierBox.innerHTML = "<h3>Courrier</h3>" + courrierList.courrierName
    
         leftBox.append(courrierBox)
 
@@ -251,39 +280,53 @@ async function getOrderDetails(id) {
     orderDetailsList.products.forEach(productList => {
         let productBox = document.createElement("div")
         productBox.classList.add("productBox")
-        productBox.innerHTML = "Product with id: " + productList.Id + "<br>" + " Name: " + productList.name + "<br>" +  " UnitPrice: " + productList.unitPrice + " € " + "<br>" + " Quantity: " + productList.quantity
+        productBox.innerHTML = "<h3>Product details</h3>" + "Product with id: " + productList.Id + "<br>" + "<p>Name: " + productList.name + "</p>" +  " UnitPrice: " + productList.unitPrice + " € " + "<br>" + " Quantity: " + productList.quantity + "<br>" + "<br>"+ "<hr>"
     
         leftBox.append(productBox)
     })
+
+    let userBox = document.createElement("h2")
+    userBox.innerText = "Information about customer"
+
 
     orderDetailsList.user.forEach(userList => {
     
         rightBox.innerHTML = "User id: " + userList.Id + "<br>" + " FirstName: " + userList.FirstName + "<br>" + " LastName: " + userList.LastName + "<br>" + " Email " + userList.Email + "<br>" + " Mobile: " + userList.MobileNumber + "<br>" + " Adress: " + userList.Street + "<br>" + " ZipCode: " + userList.ZipCode + "<br>" + " City: " + userList.City + "<br>" + " Country: " + userList.Country
     
         leftBox.append(rightBox)
+        
     })
 
-    showOrderDetail.append(rightBox)
-
-
-
-
-
-
-
-  /*   for (let i = 0; i < orderDetails.courrier.length; i++) {
-        const element = orderDetails[i];
-        
-
-
-    } */
-
-
-  
+    showOrderDetail.append(userBox, rightBox)
     
 }
 
+async function sendOrder(orderId) {
 
+    let checkAdmin = await verifyAdmin();
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
+
+   let body = new FormData(); 
+    body.append("statusId", "SHIP")
+    body.append("orderId", orderId)
+    body.append("endpoint", "updateOrder"); 
+    let sentOrder = await makeRequest(`./../api/receivers/orderReceiver.php`, "POST", body)
+
+    if(sentOrder == true) { 
+        alert("The order is sent!")
+        
+        location.reload();
+
+    } else {
+        alert("The sending has failed!")
+
+
+    }
+
+}
 
 
 // Update product buttons/links
@@ -313,19 +356,42 @@ document.querySelector(".toggle3").addEventListener("click", () => {
 })
 
 
-async function getUnitsInStock() {
+async function overviewUnitsInStock() {
+
+    let checkAdmin = await verifyAdmin();
+    if(!checkAdmin) {
+        return
+    }
 
     let getProduct = document.querySelector(".getProduct")
+    let overviewProduct = document.createElement("div")
+    overviewProduct.classList.add("overviewProduct")
+    overviewProduct.innerHTML = "";
+
+    getProduct.append(overviewProduct)
+
+}
+
+
+
+document.querySelector(".getProductButton").addEventListener("click", getUnitsInStock)
+
+async function getUnitsInStock() {
+
+  let checkAdmin = await verifyAdmin();
+  if(!checkAdmin) {
+    alert("You are not allowed to proceed")
+    return
+}
 
     let products = await getAllProducts()
 
-    let overviewProduct = document.createElement("div")
-    overviewProduct.classList.add("overviewProduct")
+    let overviewProduct = document.querySelector(".overviewProduct")
 
-    document.querySelector(".getProductButton").addEventListener("click", () => {
-        
+    if(overviewProduct) {
         overviewProduct.innerHTML = "";
-
+    }
+    
         let productId =  document.querySelector(".productId").value
 
         if(!productId){
@@ -359,12 +425,12 @@ async function getUnitsInStock() {
                 pQty.innerText = "Current Qty: " + product.unitsInStock
                 pImage.src = "./assets/" + product.image
     
-                getProduct.append(overviewProduct)
+               /*  getProduct.append(overviewProduct) */
                 overviewProduct.append(pImage, infoProductContainer)
                 infoProductContainer.append(pId, pName, pQty)
             }
         }
-    })
+
 }
 
 
@@ -372,6 +438,14 @@ async function getUnitsInStock() {
 
 async function setQuantity() {
 
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
+
+    let inputValue =  document.querySelector(".updateUnits")
     let updateUnits =  document.querySelector(".updateUnits").value
     let productId =  document.querySelector(".productId").value
 
@@ -395,11 +469,16 @@ async function setQuantity() {
 
     if(updateUnitsInStock == true) { 
         alert("Success!")
-
-        location.reload();
+        let collapse = document.querySelector(".updateProduct")
+        collapse.classList.remove("menu")
+        inputValue.value = "";
+        getUnitsInStock()
+        
 
     } else {
         alert("Product not updated")
+        getUnitsInStock()
+        
     }
 }
 
@@ -407,6 +486,14 @@ async function setQuantity() {
 
 async function addQuantity(value) {
 
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
+
+    let inputValue =  document.querySelector(".addUnits")
     let productId =  document.querySelector(".productId").value
 
     if(!productId){
@@ -423,16 +510,27 @@ async function addQuantity(value) {
 
     if(result == true) { 
         alert("Success!")
-
-        location.reload();
+        let collapse = document.querySelector(".addQtyProduct")
+        collapse.classList.remove("menu")
+        inputValue.value = "";
+        getUnitsInStock()
 
     } else {
         alert("Product not updated")
+        getUnitsInStock()
     }
 }
 
 async function deleteQuantity(value) {
 
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
+
+    let inputValue =  document.querySelector(".deleteUnits")
     let productId =  document.querySelector(".productId").value
 
     if(!productId){
@@ -449,11 +547,14 @@ async function deleteQuantity(value) {
 
     if(result == true) {
         alert("Success!")
-
-        location.reload();
+        let collapse = document.querySelector(".deleteQtyProduct")
+        collapse.classList.remove("menu")
+        inputValue.value = "";
+        getUnitsInStock()
 
     } else {
         alert("Product not updated")
+        getUnitsInStock()
     }
 }
 
@@ -489,22 +590,27 @@ document.querySelector(".toggle6").addEventListener("click", () => {
 
 
 /* SELECT PRODUCT */
-// ändra namn på denna sedan till typ getCategoryOptions
-async function getProductWithCategory() {
+
+
+
+async function overviewCategory() {
     let getProductCategory = document.querySelector(".getProductCategory")
     let overview = document.createElement("div")
     overview.classList.add("overview")
+    overview.innerHTML = ""
     getProductCategory.append(overview)
-
-
-
-
-
-    document.querySelector(".getProductWithCategoryButton").addEventListener("click", renderProductWithCategory) 
 }
 
+document.querySelector(".getProductWithCategoryButton").addEventListener("click", renderProductWithCategory) 
 
 async function renderProductWithCategory() {
+    
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
 
     let id =  document.querySelector(".getId").value
 
@@ -629,6 +735,12 @@ async function renderProductWithCategory() {
 
 async function getCategoryWithProductId(id) {
 
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        return
+    }
+
     let action = "getCategoryWithProductId"
 
     return await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${id}`, "GET")
@@ -644,6 +756,13 @@ async function getCategoryWithProductId(id) {
 document.querySelector(".addCategoryButton").addEventListener("click", addCategoryToProduct) 
 
 async function addCategoryToProduct() {
+
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
 
     let productId =  document.querySelector(".getId").value
 
@@ -681,12 +800,13 @@ async function addCategoryToProduct() {
 
     if(result) { 
         alert("Success!")
-
-        location.reload();
+        let collapse = document.querySelector(".addCategory")
+        collapse.classList.remove("menu")
+        renderProductWithCategory()
 
     } else {
         alert("Product not updated")
-        location.reload();
+        renderProductWithCategory()
     }
 }
 
@@ -707,6 +827,13 @@ async function getCategories() {
 document.querySelector(".deleteCategoryButton").addEventListener("click", deleteCategoryFromProduct) 
 
 async function deleteCategoryFromProduct() {
+
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
 
     let productId =  document.querySelector(".getId").value
     let categoryId = document.querySelector("#deleteCategory").value
@@ -734,12 +861,13 @@ async function deleteCategoryFromProduct() {
 
     if(result) { 
         alert("Success!")
-
-        location.reload();
+        let collapse = document.querySelector(".deleteCategory")
+        collapse.classList.remove("menu")
+        renderProductWithCategory()
 
     } else {
         alert("Product not updated")
-        location.reload();
+        renderProductWithCategory()
     } 
 
 }
@@ -752,6 +880,13 @@ async function deleteCategoryFromProduct() {
 document.querySelector(".replaceCategoryButton").addEventListener("click", categoryReplace) 
 
 async function categoryReplace() {
+
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
 
     let categoryIdToBeReplaced = document.querySelector("#categoryToBeReplaced").value
     let newCategoryId = document.querySelector("#newCategory").value
@@ -797,12 +932,13 @@ async function categoryReplace() {
 
     if(result) { 
         alert("Success!")
-
-        location.reload();
+        let collapse = document.querySelector(".replaceCategory")
+        collapse.classList.remove("menu")
+        renderProductWithCategory()
 
     } else {
         alert("Product not updated")
-        location.reload();
+        renderProductWithCategory()
     }  
 
 }
@@ -813,6 +949,12 @@ async function categoryReplace() {
 
 
 async function renderSubscribers() {
+
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        return
+    }
 
         const renderSubList = await getAllLoggedInSubscribers();
         
@@ -852,6 +994,14 @@ document.querySelector('#sendNews').addEventListener('click', createNewsLetter)
 
 async function createNewsLetter(e) {
     e.preventDefault();
+
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
+
     let title = document.getElementById('title').value;
     let content = document.getElementById('content').value;
     let success = document.querySelector('.success');

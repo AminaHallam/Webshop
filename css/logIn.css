@@ -64,7 +64,6 @@ main {
     align-items: flex-start;
     column-gap: 40px;
     flex-grow: 1;
-    padding-top: 30px;
 }
 
 .registerBlock{

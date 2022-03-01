@@ -159,9 +159,9 @@ a {
     margin-left: 5px;
 }
 
-.adminSetting {
+/* .adminSetting {
     display: none;
-}
+} */
  
 #adminIcon {
     height: 34px;
@@ -204,10 +204,6 @@ a {
 }
 
 .footerDiv {
-  /*   position: relative; */
-/*     bottom: 0px;
-    left: 0px;
-    right: 0px; */
     display: flex;
     flex-direction: row; 
     justify-content: space-around; 
@@ -238,6 +234,8 @@ a {
     padding-bottom: 30px;
 }
 
+
+/* Iconerna när ingen är inloggad */
 .none {
     display: none;
 }
@@ -500,28 +498,6 @@ a {
     .qtyCustomer {
         right: 73px;
     }
-
-    /* Ikonerna vill ej bli mindre */
-    /* 
-    #accountIcon {
-        height: 20px;
-        width: 20px;    
-    }
-
-    #cartIcon {
-        height: 18px;
-        width: 18px;    
-    }
-
-    #logOutIcon {
-        height: 20px;
-        width: 20px;
-    }
-
-    #orderIcon {
-        height: 20px;
-        width: 20px;
-    } */
 
 }
 

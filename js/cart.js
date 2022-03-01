@@ -1,4 +1,4 @@
-import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
+import {openMenu, getAllCategories, burger} from './../helperFunctions/renderHelper.js'
 import {makeRequest, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
 
 
@@ -16,19 +16,6 @@ async function onLoad() {
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)
-
-function burger() {
-
-    const hamburger = document.querySelector(".hamburgerMenu");
-    const menu = document.querySelector(".contactDiv");
-    
-    hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        menu.classList.toggle("active");
-    
-    });
-}
-
 
 
 // Om du inte är inloggad så skickas du till loginsidan. 
@@ -70,6 +57,8 @@ async function renderCart() {
     let cart = await getCart()
     let userInfo = await getUser()
 
+    console.log(cart)
+
     const main = document.getElementsByTagName("main")[0]
 
     main.innerHTML = "";
@@ -92,7 +81,7 @@ async function renderCart() {
 
         let image = document.createElement("img")
         image.classList.add("cartItemImage")
-        image.src = "./../assets/" + cartItem.product.image
+        image.src = "./../assets/" + cartItem.image
 
 
         let infoContainer = document.createElement("div")
@@ -100,10 +89,11 @@ async function renderCart() {
 
         let title = document.createElement("h2")
         title.classList.add("title")
-        title.innerHTML = cartItem.product.name;
+        title.innerHTML = cartItem.name;
 
         let unitPrice = document.createElement("p")
-        unitPrice.innerHTML = cartItem.product.unitPrice + " €";
+        unitPrice.classList.add("unitPrice")
+        unitPrice.innerHTML = cartItem.unitPrice + " €";
         
         let priceContainer = document.createElement("div")
         priceContainer.classList.add("priceContainer")
@@ -114,26 +104,26 @@ async function renderCart() {
         let deleteQty = document.createElement("div")
         deleteQty.classList.add("ajustBoxes")
         deleteQty.innerText = "-"
-        deleteQty.addEventListener("click", () => {deleteProduct(cartItem.product.Id)})
+        deleteQty.addEventListener("click", () => {deleteProduct(cartItem.Id)})
 
         let addQty = document.createElement("div")
         addQty.classList.add("addQty")
         addQty.classList.add("ajustBoxes")
         addQty.innerText = "+"
-        addQty.addEventListener("click", () => {addProduct(cartItem.product.Id)})
+        addQty.addEventListener("click", () => {addProduct(cartItem.Id)})
 
         let unitQty = document.createElement("p")
         unitQty.innerHTML = cartItem.quantity + " pcs"
 
         let totalPrice = document.createElement("p")
         totalPrice.classList.add("totalpriceItem")
-        totalPrice.innerHTML = cartItem.quantity * cartItem.product.unitPrice + " €"
+        totalPrice.innerHTML = cartItem.quantity * cartItem.unitPrice + " €"
 
         cart.findIndex((shoppingCart) => { 
 
-            if(shoppingCart.product.Id == cartItem.product.Id) {
+            if(shoppingCart.Id == cartItem.Id) {
                  
-                if(shoppingCart.quantity >= cartItem.product.unitsInStock) {
+                if(shoppingCart.quantity >= cartItem.unitsInStock) {
 
                     addQty.classList.add("noClick")
                     
@@ -156,14 +146,10 @@ async function renderCart() {
 
 
 
-
-
-
-
    /*  Order Summary    */ 
 
 
-    let totalSum = cart.reduce((sum,item) => sum + item.product.unitPrice * item.quantity, 0);
+    let totalSum = cart.reduce((sum,item) => sum + item.unitPrice * item.quantity, 0);
 
     let summaryTitle = document.createElement("h2")
     summaryTitle.innerText = "Order summary"
@@ -283,7 +269,7 @@ async function addSubscriber() {
 
      } else { 
 
-         alert("Welcome our new subscriber")
+         alert("You are now signed to our newsletter")
 
      }
 

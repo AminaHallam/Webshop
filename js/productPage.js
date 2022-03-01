@@ -1,5 +1,5 @@
 
-import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
+import {openMenu, getAllCategories, burger} from './../helperFunctions/renderHelper.js'
 import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
 
 
@@ -17,18 +17,6 @@ async function onLoad() {
 
     burger();
 
-}
-
-function burger() {
-
-    const hamburger = document.querySelector(".hamburgerMenu");
-    const menu = document.querySelector(".contactDiv");
-    
-    hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        menu.classList.toggle("active");
-    
-    });
 }
 
 
@@ -82,18 +70,9 @@ async function renderProduct(idToGet) {
     addToCartButton.innerText = "Add"
     addToCartButton.addEventListener("click", () => {addToCart(product.Id)})
     
-    /* let returnToProductPage = document.getElementsByClassName('returnToPpage'); 
-    returnToProductPage.innerText = "Return to previous page" */
-    
     document.querySelector(".returnToPpage").addEventListener("click", () => {
         history.back()
     })
-    
-    
-    /* returnToProductPage.addEventListener("click", () => {
-        
-        history.back()
-    }) */
 
     let divForCart = document.createElement('div');
     divForCart.classList.add('divForCart')
