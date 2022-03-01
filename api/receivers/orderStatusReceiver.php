@@ -8,9 +8,11 @@ try {
 
         if($_GET["action"] == "getAll") {
 
-            echo json_encode("getAll"); 
-
-
+            if(isset($_SESSION["inloggedUser"])) {  
+            
+            $controller = new OrderStatusController();
+            echo json_encode($controller -> getAll()); 
+            }
         }
 
 

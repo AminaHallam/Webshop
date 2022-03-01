@@ -145,16 +145,66 @@ async function myOrders(id, type) {
 
     //Hämtar ut alla ordrar
     async function myprofilePage() {
-    const action = "getAll";
+    /* const action = "getAll";
     let order = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET");
     let admin = await verifyAdmin(); 
     if(admin){
     renderOrders(order, admin);
-    }
+    } */
+
+    filterButton()
   }
 
 
 
+async function filterButton() {
+    let filter = document.querySelector('.filter')
+    const action = "getAll";
+    let orderStatus = await makeRequest(`./../api/receivers/orderStatusReceiver.php?action=${action}`, "GET");
+    let buttonForAll = document.createElement('button')
+    buttonForAll.classList.add('filterBtn')
+    buttonForAll.innerText = "All"
+    buttonForAll.addEventListener('click', async () => {
+        const action = "getAll";
+        let order = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET");
+        let admin = await verifyAdmin(); 
+        let orderHeader = document.querySelector('.containerForOrders')
+        if(admin){
+            if(orderHeader) {
+                orderHeader.innerHTML = "";
+            }
+            renderOrders(order, admin);
+    }})
+
+    filter.append(buttonForAll)
+
+    for (let i = 0; i < orderStatus.length; i++) {
+        const element = orderStatus[i];
+        console.log(element)
+        let filterBtn = document.createElement('button')
+        filterBtn.classList.add('filterBtn')
+        filterBtn.innerText = element.Status
+        
+        filterBtn.addEventListener('click', () => {
+            let orderHeader = document.querySelector('.containerForOrders')
+            if(orderHeader) {
+                orderHeader.innerHTML = "";
+            }
+            filterOrders(element.Id, "Status")
+            
+        })
+        
+        filter.append(filterBtn)
+    }
+}
+
+async function filterOrders(id, type) {
+    const action = "getByOtherId";
+    let specificOther = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}&type=${type}`, "GET")
+    let admin = await verifyAdmin();
+    
+    renderOrders(specificOther, admin)
+}
 
 
 
@@ -188,6 +238,7 @@ async function renderOrders(list, check) {
     let headerRow = document.createElement("div");
     headerRow.classList.add('containerForOrders')
     bigContainer.appendChild(headerRow);
+    
     
     headers.forEach((headerText, index, headers) => {
         let orderHeader = document.createElement("div");

@@ -8,6 +8,7 @@ h2 {
   margin-bottom: 30px;
 }
 
+
 .updateQty, .modifyCategory, .overviewOrders, .overviewCustomerOrders, .createNewsletter, .subscribers, .addDeleteProduct, .orderDetail, .orderDetailsCustomer {
     padding: 40px;
     margin-left: 40px;
@@ -37,13 +38,12 @@ h3 {
   display: flex;
   flex-direction: row;
   width: 80vw;
-  justify-content: space-evenly;
+  justify-content: space-between;
   height: 24px;
 }
 
 
 .leftBox {
-
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -53,6 +53,7 @@ h3 {
   word-wrap: break-word;
   
 }
+
 
 .rightBox {
   display: flex;
@@ -71,13 +72,22 @@ h3 {
 
  
 .overviewOrders {
-  display: flex;
-  flex-direction: column;
+   display: flex;
+    flex-direction: column;
+    /* margin-left: 5%; */
+    /* margin-right: 5%; */
+    width: 100vw;
+    margin: 3%;
+    background-color: #eee8e3;
+    border-radius: 10px;
+    height: auto;
+    /* margin-bottom: 20px; */
+
 }
 
-.orders{
+/* .orders{
   width: 80vw;
-}
+} */
 
 .orderHeader {
   /* width: 120px; */
@@ -372,6 +382,10 @@ option {
   .createNewsletter {
     width: 88vw;
   }
+  .overviewOrders {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 95vw;
 }
 
 @media only screen and (max-width: 540px) {
@@ -392,17 +406,10 @@ option {
   }
 }
 
-@media only screen and (max-width: 540px) {
-  .orderButton {
-    width: 15px !important;
-    padding: 2px 15px !important;
-    font-size: 6px !important;
-  }
-  .cell {
-    font-size: 7px;
-  }
-  .orderHeader {
-    font-size: 8px;
+@media only screen and (max-width: 400px) {
+  .overviewOrders {
+    margin-left: 2px;
+    margin-right: 2px;
   }
 }
 

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include_once("./../classes/createInstanceFunctions.php");
 include_once("./../controllers/mainController.php");
 
