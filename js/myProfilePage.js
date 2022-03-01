@@ -134,9 +134,27 @@ async function whichPageToDisplay() {
     let order = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET");
   
     renderOrders(order);
+    filterButton()
     
   }
 
+
+
+async function filterButton() {
+    let filter = document.getElementsByClassName('filter')
+    const action = "getAll";
+    let orderStatus = await makeRequest(`./../api/receivers/orderStatusReceiver.php?action=${action}`, "GET");
+    console.log(orderStatus)
+
+    for (let i = 0; i < orderStatus.length; i++) {
+        const element = orderStatus[i];
+        console.log(element)
+        let filterBtn = document.createElement('button')
+        filterBtn.classList.add('filterBtn')
+
+        filter.append(filterBtn)
+    }
+}
 
 
 
