@@ -150,7 +150,7 @@ class OrderController extends MainController {
     public function getOrdersFromOtherId($Id, $type) { 
         $query = "SELECT * FROM `order`
         WHERE ".$type."Id = ".$Id.";";
-
+        error_log(serialize($query));
         return $this->database->freeQuery($query, $this->createFunction); 
     }  
 

@@ -36,7 +36,7 @@ try {
                 }
                 
                 $controller = new OrderController(); 
-                echo(json_encode($controller->getOrdersFromOtherId($_GET["id"],$_GET["type"])));
+                echo(json_encode($controller->getOrdersFromOtherId(json_encode($_GET["id"]),$_GET["type"])));
 
 
             } else if ($_GET["type"] == "User") {
