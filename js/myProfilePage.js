@@ -1,5 +1,5 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, showCorrectLayout, logOut, printNrOfElements, getAllProducts} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, verifyAdmin, showCorrectLayout, logOut, printNrOfElements, getAllProducts, getUser} from './../helperFunctions/fetchHelper.js'
 
 async function onLoad() {
     await showCorrectLayout();
@@ -114,24 +114,42 @@ async function whichPageToDisplay() {
 
    } else {
         document.querySelector(".adminLayout").classList.add("none")
-
-       let titleKund = document.createElement("h1")
-       titleKund.innerText ="Welcome to my pages!" 
-       main.appendChild(titleKund)
+        document.querySelector('.customerLayout').classList.remove('none')
+        let user = await getUser();
+       
+        let userId = user.Id; 
+        myOrders(userId, 'User');
+        //console.log(order)
 
        
    } 
 
 }
 
+
+
+
+async function myOrders(id, type) {
+    const action = "getByOtherId";
+    let specificOther = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}&type=${type}`, "GET")
+   
+    renderOrders(specificOther)
+}
+
+
+
     //Hämtar ut alla ordrar
     async function myprofilePage() {
     const action = "getAll";
     let order = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET");
-  
+    let admin = await verifyAdmin(); 
+    if(admin){
     renderOrders(order);
-    
+    }
   }
+
+
+
 
 
 
