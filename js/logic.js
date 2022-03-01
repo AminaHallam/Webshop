@@ -1,4 +1,4 @@
-import {openMenu, getAllCategories} from '.././helperFunctions/renderHelper.js'
+import {openMenu, getAllCategories, burger} from '.././helperFunctions/renderHelper.js'
 import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from '.././helperFunctions/fetchHelper.js'  // checka verifyadmin
 
 document.querySelector(".logOut").addEventListener("click", logOut)
@@ -10,22 +10,6 @@ async function onLoad() {
     await getAllCategories();
     burger()
 }
-
-
-function burger() {
-
-    const hamburger = document.querySelector(".hamburgerMenu");
-    const menu = document.querySelector(".contactDiv");
-    
-    hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        menu.classList.toggle("active");
-    
-    });
-}
-
-
-
 
 
 document.getElementById("menu").addEventListener("click", openMenu);
