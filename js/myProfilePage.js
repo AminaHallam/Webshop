@@ -125,8 +125,8 @@ async function whichPageToDisplay() {
     if(checkAdmin) {
         
         document.querySelector(".adminLayout").classList.remove("none")
-        getUnitsInStock()
-        getProductWithCategory() 
+        overviewUnitsInStock()
+        overviewCategory() 
 
    } else {
         document.querySelector(".adminLayout").classList.add("none")
@@ -153,6 +153,14 @@ async function whichPageToDisplay() {
 
 
 async function renderOrders(list) {
+    
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
+
     let bigContainer = document.getElementsByClassName("overviewOrders")[0];
     
     let headers = [
@@ -214,6 +222,13 @@ async function renderOrders(list) {
 // render orderList By id 
 
 async function getOrderDetails(id) {
+
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
     
     const action = "getById"; 
     
@@ -313,19 +328,40 @@ document.querySelector(".toggle3").addEventListener("click", () => {
 })
 
 
-async function getUnitsInStock() {
+async function overviewUnitsInStock() {
+
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
 
     let getProduct = document.querySelector(".getProduct")
+    let overviewProduct = document.createElement("div")
+    overviewProduct.classList.add("overviewProduct")
+    overviewProduct.innerHTML = "";
+
+    getProduct.append(overviewProduct)
+
+}
+
+
+
+document.querySelector(".getProductButton").addEventListener("click", getUnitsInStock)
+
+async function getUnitsInStock() {
+
+  /*   let getProduct = document.querySelector(".getProduct") */
 
     let products = await getAllProducts()
 
-    let overviewProduct = document.createElement("div")
-    overviewProduct.classList.add("overviewProduct")
+    let overviewProduct = document.querySelector(".overviewProduct")
 
-    document.querySelector(".getProductButton").addEventListener("click", () => {
-        
+    if(overviewProduct) {
         overviewProduct.innerHTML = "";
-
+    }
+    
         let productId =  document.querySelector(".productId").value
 
         if(!productId){
@@ -359,12 +395,12 @@ async function getUnitsInStock() {
                 pQty.innerText = "Current Qty: " + product.unitsInStock
                 pImage.src = "./assets/" + product.image
     
-                getProduct.append(overviewProduct)
+               /*  getProduct.append(overviewProduct) */
                 overviewProduct.append(pImage, infoProductContainer)
                 infoProductContainer.append(pId, pName, pQty)
             }
         }
-    })
+
 }
 
 
@@ -372,6 +408,14 @@ async function getUnitsInStock() {
 
 async function setQuantity() {
 
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
+
+    let inputValue =  document.querySelector(".updateUnits")
     let updateUnits =  document.querySelector(".updateUnits").value
     let productId =  document.querySelector(".productId").value
 
@@ -395,11 +439,16 @@ async function setQuantity() {
 
     if(updateUnitsInStock == true) { 
         alert("Success!")
-
-        location.reload();
+        let collapse = document.querySelector(".updateProduct")
+        collapse.classList.remove("menu")
+        inputValue.value = "";
+        getUnitsInStock()
+        
 
     } else {
         alert("Product not updated")
+        getUnitsInStock()
+        
     }
 }
 
@@ -407,6 +456,14 @@ async function setQuantity() {
 
 async function addQuantity(value) {
 
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
+
+    let inputValue =  document.querySelector(".addUnits")
     let productId =  document.querySelector(".productId").value
 
     if(!productId){
@@ -423,16 +480,27 @@ async function addQuantity(value) {
 
     if(result == true) { 
         alert("Success!")
-
-        location.reload();
+        let collapse = document.querySelector(".addQtyProduct")
+        collapse.classList.remove("menu")
+        inputValue.value = "";
+        getUnitsInStock()
 
     } else {
         alert("Product not updated")
+        getUnitsInStock()
     }
 }
 
 async function deleteQuantity(value) {
 
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
+
+    let inputValue =  document.querySelector(".deleteUnits")
     let productId =  document.querySelector(".productId").value
 
     if(!productId){
@@ -449,11 +517,14 @@ async function deleteQuantity(value) {
 
     if(result == true) {
         alert("Success!")
-
-        location.reload();
+        let collapse = document.querySelector(".deleteQtyProduct")
+        collapse.classList.remove("menu")
+        inputValue.value = "";
+        getUnitsInStock()
 
     } else {
         alert("Product not updated")
+        getUnitsInStock()
     }
 }
 
@@ -489,22 +560,27 @@ document.querySelector(".toggle6").addEventListener("click", () => {
 
 
 /* SELECT PRODUCT */
-// ändra namn på denna sedan till typ getCategoryOptions
-async function getProductWithCategory() {
+
+
+
+async function overviewCategory() {
     let getProductCategory = document.querySelector(".getProductCategory")
     let overview = document.createElement("div")
     overview.classList.add("overview")
+    overview.innerHTML = ""
     getProductCategory.append(overview)
-
-
-
-
-
-    document.querySelector(".getProductWithCategoryButton").addEventListener("click", renderProductWithCategory) 
 }
 
+document.querySelector(".getProductWithCategoryButton").addEventListener("click", renderProductWithCategory) 
 
 async function renderProductWithCategory() {
+    
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
 
     let id =  document.querySelector(".getId").value
 
@@ -629,6 +705,13 @@ async function renderProductWithCategory() {
 
 async function getCategoryWithProductId(id) {
 
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
+
     let action = "getCategoryWithProductId"
 
     return await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${id}`, "GET")
@@ -644,6 +727,13 @@ async function getCategoryWithProductId(id) {
 document.querySelector(".addCategoryButton").addEventListener("click", addCategoryToProduct) 
 
 async function addCategoryToProduct() {
+
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
 
     let productId =  document.querySelector(".getId").value
 
@@ -681,12 +771,13 @@ async function addCategoryToProduct() {
 
     if(result) { 
         alert("Success!")
-
-        location.reload();
+        let collapse = document.querySelector(".addCategory")
+        collapse.classList.remove("menu")
+        renderProductWithCategory()
 
     } else {
         alert("Product not updated")
-        location.reload();
+        renderProductWithCategory()
     }
 }
 
@@ -707,6 +798,13 @@ async function getCategories() {
 document.querySelector(".deleteCategoryButton").addEventListener("click", deleteCategoryFromProduct) 
 
 async function deleteCategoryFromProduct() {
+
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
 
     let productId =  document.querySelector(".getId").value
     let categoryId = document.querySelector("#deleteCategory").value
@@ -734,12 +832,13 @@ async function deleteCategoryFromProduct() {
 
     if(result) { 
         alert("Success!")
-
-        location.reload();
+        let collapse = document.querySelector(".deleteCategory")
+        collapse.classList.remove("menu")
+        renderProductWithCategory()
 
     } else {
         alert("Product not updated")
-        location.reload();
+        renderProductWithCategory()
     } 
 
 }
@@ -752,6 +851,13 @@ async function deleteCategoryFromProduct() {
 document.querySelector(".replaceCategoryButton").addEventListener("click", categoryReplace) 
 
 async function categoryReplace() {
+
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
 
     let categoryIdToBeReplaced = document.querySelector("#categoryToBeReplaced").value
     let newCategoryId = document.querySelector("#newCategory").value
@@ -797,12 +903,13 @@ async function categoryReplace() {
 
     if(result) { 
         alert("Success!")
-
-        location.reload();
+        let collapse = document.querySelector(".replaceCategory")
+        collapse.classList.remove("menu")
+        renderProductWithCategory()
 
     } else {
         alert("Product not updated")
-        location.reload();
+        renderProductWithCategory()
     }  
 
 }
@@ -813,6 +920,13 @@ async function categoryReplace() {
 
 
 async function renderSubscribers() {
+
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
 
         const renderSubList = await getAllLoggedInSubscribers();
         
@@ -852,6 +966,14 @@ document.querySelector('#sendNews').addEventListener('click', createNewsLetter)
 
 async function createNewsLetter(e) {
     e.preventDefault();
+
+    let checkAdmin = await verifyAdmin();
+
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
+
     let title = document.getElementById('title').value;
     let content = document.getElementById('content').value;
     let success = document.querySelector('.success');
