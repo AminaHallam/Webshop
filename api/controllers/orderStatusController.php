@@ -27,7 +27,8 @@ class OrderStatusController extends MainController {
     }
 
 
-    public function update($newValue, $entity) {
+    public function update($newValue, $orderStatus) {
+
 
     }
     
