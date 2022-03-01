@@ -137,8 +137,8 @@ async function whichPageToDisplay() {
 async function myOrders(id, type) {
     const action = "getByOtherId";
     let specificOther = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}&type=${type}`, "GET")
-   
-    renderOrders(specificOther)
+    let user = await getUser(); 
+    renderOrders(specificOther, user)
 }
 
 
@@ -149,7 +149,7 @@ async function myOrders(id, type) {
     let order = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET");
     let admin = await verifyAdmin(); 
     if(admin){
-    renderOrders(order);
+    renderOrders(order, admin);
     }
   }
 
@@ -159,14 +159,12 @@ async function myOrders(id, type) {
 
 
 
-async function renderOrders(list) {
+async function renderOrders(list, check) {
     
-    let checkAdmin = await verifyAdmin();
-
-    if(!checkAdmin) {
-        return
-    }
-
+  if(!check) {
+       return
+        
+    }  
     let bigContainer = document.getElementsByClassName("overviewOrders")[0];
     
     let headers = [
@@ -197,10 +195,20 @@ async function renderOrders(list) {
         row.classList.add('row')
         const orderValues = Object.values(order);
         let orderButton = document.createElement('button')
+        let admin = await verifyAdmin(); 
+        let user = await getUser(); 
+        if(admin){
         orderButton.addEventListener("click", () => {
-            getOrderDetails(order.Id)
+            getOrderDetails(order.Id, admin)
             
         })
+        }else if(user){
+                orderButton.addEventListener("click", () => {
+                    getOrderDetails(order.Id, user)
+        }
+
+
+                )}
         orderButton.classList.add('orderButton')
         orderButton.innerText = "To Order"
         orderValues.splice(6, 4) 
@@ -227,13 +235,13 @@ async function renderOrders(list) {
 
 // render orderList By id 
 
-async function getOrderDetails(id) {
+async function getOrderDetails(id, check) {
 
-    let checkAdmin = await verifyAdmin();
 
-    if(!checkAdmin) {
+ 
+    if(!check) {
         return
-    }
+    } 
     
     const action = "getById"; 
     
