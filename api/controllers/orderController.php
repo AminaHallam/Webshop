@@ -129,6 +129,25 @@ class OrderController extends MainController {
     }
 
 
+
+    public function updateCustomerOrder($statusId, $orderId) {
+       // $userController = new UserController(); 
+
+        $specificOrder = $this->getById($orderId); 
+
+        $updateReceivedOrder = createOrder($specificOrder->Id, $statusId, $specificOrder->UserId, $specificOrder->CourrierId, $specificOrder->RegisterDate, null, date('Y-m-d H:i:s'));   
+        error_log(serialize($updateReceivedOrder));
+        unset($updateReceivedOrder->products);
+        unset($updateReceivedOrder->user);
+        unset($updateReceivedOrder->courrier);
+        unset($updateReceivedOrder->orderStatus); 
+        
+        $result = $this->database->update($updateReceivedOrder); 
+
+        return $result; 
+    }
+
+
     public function delete($id) {
         return $this->database->delete($id);
     }
