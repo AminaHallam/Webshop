@@ -8,7 +8,8 @@ h2 {
   margin-bottom: 30px;
 }
 
-.updateQty, .modifyCategory, .createNewsletter, .subscribers, .addDeleteProduct, .orderDetail {
+
+.updateQty, .modifyCategory, .overviewOrders, .overviewCustomerOrders, .createNewsletter, .subscribers, .addDeleteProduct, .orderDetail, .orderDetailsCustomer {
     padding: 40px;
     margin-left: 40px;
     margin-right: 40px;

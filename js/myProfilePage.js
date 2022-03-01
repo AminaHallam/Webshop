@@ -210,13 +210,22 @@ async function filterOrders(id, type) {
 
 
 async function renderOrders(list, check) {
-    
-  if(!check) {
+
+    let admin = await verifyAdmin(); 
+    let user = await getUser();
+
+
+    if(!check) {
        return
         
     }  
+
+  
     let bigContainer = document.getElementsByClassName("overviewOrders")[0];
     
+    let bigContainerCust = document.getElementsByClassName("overviewCustomerOrders")[0];
+    
+
     let headers = [
         "Id",
         "StatusId",
@@ -245,6 +254,7 @@ async function renderOrders(list, check) {
         let row = document.createElement('div')
         row.classList.add('row')
         const orderValues = Object.values(order);
+        
         let orderButton = document.createElement('button')
         let admin = await verifyAdmin(); 
         let user = await getUser(); 
@@ -255,14 +265,14 @@ async function renderOrders(list, check) {
         })
         }else if(user){
                 orderButton.addEventListener("click", () => {
-                    getOrderDetails(order.Id, user)
+                    getCustomerOrderDetail(order.Id)
         }
 
 
                 )}
         orderButton.classList.add('orderButton')
         orderButton.innerText = "To Order"
-        orderValues.splice(6, 4) 
+        orderValues.splice(7, 4) 
         orderValues.splice(2, 2) 
 
         
@@ -278,12 +288,64 @@ async function renderOrders(list, check) {
             row.append(cell, orderButton)
            
         }
+        if(admin){
         bigContainer.appendChild(row)
+        }else if(user){
+            bigContainerCust.appendChild(row)
+        }
     } 
     
 }
 
+async function getCustomerOrderDetail(id){
 
+/* if(!check) {
+    return
+}  */
+
+const action = "getById"; 
+
+let orderDetailsList = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}`, "GET"); 
+
+
+
+let showOrderDetail = document.querySelector(".orderDetailsCustomer")
+showOrderDetail.classList.toggle("none")
+
+let orderHeader = document.createElement("h2")
+orderHeader.innerHTML = "Order Details"
+showOrderDetail.innerHTML = ""
+
+showOrderDetail.append(orderHeader)
+
+let leftBox = document.createElement("div")
+leftBox.classList.add("leftBox")
+
+let rightBox = document.createElement("div")
+rightBox.classList.add("rightBox")
+showOrderDetail.append(leftBox)
+
+let orderId = orderDetailsList.Id
+
+orderDetailsList.orderStatus.forEach(orderStatus => {
+
+    let orderDetails = document.createElement("div")
+    orderDetails.classList.add("orderDetails")
+    orderDetails.innerHTML = "<h3>Order status</h3>" + "Order with id: " + orderDetailsList.Id + " - " + orderStatus.Status + "  "
+
+    let sendOrderButton = document.createElement("button")
+    sendOrderButton.classList.add("orderupdated")
+    sendOrderButton.innerText = " Mark order as recieved"
+    sendOrderButton.addEventListener("click", () => {
+       
+        markOrderAsRecieved(orderId)
+
+    })
+
+    leftBox.append(orderDetails)
+    orderDetails.append(sendOrderButton)
+})
+}
 // render orderList By id 
 
 async function getOrderDetails(id, check) {
@@ -405,6 +467,30 @@ async function sendOrder(orderId) {
     }
 
 }
+
+
+async function markOrderAsRecieved(orderId){
+
+    let body = new FormData(); 
+    body.append("statusId", "CREC")
+    body.append("orderId", orderId)
+    body.append("endpoint", "updateReceivedOrder"); 
+    
+    let receivedOrder = await makeRequest(`./../api/receivers/orderReceiver.php`, "POST", body)
+
+    if(receivedOrder == true) { 
+        alert("Your order has been registered as delivered")
+        
+        location.reload();
+
+    } else {
+        alert("Failed on update")
+
+
+    }
+
+}
+
 
 
 // Update product buttons/links
