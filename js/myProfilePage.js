@@ -1,5 +1,5 @@
-import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
 
+import {openMenu, getAllCategories, burger} from './../helperFunctions/renderHelper.js'
 import {makeRequest,  getUser, verifyAdmin, showCorrectLayout, logOut, printNrOfElements, getAllProducts, getProductFromId} from './../helperFunctions/fetchHelper.js'
 
 
@@ -31,18 +31,6 @@ async function accountCheck() {
 
         return
     }
-}
-
-function burger() {
-
-    const hamburger = document.querySelector(".hamburgerMenu");
-    const menu = document.querySelector(".contactDiv");
-    
-    hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        menu.classList.toggle("active");
-    
-    });
 }
 
 async function getAllLoggedInSubscribers(){
@@ -176,7 +164,6 @@ async function renderOrders(list) {
     let checkAdmin = await verifyAdmin();
 
     if(!checkAdmin) {
-        alert("You are not allowed to proceed")
         return
     }
 
@@ -245,7 +232,6 @@ async function getOrderDetails(id) {
     let checkAdmin = await verifyAdmin();
 
     if(!checkAdmin) {
-        alert("You are not allowed to proceed")
         return
     }
     
@@ -336,6 +322,12 @@ async function getOrderDetails(id) {
 
 async function sendOrder(orderId) {
 
+    let checkAdmin = await verifyAdmin();
+    if(!checkAdmin) {
+        alert("You are not allowed to proceed")
+        return
+    }
+
    let body = new FormData(); 
     body.append("statusId", "SHIP")
     body.append("orderId", orderId)
@@ -386,9 +378,7 @@ document.querySelector(".toggle3").addEventListener("click", () => {
 async function overviewUnitsInStock() {
 
     let checkAdmin = await verifyAdmin();
-
     if(!checkAdmin) {
-        alert("You are not allowed to proceed")
         return
     }
 
@@ -407,7 +397,11 @@ document.querySelector(".getProductButton").addEventListener("click", getUnitsIn
 
 async function getUnitsInStock() {
 
-  /*   let getProduct = document.querySelector(".getProduct") */
+  let checkAdmin = await verifyAdmin();
+  if(!checkAdmin) {
+    alert("You are not allowed to proceed")
+    return
+}
 
     let products = await getAllProducts()
 
@@ -763,7 +757,6 @@ async function getCategoryWithProductId(id) {
     let checkAdmin = await verifyAdmin();
 
     if(!checkAdmin) {
-        alert("You are not allowed to proceed")
         return
     }
 
@@ -979,7 +972,6 @@ async function renderSubscribers() {
     let checkAdmin = await verifyAdmin();
 
     if(!checkAdmin) {
-        alert("You are not allowed to proceed")
         return
     }
 
