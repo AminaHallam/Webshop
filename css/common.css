@@ -75,7 +75,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-right: 50px;
+   /*  padding-right: 50px; */
     gap: 20px;
 }
 
@@ -100,6 +100,7 @@ header {
     justify-content: flex-end;
     width: 4em;
     margin-top: 70px;
+    gap: 10px;
 }
 
 .allIcons {
@@ -138,25 +139,24 @@ a {
 
 .loggedInUser p {
     padding-top: 2px;
-    padding-right: 5px;
+    padding-right: 25px;
 }
  
 
 .adminIcons {
     display: flex;
+    gap: 0px 10px;
 }
 
 
 #accountIcon {
     height: 34px;
     width: 34px; 
-    margin-left: 5px;
 }
 
 #cartIcon {
     height: 30px;
     width: 30px; 
-    margin-left: 5px;
 }
 
 .adminSetting {
@@ -166,19 +166,16 @@ a {
 #adminIcon {
     height: 34px;
     width: 34px; 
-    margin-left: 5px;
 }
 
 #orderIcon {
     height: 34px;
     width: 34px; 
-    margin-left: 5px;
 }
 
 #logOutIcon {
     height: 34px;
     width: 34px;
-    margin-left: 5px;
 }
 
 .qty {
@@ -204,10 +201,6 @@ a {
 }
 
 .footerDiv {
-  /*   position: relative; */
-/*     bottom: 0px;
-    left: 0px;
-    right: 0px; */
     display: flex;
     flex-direction: row; 
     justify-content: space-around; 
@@ -234,8 +227,8 @@ a {
     font-size: 16px;
     text-align: center;
     background-color: #fdf6ef;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .none {
@@ -332,23 +325,28 @@ a {
         align-items: center;
     }
 
+    /* Se över detta... */
     .contactDiv {
+        /* Ta bort? */
         position: absolute;
         left: -100%;
+
+
         top: 90px;
         flex-direction: column;
         align-items: flex-start;
 
-        background-color: white;
-        width: 170px;
+        background-color: #EDEDE9;
+        /* width: 170px; */
         object-fit: contain;
 
         transition: 0.3s;
-        padding: 10px;
+        padding-left: 5px;
     }
 
     .nav-item {        
-        margin: 16px 0;
+        margin-top: 10px;
+        border-bottom: solid 1px black;
     }
 
     .contactDiv.active {
@@ -444,6 +442,8 @@ a {
         height: 3px;
         margin: 5px auto;
     }
+
+    /* Se över krysset.... */
     .hamburger.active .bar:nth-child(1) {
         transform: translateY(8px) rotate(45deg)
     }
@@ -501,27 +501,6 @@ a {
         right: 73px;
     }
 
-    /* Ikonerna vill ej bli mindre */
-    /* 
-    #accountIcon {
-        height: 20px;
-        width: 20px;    
-    }
-
-    #cartIcon {
-        height: 18px;
-        width: 18px;    
-    }
-
-    #logOutIcon {
-        height: 20px;
-        width: 20px;
-    }
-
-    #orderIcon {
-        height: 20px;
-        width: 20px;
-    } */
 
 }
 
