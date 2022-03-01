@@ -53,7 +53,7 @@ class OrderDetailsController extends MainController {
                 
             $product = $products[$i];
 
-            $createOrderDetails = createOrderDetails($orderId, $product->product->Id, $product->quantity);  
+            $createOrderDetails = createOrderDetails($orderId, $product->Id, $product->quantity);  
             
             $addedProducts = $this->database->insert($createOrderDetails);    
         }

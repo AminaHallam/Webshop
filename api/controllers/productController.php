@@ -55,6 +55,15 @@ class ProductController extends MainController {
 
 
     public function delete($id) {
+        
+        $userController = new UserController();
+        $checkAdmin = ($userController->verifyAdmin());
+
+        if(!$checkAdmin) {
+            throw new Exception("Action not allowed", 401);
+            exit;
+        }
+
         return $this->database->delete($id);
     }
 
@@ -98,12 +107,12 @@ class ProductController extends MainController {
                 
             $product = $products[$i];
 
-            $newValue = $product->product->unitsInStock - $product->quantity; 
-            $name = $product->product->name;
-            $description = $product->product->description;
-            $image = $product->product->image;
+            $newValue = $product->unitsInStock - $product->quantity; 
+            $name = $product->name;
+            $description = $product->description;
+            $image = $product->image;
 
-            $productToUpdate = createProduct((int)$product->product->Id, $name , $description, (int)$product->product->unitPrice, (int)$newValue, $image); 
+            $productToUpdate = createProduct((int)$product->Id, $name , $description, (int)$product->unitPrice, (int)$newValue, $image); 
             
             unset($productToUpdate->quantity);
 

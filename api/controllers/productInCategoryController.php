@@ -37,6 +37,15 @@ class ProductInCategoryController extends MainController {
 
 
     public function delete($id) {
+
+        $userController = new UserController();
+        $checkAdmin = ($userController->verifyAdmin());
+
+        if(!$checkAdmin) {
+            throw new Exception("Action not allowed", 401);
+            exit;
+        }
+
         return $this->database->delete($id);
     }
 
@@ -85,43 +94,6 @@ class ProductInCategoryController extends MainController {
 
 
 
-
-
-
-
-
-
-
-
-
-/* 
-    public function getOrderDetailsFromProduct($orderId, $productId) {
-
-        $query = "SELECT od.ProductID, od.OrderID, od.Quantity
-        FROM `orderdetails` od
-        JOIN `order` o
-        ON od.OrderID = o.Id
-        WHERE od.OrderID = ".$orderId." AND od.productId = ".$productId.";";
-
-        $orderDetails = $this->database->freeQuery($query, $this->createOrderDetails); 
-
-        return $orderDetails; 
-
-
-    } */
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function addProductToCategory($productId, $categoryId) {
 
         $userController = new UserController();
@@ -133,7 +105,7 @@ class ProductInCategoryController extends MainController {
         }
 
         $categoryController = new CategoryController();
-        $getCategoriesOnProduct = json_encode($categoryController->getCategoryWithProductId($productId));
+        $getCategoriesOnProduct = ($categoryController->getCategoryWithProductId($productId));
 
         for ($i=0; $i < count($getCategoriesOnProduct) ; $i++) { 
 
@@ -148,8 +120,10 @@ class ProductInCategoryController extends MainController {
 
         $addProductToCategory = createProductInCategory($productId, $categoryId, date('Y-m-d H:i:s')); 
 
-                return $this->database->insert($addProductToCategory); 
+            return $this->database->insert($addProductToCategory); 
     }
+
+
 
 
     public function deleteProductFromCategory($productId, $categoryId) {
@@ -159,6 +133,14 @@ class ProductInCategoryController extends MainController {
 
         if(!$checkAdmin) {
             throw new Exception("Action not allowed", 401);
+            exit;
+        }
+
+        $categoryController = new CategoryController();
+        $getCategoriesOnProduct = ($categoryController->getCategoryWithProductId($productId));
+
+        if(count($getCategoriesOnProduct) == 1) {
+            throw new Exception("Can't delete category. Try with 'Replace-function instead'", 401);
             exit;
         }
 

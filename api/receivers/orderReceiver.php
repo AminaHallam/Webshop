@@ -51,7 +51,8 @@ try {
                 echo(json_encode($controller->getOrdersFromOtherId((int)$_GET["id"],$_GET["type"])));
 
             }
-        }
+
+        } 
 
     }  else if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -59,7 +60,7 @@ try {
 
             if(isset($_POST["createOrder"])) {
 
-                if($_SESSION["inloggedUser"]) {
+                if(isset($_SESSION["inloggedUser"])) {
 
                     
                     $controller = new OrderController();
@@ -73,9 +74,16 @@ try {
                         echo json_encode(false);
                         exit;
                     }
-                } 
 
-            }        
+                } else {
+                    throw new Exception("Please login or register an account to proceed", 401);
+                    exit;
+                }
+
+            }  else {
+                    throw new Exception("POST with key 'CreateOrder' is empty", 401);
+                    exit;
+            }     
             
         }  else if($_POST["endpoint"] == "updateOrder") {
         
