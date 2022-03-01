@@ -357,7 +357,15 @@ option {
   border: unset;
   }  
 
+  .orderContainer {
+    margin-top: 20px;
+  }
 
+  .filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 
 @media only screen and (max-width: 1124px) {
   .orderButton {
@@ -386,6 +394,7 @@ option {
     margin-left: 5%;
     margin-right: 5%;
     width: 95vw;
+}
 }
 
 @media only screen and (max-width: 540px) {

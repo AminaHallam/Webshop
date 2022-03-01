@@ -116,6 +116,7 @@ async function whichPageToDisplay() {
         document.querySelector(".adminLayout").classList.remove("none")
         overviewUnitsInStock()
         overviewCategory() 
+        filterButton()
 
    } else {
         document.querySelector(".adminLayout").classList.add("none")
@@ -152,7 +153,7 @@ async function myOrders(id, type) {
     renderOrders(order, admin);
     } */
 
-    filterButton()
+    
   }
 
 
@@ -168,11 +169,7 @@ async function filterButton() {
         const action = "getAll";
         let order = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET");
         let admin = await verifyAdmin(); 
-        let orderHeader = document.querySelector('.containerForOrders')
         if(admin){
-            if(orderHeader) {
-                orderHeader.innerHTML = "";
-            }
             renderOrders(order, admin);
     }})
 
@@ -180,18 +177,14 @@ async function filterButton() {
 
     for (let i = 0; i < orderStatus.length; i++) {
         const element = orderStatus[i];
-        console.log(element)
+
         let filterBtn = document.createElement('button')
         filterBtn.classList.add('filterBtn')
         filterBtn.innerText = element.Status
         
         filterBtn.addEventListener('click', () => {
-            let orderHeader = document.querySelector('.containerForOrders')
-            if(orderHeader) {
-                orderHeader.innerHTML = "";
-            }
+       
             filterOrders(element.Id, "Status")
-            
         })
         
         filter.append(filterBtn)
@@ -208,6 +201,8 @@ async function filterOrders(id, type) {
 
 
 
+let orderContainer = document.createElement("div")
+let headerRow = document.createElement("div");
 
 async function renderOrders(list, check) {
 
@@ -217,14 +212,11 @@ async function renderOrders(list, check) {
 
     if(!check) {
        return
-        
     }  
 
   
     let bigContainer = document.getElementsByClassName("overviewOrders")[0];
-    
     let bigContainerCust = document.getElementsByClassName("overviewCustomerOrders")[0];
-    
 
     let headers = [
         "Id",
@@ -235,9 +227,15 @@ async function renderOrders(list, check) {
         ""
     ];
     
-    let headerRow = document.createElement("div");
+    
+    orderContainer.classList.add("orderContainer")
+    bigContainer.append(orderContainer)
+    orderContainer.innerHTML = "";
+    headerRow.innerHTML = ""
+
+    
     headerRow.classList.add('containerForOrders')
-    bigContainer.appendChild(headerRow);
+    orderContainer.appendChild(headerRow);
     
     
     headers.forEach((headerText, index, headers) => {
@@ -259,6 +257,7 @@ async function renderOrders(list, check) {
         let admin = await verifyAdmin(); 
         let user = await getUser(); 
         if(admin){
+
         orderButton.addEventListener("click", () => {
             getOrderDetails(order.Id, admin)
             
@@ -289,7 +288,7 @@ async function renderOrders(list, check) {
            
         }
         if(admin){
-        bigContainer.appendChild(row)
+        orderContainer.appendChild(row)
         }else if(user){
             bigContainerCust.appendChild(row)
         }
