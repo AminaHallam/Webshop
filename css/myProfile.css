@@ -1,7 +1,3 @@
-/* main {
-  margin-top: 60px;
-} */
-
 h1 {
   margin-bottom: 20px;
   margin-top: 50px;
@@ -24,15 +20,17 @@ h2 {
 
 }
 
+
 h3 {
   margin-bottom: 8px;
   text-decoration: solid;
   margin-top: 14px;
   font-size: 20px;
 }
+.createNewsletter { 
+  width: 100%;
+  margin: 0px;
 
-p {
-  word-wrap: break-word;
 }
 
 .containerForOrders, .row {
@@ -82,23 +80,48 @@ p {
 }
 
 .orderHeader {
-  width: 120px;
+  /* width: 120px; */
   font-size: 14px;
   font-weight: bold;
   text-align: center;
 }
 
+.o0, .o1{
+  width: 70px;
+}
+
+.o2, .o3, .o4 {
+  width: 170px;
+}
+
+.c0, .c1 {
+  width: 70px;
+}
+
+.c3, .c4, .c2 {
+  width: 170px;
+}
+
 .cell {
-  width: 120px;
+  /* width: 120px; */
   font-size: 12px;
   text-align: center;
 }
+
+
 
 .orderButton {
   font-size: 12px !important; 
   height: 20px !important;
   margin: 2px !important;
+  width: 100px;
 }
+
+.o5 {
+  width: 100px;
+}
+
+
 
 .specificOrder {
   height: 500px;
@@ -118,10 +141,11 @@ p {
     margin-bottom: 30px;
 }
 
-.overviewProduct {
+.overviewProduct, .overview {
     display: flex;
     margin-top: 8px;
     gap: 10px;
+    padding: 15px;
 }
 
 .updateQty/* , .modifyCategory */ {
@@ -229,22 +253,25 @@ button, .orderButton, #sendNews {
 }
 
 
-.toggle, .toggle2, .toggle3 {
+.toggle, .toggle2, .toggle3, .toggle4, .toggle5, .toggle6 {
   font-size: 20px;
+  cursor: pointer;
 }
 
 
 /* Collapse */
-.updateProduct, .addQtyProduct, .deleteQtyProduct {
+.updateProduct, .addQtyProduct, .deleteQtyProduct, .replaceCategory, .addCategory, .deleteCategory {
   cursor: pointer;
   max-height: 0px;
-  height: 0px;
   overflow: hidden;
   transition: max-width 1s ease-in-out;
   margin-bottom: 10px;
 }
 
-
+.menu {
+  max-height: 1000px;
+  transition: max-width 1s ease-in-out;
+}
 
 .newsAndSub{
   display: flex; 
@@ -256,12 +283,27 @@ button, .orderButton, #sendNews {
   display: flex; 
   justify-content: space-around; 
   flex-wrap: wrap;
+  width: 100%;
 }
 
 
 .newsletter {
   display:flex; 
-  
+  width: 80vw;
+}
+
+
+
+.createNewsletter form {
+  width: 100%;
+}
+
+#title {
+  width: 40%;
+}
+
+#content {
+  width: 100%;
 }
 
 .subscribers {
@@ -282,11 +324,7 @@ button, .orderButton, #sendNews {
 }
 
 
-.menu {
-  max-height: 1000px;
-  height: 80px;
-  transition: max-width 1s ease-in-out;
-}
+
 
 
 .content {
@@ -295,9 +333,23 @@ button, .orderButton, #sendNews {
   margin: 2px; 
 }
 
+
 .none {
   display: none;
 }
+
+select {
+padding: 5px;
+border-radius: 5px;
+margin-left: 5px;
+border: unset;
+}  
+
+option {
+  padding: 5px;
+  border-radius: 5px;
+  border: unset;
+  }  
 
 
 
@@ -320,6 +372,10 @@ button, .orderButton, #sendNews {
   .orderButton {
     width: 40px !important;
   }
+
+  .createNewsletter {
+    width: 88vw;
+  }
 }
 
 @media only screen and (max-width: 540px) {
@@ -333,6 +389,10 @@ button, .orderButton, #sendNews {
   }
   .orderHeader {
     font-size: 8px;
+  }
+
+  .newsletter {
+    width: 100vw;
   }
 }
 

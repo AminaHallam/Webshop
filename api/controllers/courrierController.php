@@ -38,7 +38,7 @@ class CourrierController extends MainController {
     }
     
     public function delete($id) {
-
+        return $this->database->delete($id);
     }
 
 

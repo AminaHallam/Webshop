@@ -1,7 +1,10 @@
 import {openMenu, getAllCategories} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, showCorrectLayout, logOut, printNrOfElements, getAllProducts} from './../helperFunctions/fetchHelper.js'
+import {makeRequest,  getUser, verifyAdmin, showCorrectLayout, logOut, printNrOfElements, getAllProducts, getProductFromId} from './../helperFunctions/fetchHelper.js'
+
+
 
 async function onLoad() {
+    await accountCheck();
     await showCorrectLayout();
     await printNrOfElements();
     await whichPageToDisplay();
@@ -15,6 +18,18 @@ async function onLoad() {
     const id = urlParams.get("id");
     myprofilePage(id);
     burger();
+}
+
+async function accountCheck() {
+
+    let allowed = await getUser();
+
+    if(!allowed) {
+
+        location.href = "./../login.html";
+
+        return
+    }
 }
 
 function burger() {
@@ -111,6 +126,7 @@ async function whichPageToDisplay() {
         
         document.querySelector(".adminLayout").classList.remove("none")
         getUnitsInStock()
+        getProductWithCategory() 
 
    } else {
         document.querySelector(".adminLayout").classList.add("none")
@@ -142,8 +158,6 @@ async function renderOrders(list) {
     let headers = [
         "Id",
         "StatusId",
-        "UserId",
-        "CourrierId",
         "Reg-Date",
         "Ship-Date",
         "Rec-Date",
@@ -154,9 +168,10 @@ async function renderOrders(list) {
     headerRow.classList.add('containerForOrders')
     bigContainer.appendChild(headerRow);
     
-    headers.forEach((headerText) => {
+    headers.forEach((headerText, index, headers) => {
         let orderHeader = document.createElement("div");
         orderHeader.classList.add('orderHeader')
+        orderHeader.classList.add('o'+index)
         orderHeader.innerText = headerText;
         headerRow.appendChild(orderHeader);
     });
@@ -175,16 +190,20 @@ async function renderOrders(list) {
         orderButton.classList.add('orderButton')
         orderButton.innerText = "To Order"
         orderValues.splice(6, 4) 
+        orderValues.splice(2, 2) 
+
+        
         
         for (let i = 0; i < orderValues.length; i++) {
             const orderDetail = orderValues[i]
             let cell = document.createElement('div')
             cell.classList.add('cell')
+            cell.classList.add('c'+i)
             
             cell.innerText = orderDetail
             
-            row.appendChild(cell)
-            row.appendChild(orderButton)
+            row.append(cell, orderButton)
+           
         }
         bigContainer.appendChild(row)
     } 
@@ -315,7 +334,7 @@ document.querySelector(".addQtyProductButton").addEventListener("click", () => {
 
 
 
-// Collapse toggle
+// Collapse 
 document.querySelector(".toggle").addEventListener("click", () => {
     let updateProduct = document.querySelector(".updateProduct")
     updateProduct.classList.toggle("menu")
@@ -330,14 +349,12 @@ document.querySelector(".toggle3").addEventListener("click", () => {
 })
 
 
-
-
-
 async function getUnitsInStock() {
 
     let getProduct = document.querySelector(".getProduct")
 
     let products = await getAllProducts()
+
     let overviewProduct = document.createElement("div")
     overviewProduct.classList.add("overviewProduct")
 
@@ -346,6 +363,18 @@ async function getUnitsInStock() {
         overviewProduct.innerHTML = "";
 
         let productId =  document.querySelector(".productId").value
+
+        if(!productId){
+            alert("Product ID is missing, please try again");
+            return
+        }
+
+        const product = products.find((product) => product.Id == productId)
+
+        if(!product) {
+            alert("Product does not exist")
+            return
+        }
         
         for (let i = 0; i < products.length; i++) {
         
@@ -382,6 +411,15 @@ async function setQuantity() {
     let updateUnits =  document.querySelector(".updateUnits").value
     let productId =  document.querySelector(".productId").value
 
+    if(!productId){
+        alert("Product ID is missing, please try again");
+        return
+    }
+    if(!updateUnits){
+        alert("Value is missing, please try again");
+        return
+    }
+
     let action = "setQuantity"
 
     let myData = new FormData()
@@ -392,7 +430,7 @@ async function setQuantity() {
     let updateUnitsInStock = await makeRequest("./../api/receivers/productReceiver.php", "POST", myData)
 
     if(updateUnitsInStock == true) { 
-        alert("Sucess!")
+        alert("Success!")
 
         location.reload();
 
@@ -407,6 +445,11 @@ async function addQuantity(value) {
 
     let productId =  document.querySelector(".productId").value
 
+    if(!productId){
+        alert("Product ID is missing, please try again");
+        return
+    }
+
     let body = new FormData()
     body.append("action", "addQuantity")
     body.append("value", value)
@@ -415,7 +458,7 @@ async function addQuantity(value) {
     let result = await makeRequest("./../api/receivers/productReceiver.php", "POST", body)
 
     if(result == true) { 
-        alert("Sucess!")
+        alert("Success!")
 
         location.reload();
 
@@ -428,6 +471,11 @@ async function deleteQuantity(value) {
 
     let productId =  document.querySelector(".productId").value
 
+    if(!productId){
+        alert("Product ID is missing, please try again");
+        return
+    }
+
     let body = new FormData()
     body.append("action", "deleteQuantity")
     body.append("value", value)
@@ -436,7 +484,7 @@ async function deleteQuantity(value) {
     let result = await makeRequest("./../api/receivers/productReceiver.php", "POST", body)
 
     if(result == true) {
-        alert("Sucess!")
+        alert("Success!")
 
         location.reload();
 
@@ -448,39 +496,393 @@ async function deleteQuantity(value) {
 
 
 
-async function renderSubscribers() {
 
-const renderSubList = await getAllLoggedInSubscribers();
 
-for (let i = 0; i < renderSubList.length; i++) {
+
+
+    /* MODIFY CATEGORY */
+
+
+
+
+
+
+// Collapse
+document.querySelector(".toggle4").addEventListener("click", () => {
+    let replaceCategory = document.querySelector(".replaceCategory")
+    replaceCategory.classList.toggle("menu")
+})
+document.querySelector(".toggle5").addEventListener("click", () => {
+    let addCategory = document.querySelector(".addCategory")
+    addCategory.classList.toggle("menu")
+})
+document.querySelector(".toggle6").addEventListener("click", () => {
+    let deleteCategory = document.querySelector(".deleteCategory")
+    deleteCategory.classList.toggle("menu")
+})
+
+
+
+
+/* SELECT PRODUCT */
+// ändra namn på denna sedan till typ getCategoryOptions
+async function getProductWithCategory() {
+    let getProductCategory = document.querySelector(".getProductCategory")
+    let overview = document.createElement("div")
+    overview.classList.add("overview")
+    getProductCategory.append(overview)
+
+
+
+
+
+    document.querySelector(".getProductWithCategoryButton").addEventListener("click", renderProductWithCategory) 
+}
+
+
+async function renderProductWithCategory() {
+
+    let id =  document.querySelector(".getId").value
+
+    if(!id){
+        alert("Product ID is missing, please try again");
+        return
+    }
+
+    let categories = await getCategoryWithProductId(id)
+    let allProducts = await getAllProducts()
+
+    const product = allProducts.find((product) => product.Id == id)
+
+    if(!product) {
+        alert("Product does not exist")
+        return
+    }
+
+    if(!categories) {
+        alert("No category was found")
+    }
+
+    let overview = document.querySelector(".overview")
+
+    if(overview) {
+        overview.innerHTML = "";
+    }
+   
+    let infoProductContainer = document.createElement("div")
+    infoProductContainer.classList.add("infoProductContainer")
+    let pId = document.createElement("p")
+    let pName = document.createElement("p")
+    let pImage = document.createElement("img")
+    pImage.classList.add("pImage")
+    let category = document.createElement("p")
+    category.innerText = "Category: "
     
-    const subList = renderSubList[i];
 
-    const allSubscribers = document.querySelector(".firstname");
-    const emailCont = document.querySelector(".email")
-    let firstNameDiv = document.createElement("div")
-    firstNameDiv.classList.add("firstNameDiv")
-    let firstName = document.createElement("p")
-    firstName.classList.add("firstNameSub")
-    firstName.innerText = subList.FirstName
+    pId.innerText = "Id: " + product.Id
+    pName.innerText = "Name: " + product.name
+    pImage.src = "./assets/" + product.image
 
-    firstNameDiv.append(firstName)
-    allSubscribers.append(firstNameDiv)
+    overview.append(pImage, infoProductContainer)
+    infoProductContainer.append(pId, pName, category)
+
+    for (let i = 0; i < categories.length; i++) {
+        const category = categories[i];
+        let categoryName = document.createElement("p")
+        categoryName.innerText = category.categoryName
+        infoProductContainer.append(categoryName)
+    }
+
+    let selectList = document.querySelector("#addCategory")
+    let selectListToBeReplaced = document.querySelector("#categoryToBeReplaced")
+    let selectListNewCategory = document.querySelector("#newCategory")
+    let selectListDelete = document.querySelector("#deleteCategory")
+
+    selectList.innerHTML= "";
+    selectListToBeReplaced.innerHTML= "";
+    selectListNewCategory.innerHTML= "";
+    selectListDelete.innerHTML= "";
 
 
-    let emailDiv = document.createElement("div")
-    emailDiv.classList.add("emailDiv")
-    let email = document.createElement("p")
-    email.classList.add("emailSub")
-    email.innerText = subList.Email 
-    emailDiv.append(email)
-    emailCont.append(emailDiv)
+    
+    // Select Add Category
+    let categoryList = await getCategories()
+    
+    for (let i = 0; i < categoryList.length; i++) {
+        const listItem = categoryList[i];
+        
+        let option = document.createElement("option")
+        option.innerText = listItem.categoryName
+        option.setAttribute("value", listItem.Id) 
+        selectList.append(option)
 
     }
+
+    // Select Category to be replaced
+    let categoryListProduct = await getCategoryWithProductId(id)
+
+    for (let i = 0; i < categoryListProduct.length; i++) {
+        
+        const categoryItem = categoryListProduct[i];
+        
+        let option = document.createElement("option")
+        option.innerText = categoryItem.categoryName
+        option.setAttribute("value", categoryItem.Id) 
+        selectListToBeReplaced.append(option)
+    }
+
+    // Select new category
+    for (let i = 0; i < categoryList.length; i++) {
+        const listItem = categoryList[i];
+        
+        let option = document.createElement("option")
+        option.innerText = listItem.categoryName
+        option.setAttribute("value", listItem.Id) 
+        selectListNewCategory.append(option)
+
+    }
+
+
+    // Select Delete Category
+    if(categoryListProduct.length == 1) {
+        return
+    }
+
+    for (let i = 0; i < categoryListProduct.length; i++) {
+        const categoryItem = categoryListProduct[i];
+        
+        let option = document.createElement("option")
+        option.innerText = categoryItem.categoryName
+        option.setAttribute("value", categoryItem.Id) 
+        selectListDelete.append(option)
+    }
+
+
+
+
+
+}
+
+async function getCategoryWithProductId(id) {
+
+    let action = "getCategoryWithProductId"
+
+    return await makeRequest(`./../api/receivers/categoryReceiver.php?action=${action}&id=${id}`, "GET")
 
 }
 
 
+
+
+
+/* ADD CATEGORY */
+
+document.querySelector(".addCategoryButton").addEventListener("click", addCategoryToProduct) 
+
+async function addCategoryToProduct() {
+
+    let productId =  document.querySelector(".getId").value
+
+    if(!productId){
+        alert("Product ID is missing, please try again");
+        return
+    }
+  
+    let categoryId = document.querySelector("#addCategory").value
+    
+    if(!categoryId){
+        alert("Please select a category to proceed");
+        return
+    }
+
+    let currentCategories = await getCategoryWithProductId(productId)
+
+    for (let i = 0; i < currentCategories.length; i++) {
+        const currentCategory = currentCategories[i];
+        
+        if(currentCategory.Id == categoryId) {
+            alert("Category already exists on product")
+            return
+        }
+    }
+
+    let action = "addCategoryToProduct"
+
+    let body = new FormData()
+    body.append("action", action)
+    body.append("categoryId", categoryId)
+    body.append("productId", productId)
+
+    let result = await makeRequest("./../api/receivers/productInCategoryReceiver.php", "POST", body) 
+
+    if(result) { 
+        alert("Success!")
+
+        location.reload();
+
+    } else {
+        alert("Product not updated")
+        location.reload();
+    }
+}
+
+async function getCategories() {
+    const action = "getAll";
+
+    let allCategories = await makeRequest(`./api/receivers/categoryReceiver.php?action=${action}`, "GET")
+
+    return allCategories
+    
+}
+
+
+
+/* DELETE CATEGORY */
+
+
+document.querySelector(".deleteCategoryButton").addEventListener("click", deleteCategoryFromProduct) 
+
+async function deleteCategoryFromProduct() {
+
+    let productId =  document.querySelector(".getId").value
+    let categoryId = document.querySelector("#deleteCategory").value
+
+    if(!productId){
+        alert("Product ID is missing, please try again");
+        return
+    }
+    
+    if(!categoryId){
+        alert("Please select a category to proceed");
+        return
+    }
+
+    let action = "deleteCategoryFromProduct"
+
+    let body = new FormData()
+    body.append("action", action)
+    body.append("categoryId", categoryId)
+    body.append("productId", productId)
+
+    let result = await makeRequest("./../api/receivers/productInCategoryReceiver.php", "POST", body) 
+
+    console.log(result)
+
+    if(result) { 
+        alert("Success!")
+
+        location.reload();
+
+    } else {
+        alert("Product not updated")
+        location.reload();
+    } 
+
+}
+
+
+
+/* REPLACE CATEGORY */
+
+
+document.querySelector(".replaceCategoryButton").addEventListener("click", categoryReplace) 
+
+async function categoryReplace() {
+
+    let categoryIdToBeReplaced = document.querySelector("#categoryToBeReplaced").value
+    let newCategoryId = document.querySelector("#newCategory").value
+    let productId =  document.querySelector(".getId").value
+
+    if(!categoryIdToBeReplaced) {
+        alert("please select a category you want to replace")
+        return
+    }
+
+    if(!newCategoryId) {
+        alert("please select new category")
+        return
+    }
+
+    if(!productId) {
+        alert("please select a product")
+        return
+    }
+
+    let currentCategories = await getCategoryWithProductId(productId)
+
+    for (let i = 0; i < currentCategories.length; i++) {
+        const currentCategory = currentCategories[i];
+        
+        if(currentCategory.Id == newCategoryId) {
+            alert("Category already exists on product")
+            return
+        }
+    }
+
+    let action = "replaceCategory"
+
+    let body = new FormData()
+    body.append("action", action)
+    body.append("oldCategoryId", categoryIdToBeReplaced)
+    body.append("newCategoryId", newCategoryId)
+    body.append("productId", productId)
+
+    let result = await makeRequest("./../api/receivers/productInCategoryReceiver.php", "POST", body) 
+
+    console.log(result)
+
+    if(result) { 
+        alert("Success!")
+
+        location.reload();
+
+    } else {
+        alert("Product not updated")
+        location.reload();
+    }  
+
+}
+
+
+
+
+
+
+async function renderSubscribers() {
+
+        const renderSubList = await getAllLoggedInSubscribers();
+        
+        
+        console.log(renderSubList)
+        for (let i = 0; i < renderSubList.length; i++) {
+            
+            let subList = renderSubList[i]
+        
+           
+            const allSubscribers = document.querySelector(".firstname");
+            const emailCont = document.querySelector(".email")
+            let firstNameDiv = document.createElement("div")
+            firstNameDiv.classList.add("firstNameDiv")
+            let firstName = document.createElement("p")
+            firstName.classList.add("firstNameSub")
+        
+            firstName.innerText = subList.FirstName
+         
+            firstNameDiv.append(firstName)
+            allSubscribers.append(firstNameDiv)
+        
+        
+            let emailDiv = document.createElement("div")
+            emailDiv.classList.add("emailDiv")
+            let email = document.createElement("p")
+            email.classList.add("emailSub")
+  
+            email.innerText = subList.Email
+            emailDiv.append(email)
+            emailCont.append(emailDiv)
+ 
+        }
+    }
 
 document.querySelector('#sendNews').addEventListener('click', createNewsLetter)
 

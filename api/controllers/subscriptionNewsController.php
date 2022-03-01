@@ -63,7 +63,7 @@ class SubscriptionNewsController extends MainController {
 
 
     public function delete($id) {
-
+        return $this->database->delete($id);
     }
 
 
@@ -86,27 +86,39 @@ class SubscriptionNewsController extends MainController {
    
         $subscriberLoggedIn = $this->database->freeQuery($query, $this->createSubscriptionNews);
         $subscriberGuest = $this->database->freeQuery($query2, $this->createSubscriptionNews);
+
+        $subscriberList = []; 
+ 
         
-        return $allSubscribers = array_merge($subscriberLoggedIn, $subscriberGuest);
 
+        if($subscriberLoggedIn != 'null'){
+
+        for ($i=0; $i < count($subscriberLoggedIn); $i++) { 
+            
+            $sub = $subscriberLoggedIn[$i]; 
+            error_log(serialize($sub));
+            array_push($subscriberList, $sub); 
+
+        }
+
+        }
+
+        //if($subscriberGuest != 'null'){
+
+        for ($i=0; $i < count($subscriberGuest); $i++) { 
+            
+            $sub1 = $subscriberGuest[$i]; 
+
+            array_push($subscriberList, $sub1);
+        } 
+        //error_log(serialize($subscriberList));
+        return $subscriberList;
+        }
+  
+            
+            
+     
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
 
 
 ?> 
