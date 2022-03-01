@@ -23,6 +23,7 @@ main {
 	scroll-padding: 1rem;
   object-fit: scale-down;
   cursor: pointer;
+  margin-top: 35px;
 }
 
 .gallery::-webkit-scrollbar {
@@ -252,7 +253,11 @@ input[type=submit]:hover {
     max-height: 250px;
     min-height: 250px;
   }
+}
 
+@media screen and (max-width:1000px) {
+  .gallery {margin-top: 0;
+  }
 }
 
 @media screen and (max-width:800px) {
