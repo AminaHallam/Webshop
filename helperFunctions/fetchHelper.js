@@ -41,6 +41,7 @@ export async function showCorrectLayout() {
         document.querySelector(".adminIcons").classList.add("none");
         document.querySelector(".qty").classList.remove("qtyCustomer")
         document.querySelector(".qty").classList.remove("qtyAdmin")
+
         loggedInUser.classList.add("none")
         return
     }
@@ -57,8 +58,9 @@ export async function showCorrectLayout() {
     /* Checkar om den inloggade användaren är admin eller inte. Här påverkar vi layouten i headern*/
     let checkAdmin = await verifyAdmin();
      if(checkAdmin) {
-        console.log("Du är admin");
+
         document.querySelector(".adminIcons").classList.remove("none");
+        document.querySelector(".myOrders").classList.add("none");
         document.querySelector(".loginIcon").classList.add("none")
         document.querySelector(".qty").classList.add("qtyAdmin")
 
@@ -70,7 +72,7 @@ export async function showCorrectLayout() {
 
 
     } else {
-        console.log("Du är en vanlig kund");
+
         document.querySelector(".adminIcons").classList.remove("none");
         document.querySelector(".adminSetting").classList.add("none");
         document.querySelector(".loginIcon").classList.add("none")
