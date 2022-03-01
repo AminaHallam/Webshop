@@ -3,7 +3,7 @@
 
 class Database {
     
-    public $db;
+    private $db;
     public $selectedTable;
     public $selectedClass;
 

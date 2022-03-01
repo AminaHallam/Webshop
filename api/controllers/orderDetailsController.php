@@ -1,6 +1,6 @@
 <?php 
 
-include_once("./../classes/createInstanceFunctions.php");
+include_once("./../handlers/createInstanceFunctions.php");
 include_once("./../controllers/mainController.php");
 include_once("./../controllers/productController.php");
 include_once("./../controllers/userController.php");
