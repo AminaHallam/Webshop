@@ -1,3 +1,4 @@
+
 import {openMenu, getAllCategories, burger} from './../helperFunctions/renderHelper.js'
 import {makeRequest,  getUser, verifyAdmin, showCorrectLayout, logOut, printNrOfElements, getAllProducts, getProductFromId} from './../helperFunctions/fetchHelper.js'
 
@@ -118,24 +119,38 @@ async function whichPageToDisplay() {
 
    } else {
         document.querySelector(".adminLayout").classList.add("none")
-
-       let titleKund = document.createElement("h1")
-       titleKund.innerText ="Welcome to my pages!" 
-       main.appendChild(titleKund)
+        document.querySelector('.customerLayout').classList.remove('none')
+        let user = await getUser();
+       
+        let userId = user.Id; 
+        myOrders(userId, 'User');
+        //console.log(order)
 
        
    } 
 
 }
 
+
+
+
+async function myOrders(id, type) {
+    const action = "getByOtherId";
+    let specificOther = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}&type=${type}`, "GET")
+    let user = await getUser(); 
+    renderOrders(specificOther, user)
+}
+
+
+
     //Hämtar ut alla ordrar
     async function myprofilePage() {
     const action = "getAll";
     let order = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET");
-  
-    renderOrders(order);
-    filterButton()
-    
+    let admin = await verifyAdmin(); 
+    if(admin){
+    renderOrders(order, admin);
+    }
   }
 
 
@@ -158,14 +173,15 @@ async function filterButton() {
 
 
 
-async function renderOrders(list) {
+
+
+
+async function renderOrders(list, check) {
     
-    let checkAdmin = await verifyAdmin();
-
-    if(!checkAdmin) {
-        return
-    }
-
+  if(!check) {
+       return
+        
+    }  
     let bigContainer = document.getElementsByClassName("overviewOrders")[0];
     
     let headers = [
@@ -196,10 +212,20 @@ async function renderOrders(list) {
         row.classList.add('row')
         const orderValues = Object.values(order);
         let orderButton = document.createElement('button')
+        let admin = await verifyAdmin(); 
+        let user = await getUser(); 
+        if(admin){
         orderButton.addEventListener("click", () => {
-            getOrderDetails(order.Id)
+            getOrderDetails(order.Id, admin)
             
         })
+        }else if(user){
+                orderButton.addEventListener("click", () => {
+                    getOrderDetails(order.Id, user)
+        }
+
+
+                )}
         orderButton.classList.add('orderButton')
         orderButton.innerText = "To Order"
         orderValues.splice(6, 4) 
@@ -226,13 +252,13 @@ async function renderOrders(list) {
 
 // render orderList By id 
 
-async function getOrderDetails(id) {
+async function getOrderDetails(id, check) {
 
-    let checkAdmin = await verifyAdmin();
 
-    if(!checkAdmin) {
+ 
+    if(!check) {
         return
-    }
+    } 
     
     const action = "getById"; 
     
