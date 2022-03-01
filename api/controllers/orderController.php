@@ -103,13 +103,34 @@ class OrderController extends MainController {
     }
 
 
-    public function update($newValue, $entity) {
+    public function update($statusId, $orderId) {
+
+        $userController = new UserController(); 
+        $checkAdmin = ($userController->verifyAdmin());
+
+        if(!$checkAdmin) {
+            throw new Exception("Action not allowed", 401);
+            exit;
+        }
+
+        $specificOrder = $this->getById($orderId); 
+
+        $updateOrder = createOrder($specificOrder->Id, $statusId, $specificOrder->UserId, $specificOrder->CourrierId, $specificOrder->RegisterDate, date('Y-m-d H:i:s'), null);   
+        
+        unset($updateOrder->products);
+        unset($updateOrder->user);
+        unset($updateOrder->courrier);
+        unset($updateOrder->orderStatus);
+        
+        $result = $this->database->update($updateOrder); 
+
+        return $result; 
 
     }
 
 
     public function delete($id) {
-
+        return $this->database->delete($id);
     }
 
 

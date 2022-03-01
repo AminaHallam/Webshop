@@ -48,13 +48,11 @@ try {
                     exit;
                 } 
 
-                $product = new stdClass;
-                $product->product = $productDb;
-                $product->quantity = 1;
+                $productDb->quantity = 1;
 
                 foreach ($cart as $i => $cartItem) { 
 
-                    if($productDb->Id == $cartItem->product->Id) {
+                    if($productDb->Id == $cartItem->Id) {
 
                         if($cartItem->quantity >= $productDb->unitsInStock) {
                             echo json_encode("Sorry, we do not have more of this product available for reservation");
@@ -70,7 +68,7 @@ try {
 
                     if($i < 0) {
 
-                        array_push($cart, $product);
+                        array_push($cart, $productDb);
     
                         $_SESSION["myCart"] = json_encode($cart);
     
@@ -79,7 +77,7 @@ try {
                     } 
                 }
 
-                array_push($cart, $product);
+                array_push($cart, $productDb);
     
                 $_SESSION["myCart"] = json_encode($cart);
 
@@ -113,7 +111,7 @@ try {
 
                 foreach ($cart as $i => $cartItem) { 
 
-                    if($productDb->Id == $cartItem->product->Id) {
+                    if($productDb->Id == $cartItem->Id) {
            
                         if($cart[$i]->quantity == 1) {
 

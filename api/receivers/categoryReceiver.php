@@ -26,6 +26,17 @@ try {
             echo(json_encode($controller->getById((int)$_GET["id"])));
             exit; 
             
+        } else if($_GET["action"] == "getCategoryWithProductId") {
+
+            $controller = new categoryController();
+
+            if(!isset($_GET["id"])) {
+                throw new Exception("Missing ID", 501);
+                exit;
+            }
+
+            echo(json_encode($controller->getCategoryWithProductId((int)$_GET["id"])));
+
         }
     }    
 
