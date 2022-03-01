@@ -234,30 +234,58 @@ async function getOrderDetails(id) {
     
     let orderDetailsList = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}`, "GET"); 
 
+   
     
     let showOrderDetail = document.querySelector(".orderDetail")
-    showOrderDetail.innerText = "";
     showOrderDetail.classList.toggle("none")
+
+    let orderHeader = document.createElement("h2")
+    orderHeader.innerHTML = "Order Details"
+    showOrderDetail.innerHTML = ""
     
-    //let orderDetails = Object.entries(orderDetailsList)
+    showOrderDetail.append(orderHeader)
     
-    console.log(orderDetailsList)
     let leftBox = document.createElement("div")
     leftBox.classList.add("leftBox")
 
     let rightBox = document.createElement("div")
     rightBox.classList.add("rightBox")
+    showOrderDetail.append(leftBox)
+
+    let orderId = orderDetailsList.Id
 
     orderDetailsList.orderStatus.forEach(orderStatus => {
-        leftBox.innerText = "Order with id: " + orderDetailsList.Id + " - " + orderStatus.Status 
 
-        showOrderDetail.append(leftBox)
+        let orderDetails = document.createElement("div")
+        orderDetails.classList.add("orderDetails")
+        orderDetails.innerHTML = "<h3>Order status</h3>" + "Order with id: " + orderDetailsList.Id + " - " + orderStatus.Status + "  "
+
+        let sendOrderButton = document.createElement("button")
+        sendOrderButton.classList.add("sendOrderButton")
+        sendOrderButton.innerText = " Send the order!"
+        sendOrderButton.addEventListener("click", () => {
+            sendOrder(orderId)
+
+        })
+
+        leftBox.append(orderDetails)
+        orderDetails.append(sendOrderButton)
+
+      if(orderStatus.Status == "Shipped" || orderStatus.Status == "CustReceived") {
+            sendOrderButton.classList.add("none")
+            return
+
+        } else {
+            sendOrderButton.classList.remove("none")
+
+        }
+    
     });
 
     orderDetailsList.courrier.forEach(courrierList => {
         let courrierBox = document.createElement("div")
         courrierBox.classList.add("courrierBox")
-        courrierBox.innerText = "Courrier: " + courrierList.courrierName
+        courrierBox.innerHTML = "<h3>Courrier</h3>" + courrierList.courrierName
    
         leftBox.append(courrierBox)
 
@@ -266,39 +294,47 @@ async function getOrderDetails(id) {
     orderDetailsList.products.forEach(productList => {
         let productBox = document.createElement("div")
         productBox.classList.add("productBox")
-        productBox.innerHTML = "Product with id: " + productList.Id + "<br>" + " Name: " + productList.name + "<br>" +  " UnitPrice: " + productList.unitPrice + " € " + "<br>" + " Quantity: " + productList.quantity
+        productBox.innerHTML = "<h3>Product details</h3>" + "Product with id: " + productList.Id + "<br>" + "<p>Name: " + productList.name + "</p>" +  " UnitPrice: " + productList.unitPrice + " € " + "<br>" + " Quantity: " + productList.quantity + "<br>" + "<br>"+ "<hr>"
     
         leftBox.append(productBox)
     })
+
+    let userBox = document.createElement("h2")
+    userBox.innerText = "Information about customer"
+
 
     orderDetailsList.user.forEach(userList => {
     
         rightBox.innerHTML = "User id: " + userList.Id + "<br>" + " FirstName: " + userList.FirstName + "<br>" + " LastName: " + userList.LastName + "<br>" + " Email " + userList.Email + "<br>" + " Mobile: " + userList.MobileNumber + "<br>" + " Adress: " + userList.Street + "<br>" + " ZipCode: " + userList.ZipCode + "<br>" + " City: " + userList.City + "<br>" + " Country: " + userList.Country
     
         leftBox.append(rightBox)
+        
     })
 
-    showOrderDetail.append(rightBox)
-
-
-
-
-
-
-
-  /*   for (let i = 0; i < orderDetails.courrier.length; i++) {
-        const element = orderDetails[i];
-        
-
-
-    } */
-
-
-  
+    showOrderDetail.append(userBox, rightBox)
     
 }
 
+async function sendOrder(orderId) {
 
+   let body = new FormData(); 
+    body.append("statusId", "SHIP")
+    body.append("orderId", orderId)
+    body.append("endpoint", "updateOrder"); 
+    let sentOrder = await makeRequest(`./../api/receivers/orderReceiver.php`, "POST", body)
+
+    if(sentOrder == true) { 
+        alert("The order is sent!")
+        
+        location.reload();
+
+    } else {
+        alert("The sending has failed!")
+
+
+    }
+
+}
 
 
 // Update product buttons/links

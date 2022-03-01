@@ -51,6 +51,7 @@ try {
                 echo(json_encode($controller->getOrdersFromOtherId((int)$_GET["id"],$_GET["type"])));
 
             }
+
         } 
 
     }  else if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -84,8 +85,34 @@ try {
                     exit;
             }     
             
+        }  else if($_POST["endpoint"] == "updateOrder") {
+        
+                if(isset($_POST["statusId"]) && isset($_POST["orderId"])) {
+        
+                    if($_SESSION["inloggedUser"]) {
+        
+                        $controller = new OrderController(); 
+                        $result = json_encode($controller->update($_POST["statusId"], $_POST["orderId"])); 
+
+                        if($result == true) {
+                            echo json_encode(true);
+                            exit;
+                        }else {
+                            echo json_encode(false);
+                            exit; 
+                        }
+        
+                    }
+        
+                } else {
+                    throw new Exception("Missing ID", 401);
+                    exit;
+                }
+    
         } 
-    }   
+        
+    }
+
 
 } catch(Exception $e) {
     echo json_encode(array("Message" => $e->getMessage(), "Status" => $e->getCode()));
