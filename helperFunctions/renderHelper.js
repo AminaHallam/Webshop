@@ -74,3 +74,15 @@ export async function getCategoryFromId(idToGet) {
 
 }
 
+
+export function burger() {
+
+    const hamburger = document.querySelector(".hamburgerMenu");
+    const menu = document.querySelector(".contactDiv");
+    
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menu.classList.toggle("active");
+    
+    });
+}
