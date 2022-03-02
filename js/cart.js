@@ -57,8 +57,6 @@ async function renderCart() {
     let cart = await getCart()
     let userInfo = await getUser()
 
-    console.log(cart)
-
     const main = document.getElementsByTagName("main")[0]
 
     main.innerHTML = "";
@@ -101,6 +99,11 @@ async function renderCart() {
         let ajustQty = document.createElement("div")
         ajustQty.classList.add("ajustQty")
 
+        let removeButton = document.createElement("div")
+        removeButton.classList.add("removeProduct")
+        removeButton.innerHTML = '<img src="./assets/icons/delete.png" alt="Trash Icon">'
+        removeButton.addEventListener("click", () => {removeItem(cartItem.Id)})
+
         let deleteQty = document.createElement("div")
         deleteQty.classList.add("ajustBoxes")
         deleteQty.innerText = "-"
@@ -139,6 +142,9 @@ async function renderCart() {
         cartContainer.append(itemContainer)
         itemContainer.append(image, infoContainer)
         infoContainer.append(title, unitPrice, priceContainer, ajustQty, totalPrice)
+
+        //priceContainer.append(ajustQty, totalPrice)
+        ajustQty.append(deleteQty, unitQty, addQty, removeButton)
         ajustQty.append(deleteQty, unitQty, addQty)
 
     }
@@ -334,6 +340,19 @@ async function deleteProduct(productId) {
     await renderCart();
     await printNrOfElements();
 }    
+
+async function removeItem(productId) {
+
+    const action = "deleteItem"
+    var body = new FormData()
+    body.append("action", action)
+    body.append("productId", productId)
+ 
+    await makeRequest(`./../api/receivers/cartReceiver.php`, "POST", body)
+
+    await renderCart();
+    await printNrOfElements();
+}
 
 
 window.addEventListener('load', onLoad)

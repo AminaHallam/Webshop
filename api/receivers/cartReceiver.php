@@ -133,8 +133,48 @@ try {
                 throw new Exception("Missing ID", 401);
                 exit;
             }
+        } else if($_POST["action"] == "deleteItem") {
+
+                if(isset($_POST["productId"])) { 
+
+                    $productId = json_decode($_POST["productId"]);
+
+                    
+                    $controller = new ProductController();
+                    $productDb = ($controller->getById(json_decode($productId)));
+                    $cart = json_decode($_SESSION["myCart"]);
+                    
+                    if(!$cart) {
+                        throw new Exception("Cart is empty", 401);
+                        exit;
+                    }
+                    
+                    if(!$productDb) {
+                        throw new Exception("Found no match to ID in DB", 401);
+                        exit;
+                    }
+
+                    foreach ($cart as $i => $cartItem) {
+
+                        if($productDb->Id == $cartItem->Id) {
+
+                            array_splice($cart, $i, 1); 
+
+                            $_SESSION["myCart"] = json_encode($cart); 
+                            exit; 
+
+                        }
+
+                    }
+
+                } 
+
+        } else {
+            throw new Exception("Missing ID", 401);
+            exit;
         }
     }
+    
 
 } catch(Exception $e) {
     echo json_encode(array("Message" => $e->getMessage(), "Status" => $e->getCode()));
