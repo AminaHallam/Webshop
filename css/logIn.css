@@ -7,16 +7,12 @@
 }
 
 main {
-    margin-top: 120px;
-    margin-bottom: 120px;
-    height: unset;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 .hidden {
@@ -36,9 +32,13 @@ main {
 .accountContainer {
     display: flex;
     justify-content: center;
-    height: 100%;
     align-items: flex-start;
     text-align: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px 2px #e2e1e1;
 }
 
 .h1 {
@@ -46,12 +46,11 @@ main {
     padding-bottom: 20px;
 }
 
-.form {
+.formDiv {
     width: 100%;
-    border-radius: 7px;
     background-color: white;
+    padding: 70px;
     text-align: center;
-    padding-bottom: 100px;
 }
 
 .containerForms {
@@ -189,10 +188,41 @@ a:link {
           /* gap */
           width: 50%;
       }
+      
+    .formDiv {
+        padding: 20px;
+    }
+
+    .accountContainer {
+        margin-top: 50px;
+        margin-bottom: 70px;
+    
+        border-radius: 5px;
+        box-shadow: none;
+
+    }
+
   }
+
+  
+  @media screen and (max-width: 800px) {
+
+  .accountContainer {
+    margin-top: 30px;
+    margin-bottom: 70px;
+
+  }
+
+}
 
 
 @media screen and (max-width: 600px) {
+
+    .accountContainer {
+        margin-top: 20px;
+        margin-bottom: 70px;
+    }
+
     .form {
         /* gap */
         width: 100%;
@@ -211,3 +241,15 @@ a:link {
         flex-wrap: wrap;
     }
 }
+
+  
+@media screen and (max-width: 480px) {
+
+    .accountContainer {
+      margin-top: 10px;
+      margin-bottom: 70px;
+  
+    }
+  
+  }
+  

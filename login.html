@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/logIn.css">
+    <link rel="stylesheet" href="./css/startPage.css">
     
     <!-- Fonts -->
     <script src="https://morgan3d.github.io/include.js/include.min.js"></script>
@@ -63,7 +64,7 @@
 
     <main>
         <div class="accountContainer">
-            <form class="form" id="login"> 
+            <form class="formDiv" id="login"> 
                 <h1 class="h1">Sign in</h1>
                 <div class="inputGroup">
                     <input id="inputUserName" type="email" placeholder="example@example.se" name="Användarnamn" autofocus required>
@@ -78,7 +79,7 @@
                 </p>
             </form>
             
-            <form name="registrationForm" class="form hidden" id="createAccount">
+            <form name="registrationForm" class="formDiv hidden" id="createAccount">
                 <h1 class="h1">Create account</h1>
                 <div class="containerForms">
                     <div class="registerBlock">
@@ -159,7 +160,7 @@
                 </div>       
                 <div class="newsLetterContainer">
                   <input id="firstNameNews" type="text" placeholder="Name" name="firstNameNews" required>
-                  <input id="emailNews" type="text" placeholder="Email adress" name="emailNews" required>
+                  <input id="emailNews" type="text" placeholder="Email address" name="emailNews" required>
                   <input id= "submitClick" type="submit" value="Sign me up!">
                 </div>
             </form>
