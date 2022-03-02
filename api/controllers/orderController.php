@@ -147,7 +147,7 @@ try {
 
             $specificOrder = $this->getById($orderId); 
 
-            $updateReceivedOrder = createOrder($specificOrder->Id, $statusId, $specificOrder->UserId, $specificOrder->CourrierId, $specificOrder->RegisterDate, null, date('Y-m-d H:i:s'));   
+            $updateReceivedOrder = createOrder($specificOrder->Id, $statusId, $specificOrder->UserId, $specificOrder->CourrierId, $specificOrder->RegisterDate, $specificOrder->ShippingDate, date('Y-m-d H:i:s'));   
             error_log(serialize($updateReceivedOrder));
             unset($updateReceivedOrder->products);
             unset($updateReceivedOrder->user);

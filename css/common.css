@@ -57,19 +57,32 @@ header {
     padding-right: 15px;
 }
 
+
+
+
 #dropdown {
     display: none;
     position: absolute;
     width: 100%;
+    
 }
 
 #dropdown.active {
     display: block;
+    background: rgb(253, 250, 250, 09);
+    opacity: 0.9;
+    font-weight: bold;
+    width: 100%;
+    
 } 
+
+
+
 
 .productContainerForDropdown {
     padding-top: 10px;
     padding-bottom: 10px;
+    
 }
 
 .contactDiv {
@@ -78,6 +91,7 @@ header {
     justify-content: center;
    /*  padding-right: 50px; */
     gap: 20px;
+    font-size: larger;
 }
 
 .hamburgerMenu {
