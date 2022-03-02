@@ -462,11 +462,41 @@ async function getCustomerOrderDetail(id){
             markOrderAsRecieved(orderIdC)
 
         })
+            leftBoxC.append(orderDetailsC)
+            orderDetailsC.append(sendOrderButtonC)
+    
+          if(orderStatus.Status != "Shipped") {
+                sendOrderButtonC.classList.add("none")
+                return
+    
+            } else {
+                sendOrderButtonC.classList.remove("none")
+    
+            }
+        
+        });
+        
 
-        leftBoxC.append(orderDetailsC)
-        orderDetailsC.append(sendOrderButtonC)
-    })
-}
+            orderDetailsListC.courrier.forEach(courrierList => {
+                let courrierBoxC = document.createElement("div")
+                courrierBoxC.classList.add("courrierBox")
+                courrierBoxC.innerHTML = "<h3>Courrier</h3>" + courrierList.courrierName
+           
+                leftBoxC.append(courrierBoxC)
+        
+            })
+        
+            orderDetailsListC.products.forEach(productList => {
+                let productBoxC = document.createElement("div")
+                productBoxC.classList.add("productBox")
+                
+                productBoxC.innerHTML = "<h3>Product details</h3>" + "<br>" + "<p>Product Name: " + productList.name + "</p>" +  " Price: " + productList.unitPrice + " € " + "<br>" + " Quantity: " + productList.quantity + "<br>" + "<br>"+ "<hr>"
+                
+                leftBoxC.append(productBoxC)
+            })
+        
+    
+        }
 
 
 async function markOrderAsRecieved(orderId){

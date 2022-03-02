@@ -117,9 +117,7 @@ try {
                 
 
                 if($_SESSION["inloggedUser"]) {
-                    error_log(serialize($_POST['statusId']));
-             
-
+                   
                 
                     $controller = new OrderController(); 
                     $result = json_encode($controller->updateCustomerOrder($_POST["statusId"], $_POST["orderId"])); 
