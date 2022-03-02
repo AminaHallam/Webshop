@@ -1,7 +1,7 @@
 import {openMenu, getAllCategories, burger} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
 
-// Se över vad vi kallar på 
+
 async function onLoad() {
     await showCorrectLayout();
     await printNrOfElements();
@@ -29,7 +29,8 @@ async function renderProducts(list){
     const main = document.getElementsByTagName("main")[0]; 
     let allproductsDiv = document.createElement("div")
     allproductsDiv.classList.add("allproductsDiv")
-    let titleOfAllProducts = document.createElement("div")
+    
+    let titleOfAllProducts = document.createElement("h2")
     titleOfAllProducts.classList.add("titleOfAllProducts")
     titleOfAllProducts.innerText = "All Products"
     
