@@ -51,6 +51,11 @@ try {
 
         public function addProducts($products, $orderId) {
 
+            if(!isset($_SESSION["inloggedUser"])) {
+                throw new Exception("Action not allowed", 401);
+                exit;
+            }
+
             for ($i=0; $i < count($products); $i++) { 
                     
                 $product = $products[$i];
@@ -66,6 +71,11 @@ try {
 
 
         public function getOrderDetailsFromOrder($orderId, $productId) {
+
+            if(!isset($_SESSION["inloggedUser"])) {
+                throw new Exception("Action not allowed", 401);
+                exit;
+            }
 
             $query = "SELECT od.ProductID, od.OrderID, od.Quantity
             FROM `orderdetails` od

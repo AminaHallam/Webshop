@@ -47,15 +47,13 @@ try {
 
 
         public function getAll() { 
-        
-            
             return $this->database->fetchAll($this->$createSubscriptionNews); 
-            // hämta datan från användare med id, gör en join. 
+
 
         }
 
         public function getById($id) {
-            /*return $this->database->fetchById($id, $this->createFunction); */
+            return $this->database->fetchById($id, $this->createFunction); 
         }
 
     
@@ -97,17 +95,15 @@ try {
 
             if($subscriberLoggedIn != 'null'){
 
-            for ($i=0; $i < count($subscriberLoggedIn); $i++) { 
-                
-                $sub = $subscriberLoggedIn[$i]; 
-                error_log(serialize($sub));
-                array_push($subscriberList, $sub); 
+                for ($i=0; $i < count($subscriberLoggedIn); $i++) { 
+                    
+                    $sub = $subscriberLoggedIn[$i]; 
+                    array_push($subscriberList, $sub); 
+
+                }
 
             }
 
-            }
-
-            //if($subscriberGuest != 'null'){
 
             for ($i=0; $i < count($subscriberGuest); $i++) { 
                 
@@ -115,7 +111,7 @@ try {
 
                 array_push($subscriberList, $sub1);
             } 
-            //error_log(serialize($subscriberList));
+
             return $subscriberList;
             }
             

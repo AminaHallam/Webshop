@@ -22,7 +22,9 @@ try {
 
                 $user = unserialize($_SESSION["inloggedUser"]);
 
-                // ifsats true eller false
+                if(!$user) {
+                    echo json_encode(false);
+                }
 
                 echo json_encode($user);
 

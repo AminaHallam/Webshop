@@ -93,7 +93,6 @@ try {
             $orderStatus = $orderStatusController->getOrderStatus($id); 
             $order->orderStatus = $orderStatus; 
 
-            /* Hämtar produkterna som är kopplade till det specifika orderidt - Lyckas inte med quantity */
             $productController = new ProductController();
             $products = $productController->getProductsFromOrder($id);
             $order->products = $products;
