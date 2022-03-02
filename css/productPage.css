@@ -1,5 +1,4 @@
 main {
-
 }
 
 main {
@@ -15,6 +14,9 @@ body {
   min-height: 100%;
 }
 
+body {
+  min-height: 100%;
+}
 
 .returnButton {
   padding-top: 100px;
@@ -271,7 +273,6 @@ body {
     margin-top: 2px;
     font-size: smaller;
 } 
-
 
 .divForCart {
    display:flex; 

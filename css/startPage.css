@@ -18,6 +18,7 @@ main {
   background-color: white;
 	height: 70vh;
   padding: 2rem;
+  margin-top: 20px;
 
 	scroll-snap-type: both mandatory;
 	scroll-padding: 1rem;
@@ -307,8 +308,9 @@ input[type=submit]:hover {
 @media screen and (max-width:800px) {
 
   .gallery {
-    padding-bottom: 2rem;
-    height: 45vh;
+    padding-top: 0rem;
+    padding-bottom: 2rem; 
+    height: 55vh;
   }
 
   .textContainer {
@@ -333,12 +335,13 @@ input[type=submit]:hover {
 
 
 @media screen and (max-width:700px) {
+  
   #photo1 {
     background-image:url("./../assets/womanEveryoneKnowsThePrice.JPG");
     background-size: cover;
     height: 100%;
     width: 100%
-}
+  }
 
 }
 
@@ -355,8 +358,10 @@ input[type=submit]:hover {
     text-align: center;
   }
 
-
-}
+  .imageScroller img {
+    max-height: 230px;
+    min-height: 230px;
+  }
 
 
 @media screen and (max-width: 540px) { 
@@ -372,8 +377,11 @@ input[type=submit]:hover {
     flex-direction: column;
   }
 
-}
-
+  .imageScroller img { 
+    max-height: 220px;
+    min-height: 220px;
+  }
+     
 
 @media screen and (max-width:380px) {
   
@@ -381,5 +389,9 @@ input[type=submit]:hover {
     max-height: 200px;
     min-height: 200px;
   }
-     
+
+}
+
+@media screen and (max-width:380px) {
+    
 }

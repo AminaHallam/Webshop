@@ -1,5 +1,5 @@
 
-// Gör en request till PHP
+// Makes a request to php
 export async function makeRequest(url, method, body) {
     try {
         let response = await fetch(url, {
@@ -19,7 +19,7 @@ export async function makeRequest(url, method, body) {
 /* User */
 
 
-// Returnerar True/False beroende på om den som är inloggad är admin eller inte. 
+// Returns true if logged in user is registered as admin
 export async function verifyAdmin() {
     const action = 'verifyAdmin'; 
     let verifyA = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
@@ -29,11 +29,11 @@ export async function verifyAdmin() {
 
 
 
-// Visar den rätta layouten beroende på om det är en kund eller admin som är inloggad. Om ingen är inloggad behålls den befintliga layouten.
+// Shows correct layout depending on whether user is a regular customer or if user is an admin. If no user is logged in, original layout is kept. 
 export async function showCorrectLayout() {
     const loggedInUser = document.querySelector(".loggedInUser")
     
-    /* Checkar om någon användare finns i session(dvs inloggad) */
+    // Check to see if there is a user in session
     let checkIfInlogged = await getUser();
     
     if(!checkIfInlogged) {
@@ -47,7 +47,7 @@ export async function showCorrectLayout() {
     }
 
 
-    /* Visar vem som är inloggad */
+    // Display which user is logged in
     loggedInUser.classList.remove("none")
     let activeUser = document.createElement("p")
     activeUser.innerText = "Logged in user: " + checkIfInlogged.FirstName
@@ -55,7 +55,8 @@ export async function showCorrectLayout() {
 
 
 
-    /* Checkar om den inloggade användaren är admin eller inte. Här påverkar vi layouten i headern*/
+    
+    // check to determin in logged in user is of type admin
     let checkAdmin = await verifyAdmin();
      if(checkAdmin) {
 
@@ -86,7 +87,7 @@ export async function showCorrectLayout() {
 }
 
 
-// Hämtar Id, förnamn och efternamn från SESSION vid inloggad användare. Vid ej inloggad användare så returnerar getUser false.
+// Get id, firstname and lastname from SESSION. If there is no user in session, getUser returns false. 
 export async function getUser() {
     const action = 'getUser'; 
     let getUser = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
@@ -94,7 +95,7 @@ export async function getUser() {
 }
 
 
-// Loggar ut användare genom att göra en session_destroy i PHP.
+// Logs out user by session_destroy()
 export async function logOut(){
     const action = "destroySession"
     let logoutUser = await makeRequest(`./../api/receivers/userReceiver.php?action=${action}`, "GET")
@@ -106,7 +107,7 @@ export async function logOut(){
 
 /* Order */
 
-// Hämtar alla ordrar
+// Fetches all orders
 export async function getAllOrders() {
     const action = "getAll";
     let allOrders = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET")
@@ -114,14 +115,14 @@ export async function getAllOrders() {
 }
 
 
-// Hämtar en order baserat på ett orderid
+// Fetch an order by orderId
 export async function getOrderById(idToGet) {
     const action = "getById";
     let specificOrder = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${idToGet}`, "GET")
     console.log(specificOrder)  // Return?
 }
 
-// Hämtar ordrar baserat på statusid eller userid 
+// Fetch an order based on statusId and userId
 export async function getOrdersByOtherId(idToGet, type) {
     const action = "getByOtherId";
     let specificOther = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${idToGet}&type=${type}`, "GET")
@@ -133,7 +134,7 @@ export async function getOrdersByOtherId(idToGet, type) {
 
 /* Product */
 
-// Hämtar alla produkter 
+// Fetches all products 
 export async function getAllProducts() {
     const action = "getAll";
 
@@ -145,7 +146,7 @@ export async function getAllProducts() {
 
 
 
-// Hämtar en produkt baserat på ett produktid 
+// Fetch a product based on productId
 export async function getProductFromId(id) {
 
 const action = 'getById';  
@@ -161,7 +162,7 @@ return specificProduct
 /* Cart */
 
 
-// Printar ut det totala antalet på produkter vi lagt till i kundvagen uppe i headern. 
+// Prints out the total number of products that are placed in cart. 
 export async function printNrOfElements() {
 
     let numberCart = document.querySelector(".qty")
@@ -171,7 +172,7 @@ export async function printNrOfElements() {
     let cart = await makeRequest(`./../api/receivers/cartReceiver.php?action=${action}`, "GET")
 
     if(cart) {
-        cart = await JSON.parse(cart) //parse överflödig?
+        cart = await JSON.parse(cart) 
     } else { 
         cart = []
     } 
