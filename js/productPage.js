@@ -71,7 +71,8 @@ async function renderProduct(idToGet) {
     addToCartButton.addEventListener("click", () => {addToCart(product.Id)})
     
     document.querySelector(".returnToPpage").addEventListener("click", () => {
-        history.back()
+        let returnButton = document.referrer
+        location.href = returnButton
     })
 
     let divForCart = document.createElement('div');
