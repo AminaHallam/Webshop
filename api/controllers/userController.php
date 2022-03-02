@@ -68,8 +68,6 @@ try {
 
             $checkEmail = $this->database->freeQuery($query, $this->createUser); 
 
-            error_log(serialize($checkEmail));
-
             if($checkEmail == "{}") {
                 return true;
             }
@@ -90,7 +88,7 @@ try {
         
                 if($checkEmail == $user) {
 
-                $hashedPw = $userDb->Password;
+                    $hashedPw = $userDb->Password;
                 
                     if (password_verify($password, $hashedPw)) {
                         $_SESSION["inloggedUser"] = serialize($userDb);

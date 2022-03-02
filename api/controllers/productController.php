@@ -103,6 +103,11 @@ try {
         // Uppdaterar unitsInStock på produkter när ordern är lagd
         public function updateQtyProductOrder($products) {
 
+            if(!isset($_SESSION["inloggedUser"])) {
+                throw new Exception("Action not allowed", 401);
+                exit;
+            }
+
             for ($i=0; $i < count($products); $i++) { 
                     
                 $product = $products[$i];
@@ -158,7 +163,6 @@ try {
 
                 array_push($productList, $product); 
 
-                
             }
             
             return $productList;

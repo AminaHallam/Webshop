@@ -93,7 +93,6 @@ try {
             $orderStatus = $orderStatusController->getOrderStatus($id); 
             $order->orderStatus = $orderStatus; 
 
-            /* Hämtar produkterna som är kopplade till det specifika orderidt - Lyckas inte med quantity */
             $productController = new ProductController();
             $products = $productController->getProductsFromOrder($id);
             $order->products = $products;
@@ -107,25 +106,12 @@ try {
 
             $userController = new UserController(); 
             $checkAdmin = ($userController->verifyAdmin());
+            $specificOrder = $this->getById($orderId); 
 
             if(!$checkAdmin) {
                 throw new Exception("Action not allowed", 401);
                 exit;
             }
-
-            $specificOrder = $this->getById($orderId); 
-
-        $updateReceivedOrder = createOrder($specificOrder->Id, $statusId, $specificOrder->UserId, $specificOrder->CourrierId, $specificOrder->RegisterDate, $specificOrder->ShippingDate, date('Y-m-d H:i:s'));   
-        
-       
-
-        unset($updateReceivedOrder->products);
-        unset($updateReceivedOrder->user);
-        unset($updateReceivedOrder->courrier);
-        unset($updateReceivedOrder->orderStatus); 
-        
-        $result = $this->database->update($updateReceivedOrder); 
-
 
             $updateOrder = createOrder($specificOrder->Id, $statusId, $specificOrder->UserId, $specificOrder->CourrierId, $specificOrder->RegisterDate, date('Y-m-d H:i:s'), null);   
             
@@ -143,12 +129,17 @@ try {
 
 
         public function updateCustomerOrder($statusId, $orderId) {
-        // $userController = new UserController(); 
+
+            
+            $verifyUser = json_decode($_SESSION["inloggedUser"]);
 
             $specificOrder = $this->getById($orderId); 
 
+            error_log(serialize($specificOrder->user));
+
+
             $updateReceivedOrder = createOrder($specificOrder->Id, $statusId, $specificOrder->UserId, $specificOrder->CourrierId, $specificOrder->RegisterDate, $specificOrder->ShippingDate, date('Y-m-d H:i:s'));   
-            error_log(serialize($updateReceivedOrder));
+
             unset($updateReceivedOrder->products);
             unset($updateReceivedOrder->user);
             unset($updateReceivedOrder->courrier);
