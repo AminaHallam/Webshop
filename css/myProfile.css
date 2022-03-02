@@ -1,3 +1,9 @@
+/* Prova med detta när responsivivteten är klar :) */
+
+/* main {
+  height: 100vh;
+} */
+
 h1 {
   margin-bottom: 20px;
   margin-top: 50px;
@@ -350,6 +356,13 @@ button, .orderButton, #sendNews {
   margin-right: 20px;
   margin-bottom: 20px;
 }
+
+
+.row {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.137);
+  margin-top: 8px;
+}
+
 
 .content {
   height: 150px;

@@ -1,6 +1,6 @@
 
 import {openMenu, getAllCategories, burger} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
 
 
 async function onLoad() {
@@ -71,7 +71,8 @@ async function renderProduct(idToGet) {
     addToCartButton.addEventListener("click", () => {addToCart(product.Id)})
     
     document.querySelector(".returnToPpage").addEventListener("click", () => {
-        history.back()
+        let returnButton = document.referrer
+        location.href = returnButton
     })
 
     let divForCart = document.createElement('div');
@@ -100,7 +101,7 @@ async function renderProduct(idToGet) {
 
 
 
-// Lägger till produkten i kundvagnen (SESSION)
+// add products to cart 
 async function addToCart(productId) {
 
     const push = "addProduct"

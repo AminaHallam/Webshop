@@ -39,7 +39,7 @@
                 <li class="nav-item" id="menu">COLLECTION
                 <i class="fas fa-angle-down"></i>
                     <ul id="dropdown">
-                        <li><a class="nav-item" href="allProductsPage.html">ALL PRODUCTS</a></li>
+                        <li><a class="nav-item" href="allProductsPage.html" id="allProducts">All products</a></li>
                     </ul>
                 </li>
                 <li><a class="nav-item" href="#imgAbout">ABOUT</a></li>
@@ -73,28 +73,66 @@
             <li class="carousel" id='photo4'></li>
             <li class="carousel" id='photo5'></li>
            <!--  <div class="centered">Centered</div> -->
+           <!-- Lägg till button - NEWS -->
         </ul>
-    
 
-        <div class="h1">
+
+        <div class="wellcomeHeader">
+            <h1>Wellcome to Zeon Milo's art!</h1>
+            <h3>- lorem lorem lorem lorem</h3>
+        </div>
+
+
+        <div class="collectionHeader">
+            <h1>Collections</h1>
+        </div>
+            <div class="collectionContainer">
+                <div class="productContainer">
+                   <div>
+                        <img class="collectionImage" src="/assets/wildWhatWeDoInLife.JPG" alt="Wildlife">
+                    </div> 
+                   <div>
+                        <img class="collectionImage" src="/assets/womanStrongPorch.JPG" alt="Strong Woman">
+                   </div> 
+                    <div>
+                        <img class="collectionImage" src="/assets/figIveSeenItAll.JPG" alt="Figurativ">
+                    </div>
+                    <div>
+                        <img class="collectionImage" src="/assets/abStopHiding.png" alt="Abstract">
+                    </div>
+                </div>
+             </div>
+
+        <div class="headerNews">
         <h1>News!</h1>
             <div class="imageDiv">
                 <div class="imageSlider">
                     <div class="imageScroller">
-                        <img src="/assets/abTheseTimes.png" alt="">
+                        <img src="/assets/abTheseTimes.png" alt="News-Image">
                     </div>
                     <div class="imageScroller">
-                        <img src="/assets/abKnowledge.jpg" alt="">
+                        <img src="/assets/abKnowledge.jpg" alt="News-Image">
                     </div>
                     <div class="imageScroller">
-                        <img src="/assets/figTellMeMore.JPG" alt="">
+                        <img src="/assets/figTellMeMore.JPG" alt="News-Image">
                     </div>
                     <div class="imageScroller">
-                        <img src="/assets/wildSpiritOfAWolf.png" alt="">
+                        <img src="/assets/wildSpiritOfAWolf.png" alt="News-Image">
+                    </div>
+                    <div class="imageScroller">
+                        <img src="/assets/abKnowledge.jpg" alt="News-Image">
+                    </div>
+                    <div class="imageScroller">
+                        <img src="/assets/figTellMeMore.JPG" alt="News-Image">
+                    </div>
+                    <div class="imageScroller">
+                        <img src="/assets/wildSpiritOfAWolf.png" alt="News-Image">
+                      
                     </div>
                 </div>             
             </div>
         </div>
+
 
         <div class="aboutContainer">
             <div class="about" id="imgAbout">
@@ -171,7 +209,7 @@
             </div>       
             <div class="newsLetterContainer">
               <input id="firstNameNews" type="text" placeholder="Name" name="firstNameNews" required>
-              <input id="emailNews" type="text" placeholder="Email adress" name="emailNews" required>
+              <input id="emailNews" type="text" placeholder="Email address" name="emailNews" required>
               <input id= "submitClick" type="submit" value="Sign me up!">
             </div>
         </form>

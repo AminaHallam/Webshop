@@ -17,7 +17,6 @@
 body {
     font-family: var(--primaryFont);
     color: black; 
-    /* min-height: 100vh; */
 }
 
 header {
@@ -48,6 +47,8 @@ header {
     justify-content: space-between;
 }
  
+
+/* Se över menyn-styling */
 #menu { 
     position: relative; 
     width: 150px;
@@ -56,27 +57,41 @@ header {
     padding-right: 15px;
 }
 
+
+
+
 #dropdown {
     display: none;
     position: absolute;
     width: 100%;
+    
 }
 
 #dropdown.active {
     display: block;
+    background: rgb(253, 250, 250, 09);
+    opacity: 0.9;
+    font-weight: bold;
+    width: 100%;
+    
 } 
+
+
+
 
 .productContainerForDropdown {
     padding-top: 10px;
     padding-bottom: 10px;
+    
 }
 
 .contactDiv {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-right: 50px;
+   /*  padding-right: 50px; */
     gap: 20px;
+    font-size: larger;
 }
 
 .hamburgerMenu {
@@ -87,7 +102,7 @@ header {
 .bar {
     display: block;
     width: 35px;
-    height: 3px;
+    height: 2px;
     margin: 7px auto;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
@@ -100,10 +115,11 @@ header {
     justify-content: flex-end;
     width: 4em;
     margin-top: 70px;
+    gap: 10px;
 }
 
 .allIcons {
-    padding-right: 60px;
+    padding-right: 80px;
 }
 
 .fas {
@@ -118,6 +134,7 @@ ul, li {
     background-color: white;    
 }
 
+/* Kolla detta i samband med stylning av hamburgare */
 li {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -138,47 +155,38 @@ a {
 
 .loggedInUser p {
     padding-top: 2px;
-    padding-right: 5px;
+    padding-right: 25px;
 }
  
-
 .adminIcons {
     display: flex;
+    gap: 0px 10px;
 }
-
 
 #accountIcon {
     height: 34px;
     width: 34px; 
-    margin-left: 5px;
 }
 
 #cartIcon {
     height: 30px;
     width: 30px; 
-    margin-left: 5px;
 }
 
-/* .adminSetting {
-    display: none;
-} */
  
 #adminIcon {
     height: 34px;
     width: 34px; 
-    margin-left: 5px;
 }
 
 #orderIcon {
     height: 34px;
     width: 34px; 
-    margin-left: 5px;
 }
 
 #logOutIcon {
     height: 34px;
     width: 34px;
-    margin-left: 5px;
 }
 
 .qty {
@@ -187,20 +195,20 @@ a {
     justify-content: center;
     width: 15px;
     height: 15px;
-    right:82px;
-    top:100px;
+    right:98px;
+    top:105px;
     font-size: 10px;
     border-radius: 50%;
     background-color: #E3D5CA;
 }
 
 .qtyAdmin {
-    right: 160px;
+    right: 176px;
 }
 
 .qtyCustomer {
-    right: 160px;
-    top: 100px;
+    right: 176px;
+    top: 105px;
 }
 
 .footerDiv {
@@ -230,10 +238,9 @@ a {
     font-size: 16px;
     text-align: center;
     background-color: #fdf6ef;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
-
 
 /* Iconerna när ingen är inloggad */
 .none {
@@ -263,26 +270,32 @@ a {
         width: 26px;
     }
 
+    #adminIcon {
+        height: 26px;
+        width: 26px; 
+    }
+
     #orderIcon {
         height: 26px;
         width: 26px;
     }
 
     .allIcons {
-        padding-right: 20px;
+        padding-right: 40px;
     }
 
     .qty {
-        right: 37px;
-        top: 85px;
+        right: 54px;
+        top: 89px;
     }
     .qtyAdmin {
-        right: 97px;
+        right: 116px;
+        top: 89px;
     }
 
     .qtyCustomer {
-        right: 97px;
-        top: 84px;
+        right: 115px;
+        top: 89px;
     }
 
     .loggedInUser p {
@@ -308,10 +321,6 @@ a {
     }
 
     .hamburgerMenu {
-        display: block; 
-    }
-
-    .hamburgerMenu {
         display: block;
         padding-left: 30px;
     }
@@ -330,23 +339,28 @@ a {
         align-items: center;
     }
 
+    /* Se över detta... */
     .contactDiv {
+        /* Ta bort? */
         position: absolute;
         left: -100%;
+
+
         top: 90px;
         flex-direction: column;
         align-items: flex-start;
 
-        background-color: white;
-        width: 170px;
+        background-color: #EDEDE9;
+        /* width: 170px; */
         object-fit: contain;
 
         transition: 0.3s;
-        padding: 10px;
+        padding-left: 5px;
     }
 
     .nav-item {        
-        margin: 16px 0;
+        margin-top: 10px;
+        border-bottom: solid 1px black;
     }
 
     .contactDiv.active {
@@ -358,16 +372,18 @@ a {
     }
     
     .qty {
-        top: 38px;
-        right: 37px;
+        right: 53px;
+        top: 40px;
     }
 
     .qtyAdmin {
-        right: 100px;
+        right: 123px;
+        top: 42px;
     }
 
     .qtyCustomer {
-        right: 97px;
+        right: 122px;
+        top: 42px;
     }
 
     .logoFooter img {
@@ -397,6 +413,11 @@ a {
         padding-bottom: 7px;
         font-size: 12px;
     }
+
+    .loggedInUser p {
+        font-size: 10px;
+    }
+
 }
  
 
@@ -415,42 +436,48 @@ a {
         width: 100%;
     }
 
-
     #accountIcon {
-        height: 22px;
-        width: 22px;    
+        height: 23px;
+        width: 23px;    
     }
 
     #cartIcon {
-        height: 20px;
-        width: 20px;    
+        height: 21px;
+        width: 21px;    
     }
 
     #logOutIcon {
-        height: 22px;
-        width: 22px;
+        height: 23px;
+        width: 23px;
+    }
+
+    #adminIcon {
+        height: 23px;
+        width: 23px; 
     }
 
     #orderIcon {
-        height: 22px;
-        width: 22px;
+        height: 23px;
+        width: 23px;
     }
 
     .bar {
-        display: block;
         width: 30px;
-        height: 3px;
-        margin: 5px auto;
+        height: 2px;
+        margin: 6px auto;
     }
+
+    /* Se över krysset.... */
     .hamburger.active .bar:nth-child(1) {
         transform: translateY(8px) rotate(45deg)
     }
+
     .hamburger.active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
     }
 
     .logoFooter img {
-        max-width: 110px;
+        max-width: 120px;
         padding-left: 0px;
     }
 
@@ -460,14 +487,18 @@ a {
     }
 
     .qty {
-        right: 32px;
+        right: 52px;
+        top: 43px;
     }
+
     .qtyAdmin {
-        right: 87px;
+        right: 115px;
+        top: 43px;
     }
 
     .qtyCustomer {
-        right: 87px;
+        right: 115px;
+        top: 43px;
     }
 
 }
@@ -476,7 +507,7 @@ a {
 @media screen and (max-width: 480px) { 
 
     .logoHeader img {
-        max-width: 100px;
+        max-width: 145px;
     }    
 
     .logoFooter img {
@@ -484,32 +515,95 @@ a {
     }
 
     .allIcons {
-        padding-right: 5px; 
+        padding-right: 20px;
+    }
+
+    .hamburgerMenu {
+        padding-left: 20px;
     }
 
     .qty {
-        right: 15px;
+        right: 32px;
+        top: 43px;
     }
 
     .qtyAdmin {
-        right: 73px;
+        right: 95px;
+        top: 43px;
     }
 
     .qtyCustomer {
-        right: 73px;
-    }
+        right: 95px;
+        top: 43px;
+    } 
+
 
 }
 
 
-@media screen and (max-width:320px) { 
+@media screen and (max-width:380px) { 
     
     .logoHeader img {
-        max-width: 110px;
+        max-width: 115px;
     }        
 
     .logoFooter img {
         width: 110px;
     }
+
+    .bar {
+        width: 25px;
+        height: 2px;
+        margin: 5px auto;
+    }
+
+    #cartIcon {
+        height: 19px;
+        width: 19px;    
+    }
+
+    #logOutIcon {
+        height: 21px;
+        width: 21px;
+    }
+
+    #adminIcon {
+        height: 21px;
+        width: 21px; 
+    }
+
+    #orderIcon {
+        height: 21px;
+        width: 21px;
+    }
+
+    .icons {
+        margin-top: 0px;
+        gap: 0px 3px;
+    }
+
+    .qtyAdmin {
+        right: 86px;
+        top: 43px;
+    }
+
+    .qtyCustomer {
+        right: 86px;
+        top: 43px;
+    } 
+
+
+}
+
+@media screen and (max-width:380px) { 
+    
+    .logoHeader img {
+        max-width: 105px;
+    }        
+
+    .logoFooter img {
+        width: 100px;
+    }
+
 
 }

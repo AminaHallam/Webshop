@@ -1,19 +1,27 @@
 import {openMenu, getAllCategories, burger} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'  // checka verifyadmin och getuser
+import {makeRequest, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'  // checka verifyadmin och getuser
 
-const myPage = document.querySelector(".myPage")
-const buttonCA = document.querySelector(".buttonCA")
+
 const loginForm = document.querySelector("#login")
 const createAccountForm = document.querySelector("#createAccount")
 
 
 async function onLoad() {
+    await accountCheck();
     await showCorrectLayout();
     await printNrOfElements();
     await getAllCategories();
     burger();
 }
 
+async function accountCheck() {
+
+    let allowed = await getUser();
+    if(allowed) {
+        location.href = "./../index.html";
+        return
+    }
+}
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)
@@ -39,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-/* Logga in */
+// log in function
 document.querySelector(".button").addEventListener("click", loginUser)
 
 async function loginUser(e) {
@@ -188,7 +196,7 @@ e.preventDefault();
 
 
 
-    //POST till userReciever
+    //POST to userReciever
     const userToAdd = {
         FirstName: registerFirstname,
         LastName: registerLastname,
@@ -361,64 +369,7 @@ function validateRegistrationFormMobile() {
         return true; 
     }
 }
-   /*  let lastName = document.forms["registrationForm"]["lastName"].value;
-
-    if (lastName == "" || x == null) {
-        //alert("Lastname must be filled out");
-        return false;
-      }
-
-      let street = document.forms["registrationForm"]["street"].value;
-
-      if (street == "" || x == null) {
-          //alert("Street must be filled out");
-          return false;
-        }
-        let zipCode = document.forms["registrationForm"]["zipcode"].value;
-
-        if (zipCode == "" || x == null) {
-            //alert("Zipcode must be filled out");
-            return false;
-          }
-        
-          let city = document.forms["registrationForm"]["city"].value;
-
-          if (city == "" || x == null) {
-              //alert("Please enter city");
-              return false;
-            }
-
-            let country = document.forms["registrationForm"]["country"].value;
-
-            if (country == "" || x == null) {
-                //alert("Country must be filled out");
-                return false;
-              }
-
-              let email = document.forms["registrationForm"]["email"].value;
-
-              if (email == "" || x == null) {
-                  //alert("Email must be filled out");
-                  return false;
-                }
-
-                let countryCode = document.forms["registrationForm"]["countrycode"].value;
-
-                if (countryCode == "" || x == null) {
-                    //alert("Countrycode must be filled out");
-                    return false;
-                  }
-
-                  let mobile = document.forms["registrationForm"]["mobileNumber"].value;
-
-                  if (mobile == "" || x == null) {
-                      //alert("Mobile number must be filled out");
-                      return false;
-                    }
-
-                   
-                 */
-
+       
   
 
 

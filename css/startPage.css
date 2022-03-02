@@ -18,6 +18,7 @@ main {
   background-color: white;
 	height: 70vh;
   padding: 2rem;
+  margin-top: 20px;
 
 	scroll-snap-type: both mandatory;
 	scroll-padding: 1rem;
@@ -83,7 +84,7 @@ main {
     transform: translate(-50%, -50%);
   }
 
-.h1 {
+.headerNews {
   display: inline-block;
   text-align: center;
   width: 100%;
@@ -95,7 +96,6 @@ main {
   display: block;
   width: 100%;
   overflow-y: auto;
-  /* overflow:auto; */
   padding: 40px 40px;
   background-color: #EDEDE9;
   cursor: pointer;
@@ -122,6 +122,52 @@ main {
   min-height: 300px;
 }
 
+.wellcomeHeader {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  font-size: 20px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.collectionHeader {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.collectionContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+/*   padding: 40px; */
+  flex-wrap: wrap;
+}
+
+.productContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 40px;
+/*   justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 25%; */
+} 
+
+.collectionImage {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -138,7 +184,6 @@ p {
 
 form {
   position: relative;
-  font-family: Arial;
   padding: 20px;
   background-color: #f5ebe0;
 }
@@ -263,20 +308,15 @@ input[type=submit]:hover {
 @media screen and (max-width:800px) {
 
   .gallery {
-    padding-bottom: 2rem;
-    height: 45vh;
+    padding-top: 0rem;
+    padding-bottom: 2rem; 
+    height: 55vh;
   }
 
   .textContainer {
     flex-direction: column;
   }
 
-/*   .imageScroller img {
-    width: 200px; 
-    max-height: 200px;
-    min-height: 200px;
-  }
- */
 }
 
 @media screen and (max-width:760px) { 
@@ -295,12 +335,13 @@ input[type=submit]:hover {
 
 
 @media screen and (max-width:700px) {
+  
   #photo1 {
     background-image:url("./../assets/womanEveryoneKnowsThePrice.JPG");
     background-size: cover;
     height: 100%;
     width: 100%
-}
+  }
 
 }
 
@@ -317,12 +358,12 @@ input[type=submit]:hover {
     text-align: center;
   }
 
+  .imageScroller img {
+    max-height: 230px;
+    min-height: 230px;
+  }
 
-}
 
-
-
-/* smartphones, Android phones, landscape iPhone */
 @media screen and (max-width: 540px) { 
  
   .textAbout {
@@ -336,17 +377,21 @@ input[type=submit]:hover {
     flex-direction: column;
   }
 
-}
-
-
+  .imageScroller img { 
+    max-height: 220px;
+    min-height: 220px;
+  }
+     
 
 @media screen and (max-width:380px) {
-  
-
   
   .imageScroller img { 
     max-height: 200px;
     min-height: 200px;
   }
-     
+
+}
+
+@media screen and (max-width:380px) {
+    
 }
