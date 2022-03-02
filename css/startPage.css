@@ -17,8 +17,7 @@ main {
 
   background-color: white;
 	height: 70vh;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding: 2rem;
   margin-top: 20px;
 
 	scroll-snap-type: both mandatory;
