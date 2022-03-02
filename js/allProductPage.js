@@ -29,7 +29,8 @@ async function renderProducts(list){
     const main = document.getElementsByTagName("main")[0]; 
     let allproductsDiv = document.createElement("div")
     allproductsDiv.classList.add("allproductsDiv")
-    let titleOfAllProducts = document.createElement("div")
+    
+    let titleOfAllProducts = document.createElement("h2")
     titleOfAllProducts.classList.add("titleOfAllProducts")
     titleOfAllProducts.innerText = "All Products"
     
