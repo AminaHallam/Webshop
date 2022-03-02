@@ -99,21 +99,22 @@ async function renderCart() {
         let ajustQty = document.createElement("div")
         ajustQty.classList.add("ajustQty")
 
-        let removeButton = document.createElement("div")
-        removeButton.classList.add("removeProduct")
-        removeButton.innerHTML = '<img src="./assets/icons/delete.png" alt="Trash Icon">'
-        removeButton.addEventListener("click", () => {removeItem(cartItem.Id)})
-
+        
         let deleteQty = document.createElement("div")
         deleteQty.classList.add("ajustBoxes")
         deleteQty.innerText = "-"
         deleteQty.addEventListener("click", () => {deleteProduct(cartItem.Id)})
-
+        
         let addQty = document.createElement("div")
         addQty.classList.add("addQty")
         addQty.classList.add("ajustBoxes")
         addQty.innerText = "+"
         addQty.addEventListener("click", () => {addProduct(cartItem.Id)})
+        
+        let removeButton = document.createElement("div")
+        removeButton.classList.add("removeProduct")
+        removeButton.innerHTML = '<img src="./assets/icons/delete.png" alt="Trash Icon">'
+        removeButton.addEventListener("click", () => {removeItem(cartItem.Id)})
 
         let unitQty = document.createElement("p")
         unitQty.innerHTML = cartItem.quantity + " pcs"
@@ -142,10 +143,8 @@ async function renderCart() {
         cartContainer.append(itemContainer)
         itemContainer.append(image, infoContainer)
         infoContainer.append(title, unitPrice, priceContainer, ajustQty, totalPrice)
-
-        //priceContainer.append(ajustQty, totalPrice)
+        
         ajustQty.append(deleteQty, unitQty, addQty, removeButton)
-        ajustQty.append(deleteQty, unitQty, addQty)
 
     }
 
