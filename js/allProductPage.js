@@ -1,6 +1,7 @@
 import {openMenu, getAllCategories, burger} from './../helperFunctions/renderHelper.js'
 import {makeRequest, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
 
+
 async function onLoad() {
     await showCorrectLayout();
     await printNrOfElements();
