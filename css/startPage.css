@@ -1,3 +1,9 @@
+*{
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px; 
+}
+
 main {
   width: 100%;
   height: 100%;
@@ -7,77 +13,22 @@ main {
   flex-wrap: wrap;
 }
 
-.gallery {
-	display: grid;
-	grid-template-columns: repeat(10, 80vw);
-	grid-template-rows: 1fr;
-	grid-column-gap: 2rem;
-	grid-row-gap: 2rem;
-	overflow: scroll;
-
-  background-color: white;
-	height: 70vh;
-  padding: 2rem;
+.headerPicture {
+  width: 100%;
+	height: 400px;
   margin-top: 20px;
-
-	scroll-snap-type: both mandatory;
-	scroll-padding: 1rem;
-  object-fit: scale-down;
-  cursor: pointer;
-  margin-top: 35px;
 }
 
-.gallery::-webkit-scrollbar {
-  display: none;
-}
-
-.active {
-	scroll-snap-type: unset;
-}
-
-.carousel {
-	scroll-snap-align: center;
-	display: inline-block;
-	border-radius: 3px;
-	font-size: 0;
-}
-
-#photo1 {
-    background-image:url("./../assets/womanStrongBianca2.jpg");
-    background-size: cover;
+.photo1 {
+    background: url("../assets/womanStrongBianca2.jpg"); 
+    background-position: top;
+    width: 100%; 
     height: 100%;
-    width: 100%
+    margin-top: 20px;
+    object-fit: cover;
+    top: 40px;
+
 }
-
-#photo2 {
-    background-image:url("./../assets/womanStrong.jpg");
-    background-size: cover;
-   
-    object-fit: scale-down;
-}
-
-#photo3 {
-  background-image:url("./../assets/wildAnt.png");
-  background-size: cover;
-  height: 100%;
-  width: 100%
-}
-
-#photo4 {
-    background-image:url("./../assets/womanToTheMoonAndBack.JPG");
-    background-size: cover;
-    height: 100%;
-    width: 100%
-}
-
-#photo5 {
-  background-image:url("./../assets/abTheseTimes.png");
-  background-size: cover;
-  height: 100%;
-  width: 100%
-}
-
-
 
 .headerNews {
   display: inline-block;
@@ -312,8 +263,10 @@ input[type=submit]:hover {
 }
 
 @media screen and (max-width:1050px) {
-  .gallery {
-    height: 65vh;
+ 
+  .photo1 {
+    background-position: unset;
+    background-size: cover;
   }
 
   .imageScroller img {
@@ -323,22 +276,25 @@ input[type=submit]:hover {
   }
 }
 
-@media screen and (max-width:1000px) {
-  .gallery {margin-top: 0;
+@media screen and (max-width:900px) {
+  
+  .qtyCustomer {
+    right: 136px;
+
   }
+
+
 }
 
 @media screen and (max-width:800px) {
 
-  .gallery {
-    padding-top: 0rem;
-    padding-bottom: 2rem; 
-    height: 55vh;
+  .headerPicture, .photo1 {
+    margin-top: 0px;
   }
 
   .textContainer {
     flex-direction: column;
-  }
+  } 
 
 }
 
@@ -354,16 +310,18 @@ input[type=submit]:hover {
     font-size: 15px;
   }
 
+  .headerPicture, .photo1 {
+    margin-top: 0px;
+  }
+
+
 }
 
 
 @media screen and (max-width:700px) {
   
-  #photo1 {
-    background-image:url("./../assets/womanEveryoneKnowsThePrice.JPG");
-    background-size: cover;
-    height: 100%;
-    width: 100%
+  .headerPicture, .photo1 {
+    margin-top: 0px;
   }
 
 }
@@ -385,7 +343,32 @@ input[type=submit]:hover {
     max-height: 230px;
     min-height: 230px;
   }
+
+
+  .headerPicture, .photo1 {
+    margin-top: 0px;
+  }
+
+  .qtyCustomer {
+    right: 136px;
+
+  }
+
 }
+
+@media screen and (max-width: 600px) { 
+
+  .qtyCustomer {
+    right: 128px;
+
+  }
+
+  .photo1 {
+    background-position: right;
+  }
+
+}
+
 
 @media screen and (max-width: 540px) { 
  
@@ -404,6 +387,25 @@ input[type=submit]:hover {
     max-height: 220px;
     min-height: 220px;
   }
+
+  .headerPicture, .photo1 {
+    margin-top: 0px;
+  }
+
+}
+
+@media screen and (max-width: 480px) { 
+
+  .qtyCustomer {
+    right: 108px;
+
+  }
+
+  .photo1 {
+    background-position: center;
+  }
+
+}
      
 
 @media screen and (max-width:380px) {
@@ -413,8 +415,44 @@ input[type=submit]:hover {
     min-height: 200px;
   }
 
+  .headerPicture, .photo1 {
+    margin-top: 0px;
+  }
+
+  .qtyCustomer {
+    right: 97px; 
+  }
+
+  .qtyAdmin {
+    right: 97px;
+
+  }
+
+  .logoHeader {
+    max-width: 100px;
+  }
+
+  .icons {
+    gap: 0px 5px; 
+  }
+  
 }
 
-@media screen and (max-width:380px) {
+@media screen and (max-width:280px) { 
     
-}
+  .adminIcons {
+      gap: 0px 5px; 
+
+  }
+
+  .qtyAdmin {
+      right: 88px;
+  }
+
+  .qtyCustomer {
+    right: 88px; 
+  }
+
+ 
+
+} 
