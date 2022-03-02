@@ -1,5 +1,5 @@
 import {openMenu, getAllCategories, burger} from '.././helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from '.././helperFunctions/fetchHelper.js'  // checka verifyadmin
+import {makeRequest, getUser, showCorrectLayout, logOut, printNrOfElements} from '.././helperFunctions/fetchHelper.js'  // checka verifyadmin
 
 document.querySelector(".logOut").addEventListener("click", logOut)
 

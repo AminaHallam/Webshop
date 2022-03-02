@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-/* Logga in */
+// log in function
 document.querySelector(".button").addEventListener("click", loginUser)
 
 async function loginUser(e) {
@@ -197,7 +197,7 @@ e.preventDefault();
 
 
 
-    //POST till userReciever
+    //POST to userReciever
     const userToAdd = {
         FirstName: registerFirstname,
         LastName: registerLastname,
@@ -370,64 +370,7 @@ function validateRegistrationFormMobile() {
         return true; 
     }
 }
-   /*  let lastName = document.forms["registrationForm"]["lastName"].value;
-
-    if (lastName == "" || x == null) {
-        //alert("Lastname must be filled out");
-        return false;
-      }
-
-      let street = document.forms["registrationForm"]["street"].value;
-
-      if (street == "" || x == null) {
-          //alert("Street must be filled out");
-          return false;
-        }
-        let zipCode = document.forms["registrationForm"]["zipcode"].value;
-
-        if (zipCode == "" || x == null) {
-            //alert("Zipcode must be filled out");
-            return false;
-          }
-        
-          let city = document.forms["registrationForm"]["city"].value;
-
-          if (city == "" || x == null) {
-              //alert("Please enter city");
-              return false;
-            }
-
-            let country = document.forms["registrationForm"]["country"].value;
-
-            if (country == "" || x == null) {
-                //alert("Country must be filled out");
-                return false;
-              }
-
-              let email = document.forms["registrationForm"]["email"].value;
-
-              if (email == "" || x == null) {
-                  //alert("Email must be filled out");
-                  return false;
-                }
-
-                let countryCode = document.forms["registrationForm"]["countrycode"].value;
-
-                if (countryCode == "" || x == null) {
-                    //alert("Countrycode must be filled out");
-                    return false;
-                  }
-
-                  let mobile = document.forms["registrationForm"]["mobileNumber"].value;
-
-                  if (mobile == "" || x == null) {
-                      //alert("Mobile number must be filled out");
-                      return false;
-                    }
-
-                   
-                 */
-
+       
   
 
 
