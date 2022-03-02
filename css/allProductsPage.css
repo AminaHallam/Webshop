@@ -1,6 +1,3 @@
-main {
-    
-}
 
 
 .allproductsDiv {
@@ -9,7 +6,6 @@ flex-direction: row;
 flex-wrap: wrap;
 justify-content: center;
 text-align: center;
-padding-bottom: 10%;
 }
 
 .productTitle {
@@ -19,18 +15,21 @@ padding-bottom: 10%;
 }
 
 .titleOfAllProducts {
+
     display: flex;
     width: 100%;
     justify-content: center;
     align-items: center;
-    margin: 0px;
-    font-size: 40px;
-    padding-top: 95px;
+    margin-top: 25px;
+    font-size: 3.5em;
+    padding-top: 60px;
     padding-bottom: 40px;
 }
 
 
+
 .productContainer {
+
     display: flex;
     flex-direction: column;
     margin: 40px;
@@ -50,12 +49,6 @@ p {
     margin-top:10px;
 }
 
-@media only screen and (max-width: 1000px) {
-    .titleOfAllProducts {
-        padding-top: 60px;
-    }
-}
-
 @media only screen and (max-width: 950px) {
     .productTitle {
       font-size: 16px;
@@ -69,9 +62,6 @@ p {
     .collectionPageImage {
         height: 250px;
 }
-    .titleOfAllProducts {
-        padding-top: 50px;
-    }
 }
 
 @media only screen and (max-width: 873px) {
@@ -130,16 +120,6 @@ p {
     .productTitle {
         width: 150px;
     }
-    .collectionImage {
-        width: 200px;
-}
-.titleOfAllProducts {
-    padding-top: 20px;
-    padding-bottom: 30px;
-}
-.productContainer {
-    height: 350px;
-}
 }
 
 
