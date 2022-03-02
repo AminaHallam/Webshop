@@ -501,6 +501,11 @@ async function getCustomerOrderDetail(id){
 
 async function markOrderAsRecieved(orderId){
 
+    let user = await getUser();
+    if(!user) {
+        return
+    }
+
     let body = new FormData(); 
     body.append("statusId", "CREC")
     body.append("orderId", orderId)
