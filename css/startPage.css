@@ -30,7 +30,6 @@ main {
 
 }
 
-
 .headerNews {
   display: inline-block;
   text-align: center;
@@ -69,7 +68,7 @@ main {
   min-height: 300px;
 }
 
-.wellcomeHeader {
+.welcomeHeader {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -97,22 +96,50 @@ main {
 
 /*   padding: 40px; */
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: blue;
+}
+
+
+.secondCollectionContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+
+/*   padding: 40px; */
+  flex-wrap: wrap;
+  padding-bottom: 40px;
 }
 
 .productContainer {
   display: flex;
-  flex-direction: column;
+ 
   margin: 40px;
-/*   justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  width: 25%; */
+ justify-content: center;
+ 
 } 
+
+.secondProductContainer {
+
+  display:flex;
+  
+
+}
 
 .collectionImage {
   width: 100%;
   height: 400px;
   object-fit: contain;
+  margin: 5px;
 }
 
 .container {
@@ -316,6 +343,7 @@ input[type=submit]:hover {
     max-height: 230px;
     min-height: 230px;
   }
+
 
   .headerPicture, .photo1 {
     margin-top: 0px;
