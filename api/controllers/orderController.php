@@ -135,8 +135,10 @@ class OrderController extends MainController {
 
         $specificOrder = $this->getById($orderId); 
 
-        $updateReceivedOrder = createOrder($specificOrder->Id, $statusId, $specificOrder->UserId, $specificOrder->CourrierId, $specificOrder->RegisterDate, null, date('Y-m-d H:i:s'));   
-        error_log(serialize($updateReceivedOrder));
+        $updateReceivedOrder = createOrder($specificOrder->Id, $statusId, $specificOrder->UserId, $specificOrder->CourrierId, $specificOrder->RegisterDate, $specificOrder->ShippingDate, date('Y-m-d H:i:s'));   
+        
+       
+
         unset($updateReceivedOrder->products);
         unset($updateReceivedOrder->user);
         unset($updateReceivedOrder->courrier);
