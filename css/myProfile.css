@@ -8,6 +8,10 @@ h2 {
   margin-bottom: 30px;
 }
 
+main {
+  width: 100%;
+  height: 100%;
+}
 
 .updateQty, .modifyCategory, .overviewOrders, .overviewCustomerOrders, .createNewsletter, .subscribers, .addDeleteProduct, .orderDetail, .orderDetailsCustomer {
     padding: 40px;
@@ -19,6 +23,22 @@ h2 {
     border-radius: 10px;
     height: auto;
 
+}
+
+.filter {
+  font-size: 12px;
+    height: 20px;
+    margin: 2px;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 35px;
+}
+
+.filterBtn {
+  font-size: 12px; 
+  height: 20px;
+  margin: 2px;
+  width: 100px;
 }
 
 
@@ -37,7 +57,7 @@ h3 {
 .containerForOrders, .row {
   display: flex;
   flex-direction: row;
-  width: 80vw;
+  flex-basis: 0;
   justify-content: space-between;
   height: 24px;
 }
@@ -76,8 +96,8 @@ h3 {
     flex-direction: column;
     /* margin-left: 5%; */
     /* margin-right: 5%; */
-    width: 100vw;
-    margin: 3%;
+    width: 100%;
+    
     background-color: #eee8e3;
     border-radius: 10px;
     height: auto;
@@ -97,23 +117,26 @@ h3 {
 }
 
 .o0, .o1{
-  width: 70px;
+  flex-grow: 1;
+  flex-basis: 0;
 }
 
 .o2, .o3, .o4 {
-  width: 170px;
+  flex-grow: 3;
+  flex-basis: 0;
 }
 
 .c0, .c1 {
-  width: 70px;
+  flex-grow: 1;
+  flex-basis: 0;
 }
 
 .c3, .c4, .c2 {
-  width: 170px;
+  flex-grow: 3;
+  flex-basis: 0;
 }
 
 .cell {
-  /* width: 120px; */
   font-size: 12px;
   text-align: center;
 }
@@ -295,7 +318,7 @@ button, .orderButton, #sendNews {
 
 .newsletter {
   display:flex; 
-  width: 80vw;
+  width: 80%;
 }
 
 
@@ -319,26 +342,20 @@ button, .orderButton, #sendNews {
  
 }
 
-
-
 .firstNameSub, .emailSub {
   display: flex;
-  
   padding: 0, 10px;
   margin-top: 10px;
-  margin: 20px;
+  margin-left: 0px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
-
-
-
-
 
 .content {
   height: 150px;
   width: 150px; 
   margin: 2px; 
 }
-
 
 .none {
   display: none;
@@ -363,7 +380,6 @@ option {
 
   .filter {
     display: flex;
-    flex-wrap: wrap;
     gap: 10px;
   }
 
@@ -387,14 +403,23 @@ option {
     width: 40px !important;
   }
 
-  .createNewsletter {
-    width: 88vw;
-  }
+ 
   .overviewOrders {
     margin-left: 5%;
     margin-right: 5%;
-    width: 95vw;
+    width: 90%;
 }
+.o5 {
+  width: 40px;
+}
+.filterBtn {
+  width: 70px;
+  font-size: 10px;
+}
+.filter {
+  font-size: 11px;
+  gap: 5px;
+  }
 }
 
 @media only screen and (max-width: 540px) {
@@ -404,21 +429,123 @@ option {
     font-size: 6px !important;
   }
   .cell {
-    font-size: 7px;
+    font-size: 8px;
   }
   .orderHeader {
     font-size: 8px;
   }
 
   .newsletter {
-    width: 100vw;
+    width: 100%;
   }
+  .filter {
+    font-size: 10px;
+    gap: 2px;
+    margin-bottom: 15px;
+    }
+    .overviewOrders {
+      padding: 20px;
+    }
+    .modifyCategory {
+      font-size: 13px;
+    }
+    .updateQty {
+      font-size: 13px;
+    }
+
+
+    .toggle, .toggle2, .toggle3, .toggle4, .toggle5, .toggle6 {
+      font-size: 16px;
+    }
+    .createNewsletter {
+      margin: 8px;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+  .filterBtn {
+    width: 40px;
+    font-size: 6px;
+    height: 20px !important;
+  }
+  .cell {
+    font-size: 8px;
+  }
+  .orderHeader {
+    font-size: 8px;
+  }
+  .filter { 
+    font-size: 9px;
+  }
+  .getProductButton {
+    width: 80px !important;
+    font-size: 10px;
+    padding: 2px;
+  }
+  .productId {
+    width: 50px !important;
+    font-size: 10px;
+    padding: 2px;
+    height: 40px;
+  }
+  
+  .getProductWithCategoryButton {
+    width: 80px !important;
+    font-size: 10px;
+    padding: 2px;
+  }
+
+
+  .getId {
+    width: 50px !important;
+    font-size: 10px;
+    padding: 2px;
+    height: 40px;
+  }
+ 
+  
 }
 
 @media only screen and (max-width: 400px) {
   .overviewOrders {
     margin-left: 2px;
     margin-right: 2px;
+    width: 100%;
+    margin: 5px;
+    padding: 0;
+    padding: 3px;
   }
+  
+  .subscribers {
+    padding: 10px;
+  }
+
+  #subscriberFirstname, #subscriberEmail {
+    font-size: 16px;
+  }
+  .firstNameSub, .emailSub {
+    display: flex;
+    margin-top: 20px;
+    margin-right: 30px;
+  }
+}
+ 
+  @media only screen and (max-width: 330px) {
+  .updateQty {
+    padding: 10px;
+  }
+  .modifyCategory {
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+.toggle, .toggle2, .toggle3, .toggle4, .toggle5, .toggle6 {
+  font-size: 14px;
+}
+.filter {
+  font-size: 7px;
+} 
+
 }
 
