@@ -11,30 +11,24 @@ async function onLoad() {
     await whichPageToDisplay();
     await getAllCategories();
     await renderSubscribers();
-
-    //getOrderDetails(); 
-
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const id = urlParams.get("id");
-    myprofilePage(id);
     burger();
 }
 
 async function accountCheck() {
 
     let allowed = await getUser();
-
     if(!allowed) {
-
         location.href = "./../login.html";
-
         return
     }
 }
 
 async function getAllLoggedInSubscribers(){
+    let admin = await verifyAdmin(); 
 
+    if(!admin) {
+       return
+    }  
     const action = "getAllLoggedInSubscribers";
 
     let allSubscribers = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php?action=${action}`, "GET")
@@ -44,65 +38,7 @@ async function getAllLoggedInSubscribers(){
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut);
-document.getElementById("sendNews").addEventListener("click", addSubscriptionNews); 
 
-
-
-
-async function addSubscriptionNews(e) {
-
-    e.preventDefault();
-    const action = "addSubscriptionNews";
-
-    let registerFirstname = document.getElementById("firstNameNews").value
-    let registerEmail = document.getElementById("emailNews").value
-    
-    const subscriber = {
-        FirstName: registerFirstname,
-        Email: registerEmail,
-    }
-
-   
-   
-    var body = new FormData()
-    body.append("action", action)
-    body.append("subscriber", JSON.stringify(subscriber))
- 
-
-    let getLoggedInUser = await getUser(); 
-   
-    if(getLoggedInUser){
-        var body = new FormData()
-        body.append("action", action)
-        
-        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
-
-        if(!status) {
-            alert("You are already a subscriber")
-        } else {
-
-            alert("Welcome our new subscriber")
-
-        }
-
-
-    }else{
-        
-        let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
-        
-        if(!checkSubscription) {
-
-            alert("You are already a subscriber")
-    
-         } else { 
-
-             alert("Welcome our new subscriber")
-
-         }
-    
-    }
-
-}
 
 
 async function whichPageToDisplay() {
@@ -117,17 +53,17 @@ async function whichPageToDisplay() {
         overviewUnitsInStock()
         overviewCategory() 
         filterButton()
+        let user = await getUser();
+        let userId = user.Id; 
+        myOrders(userId, 'User');
 
    } else {
         document.querySelector(".adminLayout").classList.add("none")
         document.querySelector('.customerLayout').classList.remove('none')
         let user = await getUser();
-       
         let userId = user.Id; 
         myOrders(userId, 'User');
-        //console.log(order)
 
-       
    } 
 
 }
@@ -135,30 +71,22 @@ async function whichPageToDisplay() {
 
 
 
-async function myOrders(id, type) {
-    const action = "getByOtherId";
-    let specificOther = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}&type=${type}`, "GET")
-    let user = await getUser(); 
-    renderOrders(specificOther, user)
-}
 
 
 
-    //Hämtar ut alla ordrar
-    async function myprofilePage() {
-    /* const action = "getAll";
-    let order = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET");
+
+
+/* OVERVIEW ORDERS */
+
+async function filterButton() { 
+
     let admin = await verifyAdmin(); 
-    if(admin){
-    renderOrders(order, admin);
-    } */
 
-    
-  }
+    if(!admin) {
+       return
+    }  
 
 
-
-async function filterButton() {
     let filter = document.querySelector('.filter')
     const action = "getAll";
     let orderStatus = await makeRequest(`./../api/receivers/orderStatusReceiver.php?action=${action}`, "GET");
@@ -169,9 +97,13 @@ async function filterButton() {
         const action = "getAll";
         let order = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET");
         let admin = await verifyAdmin(); 
-        if(admin){
-            renderOrders(order, admin);
-    }})
+        if(!admin) {
+            return
+        }  
+
+        renderOrders(order, admin);
+        
+    })
 
     filter.append(buttonForAll)
 
@@ -194,29 +126,24 @@ async function filterButton() {
 async function filterOrders(id, type) {
     const action = "getByOtherId";
     let specificOther = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}&type=${type}`, "GET")
-    let admin = await verifyAdmin();
     
-    renderOrders(specificOther, admin)
+    renderOrders(specificOther)
 }
-
 
 
 let orderContainer = document.createElement("div")
 let headerRow = document.createElement("div");
 
-async function renderOrders(list, check) {
+async function renderOrders(list) {
 
     let admin = await verifyAdmin(); 
-    let user = await getUser();
 
-
-    if(!check) {
+    if(!admin) {
        return
     }  
 
   
     let bigContainer = document.getElementsByClassName("overviewOrders")[0];
-    let bigContainerCust = document.getElementsByClassName("overviewCustomerOrders")[0];
 
     let headers = [
         "Id",
@@ -226,7 +153,6 @@ async function renderOrders(list, check) {
         "Rec-Date",
         ""
     ];
-    
     
     orderContainer.classList.add("orderContainer")
     bigContainer.append(orderContainer)
@@ -254,27 +180,19 @@ async function renderOrders(list, check) {
         const orderValues = Object.values(order);
         
         let orderButton = document.createElement('button')
-        let admin = await verifyAdmin(); 
-        let user = await getUser(); 
-        if(admin){
-
+       
         orderButton.addEventListener("click", () => {
             getOrderDetails(order.Id, admin)
             
         })
-        }else if(user){
-                orderButton.addEventListener("click", () => {
-                    getCustomerOrderDetail(order.Id)
-        }
 
-
-                )}
+   
         orderButton.classList.add('orderButton')
         orderButton.innerText = "To Order"
         orderValues.splice(7, 4) 
         orderValues.splice(2, 2) 
 
-        
+   
         
         for (let i = 0; i < orderValues.length; i++) {
             const orderDetail = orderValues[i]
@@ -287,79 +205,22 @@ async function renderOrders(list, check) {
             row.append(cell, orderButton)
            
         }
-        if(admin){
         orderContainer.appendChild(row)
-        }else if(user){
-            bigContainerCust.appendChild(row)
-        }
-    } 
-    
+    }
 }
 
-async function getCustomerOrderDetail(id){
-
-/* if(!check) {
-    return
-}  */
-
-const action = "getById"; 
-
-let orderDetailsList = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}`, "GET"); 
 
 
+async function getOrderDetails(id) {
 
-let showOrderDetail = document.querySelector(".orderDetailsCustomer")
-showOrderDetail.classList.toggle("none")
-
-let orderHeader = document.createElement("h2")
-orderHeader.innerHTML = "Order Details"
-showOrderDetail.innerHTML = ""
-
-showOrderDetail.append(orderHeader)
-
-let leftBox = document.createElement("div")
-leftBox.classList.add("leftBox")
-
-let rightBox = document.createElement("div")
-rightBox.classList.add("rightBox")
-showOrderDetail.append(leftBox)
-
-let orderId = orderDetailsList.Id
-
-orderDetailsList.orderStatus.forEach(orderStatus => {
-
-    let orderDetails = document.createElement("div")
-    orderDetails.classList.add("orderDetails")
-    orderDetails.innerHTML = "<h3>Order status</h3>" + "Order with id: " + orderDetailsList.Id + " - " + orderStatus.Status + "  "
-
-    let sendOrderButton = document.createElement("button")
-    sendOrderButton.classList.add("orderupdated")
-    sendOrderButton.innerText = " Mark order as recieved"
-    sendOrderButton.addEventListener("click", () => {
-       
-        markOrderAsRecieved(orderId)
-
-    })
-
-    leftBox.append(orderDetails)
-    orderDetails.append(sendOrderButton)
-})
-}
-// render orderList By id 
-
-async function getOrderDetails(id, check) {
-
-
- 
-    if(!check) {
+    let checkAdmin = await verifyAdmin();
+    if(!checkAdmin) {
         return
-    } 
+    }
     
     const action = "getById"; 
     
     let orderDetailsList = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}`, "GET"); 
-
-   
     
     let showOrderDetail = document.querySelector(".orderDetail")
     showOrderDetail.classList.toggle("none")
@@ -462,9 +323,149 @@ async function sendOrder(orderId) {
     } else {
         alert("The sending has failed!")
 
-
     }
 
+}
+
+
+
+
+/* MY ORDERS */
+
+
+async function myOrders(id, type) {
+    const action = "getByOtherId";
+    let specificOther = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}&type=${type}`, "GET")
+    let user = await getUser();
+    if(!user) {
+        return
+    }
+    renderMyOrders(specificOther)
+}
+
+
+async function renderMyOrders(list) {
+
+    let user = await getUser();
+    if(!user) {
+        return
+    }
+
+    let orderContainerC = document.createElement("div")
+    let headerRowC = document.createElement("div");
+    let bigContainerCust = document.getElementsByClassName("overviewCustomerOrders")[0];
+
+    let headers = [
+        "Id",
+        "StatusId",
+        "Reg-Date",
+        "Ship-Date",
+        "Rec-Date",
+        ""
+    ];
+    
+    orderContainerC.classList.add("orderContainer")
+    bigContainerCust.append(orderContainerC)
+    orderContainerC.innerHTML = "";
+    headerRowC.innerHTML = ""
+
+    
+    headerRowC.classList.add('containerForOrders')
+    orderContainerC.appendChild(headerRowC);
+    
+    
+    headers.forEach((headerText, index, headers) => {
+        let orderHeaderC = document.createElement("div");
+        orderHeaderC.classList.add('orderHeader')
+        orderHeaderC.classList.add('o'+index)
+        orderHeaderC.innerText = headerText;
+        headerRowC.appendChild(orderHeaderC);
+    });
+    
+    
+    for (let i = 0; i < list.length; i++) {
+        const orderC = list[i];
+        let rowC = document.createElement('div')
+        rowC.classList.add('row')
+        const orderValuesC = Object.values(orderC);
+        
+        let orderButtonC = document.createElement('button')
+
+        orderButtonC.addEventListener("click", () => {
+            getCustomerOrderDetail(orderC.Id)
+        
+        })
+
+        orderButtonC.classList.add('orderButton')
+        orderButtonC.innerText = "To Order"
+        orderValuesC.splice(7, 4) 
+        orderValuesC.splice(2, 2) 
+
+        
+        
+        for (let i = 0; i < orderValuesC.length; i++) {
+            const orderDetailC = orderValuesC[i]
+            let cellC = document.createElement('div')
+            cellC.classList.add('cell')
+            cellC.classList.add('c'+i)
+            
+            cellC.innerText = orderDetailC
+            
+            rowC.append(cellC, orderButtonC)
+           
+        }
+       
+            bigContainerCust.appendChild(rowC)
+    } 
+
+}
+
+async function getCustomerOrderDetail(id){
+    let user = await getUser();
+    if(!user) {
+        return
+    }
+
+    const action = "getById"; 
+
+    let orderDetailsListC = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${id}`, "GET"); 
+
+    let showOrderDetailC = document.querySelector(".orderDetailsCustomer")
+    showOrderDetailC.classList.toggle("none")
+
+    let orderHeaderC = document.createElement("h2")
+    orderHeaderC.innerHTML = "Order Details"
+    showOrderDetailC.innerHTML = ""
+
+    showOrderDetailC.append(orderHeaderC)
+
+    let leftBoxC = document.createElement("div")
+    leftBoxC.classList.add("leftBox")
+
+    let rightBoxC = document.createElement("div")
+    rightBoxC.classList.add("rightBox")
+    showOrderDetailC.append(leftBoxC)
+
+    let orderIdC = orderDetailsListC.Id
+
+    orderDetailsListC.orderStatus.forEach(orderStatus => {
+
+        let orderDetailsC = document.createElement("div")
+        orderDetailsC.classList.add("orderDetails")
+        orderDetailsC.innerHTML = "<h3>Order status</h3>" + "Order with id: " + orderDetailsListC.Id + " - " + orderStatus.Status + "  "
+
+        let sendOrderButtonC = document.createElement("button")
+        sendOrderButtonC.classList.add("orderupdated")
+        sendOrderButtonC.innerText = " Mark order as recieved"
+        sendOrderButtonC.addEventListener("click", () => {
+        
+            markOrderAsRecieved(orderIdC)
+
+        })
+
+        leftBoxC.append(orderDetailsC)
+        orderDetailsC.append(sendOrderButtonC)
+    })
 }
 
 
@@ -484,15 +485,18 @@ async function markOrderAsRecieved(orderId){
 
     } else {
         alert("Failed on update")
-
-
     }
 
 }
 
 
 
-// Update product buttons/links
+
+
+
+
+/* PRODUCT */
+
 document.querySelector(".updateProductButton").addEventListener("click", setQuantity)
 document.querySelector(".deleteQtyProductButton").addEventListener("click", () => {
     let deleteUnits =  document.querySelector(".deleteUnits").value
@@ -503,8 +507,6 @@ document.querySelector(".addQtyProductButton").addEventListener("click", () => {
     addQuantity(addUnits)})
 
 
-
-// Collapse 
 document.querySelector(".toggle").addEventListener("click", () => {
     let updateProduct = document.querySelector(".updateProduct")
     updateProduct.classList.toggle("menu")
@@ -555,44 +557,43 @@ async function getUnitsInStock() {
         overviewProduct.innerHTML = "";
     }
     
-        let productId =  document.querySelector(".productId").value
+    let productId =  document.querySelector(".productId").value
 
-        if(!productId){
-            alert("Product ID is missing, please try again");
-            return
-        }
+    if(!productId){
+        alert("Product ID is missing, please try again");
+        return
+    }
 
-        const product = products.find((product) => product.Id == productId)
+    const product = products.find((product) => product.Id == productId)
 
-        if(!product) {
-            alert("Product does not exist")
-            return
+    if(!product) {
+        alert("Product does not exist")
+        return
+    }
+    
+    for (let i = 0; i < products.length; i++) {
+    
+        const product = products[i];
+
+        if(product.Id == productId) {
+
+            let infoProductContainer = document.createElement("div")
+            infoProductContainer.classList.add("infoProductContainer")
+            let pId = document.createElement("p")
+            let pName = document.createElement("p")
+            let pQty = document.createElement("p")
+            let pImage = document.createElement("img")
+            pImage.classList.add("pImage")
+
+            pId.innerText = "Id: " + product.Id
+            pName.innerText = "Name: " + product.name
+            pQty.innerText = "Current Qty: " + product.unitsInStock
+            pImage.src = "./assets/" + product.image
+
+            overviewProduct.append(pImage, infoProductContainer)
+            infoProductContainer.append(pId, pName, pQty)
         }
-        
-        for (let i = 0; i < products.length; i++) {
-        
-            const product = products[i];
-    
-            if(product.Id == productId) {
-    
-                let infoProductContainer = document.createElement("div")
-                infoProductContainer.classList.add("infoProductContainer")
-                let pId = document.createElement("p")
-                let pName = document.createElement("p")
-                let pQty = document.createElement("p")
-                let pImage = document.createElement("img")
-                pImage.classList.add("pImage")
-    
-                pId.innerText = "Id: " + product.Id
-                pName.innerText = "Name: " + product.name
-                pQty.innerText = "Current Qty: " + product.unitsInStock
-                pImage.src = "./assets/" + product.image
-    
-               /*  getProduct.append(overviewProduct) */
-                overviewProduct.append(pImage, infoProductContainer)
-                infoProductContainer.append(pId, pName, pQty)
-            }
-        }
+    }
 
 }
 
@@ -728,14 +729,10 @@ async function deleteQuantity(value) {
 
 
 
-    /* MODIFY CATEGORY */
+/* MODIFY CATEGORY */
 
 
 
-
-
-
-// Collapse
 document.querySelector(".toggle4").addEventListener("click", () => {
     let replaceCategory = document.querySelector(".replaceCategory")
     replaceCategory.classList.toggle("menu")
@@ -753,9 +750,6 @@ document.querySelector(".toggle6").addEventListener("click", () => {
 
 
 /* SELECT PRODUCT */
-
-
-
 async function overviewCategory() {
     let getProductCategory = document.querySelector(".getProductCategory")
     let overview = document.createElement("div")
@@ -891,9 +885,6 @@ async function renderProductWithCategory() {
     }
 
 
-
-
-
 }
 
 async function getCategoryWithProductId(id) {
@@ -915,7 +906,6 @@ async function getCategoryWithProductId(id) {
 
 
 /* ADD CATEGORY */
-
 document.querySelector(".addCategoryButton").addEventListener("click", addCategoryToProduct) 
 
 async function addCategoryToProduct() {
@@ -985,8 +975,6 @@ async function getCategories() {
 
 
 /* DELETE CATEGORY */
-
-
 document.querySelector(".deleteCategoryButton").addEventListener("click", deleteCategoryFromProduct) 
 
 async function deleteCategoryFromProduct() {
@@ -1038,8 +1026,6 @@ async function deleteCategoryFromProduct() {
 
 
 /* REPLACE CATEGORY */
-
-
 document.querySelector(".replaceCategoryButton").addEventListener("click", categoryReplace) 
 
 async function categoryReplace() {

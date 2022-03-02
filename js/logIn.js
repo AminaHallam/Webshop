@@ -8,12 +8,21 @@ const createAccountForm = document.querySelector("#createAccount")
 
 
 async function onLoad() {
+    await accountCheck();
     await showCorrectLayout();
     await printNrOfElements();
     await getAllCategories();
     burger();
 }
 
+async function accountCheck() {
+
+    let allowed = await getUser();
+    if(allowed) {
+        location.href = "./../index.html";
+        return
+    }
+}
 
 document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)
