@@ -82,7 +82,7 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
+  } 
 
 .headerNews {
   display: inline-block;
@@ -117,9 +117,10 @@ main {
 }
 
 .imageScroller img {
-  width: 250px; 
-  max-height: 300px;
-  min-height: 300px;
+  width: 230px; 
+  max-height: 280px;
+  min-height: 280px;
+  object-fit: cover;
 }
 
 .wellcomeHeader {
@@ -142,31 +143,66 @@ main {
   align-items: center;
 }
 
-
 .collectionContainer {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-
-/*   padding: 40px; */
   flex-wrap: wrap;
-}
+  justify-content: center;
 
-.productContainer {
-  display: flex;
-  flex-direction: column;
-  margin: 40px;
-/*   justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  width: 25%; */
-} 
-
-.collectionImage {
   width: 100%;
-  height: 400px;
-  object-fit: contain;
+  margin-bottom: 100px;
 }
+
+#collectionImage {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  height: 100%; 
+}
+
+#imgCollection {
+  object-fit: cover;
+  width: 400px;
+  height: 500px;
+
+
+/* Förslag 3 */
+/*   box-shadow: 7px 7px 2.5px #aaaaaa; */
+box-shadow: 10px 10px 5px #aaaaaa;
+
+ /* Förslag 2 */
+/*   background-color: #3d4246;
+  opacity: 0.85; */
+
+  /* Förslag 3 */
+ /*  box-shadow: 0px 0px 1px 2px #5c5a5a; */
+
+}
+
+.imgContainer {
+  position: relative;
+  text-align: center;
+  color: white;
+  padding-top: 45px;
+}
+
+.centered {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight:bolder;
+  color: white;
+
+  /* Alt 2 */
+ /*  text-shadow: 4px 4px 4px #000000; */
+
+  /* Alt 1 */
+  background-color: black;
+  padding: 7px 12px;
+  opacity: 0.80;
+}
+
 
 .container {
   display: flex;
@@ -288,6 +324,19 @@ input[type=submit]:hover {
 
 }
 
+
+@media screen and (max-width:1150px) {
+
+  
+#imgCollection {
+  object-fit: cover;
+  width: 300px;
+  height: 400px;
+
+
+  }
+}
+
 @media screen and (max-width:1050px) {
   .gallery {
     height: 65vh;
@@ -301,6 +350,13 @@ input[type=submit]:hover {
 }
 
 @media screen and (max-width:1000px) {
+  .gallery {margin-top: 0;
+  }
+}
+
+
+/* Fixa kollektionen här */
+@media screen and (max-width:8500px) {
   .gallery {margin-top: 0;
   }
 }
@@ -390,8 +446,4 @@ input[type=submit]:hover {
     min-height: 200px;
   }
 
-}
-
-@media screen and (max-width:380px) {
-    
 }
