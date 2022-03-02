@@ -203,11 +203,11 @@ a {
 }
 
 .qtyAdmin {
-    right: 176px;
+    right: 197px;
 }
 
 .qtyCustomer {
-    right: 176px;
+    right: 197px;
     top: 105px;
 }
 
@@ -289,12 +289,12 @@ a {
         top: 89px;
     }
     .qtyAdmin {
-        right: 116px;
+        right: 136px;
         top: 89px;
     }
 
     .qtyCustomer {
-        right: 115px;
+        right: 136px;
         top: 89px;
     }
 
@@ -377,12 +377,12 @@ a {
     }
 
     .qtyAdmin {
-        right: 123px;
+        right: 136px;
         top: 42px;
     }
 
     .qtyCustomer {
-        right: 122px;
+        right: 136px;
         top: 42px;
     }
 
@@ -492,12 +492,12 @@ a {
     }
 
     .qtyAdmin {
-        right: 115px;
+        right: 128px;
         top: 43px;
     }
 
     .qtyCustomer {
-        right: 115px;
+        right: 128px;
         top: 43px;
     }
 
@@ -507,7 +507,7 @@ a {
 @media screen and (max-width: 480px) { 
 
     .logoHeader img {
-        max-width: 145px;
+        max-width: 130px;
     }    
 
     .logoFooter img {
@@ -528,14 +528,19 @@ a {
     }
 
     .qtyAdmin {
-        right: 95px;
+        right: 108px;
         top: 43px;
     }
 
     .qtyCustomer {
-        right: 95px;
+        right: 108px;
         top: 43px;
     } 
+
+    .adminsIcons {
+        gap: 0px 5px; 
+
+    }
 
 
 }
@@ -544,7 +549,7 @@ a {
 @media screen and (max-width:380px) { 
     
     .logoHeader img {
-        max-width: 115px;
+        max-width: 90px;
     }        
 
     .logoFooter img {
@@ -579,31 +584,37 @@ a {
 
     .icons {
         margin-top: 0px;
-        gap: 0px 3px;
+        gap: 0px 6px;
     }
 
     .qtyAdmin {
-        right: 86px;
+        right: 97px;
         top: 43px;
     }
 
     .qtyCustomer {
-        right: 86px;
+        right: 97px;
         top: 43px;
     } 
 
+    .adminsIcons {
+        gap: 0px 5px; 
 
-}
-
-@media screen and (max-width:380px) { 
-    
-    .logoHeader img {
-        max-width: 105px;
-    }        
-
-    .logoFooter img {
-        width: 100px;
     }
 
-
 }
+
+@media screen and (max-width:280px) { 
+    
+    .adminIcons {
+        gap: 0px 5px; 
+
+    }
+
+    .qtyAdmin {
+        right: 88px;
+    }
+
+   
+
+} 
