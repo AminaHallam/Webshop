@@ -1,6 +1,6 @@
 
 import {openMenu, getAllCategories, burger} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
+import {makeRequest, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'
 
 
 async function onLoad() {
@@ -100,7 +100,7 @@ async function renderProduct(idToGet) {
 
 
 
-// Lägger till produkten i kundvagnen (SESSION)
+// add products to cart 
 async function addToCart(productId) {
 
     const push = "addProduct"

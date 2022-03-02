@@ -1,8 +1,7 @@
 import {openMenu, getAllCategories, burger} from './../helperFunctions/renderHelper.js'
-import {makeRequest, verifyAdmin, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'  // checka verifyadmin och getuser
+import {makeRequest, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'  // checka verifyadmin och getuser
 
-const myPage = document.querySelector(".myPage")
-const buttonCA = document.querySelector(".buttonCA")
+
 const loginForm = document.querySelector("#login")
 const createAccountForm = document.querySelector("#createAccount")
 
