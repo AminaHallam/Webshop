@@ -182,15 +182,18 @@ async function renderOrders(list) {
         let orderButton = document.createElement('button')
        
         orderButton.addEventListener("click", () => {
-            getOrderDetails(order.Id, admin)
+            getOrderDetails(order.Id)
             
         })
+
 
    
         orderButton.classList.add('orderButton')
         orderButton.innerText = "To Order"
         orderValues.splice(7, 4) 
         orderValues.splice(2, 2) 
+
+
 
    
         
@@ -199,9 +202,9 @@ async function renderOrders(list) {
             let cell = document.createElement('div')
             cell.classList.add('cell')
             cell.classList.add('c'+i)
-            
+          
             cell.innerText = orderDetail
-            
+
             row.append(cell, orderButton)
            
         }

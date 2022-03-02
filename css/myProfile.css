@@ -150,7 +150,7 @@ h3 {
 
 
 .orderButton {
-  font-size: 12px !important; 
+  font-size: 12px; 
   height: 20px !important;
   margin: 2px !important;
   width: 100px;
@@ -316,15 +316,19 @@ button, .orderButton, #sendNews {
 
 .newsletterAndSubscriber {
   display: flex; 
-  justify-content: space-around; 
+/*   justify-content: space-around;  */
   flex-wrap: wrap;
+  flex-direction: column;
   width: 100%;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 
 .newsletter {
   display:flex; 
-  width: 80%;
+  width: 60%;
 }
 
 
@@ -338,13 +342,23 @@ button, .orderButton, #sendNews {
 }
 
 #content {
+  display: inline-block;
+  vertical-align: top;
   width: 100%;
+  
 }
 
+.subScriberContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
 .subscribers {
   display:flex; 
   flex-direction: row-reverse;
   margin: 5px;
+  justify-content: center;
  
 }
 
@@ -398,7 +412,7 @@ option {
 
 @media only screen and (max-width: 1124px) {
   .orderButton {
-    font-size: 8px !important;
+    font-size: 11px;
   }
   .cell {
     font-size: 10px;
@@ -409,19 +423,44 @@ option {
 }
 
 @media only screen and (max-width: 790px) {
+  
+  .customerOrders, .orders, .product, .updateQty, .modifyCategory, .newsletter, .subscribers, .subScriberContainer, .orderDetail {
+    width: 100%;
+    border-bottom: unset;
+  }
+
+  .overviewCustomerOrders, .overviewOrders, .updateQty, .modifyCategory, .subscribers, .orderDetailsCustomer, .orderDetail {
+    margin: 0px;
+    padding: 15px;
+    border-radius: unset;
+    
+  }
+
+  .subscribers {
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  h1 { margin-left: 0px;
+  
+    text-align: center;
+  }
+
+  .modifyCategory, .orderDetailsCustomer, .orderDetail {
+    margin-top: 10px;
+  }
+
+  
   .orderHeader {
     font-size: 8px;
   }
   .orderButton {
-    width: 40px !important;
+    width: 50px;
+    font-size: 8px;
   }
 
  
-  .overviewOrders {
-    margin-left: 5%;
-    margin-right: 5%;
-    width: 90%;
-}
 .o5 {
   width: 40px;
 }
@@ -470,9 +509,7 @@ option {
     .toggle, .toggle2, .toggle3, .toggle4, .toggle5, .toggle6 {
       font-size: 16px;
     }
-    .createNewsletter {
-      margin: 8px;
-    }
+
 }
 
 @media only screen and (max-width: 460px) {
@@ -491,12 +528,12 @@ option {
     font-size: 9px;
   }
   .getProductButton {
-    width: 80px !important;
+    width: 90px;
     font-size: 10px;
     padding: 2px;
   }
   .productId {
-    width: 50px !important;
+    width: 70px;
     font-size: 10px;
     padding: 2px;
     height: 40px;
@@ -510,10 +547,30 @@ option {
 
 
   .getId {
-    width: 50px !important;
+    width: 70px;
     font-size: 10px;
     padding: 2px;
     height: 40px;
+  }
+
+  .emailSub, .firstNameSub {
+    font-size: 12px;
+  }
+
+  #title{
+    width: 70%;
+  }
+
+  .updateProductButton, .addQtyProductButton, .deleteQtyProductButton, .replaceCategoryButton, .addCategoryButton, .deleteCategoryButton {
+
+    font-size: 13px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+  }
+
+  select {
+    margin-top: 10px;
   }
  
   
@@ -529,8 +586,8 @@ option {
     padding: 3px;
   }
   
-  .subscribers {
-    padding: 10px;
+  .emailSub, .firstNameSub {
+    font-size: 9px;
   }
 
   #subscriberFirstname, #subscriberEmail {
@@ -549,6 +606,10 @@ option {
   }
   .modifyCategory {
     padding: 10px;
+  }
+
+  .emailSub, .firstNameSub {
+    font-size: 7px;
   }
 }
 
