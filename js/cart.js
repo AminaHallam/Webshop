@@ -35,7 +35,7 @@ async function accountCheck() {
 
 
 // Hämtar carten från SESSION 
-async function getCart() {
+export async function getCart() {
     
     const action = "getCart"
 
@@ -142,8 +142,10 @@ async function renderCart() {
         cartContainer.append(itemContainer)
         itemContainer.append(image, infoContainer)
         infoContainer.append(title, unitPrice, priceContainer, ajustQty, totalPrice)
+
         //priceContainer.append(ajustQty, totalPrice)
         ajustQty.append(deleteQty, unitQty, addQty, removeButton)
+        ajustQty.append(deleteQty, unitQty, addQty)
 
     }
 

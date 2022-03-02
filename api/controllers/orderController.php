@@ -115,6 +115,18 @@ try {
 
             $specificOrder = $this->getById($orderId); 
 
+        $updateReceivedOrder = createOrder($specificOrder->Id, $statusId, $specificOrder->UserId, $specificOrder->CourrierId, $specificOrder->RegisterDate, $specificOrder->ShippingDate, date('Y-m-d H:i:s'));   
+        
+       
+
+        unset($updateReceivedOrder->products);
+        unset($updateReceivedOrder->user);
+        unset($updateReceivedOrder->courrier);
+        unset($updateReceivedOrder->orderStatus); 
+        
+        $result = $this->database->update($updateReceivedOrder); 
+
+
             $updateOrder = createOrder($specificOrder->Id, $statusId, $specificOrder->UserId, $specificOrder->CourrierId, $specificOrder->RegisterDate, date('Y-m-d H:i:s'), null);   
             
             unset($updateOrder->products);

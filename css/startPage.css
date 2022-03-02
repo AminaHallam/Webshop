@@ -122,6 +122,52 @@ main {
   min-height: 300px;
 }
 
+.wellcomeHeader {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  font-size: 20px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.collectionHeader {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.collectionContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+/*   padding: 40px; */
+  flex-wrap: wrap;
+}
+
+.productContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 40px;
+/*   justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 25%; */
+} 
+
+.collectionImage {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -138,7 +184,6 @@ p {
 
 form {
   position: relative;
-  font-family: Arial;
   padding: 20px;
   background-color: #f5ebe0;
 }
@@ -319,8 +364,6 @@ input[type=submit]:hover {
   }
 
 
-}
-
 @media screen and (max-width: 540px) { 
  
   .textAbout {
@@ -340,9 +383,15 @@ input[type=submit]:hover {
   }
      
 
+@media screen and (max-width:380px) {
+  
+  .imageScroller img { 
+    max-height: 200px;
+    min-height: 200px;
+  }
+
 }
 
 @media screen and (max-width:380px) {
     
-
 }
