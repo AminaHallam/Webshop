@@ -18,7 +18,7 @@ document.getElementById("menu").addEventListener("click", openMenu);
 document.querySelector(".logOut").addEventListener("click", logOut)
 
 
-// Om du inte är inloggad så skickas du till loginsidan. 
+// if user is not logged in they will be forwarded to loginpage
 async function accountCheck() {
 
     let allowed = await getUser();
@@ -34,8 +34,9 @@ async function accountCheck() {
 }
 
 
-// Hämtar carten från SESSION 
-export async function getCart() {
+// Gets cart from session
+async function getCart() {
+
     
     const action = "getCart"
 
@@ -51,7 +52,7 @@ export async function getCart() {
 }
 
 
-// Renderar ut produkterna som ligger i carten 
+// function to render out products that are placed in cart 
 async function renderCart() {
 
     let cart = await getCart()

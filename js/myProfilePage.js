@@ -1,6 +1,6 @@
 
 import {openMenu, getAllCategories, burger} from './../helperFunctions/renderHelper.js'
-import {makeRequest,  getUser, verifyAdmin, showCorrectLayout, logOut, printNrOfElements, getAllProducts, getProductFromId} from './../helperFunctions/fetchHelper.js'
+import {makeRequest,  getUser, verifyAdmin, showCorrectLayout, logOut, printNrOfElements, getAllProducts} from './../helperFunctions/fetchHelper.js'
 
 
 
