@@ -347,14 +347,7 @@ input[type=submit]:hover {
 }
 
 
-@media screen and (max-width:8500px) {
-  .gallery {margin-top: 0;
-  }
-}
-
 @media screen and (max-width:800px) {
-
- 
 
   .textContainer {
     flex-direction: column;
@@ -380,7 +373,6 @@ input[type=submit]:hover {
 
 
 }
-
 
 @media screen and (max-width:660px) { 
   
@@ -458,11 +450,12 @@ input[type=submit]:hover {
   }
 
   .photo1 {
-    background-position: center;
+    background-position: right;
   }
 
 }
-     
+
+
 
 @media screen and (max-width:380px) {
   
@@ -487,6 +480,10 @@ input[type=submit]:hover {
   .icons {
     gap: 0px 5px; 
   }
+
+  .photo1 {
+    background-position: center;
+  }
   
 
 
@@ -504,8 +501,6 @@ input[type=submit]:hover {
   .qtyCustomer {
     right: 88px; 
   }
-
- 
 
 } 
 

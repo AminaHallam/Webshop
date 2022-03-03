@@ -152,8 +152,6 @@ async function renderCart() {
 
 
    /*  Order Summary    */ 
-
-
     let totalSum = cart.reduce((sum,item) => sum + item.unitPrice * item.quantity, 0);
 
     let summaryTitle = document.createElement("h2")
@@ -299,7 +297,6 @@ async function createOrder(courrierId, userId) {
     if(resultOrder == true) {
         alert("Congratulations! Your order is placed")
         location.href = "./../myProfile.html";
-        //location.reload();
         return
     }
 
