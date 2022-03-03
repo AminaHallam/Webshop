@@ -471,6 +471,10 @@ input[type=submit]:hover {
     .collectionContainer {
       gap: 15px;
     }
+
+    .photo1 {
+      background-position: right;
+    }
 }
 
 @media screen and (max-width: 480px) { 
@@ -534,7 +538,7 @@ input[type=submit]:hover {
   }
 
   .photo1 {
-    background-position: center;
+    background-position: top;
   }
   
 
