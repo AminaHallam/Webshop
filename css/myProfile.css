@@ -633,5 +633,9 @@ h3 {
   font-size: 7px;
 } 
 
+.subscribers {
+  gap: 10px; 
+}
+
 }
 

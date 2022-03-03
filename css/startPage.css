@@ -530,7 +530,7 @@ input[type=submit]:hover {
 @media screen and (max-width: 480px) { 
 
   .qtyCustomer {
-    right: 108px;
+    right: 109px;
   }
 
   .photo1 {
@@ -565,18 +565,7 @@ input[type=submit]:hover {
       font-size: 6px;
       width: 70%;
   }
-}
 
-
-
-  .qtyCustomer {
-    right: 97px; 
-  }
-
-  .qtyAdmin {
-    right: 97px;
-
-  }
 
   .logoHeader {
     max-width: 100px;
@@ -589,8 +578,12 @@ input[type=submit]:hover {
   .photo1 {
     background-position: top;
   }
-  
 
+  .qtyCustomer {
+    right: 100px;
+  }
+  
+}
 
 @media screen and (max-width:280px) { 
     
