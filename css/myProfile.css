@@ -1,8 +1,6 @@
-/* Prova med detta när responsivivteten är klar :) */
-
- main {
+main {
   height: 100vh;
-}
+} 
 
 h1 {
   margin-bottom: 20px;
