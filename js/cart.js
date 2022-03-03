@@ -216,7 +216,7 @@ async function renderCart() {
     newsButton.classList.add("newsButton")
     newsButton.setAttribute("type", "checkbox")
     newsButton.setAttribute("value", userInfo.Id)
-    
+
     /* Total amount and button */
     let checkOutContainer = document.createElement("div")
     checkOutContainer.classList.add("checkOutContainer")
