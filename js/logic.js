@@ -17,7 +17,7 @@ document.getElementById("menu").addEventListener("click", openMenu);
 document.getElementById("submitClick").addEventListener("click", addSubscriptionNews)
 
 
-document.getElementById("myBtn").addEventListener("click", readMore);
+//document.getElementById("myBtn").addEventListener("click", readMore);
 
 function readMore() {
     const dots = document.getElementById("dots");
