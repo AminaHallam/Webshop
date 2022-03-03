@@ -21,37 +21,36 @@ main {
 }
 
 .photo1 {
-    background: url("../assets/womanStrongBianca2.jpg"); 
-    background-position: top;
-    width: 100%; 
-    height: 100%;
-    margin-top: 20px;
-    object-fit: cover;
-    top: 40px;
-    margin-top: 40px;
-
-}
-
-#photo4 {
-    background-image:url("./../assets/womanToTheMoonAndBack.JPG");
-    background-size: cover;
-    height: 100%;
-    width: 100%
-}
-
-#photo5 {
-  background-image:url("./../assets/abTheseTimes.png");
-  background-size: cover;
+  background: url("../assets/womanStrongBianca2.jpg");
+  background-position: top;
+  width: 100%;
   height: 100%;
-  width: 100%
+  margin-top: 20px;
+  object-fit: cover;
+  top: 40px;  
+  margin-top: 40px;
+
 }
 
 .centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  } 
+  position: absolute;
+  display: flex;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: bolder;
+  color: white;
+  background-color: black;
+  padding: 7px 12px;
+  opacity: 0.80;
+  justify-content: center;
+  align-items: center;
+  height: 19%;
+  margin: 0px !important;
+}
+
+
 
 .headerNews {
   display: inline-block;
@@ -102,9 +101,6 @@ main {
   font-size: 20px;
   padding-top: 100px;
   padding-bottom: 100px;
-
-  margin-bottom: 30px;
-  
 }
 
 .collectionHeader {
@@ -124,27 +120,6 @@ main {
   margin-bottom: 100px;
 }
 
-
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: blue;
-}
-
-
-.secondCollectionContainer {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: center;
-
-/*   padding: 40px; */
-  flex-wrap: wrap;
-  padding-bottom: 40px;
-}
-
 #collectionImage {
   display: flex;
   justify-content: center;
@@ -156,18 +131,12 @@ main {
   object-fit: cover;
   width: 400px;
   height: 500px;
+  box-shadow: 10px 10px 5px #aaaaaa;
+}
 
-
-/* Förslag 3 */
-/*   box-shadow: 7px 7px 2.5px #aaaaaa; */
-box-shadow: 10px 10px 5px #aaaaaa;
-
- /* Förslag 2 */
-/*   background-color: #3d4246;
-  opacity: 0.85; */
-
-  /* Förslag 3 */
- /*  box-shadow: 0px 0px 1px 2px #5c5a5a; */
+#imgCollection:hover {
+background-color: #3d4246;
+opacity: 0.85; 
 
 }
 
@@ -175,37 +144,9 @@ box-shadow: 10px 10px 5px #aaaaaa;
   position: relative;
   text-align: center;
   color: white;
-  padding-top: 45px;
+  padding-top: 70px;
 }
 
-.centered {
-  position: absolute;
-  top: 85%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  font-weight:bolder;
-  color: white;
-
-  /* Alt 2 */
- /*  text-shadow: 4px 4px 4px #000000; */
-
-  /* Alt 1 */
-  background-color: black;
-  padding: 7px 12px;
-  opacity: 0.80;
- 
-  margin: 40px;
- justify-content: center;
- 
-} 
-
-.secondProductContainer {
-
-  display:flex;
-  
-
-}
 
 .collectionImage {
   width: 100%;
@@ -318,7 +259,6 @@ input[type=submit]:hover {
   font-size: 14px;
   padding-left: 40px;
   padding-right: 40px;
-/*   margin: 40px; */
 }
 
 .textAbout {
@@ -332,14 +272,13 @@ input[type=submit]:hover {
   height: auto;
   max-height: 30em;
   object-fit: cover;
-  /* margin: 25px; */
   border-radius: 100em;
   flex-wrap: nowrap;
   box-shadow: 11px 6px 5px #d5bdaf;
   
 }
 
-#myBtn {
+#readMoreMyBtn {
   align-items: center;
   appearance: none;
   background-color: #fff;
@@ -357,13 +296,13 @@ input[type=submit]:hover {
   font-family: "Google Sans",Roboto,Arial,sans-serif;
   font-size: 14px;
   font-weight: 500;
-  height: 48px;
+  height: 40px;
   letter-spacing: .25px;
   line-height: normal;
   max-width: 100%;
   overflow: visible;
   
-  padding: 2px 30px;
+  padding: 0px 15px;
   position: relative;
   text-align: center;
   text-transform: none;
@@ -374,7 +313,6 @@ input[type=submit]:hover {
   width: auto;
   will-change: transform,opacity;
   z-index: 0;
-  width: 80px;
 }
 
 
@@ -387,8 +325,6 @@ input[type=submit]:hover {
   object-fit: cover;
   width: 300px;
   height: 400px;
-
-
   }
 }
 
@@ -410,67 +346,44 @@ input[type=submit]:hover {
   
   .qtyCustomer {
     right: 136px;
-
   }
 
-
-}
-
-
-/* Fixa kollektionen här */
-@media screen and (max-width:8500px) {
-  .gallery {margin-top: 0;
-  }
-}
-
-@media screen and (max-width:800px) {
-
-.welcomeHeader {
-  padding-top: 70px;
-}
-
-  .welcomeHeader h1 {
-  font-size: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
-  text-align: center;
-  }
- 
-  .collectionHeader h1, .headerNews h1, .about h1 {
-    font-size: 25px;
+  #imgCollection {
+      object-fit: fill;
+      width: 250px;
+      height: 300px;
+      }
   }
 
-  .textContainer {
-    flex-direction: column;
-  } 
-
-}
 
 @media screen and (max-width:760px) { 
   .textContainer {
     flex-direction: column;
   }
-
   .newsTitle {
     font-size: 20px;
   }
   .litleTitle {
     font-size: 15px;
   }
-
   .headerPicture, .photo1 {
     margin-top: 0px;
   }
-
-
 }
 
 
 @media screen and (max-width:700px) {
   
-
+  .centered {
+    font-size: 15px;
+    left: 76%;
+  }
+  .collectionContainer {
+    gap: 30px;
+  }
 
 }
+
 
 @media screen and (max-width:660px) { 
   
@@ -541,28 +454,54 @@ input[type=submit]:hover {
   .headerPicture, .photo1 {
     margin-top: 0px;
   }
-
+  
+  #imgCollection {
+    width: 200px;
+    height: 250px;
+    }
+    .collectionContainer {
+      gap: 15px;
+    }
 }
 
 @media screen and (max-width: 480px) { 
 
   .qtyCustomer {
     right: 108px;
-
   }
 
   .photo1 {
-    background-position: center;
+    background-position: right;
   }
-
+  #imgCollection {
+    width: 150px;
+    height: 200px;
+    }
+    .centered {
+      font-size: 12px;
+      left: 66%;
+  }
+  .aboutContainer {
+    padding-left: 1px;
+    padding-right: 1px;
+  }
 }
-     
+
+
 
 @media screen and (max-width:380px) {
   
   .imageScroller img { 
     max-height: 200px;
     min-height: 200px;
+  }
+  #imgCollection {
+    width: 110px;
+    height: 160px;
+    }
+    .centered {
+      font-size: 12px;
+      left: 66%;
   }
 }
 
@@ -584,6 +523,10 @@ input[type=submit]:hover {
   .icons {
     gap: 0px 5px; 
   }
+
+  .photo1 {
+    background-position: center;
+  }
   
 
 
@@ -601,8 +544,6 @@ input[type=submit]:hover {
   .qtyCustomer {
     right: 88px; 
   }
-
- 
 
 } 
 

@@ -32,7 +32,7 @@ async function renderProducts(list){
     
     let titleOfAllProducts = document.createElement("h2")
     titleOfAllProducts.classList.add("titleOfAllProducts")
-    titleOfAllProducts.innerText = "All Products"
+    titleOfAllProducts.innerText = "ALL PRODUCTS"
     
     main.append(titleOfAllProducts)
 

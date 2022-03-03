@@ -98,23 +98,15 @@ h3 {
 .overviewOrders {
    display: flex;
     flex-direction: column;
-    /* margin-left: 5%; */
-    /* margin-right: 5%; */
-    width: 100%;
-    
+    width: 100%;  
     background-color: #eee8e3;
     border-radius: 10px;
     height: auto;
-    /* margin-bottom: 20px; */
 
 }
 
-/* .orders{
-  width: 80vw;
-} */
 
 .orderHeader {
-  /* width: 120px; */
   font-size: 14px;
   font-weight: bold;
   text-align: center;
@@ -144,7 +136,6 @@ h3 {
   font-size: 12px;
   text-align: center;
 }
-
 
 
 .orderButton {
@@ -181,7 +172,7 @@ h3 {
     padding: 15px;
 }
 
-.updateQty/* , .modifyCategory */ {
+.updateQty {
   margin-bottom: 60px;
 }
 
@@ -291,8 +282,6 @@ button, .orderButton, #sendNews {
   cursor: pointer;
 }
 
-
-/* Collapse */
 .updateProduct, .addQtyProduct, .deleteQtyProduct, .replaceCategory, .addCategory, .deleteCategory {
   cursor: pointer;
   max-height: 0px;
@@ -314,7 +303,6 @@ button, .orderButton, #sendNews {
 
 .newsletterAndSubscriber {
   display: flex; 
-/*   justify-content: space-around;  */
   flex-wrap: wrap;
   flex-direction: column;
   width: 100%;
@@ -503,7 +491,6 @@ option {
       font-size: 13px;
     }
 
-
     .toggle, .toggle2, .toggle3, .toggle4, .toggle5, .toggle6 {
       font-size: 16px;
     }
@@ -542,7 +529,6 @@ option {
     font-size: 10px;
     padding: 2px;
   }
-
 
   .getId {
     width: 70px;

@@ -47,8 +47,6 @@ header {
     justify-content: space-between;
 }
  
-
-/* Se över menyn-styling */
 #menu { 
     position: relative; 
     width: 150px;
@@ -56,8 +54,6 @@ header {
     cursor: pointer;
     padding-right: 15px;
 }
-
-
 
 
 #dropdown {
@@ -77,8 +73,6 @@ header {
 } 
 
 
-
-
 .productContainerForDropdown {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -89,7 +83,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-   /*  padding-right: 50px; */
     gap: 20px;
     font-size: larger;
 }
@@ -132,10 +125,8 @@ ul, li {
     list-style: none;
     color: black;
     text-align: center;
-   /*  background-color: white;  */   
 }
 
-/* Kolla detta i samband med stylning av hamburgare */
 li {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -243,7 +234,6 @@ a {
     padding-bottom: 10px;
 }
 
-/* Iconerna när ingen är inloggad */
 .none {
     display: none;
 }
@@ -472,7 +462,7 @@ a {
         height: 2px;
     }
 
-    /* Se över krysset.... */
+
     .hamburger.active .bar:nth-child(1) {
         transform: translateY(8px) rotate(45deg)
     }
@@ -618,7 +608,5 @@ a {
     .qtyAdmin {
         right: 88px;
     }
-
-   
 
 } 
