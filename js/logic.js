@@ -17,12 +17,12 @@ document.getElementById("menu").addEventListener("click", openMenu);
 document.getElementById("submitClick").addEventListener("click", addSubscriptionNews)
 
 
-//document.getElementById("myBtn").addEventListener("click", readMore);
+document.getElementById("readMoreMyBtn").addEventListener("click", readMore);
 
 function readMore() {
     const dots = document.getElementById("dots");
     const moreText = document.getElementById("more");
-    const btnText = document.getElementById("myBtn")
+    const btnText = document.getElementById("readMoreMyBtn")
   
     if (dots.style.display === "none") {
       dots.style.display = "inline";

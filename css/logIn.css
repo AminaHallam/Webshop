@@ -66,12 +66,10 @@ main {
 }
 
 .registerBlockPassword {
-    /* gap */
     flex-grow: 1;
 }
 
 .registerBlockContact {
-    /* gap */
     flex-grow: 1;
 }
 
@@ -159,9 +157,7 @@ a:link {
 
 
 @media screen and (max-width: 980px){
-    /*   .containerForms {
-          flex-flow: row wrap;
-      } */
+
       .connectRegisterBlocks {
           row-gap: 11px;
           width: 50%;
@@ -173,8 +169,8 @@ a:link {
       
       .registerBlockContact {
           flex-grow: 1;
-          /* gap */
       }
+
       .connectRegisterBlocks {
           flex-grow: 1;
           flex-wrap: column;
@@ -182,10 +178,9 @@ a:link {
       }
       .registerBlockPassword {
           flex-grow: 1;
-          /* gap */
       }
+
       .registerBlock{
-          /* gap */
           width: 50%;
       }
       
@@ -201,7 +196,6 @@ a:link {
         box-shadow: none;
 
     }
-
   }
 
   
@@ -224,7 +218,6 @@ a:link {
     }
 
     .form {
-        /* gap */
         width: 100%;
         height: 100%;
     }
