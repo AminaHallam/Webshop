@@ -415,15 +415,7 @@ input[type=submit]:hover {
 }
 
 
-/* Fixa kollektionen här */
-@media screen and (max-width:8500px) {
-  .gallery {margin-top: 0;
-  }
-}
-
 @media screen and (max-width:800px) {
-
- 
 
   .textContainer {
     flex-direction: column;
@@ -446,13 +438,6 @@ input[type=submit]:hover {
   .headerPicture, .photo1 {
     margin-top: 0px;
   }
-
-
-}
-
-
-@media screen and (max-width:700px) {
-  
 
 
 }
@@ -533,11 +518,12 @@ input[type=submit]:hover {
   }
 
   .photo1 {
-    background-position: center;
+    background-position: right;
   }
 
 }
-     
+
+
 
 @media screen and (max-width:380px) {
   
@@ -545,9 +531,6 @@ input[type=submit]:hover {
     max-height: 200px;
     min-height: 200px;
   }
-}
-
-
 
   .qtyCustomer {
     right: 97px; 
@@ -564,6 +547,10 @@ input[type=submit]:hover {
 
   .icons {
     gap: 0px 5px; 
+  }
+
+  .photo1 {
+    background-position: center;
   }
   
 }
@@ -582,8 +569,6 @@ input[type=submit]:hover {
   .qtyCustomer {
     right: 88px; 
   }
-
- 
 
 } 
 

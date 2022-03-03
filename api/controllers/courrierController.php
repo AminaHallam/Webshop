@@ -4,7 +4,6 @@ try {
 
     include_once("./../handlers/createInstanceFunctions.php");
     include_once("./../controllers/mainController.php");
-    /* include_once("./../controllers/productController.php"); */
 
 
     class CourrierController extends MainController {
