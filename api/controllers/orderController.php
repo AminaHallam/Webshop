@@ -135,8 +135,6 @@ try {
 
             $specificOrder = $this->getById($orderId); 
 
-            error_log(serialize($specificOrder->user));
-
 
             $updateReceivedOrder = createOrder($specificOrder->Id, $statusId, $specificOrder->UserId, $specificOrder->CourrierId, $specificOrder->RegisterDate, $specificOrder->ShippingDate, date('Y-m-d H:i:s'));   
 
