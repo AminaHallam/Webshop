@@ -28,7 +28,8 @@ h2 {
     margin-top: 25px;
     font-size: 2.5em;
     padding-top: 60px;
-    padding-bottom: 40px;
+    padding-bottom: 15px;
+    text-align: center;
 }
 
 
@@ -60,9 +61,7 @@ p {
     .avaliableUnits {
         font-size: 11px;
     }
-    .collectionPageTitle {
-        padding-top: 20px;
-    }
+    
     .collectionPageImage {
         height: 250px;
 }
@@ -77,35 +76,38 @@ p {
 
 @media only screen and (max-width: 650px) {
     .collectionPageTitle {
-        padding-top: 8px;
         padding-top: 3px;
         font-size: 10px;
     }
     p {
-        margin-top: 2px;
+        margin-top: 10px;
     }
     .collectionPageImage {
         width: 150px;
 }
 .categoryContainer {
-    font-size: 30px;
+    
     padding-top: 40px;
     padding-bottom: 1px;
 }
+
 }
 
 @media only screen and (max-width: 370px) {
+    h2 {
+        padding-bottom: 10px;
+    }
     .categoryContainer {
         font-size: 18px;
         padding-top: 18px;
         padding-bottom: 20px;
     }
     .categoryContainer {
-        font-size: 18px;
-        padding-top: 18px;
+        font-size: 15px;
+        
     }
     .productContainer {
-        height: 250px;
+        height: 310px;
     }
 }
 
@@ -113,8 +115,11 @@ p {
     .productContainer {
         height: 223px;
     }
+   
     .collectionPageTitle {
         width: 150px;
+        padding-bottom: 8px;
+        margin-top: 10px;
     }
     .titleOfAllProducts {
         padding-top: 20px;
@@ -126,9 +131,9 @@ p {
     .collectionPageImage {
         width: 200px;
 }
-.categoryContainer {
-    padding-bottom: 30px;
-}
+    .categoryContainer {
+        padding-bottom: 30px;
+    }
 }
 
 
