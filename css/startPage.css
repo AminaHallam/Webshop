@@ -241,6 +241,9 @@ input[type=submit]:hover {
   
 }
 
+.textContent {
+  margin-left: 30px;
+}
 .about {
   display: flex;
   align-items: center;
@@ -253,18 +256,29 @@ input[type=submit]:hover {
 
 .textAbout {
   display: flex;
+ 
+}
+
+.textAbout {
+  display: flex;
+  flex-direction: row;
+ 
+
+}
+
+#dots {
+  margin-left: 90px;
+}
+
+#more {
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-size: 14px;
   padding-left: 40px;
   padding-right: 40px;
-}
-
-.textAbout {
-  display: flex;
-  flex-direction: row;
-
 }
 
 .imageAbout {
@@ -313,6 +327,7 @@ input[type=submit]:hover {
   width: auto;
   will-change: transform,opacity;
   z-index: 0;
+  margin-left: 50px;
 }
 
 
