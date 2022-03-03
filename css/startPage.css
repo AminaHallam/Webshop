@@ -35,7 +35,7 @@ main {
 .centered {
   position: absolute;
   display: flex;
-  top: 90%;
+  top: 94%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 20px;
@@ -46,7 +46,7 @@ main {
   opacity: 0.80;
   justify-content: center;
   align-items: center;
-  height: 19%;
+  width: 50%;
   margin: 0px !important;
 }
 
@@ -338,6 +338,9 @@ input[type=submit]:hover {
     max-height: 250px;
     min-height: 250px;
   }
+  .centered {
+    font-size: 17px;
+  }
 }
 
 @media screen and (max-width:900px) {
@@ -350,6 +353,9 @@ input[type=submit]:hover {
       object-fit: fill;
       width: 250px;
       height: 300px;
+      }
+      .centered {
+        font-size: 13px;
       }
   }
 
@@ -373,8 +379,7 @@ input[type=submit]:hover {
 @media screen and (max-width:700px) {
   
   .centered {
-    font-size: 15px;
-    left: 76%;
+    width: 60%;
   }
   .collectionContainer {
     gap: 30px;
@@ -414,14 +419,15 @@ input[type=submit]:hover {
 }
 
 @media screen and (max-width: 600px) { 
-
   .qtyCustomer {
     right: 128px;
-
   }
-
   .photo1 {
     background-position: right;
+  }
+  .centered {
+    font-size: 11px;
+    width: 70%;
   }
 
 }
@@ -472,8 +478,7 @@ input[type=submit]:hover {
     height: 200px;
     }
     .centered {
-      font-size: 12px;
-      left: 66%;
+      font-size: 9px;
   }
   .aboutContainer {
     padding-left: 1px;
@@ -494,8 +499,8 @@ input[type=submit]:hover {
     height: 160px;
     }
     .centered {
-      font-size: 12px;
-      left: 66%;
+      font-size: 6px;
+      width: 70%;
   }
 }
 
