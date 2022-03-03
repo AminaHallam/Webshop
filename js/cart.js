@@ -298,7 +298,8 @@ async function createOrder(courrierId, userId) {
     
     if(resultOrder == true) {
         alert("Congratulations! Your order is placed")
-        location.reload();
+        location.href = "./../myProfile.html";
+        //location.reload();
         return
     }
 
