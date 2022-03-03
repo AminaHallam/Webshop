@@ -63,23 +63,23 @@ Kravspecifikation på projektet:
 
 22. Kunden måste ha ett registrerat konto för att få göra ett köp (registreringsfunktion skall finnas). Tänk på att en administratör också kan vara en kund (VG) ✅ 
 
-23. När man är inloggad som kund ska man kunna se sina gjorda beställning och om det är skickade eller inte (VG) ✅ ❌
+23. När man är inloggad som kund ska man kunna se sina gjorda beställning och om det är skickade eller inte (VG) ✅ 
 
 24. Man ska kunna ansöka om att bli administratör på sidan, endast befintliga administratörer kan godkänna dessa (måste finnas ett gränssnitt för detta) (VG) ✅ ❌
 
 25. En administratör behöver godkännas av en tidigare administratör innan man kan logga in som administratör (VG) ✅ ❌
 
-26. Administratörer ska kunna redigera vilka kategorier en produkt tillhör (VG) ✅ ❌
+26. Administratörer ska kunna redigera vilka kategorier en produkt tillhör (VG) ✅ 
 
 27. Administratörer ska kunna skicka nyhetsbrev från sitt gränssnitt, nyhetsbrevet ska sparas i databasen samt innehålla en titel och en brödtext (VG) ✅ 
 
-28. Som inloggad kund ska man kunna markera sin beställning som mottagen, detta skall sparas i databasen (VG) ✅ ❌
+28. Som inloggad kund ska man kunna markera sin beställning som mottagen, detta skall sparas i databasen (VG) ✅ 
 
 29. Administratörer ska kunna lägga till och ta bort produkter (VG) ✅ ❌
 
 30. Om en produkt är slut i saldo skall detta visas på sidan. Kunden skall inte heller kunna köpa denna produkt tills positivt saldo finns (VG). ✅ 
 
-31. Administratörer ska kunna markera beställningar som skickade och se vilka ordrar som blivit mottagna (VG) ✅ ❌
+31. Administratörer ska kunna markera beställningar som skickade och se vilka ordrar som blivit mottagna (VG) ✅ 
 
 
 Länk till GitHub Repo: https://github.com/AminaHallam/Webshop
