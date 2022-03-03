@@ -38,12 +38,17 @@ try {
                 $productDb = ($controller->getById($productId));
 
                 if(!$productDb) {
-                    throw new Exception("Id does not match with DB", 401);
+                    echo json_encode("ID does not match with database, please try again with another ID");
+                    exit;
+                }
+
+                if(empty($newValue)) {
+                    echo json_encode("Please fill in a value in the input field");
                     exit;
                 }
 
                 if($newValue < 0) {
-                    throw new Exception("Value can't be minus", 401);
+                    echo json_encode("Value can't be negative");
                     exit;
                 }
 
@@ -53,7 +58,7 @@ try {
                 exit;
 
             } else {
-                throw new Exception("Missing ID or value", 401);
+                echo json_encode("Value or Product ID is missing, please check");
                 exit;
             }
 
@@ -68,12 +73,17 @@ try {
                 $productDb = ($controller->getById($productId));
 
                 if(!$productDb) {
-                    throw new Exception("Id does not match with DB", 401);
+                    echo json_encode("ID does not match with database, please try again with another ID");
+                    exit;
+                }
+
+                if(empty($value)) {
+                    echo json_encode("Please fill in a value in the input field");
                     exit;
                 }
 
                 if($value < 0) {
-                    throw new Exception("Value can't be minus", 401);
+                    echo json_encode("Value can't be negative");
                     exit;
                 }
 
@@ -84,7 +94,7 @@ try {
                 exit;
                 
             } else {
-                throw new Exception("Missing ID or value", 401);
+                echo json_encode("Value or Product ID is missing, please check");
                 exit;
             } 
         
@@ -98,17 +108,22 @@ try {
                 $productDb = ($controller->getById($productId));
 
                 if(!$productDb) {
-                    throw new Exception("Id does not match with DB", 401);
+                    echo json_encode("ID does not match with database, please try again with another ID");
+                    exit;
+                }
+
+                if(empty($value)) {
+                    echo json_encode("Please fill in a value in the input field");
                     exit;
                 }
 
                 if($value < 0) {
-                    throw new Exception("Value can't be minus", 401);
+                    echo json_encode("Value can't be negative");
                     exit;
                 }
 
                 if($productDb->unitsInStock < $value ) {
-                    throw new Exception("Total quantity can't be minus", 401);
+                    echo json_encode("Total quantity can't be negative");
                     exit;
                 }
 
@@ -119,7 +134,7 @@ try {
                 exit;
                 
             } else {
-                throw new Exception("Missing ID or value", 401);
+                echo json_encode("Value or Product ID is missing, please check");
                 exit;
             } 
         

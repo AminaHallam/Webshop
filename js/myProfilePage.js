@@ -678,7 +678,7 @@ async function setQuantity() {
         
 
     } else {
-        alert("Product not updated")
+        alert(updateUnitsInStock)
         getUnitsInStock()
         
     }
@@ -703,6 +703,11 @@ async function addQuantity(value) {
         return
     }
 
+    if(!value){
+        alert("Value is missing, please try again");
+        return
+    }
+
     let body = new FormData()
     body.append("action", "addQuantity")
     body.append("value", value)
@@ -718,7 +723,7 @@ async function addQuantity(value) {
         getUnitsInStock()
 
     } else {
-        alert("Product not updated")
+        alert(result)
         getUnitsInStock()
     }
 }
@@ -740,6 +745,11 @@ async function deleteQuantity(value) {
         return
     }
 
+    if(!value){
+        alert("Value is missing, please try again");
+        return
+    }
+
     let body = new FormData()
     body.append("action", "deleteQuantity")
     body.append("value", value)
@@ -755,7 +765,7 @@ async function deleteQuantity(value) {
         getUnitsInStock()
 
     } else {
-        alert("Product not updated")
+        alert(result)
         getUnitsInStock()
     }
 }
@@ -1046,8 +1056,6 @@ async function deleteCategoryFromProduct() {
 
     let result = await makeRequest("./../api/receivers/productInCategoryReceiver.php", "POST", body) 
 
-    console.log(result)
-
     if(result) { 
         alert("Success!")
         let collapse = document.querySelector(".deleteCategory")
@@ -1115,8 +1123,6 @@ async function categoryReplace() {
 
     let result = await makeRequest("./../api/receivers/productInCategoryReceiver.php", "POST", body) 
 
-    console.log(result)
-
     if(result) { 
         alert("Success!")
         let collapse = document.querySelector(".replaceCategory")
@@ -1146,7 +1152,6 @@ async function renderSubscribers() {
         const renderSubList = await getAllLoggedInSubscribers();
         
         
-        console.log(renderSubList)
         for (let i = 0; i < renderSubList.length; i++) {
             
             let subList = renderSubList[i]
