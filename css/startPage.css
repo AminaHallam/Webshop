@@ -47,11 +47,24 @@ main {
 }
 
 .centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  } 
+  position: absolute;
+  display: flex;
+  top: 90%;
+  left: 66%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: bolder;
+  color: white;
+  background-color: black;
+  padding: 7px 12px;
+  opacity: 0.80;
+  justify-content: center;
+  align-items: center;
+  height: 19%;
+  margin: 0px !important;
+}
+
+
 
 .headerNews {
   display: inline-block;
@@ -125,15 +138,6 @@ main {
 }
 
 
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: blue;
-}
-
-
 .secondCollectionContainer {
   display: flex;
   flex-direction: row;
@@ -178,27 +182,6 @@ box-shadow: 10px 10px 5px #aaaaaa;
   padding-top: 45px;
 }
 
-.centered {
-  position: absolute;
-  top: 85%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  font-weight:bolder;
-  color: white;
-
-  /* Alt 2 */
- /*  text-shadow: 4px 4px 4px #000000; */
-
-  /* Alt 1 */
-  background-color: black;
-  padding: 7px 12px;
-  opacity: 0.80;
- 
-  margin: 40px;
- justify-content: center;
- 
-} 
 
 .secondProductContainer {
 
@@ -385,8 +368,6 @@ input[type=submit]:hover {
   object-fit: cover;
   width: 300px;
   height: 400px;
-
-
   }
 }
 
@@ -408,24 +389,17 @@ input[type=submit]:hover {
   
   .qtyCustomer {
     right: 136px;
-
   }
-
-
-}
-
-
-/* Fixa kollektionen här */
-@media screen and (max-width:8500px) {
-  .gallery {margin-top: 0;
+   
+  #imgCollection {
+      object-fit: fill;
+      width: 250px;
+      height: 300px;
+      }
   }
-}
 
 @media screen and (max-width:800px) {
-
- 
-
-  .textContainer {
+   .textContainer {
     flex-direction: column;
   } 
 
@@ -435,25 +409,27 @@ input[type=submit]:hover {
   .textContainer {
     flex-direction: column;
   }
-
   .newsTitle {
     font-size: 20px;
   }
   .litleTitle {
     font-size: 15px;
   }
-
   .headerPicture, .photo1 {
     margin-top: 0px;
   }
-
-
 }
 
 
 @media screen and (max-width:700px) {
   
-
+  .centered {
+    font-size: 15px;
+    left: 76%;
+  }
+  .collectionContainer {
+    gap: 30px;
+  }
 
 }
 
@@ -522,20 +498,37 @@ input[type=submit]:hover {
   .headerPicture, .photo1 {
     margin-top: 0px;
   }
-
+  
+  #imgCollection {
+    width: 200px;
+    height: 250px;
+    }
+    .collectionContainer {
+      gap: 15px;
+    }
 }
 
 @media screen and (max-width: 480px) { 
 
   .qtyCustomer {
     right: 108px;
-
   }
 
   .photo1 {
     background-position: center;
   }
-
+  #imgCollection {
+    width: 150px;
+    height: 200px;
+    }
+    .centered {
+      font-size: 12px;
+      left: 66%;
+  }
+  .aboutContainer {
+    padding-left: 1px;
+    padding-right: 1px;
+  }
 }
      
 
@@ -544,6 +537,14 @@ input[type=submit]:hover {
   .imageScroller img { 
     max-height: 200px;
     min-height: 200px;
+  }
+  #imgCollection {
+    width: 110px;
+    height: 160px;
+    }
+    .centered {
+      font-size: 12px;
+      left: 66%;
   }
 }
 
