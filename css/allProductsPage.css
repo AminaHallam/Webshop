@@ -92,6 +92,7 @@ p {
     .collectionImage {
         width: 150px;
 }
+
 .titleOfAllProducts {
     font-size: 30px;
     padding-top: 40px;
@@ -119,6 +120,13 @@ p {
     }
     .productTitle {
         width: 150px;
+        padding-top: 12px;
+    }
+    .collectionImage {
+        height: auto;
+    }
+    .allproductsDiv {
+        gap: 20px;
     }
 }
 

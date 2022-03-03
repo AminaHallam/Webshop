@@ -140,7 +140,7 @@ a {
 
 .loggedInUser {
     display: flex;
-    position: fixed;
+    position: absolute;
     right: 0px;
     top: 0px;
 }
@@ -148,6 +148,7 @@ a {
 .loggedInUser p {
     padding-top: 2px;
     padding-right: 25px;
+
 }
  
 .adminIcons {

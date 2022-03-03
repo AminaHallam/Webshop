@@ -134,6 +134,9 @@ p {
     .categoryContainer {
         padding-bottom: 30px;
     }
+    .bigProductBox {
+        gap: 20px;
+    }
 }
 
 
