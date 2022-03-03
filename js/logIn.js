@@ -217,10 +217,8 @@ e.preventDefault();
     var myData = new FormData();
     myData.append("endpoint", "addUser");
     myData.append("addUser", JSON.stringify(userToAdd))
-    console.log(userToAdd)
 
     let addUser = await makeRequest("./../api/receivers/userReceiver.php", "POST", myData)
-    console.log(addUser)
 
     if(addUser) {
         alert("Your account has been created!")

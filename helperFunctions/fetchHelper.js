@@ -111,7 +111,7 @@ export async function logOut(){
 export async function getAllOrders() {
     const action = "getAll";
     let allOrders = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}`, "GET")
-    console.log(allOrders);  // Return?
+    return allOrders
 }
 
 
@@ -119,14 +119,14 @@ export async function getAllOrders() {
 export async function getOrderById(idToGet) {
     const action = "getById";
     let specificOrder = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${idToGet}`, "GET")
-    console.log(specificOrder)  // Return?
+    return specificOrder
 }
 
 // Fetch an order based on statusId and userId
 export async function getOrdersByOtherId(idToGet, type) {
     const action = "getByOtherId";
     let specificOther = await makeRequest(`./../api/receivers/orderReceiver.php?action=${action}&id=${idToGet}&type=${type}`, "GET")
-    console.log(specificOther)  // Return?
+    return specificOther
 }
 
 
