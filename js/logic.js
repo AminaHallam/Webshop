@@ -21,7 +21,7 @@ document.getElementById("readMoreMyBtn").addEventListener("click", readMore);
 
 function readMore() {
     const dots = document.getElementById("dots");
-    const moreText = document.getElementById("more");
+    const moreText = document.getElementById("open");
     const btnText = document.getElementById("readMoreMyBtn")
   
     if (dots.style.display === "none") {
