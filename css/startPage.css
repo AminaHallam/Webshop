@@ -455,6 +455,13 @@ input[type=submit]:hover {
     padding-top: 40px;
   }
 
+  .textContainer {
+    display: flex;
+    justify-content: center;
+    padding-right: 30px;
+    padding-left: 5px;
+  }
+
 }
 
 @media screen and (max-width: 600px) { 
