@@ -8,15 +8,15 @@ try {
     if($_SERVER["REQUEST_METHOD"] == "POST") {
     
         if($_POST["action"] == "add"){
-            error_log(serialize('got in again'));
-            //if(isset($_POST['news'])){
+            if(isset($_POST['news'])){
+       
                 $controller = new NewsletterController(); 
 
                 echo(json_encode($controller->add(json_decode($_POST['news']))));
 
 
                 exit; 
-            
+            }
         
             }else{
 
@@ -24,7 +24,7 @@ try {
                 
                 };
     }    
-          
+
 } catch(Exception $err) {
     echo json_encode(array('Message' => $err->getMessage(), "Status" => $err->getCode()));
 }
