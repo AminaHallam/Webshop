@@ -378,6 +378,8 @@ input[type=submit]:hover {
 }
 
 
+
+
 @media screen and (max-width:1150px) {
 
   
@@ -423,7 +425,20 @@ input[type=submit]:hover {
 
 @media screen and (max-width:800px) {
 
+.welcomeHeader {
+  padding-top: 70px;
+}
+
+  .welcomeHeader h1 {
+  font-size: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  }
  
+  .collectionHeader h1, .headerNews h1, .about h1 {
+    font-size: 25px;
+  }
 
   .textContainer {
     flex-direction: column;
@@ -483,6 +498,10 @@ input[type=submit]:hover {
   .qtyCustomer {
     right: 136px;
 
+  }
+
+  .welcomeHeader {
+    padding-top: 40px;
   }
 
 }
