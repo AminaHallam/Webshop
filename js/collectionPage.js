@@ -38,7 +38,7 @@ async function getCategoryFromId(idToGet) {
         let categoryContainer = document.createElement("div")
         categoryContainer.classList.add("categoryContainer")
         let category = document.createElement("h2")
-        category.innerHTML = specificCategory.categoryName;
+        category.innerHTML = specificCategory.categoryName.toUpperCase();
         
         main.appendChild(categoryContainer)
         categoryContainer.appendChild(category)
