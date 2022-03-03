@@ -19,7 +19,7 @@ Email: admin@admin.se
 Lösenord: admins
 
 Kravspecifikation på projektet:
-1. Alla sidor skall vara responsiva. (G) ✅ ❌
+1. Alla sidor skall vara responsiva. (G) ✅ 
 
 2. Arbetet ska implementeras med objektorienterade principer. (G) ✅ 
 
@@ -31,7 +31,7 @@ Kravspecifikation på projektet:
 
 6. All data som programmet utnyttjar ska vara sparat i en MYSQL databas (produkter, beställningar, konton mm. Ej kundvagn) (G) ✅ 
 
-7. Det ska finnas ett normaliserat diagram över databasen i ert Github-Repo (G) ✅ ❌ - Fysiskt-Diagram
+7. Det ska finnas ett normaliserat diagram över databasen i ert Github-Repo (G) ✅  - Fysiskt-Diagram
 
 8. Man ska kunna logga in som administratör i systemet (G) ✅ 
 
