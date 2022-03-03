@@ -366,6 +366,9 @@ input[type=submit]:hover {
   .centered {
     font-size: 17px;
   }
+  .textContainer {
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width:900px) {
@@ -409,10 +412,7 @@ input[type=submit]:hover {
     }
 
 @media screen and (max-width:760px) { 
-  .textContainer {
-    flex-direction: column;
-  }
-  .newsTitle {
+    .newsTitle {
     font-size: 20px;
   }
   .litleTitle {
