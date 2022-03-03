@@ -46,7 +46,7 @@ main {
   opacity: 0.80;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 40%;
   margin: 0px !important;
 }
 
@@ -330,8 +330,12 @@ input[type=submit]:hover {
   margin-left: 50px;
 }
 
+@media screen and (max-width:1550px) {
 
-
+.centered {
+  width: 50%;
+}
+}
 
 @media screen and (max-width:1150px) {
 
