@@ -1,5 +1,5 @@
 import {openMenu, getAllCategories, burger} from '.././helperFunctions/renderHelper.js'
-import {makeRequest, getUser, showCorrectLayout, logOut, printNrOfElements} from '.././helperFunctions/fetchHelper.js'  // checka verifyadmin
+import {makeRequest, getUser, showCorrectLayout, logOut, printNrOfElements, addSubscriptionNews} from '.././helperFunctions/fetchHelper.js'  // checka verifyadmin
 
 document.querySelector(".logOut").addEventListener("click", logOut)
 
@@ -34,63 +34,6 @@ function readMore() {
       moreText.style.display = "inline";
     }
 }
-
-
-
-async function addSubscriptionNews(e) {
-    e.preventDefault();
-    const action = "addSubscriptionNews";
-
-    let registerFirstname = document.getElementById("firstNameNews").value
-    let registerEmail = document.getElementById("emailNews").value
-    
-    const subscriber = {
-        FirstName: registerFirstname,
-        Email: registerEmail,
-    }
-    
-    var body = new FormData()
-    body.append("action", action)
-    body.append("subscriber", JSON.stringify(subscriber))
-
-
-    let getLoggedInUser = await getUser(); 
-   
-    if(getLoggedInUser){
-        var body = new FormData()
-        body.append("action", action)
-        
-        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
-
-        if(!status) {
-            alert("You are already a subscriber")
-        } else {
-
-            alert("Welcome our new subscriber")
-
-        }
-
-
-    } else {
-        
-        let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
-        
-        if(!checkSubscription) {
-
-            alert("You are already a subscriber")
-    
-         } else { 
-
-             alert("Welcome our new subscriber")
-
-         }
-    
-    }
-
- 
-
-}
-
 
 
 window.addEventListener('load', onLoad)

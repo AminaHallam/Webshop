@@ -1,5 +1,5 @@
 import {openMenu, getAllCategories, burger} from './../helperFunctions/renderHelper.js'
-import {makeRequest, getUser, showCorrectLayout, logOut, printNrOfElements} from './../helperFunctions/fetchHelper.js'  // checka verifyadmin och getuser
+import {makeRequest, getUser, showCorrectLayout, logOut, printNrOfElements, addSubscriptionNews} from './../helperFunctions/fetchHelper.js'  // checka verifyadmin och getuser
 
 
 const loginForm = document.querySelector("#login")
@@ -24,7 +24,8 @@ async function accountCheck() {
 }
 
 document.getElementById("menu").addEventListener("click", openMenu);
-document.querySelector(".logOut").addEventListener("click", logOut)
+document.querySelector(".logOut").addEventListener("click", logOut);
+document.getElementById("submitClick").addEventListener("click", addSubscriptionNews)
 
 
 // Switching between Login-form and create account-form

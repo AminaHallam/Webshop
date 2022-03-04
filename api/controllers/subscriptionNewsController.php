@@ -31,10 +31,17 @@ try {
                     return $this->database->insert($subscriptionNewsToAdd);
             
                 }else if($subscriber){ 
+                    if(!$subscriber->FirstName) {
+                        return false; 
+                    }
+                    if(!$subscriber->Email) {
+                        return false; 
+                    }
                     
                     $subscriptionNewsToAdd = createSubscriptionNews(null, null, $subscriber->FirstName, $subscriber->Email);
                     return $this->database->insert($subscriptionNewsToAdd);
                 
+
                 } 
             
             
