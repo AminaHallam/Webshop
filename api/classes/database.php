@@ -117,7 +117,8 @@ class Database {
         $query = $this->db->prepare("INSERT INTO ". $this->selectedTable ." (" .$columns. ") VALUES (" . $columnsAmount . ")");
 
         
-        $status = $query->execute($values);
+        $status = $query->execute($values); 
+
         $lastId = $this->db->lastInsertId();
 
         if(!$status) {
