@@ -190,50 +190,52 @@ export async function printNrOfElements() {
 export async function addSubscriptionNews(e) {
     e.preventDefault();
     const action = "addSubscriptionNews";
-
-    let registerFirstname = document.getElementById("firstNameNews").value
-    let registerEmail = document.getElementById("emailNews").value
     
-   if(!registerFirstname) {
-        alert("Please fill in your name!")
-        return
-    }
-    if(!registerEmail) {
-        alert("Please fill in your email!")
-        return
-    }
-
-    const subscriber = {
-        FirstName: registerFirstname,
-        Email: registerEmail,
-    }
-    
-    var body = new FormData()
-    body.append("action", action)
-    body.append("subscriber", JSON.stringify(subscriber))
-
-
     let getLoggedInUser = await getUser(); 
-   
+    
     if(getLoggedInUser){
-        var body = new FormData()
-        body.append("action", action)
+        var userBody = new FormData()
+        userBody.append("action", action)
         
-        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
-
+        let status = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", userBody)
+        
         if(!status) {
             alert("You are already a subscriber")
         } else {
-
+            
             alert("Welcome our new subscriber")
             location.reload();
-
+            
         }
-
-
+        
+        
     } else {
         
+        let registerFirstname = document.getElementById("firstNameNews").value
+        let registerEmail = document.getElementById("emailNews").value
+        
+        if(!registerFirstname) {
+             alert("Please fill in your name!")
+             return
+         }
+         if(!registerEmail) {
+             alert("Please fill in your email!")
+             return
+         }
+        
+
+        const subscriber = {
+            FirstName: registerFirstname,
+            Email: registerEmail,
+        }
+        
+
+        var body = new FormData()
+        body.append("action", action)
+        body.append("subscriber", JSON.stringify(subscriber))
+
         let checkSubscription = await makeRequest(`./../api/receivers/subscriptionNewsReceiver.php`, "POST", body)
+        
         
         if(!checkSubscription) {
 

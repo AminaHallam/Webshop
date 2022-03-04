@@ -26,7 +26,6 @@ try {
                 if(isset($_SESSION['inloggedUser'])){
                     $user = unserialize($_SESSION["inloggedUser"]);
 
-
                     $subscriptionNewsToAdd = createSubscriptionNews(null, $user->Id , null, null); 
                     return $this->database->insert($subscriptionNewsToAdd);
             
