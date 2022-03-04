@@ -1198,6 +1198,15 @@ async function createNewsLetter(e) {
     let content = document.getElementById('content').value;
     let success = document.querySelector('.success');
     
+   if(!title) {
+        alert("Please add title!")
+        return
+    }
+    if(!content) {
+        alert("Please add content!")
+        return
+    }
+    
     const action = 'add'
 
     const newsletter = {
