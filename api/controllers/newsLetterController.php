@@ -20,8 +20,15 @@ try {
         public function add($news){
             try {
 
+                if(!$news->Title) {
+                    return false; 
+                }
+                if(!$news->Text) {
+                    return false; 
+                }
+
                 $createNewsletter = createNewsletter(null, $news->Title, $news->Text, date('Y-m-d H:i:s'));   
-                error_log($createNewsletter);
+                
                 return $this->database->insert($createNewsletter);
     
             }   
